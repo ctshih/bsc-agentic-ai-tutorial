@@ -1,0 +1,192 @@
+/* ============================================================
+   FlyCircuit 連結體論文知識庫 — 共用樣式
+   一改全站變。色彩用 CSS 變數，支援淺/深色。
+   ============================================================ */
+
+:root {
+  --bg: #f7f8fa;
+  --surface: #ffffff;
+  --text: #1b2733;
+  --text-soft: #5a6b7b;
+  --border: #e2e8f0;
+  --accent: #2563eb;
+  --accent-soft: #eff4ff;
+  --shadow: 0 1px 3px rgba(16, 24, 40, .06), 0 1px 2px rgba(16, 24, 40, .04);
+  --radius: 12px;
+  --maxw: 880px;
+
+  /* scale（研究尺度）配色，index 與 graph 共用 */
+  --c-mesoscale: #2563eb;
+  --c-single-cell: #0d9488;
+  --c-synaptic: #db2777;
+  --c-macroscale: #7c3aed;
+  --c-method: #ea580c;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0e1116;
+    --surface: #161b22;
+    --text: #e6edf3;
+    --text-soft: #9aa7b4;
+    --border: #2a313c;
+    --accent: #5b9bff;
+    --accent-soft: #18233a;
+    --shadow: none;
+  }
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, "Segoe UI", "Noto Sans TC", "Microsoft JhengHei",
+               "PingFang TC", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.7;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ---------- 頂部導覽列 ---------- */
+.topbar {
+  position: sticky; top: 0; z-index: 50;
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+}
+.topbar .inner {
+  max-width: 1100px; margin: 0 auto; padding: 12px 24px;
+  display: flex; align-items: center; gap: 20px;
+}
+.topbar .brand { font-weight: 700; font-size: 15px; color: var(--text); }
+.topbar .brand small { color: var(--text-soft); font-weight: 400; }
+.topbar nav { display: flex; gap: 16px; margin-left: auto; font-size: 14px; }
+.topbar nav a { color: var(--text-soft); }
+.topbar nav a.active, .topbar nav a:hover { color: var(--accent); }
+
+/* ---------- 版面容器 ---------- */
+.wrap { max-width: var(--maxw); margin: 0 auto; padding: 36px 24px 80px; }
+.wrap.wide { max-width: 1100px; }
+
+/* ---------- 論文頁 ---------- */
+.paper-header h1 { font-size: 26px; line-height: 1.35; margin: 0 0 6px; }
+.paper-header .title-zh { color: var(--text-soft); font-size: 17px; margin: 0 0 16px; }
+.authors { color: var(--text-soft); font-size: 14px; margin: 0 0 14px; }
+
+.badges { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 6px; }
+.badge {
+  font-size: 12.5px; padding: 3px 10px; border-radius: 999px;
+  background: var(--accent-soft); color: var(--accent);
+  border: 1px solid color-mix(in srgb, var(--accent) 22%, transparent);
+  white-space: nowrap;
+}
+.badge.muted { background: transparent; color: var(--text-soft); border-color: var(--border); }
+.badge.scale { color: #fff; border: none; }
+
+.meta-line { font-size: 13.5px; color: var(--text-soft); margin: 10px 0; }
+.meta-line a { font-weight: 500; }
+
+.callout {
+  margin: 22px 0; padding: 16px 18px;
+  background: var(--accent-soft); border-left: 4px solid var(--accent);
+  border-radius: 8px; font-size: 15.5px;
+}
+.callout .label { font-size: 12px; font-weight: 700; letter-spacing: .04em;
+  text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 4px; }
+
+section.block { margin: 30px 0; }
+section.block > h2 {
+  font-size: 16px; margin: 0 0 12px; padding-bottom: 8px;
+  border-bottom: 1px solid var(--border); color: var(--text);
+}
+section.block ul { margin: 0; padding-left: 20px; }
+section.block li { margin: 7px 0; }
+section.block p { margin: 0; }
+
+.related-grid { display: grid; gap: 10px; }
+.related-grid a {
+  display: block; padding: 12px 14px; background: var(--surface);
+  border: 1px solid var(--border); border-radius: 10px; box-shadow: var(--shadow);
+}
+.related-grid a:hover { border-color: var(--accent); text-decoration: none; }
+.related-grid .ry { color: var(--text-soft); font-size: 13px; }
+.related-grid .rt { color: var(--text); font-weight: 500; }
+
+/* ---------- 卡片 / 目錄 ---------- */
+.page-title { font-size: 24px; margin: 0 0 4px; }
+.page-sub { color: var(--text-soft); margin: 0 0 24px; }
+
+.stats { display: flex; flex-wrap: wrap; gap: 14px; margin: 0 0 26px; }
+.stat {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 14px 18px; box-shadow: var(--shadow); min-width: 110px;
+}
+.stat .n { font-size: 22px; font-weight: 700; }
+.stat .l { font-size: 12.5px; color: var(--text-soft); }
+
+.filters {
+  display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+  margin: 0 0 22px; padding: 14px; background: var(--surface);
+  border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow);
+}
+.filters input, .filters select {
+  font: inherit; font-size: 14px; padding: 7px 10px; border-radius: 8px;
+  border: 1px solid var(--border); background: var(--bg); color: var(--text);
+}
+.filters input { flex: 1 1 220px; }
+.filters button {
+  font: inherit; font-size: 13px; padding: 7px 12px; border-radius: 8px;
+  border: 1px solid var(--border); background: var(--bg); color: var(--text-soft); cursor: pointer;
+}
+.filters button:hover { color: var(--accent); border-color: var(--accent); }
+.filters #count { margin-left: auto; font-size: 13px; color: var(--text-soft); }
+
+.cards { display: grid; gap: 14px; }
+.card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 18px 20px; box-shadow: var(--shadow); transition: border-color .15s;
+}
+.card:hover { border-color: var(--accent); }
+.card h3 { margin: 0 0 4px; font-size: 17px; line-height: 1.4; }
+.card h3 a { color: var(--text); }
+.card .cyr { color: var(--text-soft); font-size: 13px; margin: 0 0 8px; }
+.card .ctldr { font-size: 14.5px; color: var(--text-soft); margin: 8px 0 12px; }
+.card .badges { margin: 0; }
+.card.hidden { display: none; }
+
+/* ---------- 連結網路圖 ---------- */
+.graph-wrap { background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); box-shadow: var(--shadow); padding: 8px; overflow: hidden; }
+.graph-wrap svg { width: 100%; height: auto; display: block; }
+.graph-node circle { cursor: pointer; transition: r .15s; }
+.graph-node text { font-size: 12px; fill: var(--text); pointer-events: none; }
+.legend { display: flex; flex-wrap: wrap; gap: 14px; margin: 16px 0 0; font-size: 13px; color: var(--text-soft); }
+.legend i { display: inline-block; width: 11px; height: 11px; border-radius: 50%; margin-right: 5px; vertical-align: middle; }
+
+/* ---------- 時間軸 ---------- */
+.log-entry {
+  display: grid; grid-template-columns: 110px 80px 1fr; gap: 14px; align-items: baseline;
+  padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 14.5px;
+}
+.log-entry .date { color: var(--text-soft); font-variant-numeric: tabular-nums; font-size: 13px; }
+.log-entry .op { font-size: 12px; font-weight: 600; }
+.op-ingest { color: var(--c-single-cell); }
+.op-build  { color: var(--c-method); }
+.op-query  { color: var(--accent); }
+.op-lint   { color: var(--c-macroscale); }
+
+/* ---------- 頁尾 ---------- */
+.foot { max-width: var(--maxw); margin: 0 auto; padding: 30px 24px 60px;
+  color: var(--text-soft); font-size: 12.5px; border-top: 1px solid var(--border); }
+
+@media (max-width: 560px) {
+  .log-entry { grid-template-columns: 1fr; gap: 2px; }
+  .topbar .inner { flex-wrap: wrap; gap: 10px; }
+}

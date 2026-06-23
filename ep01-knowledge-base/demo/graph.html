@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>連結網路｜FlyCircuit 知識庫</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="topbar"><div class="inner">
+  <div class="brand">🧠 FlyCircuit 連結體論文知識庫 <small>· BSC Knowledge Base</small></div>
+  <nav>
+    <a href="index.html">論文目錄</a>
+    <a href="graph.html" class="active">連結網路</a>
+    <a href="log.html">時間軸</a>
+  </nav>
+</div></div>
+<div class="wrap wide">
+  <h1 class="page-title">連結網路</h1>
+  <p class="page-sub">節點＝論文（顏色＝研究尺度，大小＝關聯數），連線＝彼此引用或延伸關係。點節點進入該論文。</p>
+  <div class="graph-wrap">
+    <svg viewBox="0 0 820 600" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="論文連結網路圖">
+    <line x1="410.0" y1="490.0" x2="232.5" y2="182.5" stroke="var(--border)" stroke-width="1.6" />
+    <line x1="232.5" y1="182.5" x2="232.5" y2="387.5" stroke="var(--border)" stroke-width="1.6" />
+    <line x1="587.5" y1="387.5" x2="232.5" y2="182.5" stroke="var(--border)" stroke-width="1.6" />
+    <line x1="587.5" y1="182.5" x2="410.0" y2="80.0" stroke="var(--border)" stroke-width="1.6" />
+    <line x1="587.5" y1="387.5" x2="410.0" y2="80.0" stroke="var(--border)" stroke-width="1.6" />
+    <line x1="410.0" y1="490.0" x2="410.0" y2="80.0" stroke="var(--border)" stroke-width="1.6" />
+    <line x1="410.0" y1="80.0" x2="232.5" y2="387.5" stroke="var(--border)" stroke-width="1.6" />
+    <line x1="410.0" y1="490.0" x2="232.5" y2="387.5" stroke="var(--border)" stroke-width="1.6" />
+    <line x1="587.5" y1="182.5" x2="232.5" y2="182.5" stroke="var(--border)" stroke-width="1.6" />
+    <line x1="232.5" y1="182.5" x2="410.0" y2="80.0" stroke="var(--border)" stroke-width="1.6" />
+  <a href="papers/chiang-2011-flycircuit.html" class="graph-node">
+    <title>果蠅全腦連結網路的單細胞解析度三維重建</title>
+    <circle cx="410.0" cy="80.0" r="30" fill="#2563eb" stroke="var(--surface)" stroke-width="2.5" />
+    <text x="410.0" y="40.0" text-anchor="start" dy="-0.2em">Chiang 2011</text>
+  </a>
+  <a href="papers/community-2019.html" class="graph-node">
+    <title>果蠅腦神經元層級連結體中多樣的社群結構</title>
+    <circle cx="587.5" cy="182.5" r="21" fill="#0d9488" stroke="var(--surface)" stroke-width="2.5" />
+    <text x="614.4" y="167.0" text-anchor="start" dy="-0.2em">Community 2019</text>
+  </a>
+  <a href="papers/kaleido-2018.html" class="graph-node">
+    <title>Kaleido：以自動配色法視覺化大規模腦部單神經元影像資料</title>
+    <circle cx="587.5" cy="387.5" r="21" fill="#ea580c" stroke="var(--surface)" stroke-width="2.5" />
+    <text x="614.4" y="403.0" text-anchor="start" dy="0.7em">Kaleido 2018</text>
+  </a>
+  <a href="papers/lynsu-2024.html" class="graph-node">
+    <title>LYNSU：果蠅腦螢光影像的自動化 3D 神經氈分割方法</title>
+    <circle cx="410.0" cy="490.0" r="24" fill="#ea580c" stroke="var(--surface)" stroke-width="2.5" />
+    <text x="410.0" y="524.0" text-anchor="start" dy="0.7em">LYNSU 2024</text>
+  </a>
+  <a href="papers/neuroretriever-2021.html" class="graph-node">
+    <title>NeuroRetriever：用於連結體組裝的自動化神經元分割演算法</title>
+    <circle cx="232.5" cy="387.5" r="24" fill="#ea580c" stroke="var(--surface)" stroke-width="2.5" />
+    <text x="203.0" y="404.5" text-anchor="end" dy="0.7em">NeuroRetriever 2021</text>
+  </a>
+  <a href="papers/shih-2015-information-flow.html" class="graph-node">
+    <title>以連結體學分析果蠅腦中的資訊流</title>
+    <circle cx="232.5" cy="182.5" r="30" fill="#2563eb" stroke="var(--surface)" stroke-width="2.5" />
+    <text x="197.8" y="162.5" text-anchor="end" dy="-0.2em">Shih 2015</text>
+  </a>
+    </svg>
+  </div>
+  <div class="legend"><span><i style="background:#2563eb"></i>中尺度</span><span><i style="background:#0d9488"></i>單細胞</span><span><i style="background:#ea580c"></i>方法/工具</span></div>
+</div>
+<div class="foot">由 build.py 依各論文頁的 related 欄位自動生成。</div>
+
+</body>
+</html>

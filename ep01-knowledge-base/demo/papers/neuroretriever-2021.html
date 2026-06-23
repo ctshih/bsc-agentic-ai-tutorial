@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NeuroRetriever：用於連結體組裝的自動化神經元分割演算法｜FlyCircuit 知識庫</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script type="application/json" id="meta">
+{
+  "id": "neuroretriever-2021",
+  "title": "NeuroRetriever: Automatic Neuron Segmentation for Connectome Assembly",
+  "title_zh": "NeuroRetriever：用於連結體組裝的自動化神經元分割演算法",
+  "authors": [
+    "Chi-Tin Shih",
+    "Nan-Yow Chen",
+    "Ting-Yuan Wang",
+    "Guan-Wei He",
+    "Guo-Tzau Wang",
+    "Yen-Jen Lin",
+    "et al."
+  ],
+  "year": 2021,
+  "venue": "Frontiers in Systems Neuroscience",
+  "doi": "10.3389/fnsys.2021.687182",
+  "species": "Drosophila",
+  "scale": "method/tool",
+  "technique": [
+    "image segmentation",
+    "neuron tracing/skeletonization",
+    "high-dynamic-range (HDR) thresholding",
+    "confocal fluorescence imaging"
+  ],
+  "region": [
+    "whole brain",
+    "neuropil"
+  ],
+  "dataset": "FlyCircuit",
+  "tags": [
+    "neuron segmentation",
+    "connectome",
+    "FlyCircuit",
+    "tracing",
+    "Drosophila",
+    "影像處理"
+  ],
+  "related": [
+    "chiang-2011-flycircuit",
+    "shih-2015-information-flow"
+  ],
+  "tldr": "提出 NeuroRetriever，以 HDR 閾值與 FAST 追蹤演算法自動且無偏地分割果蠅腦單一神經元，從 22,037 張原始影像擷取出 28,125 個神經元以加速連結體組裝。",
+  "abstract_zh": "從大量含雜訊的原始螢光影像中分割出單一神經元，是建立全腦神經元連結圖的首要瓶頸，傳統人工分割耗時且易產生偏誤。本研究提出自動化演算法 NeuroRetriever，利用基於分支結構特徵的高動態範圍（HDR）閾值法，分割成年果蠅腦中單一神經元的三維形態。將其套用於 22,037 張原始腦影像，成功擷取出 28,125 個經人工分割驗證的單一神經元，可大幅加速完整連結體的三維重建。",
+  "key_findings": [
+    "開發 FAST（Fast Automated Structure Tracing）追蹤演算法，可在多個強度閾值下高效率追蹤神經元骨架。",
+    "提出「分支穩健性分數（BRS）」並據此產生 HDR 閾值遮罩，能像人眼一樣依局部邊界動態判斷，同時去除背景雜訊並保留弱訊號細微結構。",
+    "從 FlyCircuit 資料庫的 22,037 張原始影像自動擷取出 28,125 個單一神經元，並以人工分割作為黃金標準驗證。",
+    "以全域相似度（GS）量化評估：59.7% 屬 Class I（GS 0.9–1.0）、21.6% Class II、18.7% Class III；約 65.8% 的神經元與人工分割相符，可直接歸檔。",
+    "FAST 與 APP2、ENT 等演算法相比，能處理品質差異大的大規模影像並得到一致骨架；未先分割時三者皆無法直接從高雜訊原始影像產生可靠骨架。",
+    "效率上 NR 可 24 小時不間斷平行運算，使用 200 核心 AMD Opteron 叢集於兩週內分割完整個 FlyCircuit 資料集，且結果具決定性、無人為偏誤，並能找出人工漏判的神經元。"
+  ],
+  "methods": "以多重全域強度閾值對原始共軛焦影像產生一系列影像，對每張套用 FAST 追蹤骨架並計算每個體素的分支分數（BS），加總後得到分支穩健性分數（BRS）。再依 BRS 門檻（FlyCircuit 預設 m=40）自動生成 HDR 閾值遮罩，與原始影像取交集以分割出單一神經元，使用者可調整 m 值優化細節。最後以質心距離、迴轉半徑、慣性矩、主軸方向等形態參數與體素層級的 recall/precision 計算全域相似度 GS，並由專家做視覺驗證（matched/broken/tangled 三類）。",
+  "significance": "在果蠅全腦連結體與 FlyCircuit 脈絡中，單神經元分割長期是高通量連結體重建的速率限制步驟。NeuroRetriever 提供決定性、無偏誤且可大規模平行的自動分割方案，將原本仰賴人工的瓶頸自動化，直接支援 FlyCircuit 等大型影像資料庫的單神經元三維重建與後續資訊流分析。",
+  "source_pdf": "F:/FlyCircuit/Papers/2021-Frontiers-Systems-Neuroscience-NeuroRetriever.pdf"
+}
+</script>
+</head>
+<body>
+<div class="topbar"><div class="inner">
+  <div class="brand">🧠 FlyCircuit 連結體論文知識庫 <small>· BSC Knowledge Base</small></div>
+  <nav>
+    <a href="../index.html">論文目錄</a>
+    <a href="../graph.html">連結網路</a>
+    <a href="../log.html">時間軸</a>
+  </nav>
+</div></div>
+<div class="wrap">
+  <article>
+    <header class="paper-header">
+      <h1>NeuroRetriever: Automatic Neuron Segmentation for Connectome Assembly</h1>
+      <p class="title-zh">NeuroRetriever：用於連結體組裝的自動化神經元分割演算法</p>
+      <p class="authors">Chi-Tin Shih、Nan-Yow Chen、Ting-Yuan Wang、Guan-Wei He、Guo-Tzau Wang、Yen-Jen Lin、et al.</p>
+      <div class="badges">
+        <span class="badge scale" style="background:#ea580c">方法/工具</span><span class="badge muted">2021</span><span class="badge muted">Frontiers in Systems Neuroscience</span><span class="badge">Drosophila</span><span class="badge">FlyCircuit</span><span class="badge muted">image segmentation</span><span class="badge muted">neuron tracing/skeletonization</span><span class="badge muted">high-dynamic-range (HDR) thresholding</span><span class="badge muted">confocal fluorescence imaging</span>
+      </div>
+      <p class="meta-line">Frontiers in Systems Neuroscience (2021) · DOI: <a href="https://doi.org/10.3389/fnsys.2021.687182" target="_blank" rel="noopener">10.3389/fnsys.2021.687182</a> · <a href="file:///F:/FlyCircuit/Papers/2021-Frontiers-Systems-Neuroscience-NeuroRetriever.pdf">原始 PDF ↗</a></p>
+    </header>
+
+    <div class="callout">
+      <span class="label">一句話總結</span>
+      提出 NeuroRetriever，以 HDR 閾值與 FAST 追蹤演算法自動且無偏地分割果蠅腦單一神經元，從 22,037 張原始影像擷取出 28,125 個神經元以加速連結體組裝。
+    </div>
+
+    <section class="block">
+      <h2>中文摘要</h2>
+      <p>從大量含雜訊的原始螢光影像中分割出單一神經元，是建立全腦神經元連結圖的首要瓶頸，傳統人工分割耗時且易產生偏誤。本研究提出自動化演算法 NeuroRetriever，利用基於分支結構特徵的高動態範圍（HDR）閾值法，分割成年果蠅腦中單一神經元的三維形態。將其套用於 22,037 張原始腦影像，成功擷取出 28,125 個經人工分割驗證的單一神經元，可大幅加速完整連結體的三維重建。</p>
+    </section>
+
+    <section class="block">
+      <h2>關鍵發現</h2>
+      <ul>
+      <li>開發 FAST（Fast Automated Structure Tracing）追蹤演算法，可在多個強度閾值下高效率追蹤神經元骨架。</li>
+      <li>提出「分支穩健性分數（BRS）」並據此產生 HDR 閾值遮罩，能像人眼一樣依局部邊界動態判斷，同時去除背景雜訊並保留弱訊號細微結構。</li>
+      <li>從 FlyCircuit 資料庫的 22,037 張原始影像自動擷取出 28,125 個單一神經元，並以人工分割作為黃金標準驗證。</li>
+      <li>以全域相似度（GS）量化評估：59.7% 屬 Class I（GS 0.9–1.0）、21.6% Class II、18.7% Class III；約 65.8% 的神經元與人工分割相符，可直接歸檔。</li>
+      <li>FAST 與 APP2、ENT 等演算法相比，能處理品質差異大的大規模影像並得到一致骨架；未先分割時三者皆無法直接從高雜訊原始影像產生可靠骨架。</li>
+      <li>效率上 NR 可 24 小時不間斷平行運算，使用 200 核心 AMD Opteron 叢集於兩週內分割完整個 FlyCircuit 資料集，且結果具決定性、無人為偏誤，並能找出人工漏判的神經元。</li>
+      </ul>
+    </section>
+
+    <section class="block">
+      <h2>方法</h2>
+      <p>以多重全域強度閾值對原始共軛焦影像產生一系列影像，對每張套用 FAST 追蹤骨架並計算每個體素的分支分數（BS），加總後得到分支穩健性分數（BRS）。再依 BRS 門檻（FlyCircuit 預設 m=40）自動生成 HDR 閾值遮罩，與原始影像取交集以分割出單一神經元，使用者可調整 m 值優化細節。最後以質心距離、迴轉半徑、慣性矩、主軸方向等形態參數與體素層級的 recall/precision 計算全域相似度 GS，並由專家做視覺驗證（matched/broken/tangled 三類）。</p>
+    </section>
+
+    <section class="block">
+      <h2>重要性與定位</h2>
+      <p>在果蠅全腦連結體與 FlyCircuit 脈絡中，單神經元分割長期是高通量連結體重建的速率限制步驟。NeuroRetriever 提供決定性、無偏誤且可大規模平行的自動分割方案，將原本仰賴人工的瓶頸自動化，直接支援 FlyCircuit 等大型影像資料庫的單神經元三維重建與後續資訊流分析。</p>
+    </section>
+
+    <section class="block">
+      <h2>相關論文</h2>
+      <div class="related-grid">
+      <a href="chiang-2011-flycircuit.html"><span class="ry">2011 · Current Biology</span><br><span class="rt">果蠅全腦連結網路的單細胞解析度三維重建</span></a>
+      <a href="shih-2015-information-flow.html"><span class="ry">2015 · Current Biology</span><br><span class="rt">以連結體學分析果蠅腦中的資訊流</span></a>
+      </div>
+    </section>
+  </article>
+</div>
+<div class="foot">
+  本頁由 LLM 依原始 PDF 整理；中文重點為摘要性質，引用前請以原文為準。｜id: <code>neuroretriever-2021</code>
+</div>
+</body>
+</html>

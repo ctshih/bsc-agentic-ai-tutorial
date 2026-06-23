@@ -1,0 +1,7 @@
+{"date": "2026-06-22", "op": "ingest", "id": "chiang-2011-flycircuit", "title": "果蠅全腦連結網路的單細胞解析度三維重建", "note": "由原始 PDF 抽取 metadata 與中文重點，建立論文頁"}
+{"date": "2026-06-22", "op": "ingest", "id": "shih-2015-information-flow", "title": "以連結體學分析果蠅腦中的資訊流", "note": "由原始 PDF 抽取 metadata 與中文重點，建立論文頁"}
+{"date": "2026-06-22", "op": "ingest", "id": "kaleido-2018", "title": "Kaleido：以自動配色法視覺化大規模腦部單神經元影像資料", "note": "由原始 PDF 抽取 metadata 與中文重點，建立論文頁"}
+{"date": "2026-06-22", "op": "ingest", "id": "community-2019", "title": "果蠅腦神經元層級連結體中多樣的社群結構", "note": "由原始 PDF 抽取 metadata 與中文重點，建立論文頁"}
+{"date": "2026-06-22", "op": "ingest", "id": "neuroretriever-2021", "title": "NeuroRetriever：用於連結體組裝的自動化神經元分割演算法", "note": "由原始 PDF 抽取 metadata 與中文重點，建立論文頁"}
+{"date": "2026-06-22", "op": "ingest", "id": "lynsu-2024", "title": "LYNSU：果蠅腦螢光影像的自動化 3D 神經氈分割方法", "note": "由原始 PDF 抽取 metadata 與中文重點，建立論文頁"}
+{"date": "2026-06-22", "op": "build", "id": "", "title": "建立第一版知識庫 (v1)", "note": "6 篇論文，產生目錄、連結網路與時間軸"}

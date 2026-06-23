@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>論文目錄｜FlyCircuit 知識庫</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="topbar"><div class="inner">
+  <div class="brand">🧠 FlyCircuit 連結體論文知識庫 <small>· BSC Knowledge Base</small></div>
+  <nav>
+    <a href="index.html" class="active">論文目錄</a>
+    <a href="graph.html">連結網路</a>
+    <a href="log.html">時間軸</a>
+  </nav>
+</div></div>
+<div class="wrap wide">
+  <h1 class="page-title">論文目錄</h1>
+  <p class="page-sub">果蠅（Drosophila）連結體研究與 FlyCircuit 工具鏈。點任一篇進入整理頁。</p>
+  <div class="stats">
+    <div class="stat"><div class="n">6</div><div class="l">篇論文</div></div>
+    <div class="stat"><div class="n">2011–2024</div><div class="l">年份跨度</div></div>
+    <div class="stat"><div class="n">4</div><div class="l">個期刊</div></div>
+    <div class="stat"><div class="n">10</div><div class="l">條關聯</div></div>
+  </div>
+  <div class="filters">
+    <input id="q" type="search" placeholder="🔍 搜尋標題、作者、關鍵字…">
+    <select id="f-species"><option value="">物種（全部）</option>
+      <option value="Drosophila">Drosophila</option>
+      <option value="Drosophila (adult female)">Drosophila (adult female)</option>
+      <option value="Drosophila (adult)">Drosophila (adult)</option>
+    </select>
+    <select id="f-scale"><option value="">尺度（全部）</option>
+      <option value="method/tool">方法/工具</option>
+      <option value="single-cell">單細胞</option>
+      <option value="mesoscale">中尺度</option>
+    </select>
+    <select id="f-technique"><option value="">方法（全部）</option>
+      <option value="3D U-Net">3D U-Net</option>
+      <option value="3D image registration">3D image registration</option>
+      <option value="3D neuropil segmentation">3D neuropil segmentation</option>
+      <option value="3D reconstruction">3D reconstruction</option>
+      <option value="3D visualization">3D visualization</option>
+      <option value="Monte Carlo optimization">Monte Carlo optimization</option>
+      <option value="YOLOv7 object detection">YOLOv7 object detection</option>
+      <option value="automatic color assignment">automatic color assignment</option>
+      <option value="centrality analysis">centrality analysis</option>
+      <option value="community detection">community detection</option>
+      <option value="complex network theory">complex network theory</option>
+      <option value="confocal fluorescence imaging">confocal fluorescence imaging</option>
+      <option value="confocal microscopy">confocal microscopy</option>
+      <option value="connectomics">connectomics</option>
+      <option value="deep learning">deep learning</option>
+      <option value="energy function minimization">energy function minimization</option>
+      <option value="graph theory">graph theory</option>
+      <option value="high-dynamic-range (HDR) thresholding">high-dynamic-range (HDR) thresholding</option>
+      <option value="image segmentation">image segmentation</option>
+      <option value="loop detection">loop detection</option>
+      <option value="modularity analysis">modularity analysis</option>
+      <option value="network analysis">network analysis</option>
+      <option value="neuron tracing/skeletonization">neuron tracing/skeletonization</option>
+      <option value="rich club analysis">rich club analysis</option>
+      <option value="rich-club analysis">rich-club analysis</option>
+      <option value="single-neuron labeling (MARCM/GFP)">single-neuron labeling (MARCM/GFP)</option>
+      <option value="skeleton tracing">skeleton tracing</option>
+      <option value="small-world analysis">small-world analysis</option>
+      <option value="volume rendering">volume rendering</option>
+    </select>
+    <button id="reset">清除</button>
+    <span id="count"></span>
+  </div>
+  <div class="cards">
+    <article class="card"
+      data-species="Drosophila" data-scale="method/tool"
+      data-technique="|deep learning|3D neuropil segmentation|YOLOv7 object detection|3D U-Net|confocal fluorescence imaging|" data-search="lynsu: automated 3d neuropil segmentation of fluorescent images for drosophila brains lynsu：果蠅腦螢光影像的自動化 3d 神經氈分割方法 kai-yi hsu chi-tin shih nan-yow chen chung-chuan lo frontiers in neuroinformatics 影像分割 deep learning yolo u-net connectomics flycircuit lynsu 結合 yolov7 定位與 3d u-net 分割，在約 7 秒內自動分割果蠅腦螢光影像中的神經氈，精度媲美人工標註。 2024">
+      <h3><a href="papers/lynsu-2024.html">LYNSU：果蠅腦螢光影像的自動化 3D 神經氈分割方法</a></h3>
+      <p class="cyr">2024 · Kai-Yi Hsu, Chi-Tin Shih, Nan-Yow Chen et al.</p>
+      <div class="badges"><span class="badge scale" style="background:#ea580c">方法/工具</span><span class="badge muted">Frontiers in Neuroinformatics</span><span class="badge">Drosophila</span><span class="badge">FlyCircuit</span></div>
+      <p class="ctldr">LYNSU 結合 YOLOv7 定位與 3D U-Net 分割，在約 7 秒內自動分割果蠅腦螢光影像中的神經氈，精度媲美人工標註。</p>
+    </article>
+    <article class="card"
+      data-species="Drosophila" data-scale="method/tool"
+      data-technique="|image segmentation|neuron tracing/skeletonization|high-dynamic-range (HDR) thresholding|confocal fluorescence imaging|" data-search="neuroretriever: automatic neuron segmentation for connectome assembly neuroretriever：用於連結體組裝的自動化神經元分割演算法 chi-tin shih nan-yow chen ting-yuan wang guan-wei he guo-tzau wang yen-jen lin et al. frontiers in systems neuroscience neuron segmentation connectome flycircuit tracing drosophila 影像處理 提出 neuroretriever，以 hdr 閾值與 fast 追蹤演算法自動且無偏地分割果蠅腦單一神經元，從 22,037 張原始影像擷取出 28,125 個神經元以加速連結體組裝。 2021">
+      <h3><a href="papers/neuroretriever-2021.html">NeuroRetriever：用於連結體組裝的自動化神經元分割演算法</a></h3>
+      <p class="cyr">2021 · Chi-Tin Shih, Nan-Yow Chen, Ting-Yuan Wang et al.</p>
+      <div class="badges"><span class="badge scale" style="background:#ea580c">方法/工具</span><span class="badge muted">Frontiers in Systems Neuroscience</span><span class="badge">Drosophila</span><span class="badge">FlyCircuit</span></div>
+      <p class="ctldr">提出 NeuroRetriever，以 HDR 閾值與 FAST 追蹤演算法自動且無偏地分割果蠅腦單一神經元，從 22,037 張原始影像擷取出 28,125 個神經元以加速連結體組裝。</p>
+    </article>
+    <article class="card"
+      data-species="Drosophila (adult female)" data-scale="single-cell"
+      data-technique="|community detection|modularity analysis|centrality analysis|rich club analysis|small-world analysis|loop detection|" data-search="diverse community structures in the neuronal-level connectome of the drosophila brain 果蠅腦神經元層級連結體中多樣的社群結構 chi-tin shih yen-jen lin cheng-te wang ting-yuan wang chih-chen chen ta-shun su et al. neuroinformatics connectome community structure centrality rich club small-world drosophila 以 flycircuit v1.2 建構果蠅全腦神經元對神經元網路，發現八個與功能模組對應的社群，各社群在中心性、小世界性與環路結構上展現不同特性。 2019">
+      <h3><a href="papers/community-2019.html">果蠅腦神經元層級連結體中多樣的社群結構</a></h3>
+      <p class="cyr">2019 · Chi-Tin Shih, Yen-Jen Lin, Cheng-Te Wang et al.</p>
+      <div class="badges"><span class="badge scale" style="background:#0d9488">單細胞</span><span class="badge muted">Neuroinformatics</span><span class="badge">Drosophila (adult female)</span><span class="badge">FlyCircuit v1.2</span></div>
+      <p class="ctldr">以 FlyCircuit v1.2 建構果蠅全腦神經元對神經元網路，發現八個與功能模組對應的社群，各社群在中心性、小世界性與環路結構上展現不同特性。</p>
+    </article>
+    <article class="card"
+      data-species="Drosophila" data-scale="method/tool"
+      data-technique="|3D visualization|automatic color assignment|Monte Carlo optimization|volume rendering|energy function minimization|" data-search="kaleido: visualizing big brain data with automatic color assignment for single-neuron images kaleido：以自動配色法視覺化大規模腦部單神經元影像資料 ting-yuan wang nan-yow chen guan-wei he guo-tzau wang chi-tin shih ann-shyn chiang neuroinformatics visualization connectomics color assignment flycircuit big brain data single-neuron kaleido 是一套能自動為上萬個果蠅單神經元影像配色、讓相鄰神經元顏色對比鮮明的大規模 3d 視覺化工具。 2018">
+      <h3><a href="papers/kaleido-2018.html">Kaleido：以自動配色法視覺化大規模腦部單神經元影像資料</a></h3>
+      <p class="cyr">2018 · Ting-Yuan Wang, Nan-Yow Chen, Guan-Wei He et al.</p>
+      <div class="badges"><span class="badge scale" style="background:#ea580c">方法/工具</span><span class="badge muted">Neuroinformatics</span><span class="badge">Drosophila</span><span class="badge">FlyCircuit</span></div>
+      <p class="ctldr">Kaleido 是一套能自動為上萬個果蠅單神經元影像配色、讓相鄰神經元顏色對比鮮明的大規模 3D 視覺化工具。</p>
+    </article>
+    <article class="card"
+      data-species="Drosophila (adult female)" data-scale="mesoscale"
+      data-technique="|network analysis|graph theory|complex network theory|connectomics|modularity analysis|rich-club analysis|" data-search="connectomics-based analysis of information flow in the drosophila brain 以連結體學分析果蠅腦中的資訊流 chi-tin shih olaf sporns shou-li yuan ta-shun su yen-jen lin chao-chun chuang et al. current biology connectome information flow rich club small-world modularity 果蠅腦網路 用 flycircuit 1.1 的 12,995 個投射神經元重建果蠅腦的中尺度有向加權連結體，揭示其階層模組、小世界與富俱樂部結構，並推測行為時的資訊流路徑。 2015">
+      <h3><a href="papers/shih-2015-information-flow.html">以連結體學分析果蠅腦中的資訊流</a></h3>
+      <p class="cyr">2015 · Chi-Tin Shih, Olaf Sporns, Shou-Li Yuan et al.</p>
+      <div class="badges"><span class="badge scale" style="background:#2563eb">中尺度</span><span class="badge muted">Current Biology</span><span class="badge">Drosophila (adult female)</span><span class="badge">FlyCircuit 1.1</span></div>
+      <p class="ctldr">用 FlyCircuit 1.1 的 12,995 個投射神經元重建果蠅腦的中尺度有向加權連結體，揭示其階層模組、小世界與富俱樂部結構，並推測行為時的資訊流路徑。</p>
+    </article>
+    <article class="card"
+      data-species="Drosophila (adult)" data-scale="mesoscale"
+      data-technique="|single-neuron labeling (MARCM/GFP)|confocal microscopy|3D image registration|skeleton tracing|3D reconstruction|" data-search="three-dimensional reconstruction of brain-wide wiring networks in drosophila at single-cell resolution 果蠅全腦連結網路的單細胞解析度三維重建 ann-shyn chiang chih-yung lin chao-chun chuang hsiu-ming chang chang-huain hsieh chang-wei yeh et al. current biology flycircuit connectome drosophila brain lpu mesoscopic wiring map single-cell 將成蟲果蠅腦拆解成約 16,000 個單神經元並重建到標準腦座標，建構出涵蓋全腦的介觀連結圖譜與開放資料庫 flycircuit。 2011">
+      <h3><a href="papers/chiang-2011-flycircuit.html">果蠅全腦連結網路的單細胞解析度三維重建</a></h3>
+      <p class="cyr">2011 · Ann-Shyn Chiang, Chih-Yung Lin, Chao-Chun Chuang et al.</p>
+      <div class="badges"><span class="badge scale" style="background:#2563eb">中尺度</span><span class="badge muted">Current Biology</span><span class="badge">Drosophila (adult)</span><span class="badge">FlyCircuit</span></div>
+      <p class="ctldr">將成蟲果蠅腦拆解成約 16,000 個單神經元並重建到標準腦座標，建構出涵蓋全腦的介觀連結圖譜與開放資料庫 FlyCircuit。</p>
+    </article>
+  </div>
+</div>
+<div class="foot">由 build.py 自動生成 · 共 6 篇 · 編輯論文請改 papers/*.html 後重跑 build.py</div>
+<script src="assets/wiki.js"></script>
+</body>
+</html>

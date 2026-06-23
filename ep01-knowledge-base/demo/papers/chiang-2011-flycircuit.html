@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>果蠅全腦連結網路的單細胞解析度三維重建｜FlyCircuit 知識庫</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script type="application/json" id="meta">
+{
+  "id": "chiang-2011-flycircuit",
+  "title": "Three-Dimensional Reconstruction of Brain-wide Wiring Networks in Drosophila at Single-Cell Resolution",
+  "title_zh": "果蠅全腦連結網路的單細胞解析度三維重建",
+  "authors": [
+    "Ann-Shyn Chiang",
+    "Chih-Yung Lin",
+    "Chao-Chun Chuang",
+    "Hsiu-Ming Chang",
+    "Chang-Huain Hsieh",
+    "Chang-Wei Yeh",
+    "et al."
+  ],
+  "year": 2011,
+  "venue": "Current Biology",
+  "doi": "10.1016/j.cub.2010.11.056",
+  "species": "Drosophila (adult)",
+  "scale": "mesoscale",
+  "technique": [
+    "single-neuron labeling (MARCM/GFP)",
+    "confocal microscopy",
+    "3D image registration",
+    "skeleton tracing",
+    "3D reconstruction"
+  ],
+  "region": [
+    "whole brain"
+  ],
+  "dataset": "FlyCircuit",
+  "tags": [
+    "FlyCircuit",
+    "connectome",
+    "Drosophila brain",
+    "LPU",
+    "mesoscopic wiring map",
+    "single-cell"
+  ],
+  "related": [
+    "shih-2015-information-flow",
+    "kaleido-2018",
+    "community-2019",
+    "neuroretriever-2021",
+    "lynsu-2024"
+  ],
+  "tldr": "將成蟲果蠅腦拆解成約 16,000 個單神經元並重建到標準腦座標，建構出涵蓋全腦的介觀連結圖譜與開放資料庫 FlyCircuit。",
+  "abstract_zh": "本研究以 MARCM 單神經元標記搭配共軛焦影像，取得約 16,000 個成蟲果蠅單神經元的高解析三維影像（超過全腦神經元的 10%），並將其配準到單一標準模型腦中組成虛擬果蠅腦。由此建構出涵蓋全腦的介觀連結圖譜，包含 41 個局部處理單元（LPU）、6 個 hub 與 58 條神經纖維束，並建立開放取用的 FlyCircuit 影像資料庫供線上典藏、檢索、分析與三維視覺化。",
+  "key_findings": [
+    "蒐集約 16,000 個單神經元高解析三維影像，佔成蟲雌蟲腦神經元逾 10%，並配準到標準模型腦。",
+    "果蠅全腦可拆解為 41 個局部處理單元（LPU）、6 個 hub 與 58 條跨區神經纖維束。",
+    "神經元可分為侷限於單一腦區的局部中間神經元（LN）與連接多個腦區的投射神經元（PN）；儘管個體有差異，LN 聚集與 PN 連結模式具不變性。",
+    "有限尺度分析顯示僅用全腦約 10%（少於 5,000 個）神經元，跨區連結矩陣的相關係數即可達 0.97 以上，足以近似整體連結模式。",
+    "不同功能模組傾向使用不同神經傳導物質；細胞出生時序分析顯示運動、視覺、嗅覺、聽覺模組神經元的誕生時期各異，且 fru 神經元呈現性別差異。",
+    "建立開放取用的 FlyCircuit 資料庫（flycircuit.tw），提供單神經元、LPU、wiring diagram 與神經束的線上典藏與三維視覺化。"
+  ],
+  "methods": "以可抑制細胞標記的遺傳鑲嵌分析（MARCM）在特定發育時間標記單一神經元並表現 GFP，經改良製備後以共軛焦顯微鏡取得高解析三維影像。利用 anti-DLG 染色將每張影像以全域仿射配準（12 自由度）對位到雌、雄各一的標準模型腦，再追蹤神經纖維骨架，並將空間分佈轉為 58 個 neuropil 區的體素分佈統計，據以定義 LPU、纖維束與連結矩陣。",
+  "significance": "這是果蠅連結體研究的奠基性工作，首次以單細胞解析度建立涵蓋全腦的介觀 wiring map，並催生 FlyCircuit 這個開放資料庫。後續關於資訊流分析、社群結構、視覺化、神經元檢索與神經氈分割等研究皆以此資料集為基礎，是整個 FlyCircuit 脈絡的起點。",
+  "source_pdf": "F:/FlyCircuit/Papers/CurrentBiology2011_Three-Dimensional Reconstruction of Brain-wide Wiring Networks in Drosophila at Single-Cell Resolution.pdf"
+}
+</script>
+</head>
+<body>
+<div class="topbar"><div class="inner">
+  <div class="brand">🧠 FlyCircuit 連結體論文知識庫 <small>· BSC Knowledge Base</small></div>
+  <nav>
+    <a href="../index.html">論文目錄</a>
+    <a href="../graph.html">連結網路</a>
+    <a href="../log.html">時間軸</a>
+  </nav>
+</div></div>
+<div class="wrap">
+  <article>
+    <header class="paper-header">
+      <h1>Three-Dimensional Reconstruction of Brain-wide Wiring Networks in Drosophila at Single-Cell Resolution</h1>
+      <p class="title-zh">果蠅全腦連結網路的單細胞解析度三維重建</p>
+      <p class="authors">Ann-Shyn Chiang、Chih-Yung Lin、Chao-Chun Chuang、Hsiu-Ming Chang、Chang-Huain Hsieh、Chang-Wei Yeh、et al.</p>
+      <div class="badges">
+        <span class="badge scale" style="background:#2563eb">中尺度</span><span class="badge muted">2011</span><span class="badge muted">Current Biology</span><span class="badge">Drosophila (adult)</span><span class="badge">FlyCircuit</span><span class="badge muted">single-neuron labeling (MARCM/GFP)</span><span class="badge muted">confocal microscopy</span><span class="badge muted">3D image registration</span><span class="badge muted">skeleton tracing</span><span class="badge muted">3D reconstruction</span>
+      </div>
+      <p class="meta-line">Current Biology (2011) · DOI: <a href="https://doi.org/10.1016/j.cub.2010.11.056" target="_blank" rel="noopener">10.1016/j.cub.2010.11.056</a> · <a href="file:///F:/FlyCircuit/Papers/CurrentBiology2011_Three-Dimensional%20Reconstruction%20of%20Brain-wide%20Wiring%20Networks%20in%20Drosophila%20at%20Single-Cell%20Resolution.pdf">原始 PDF ↗</a></p>
+    </header>
+
+    <div class="callout">
+      <span class="label">一句話總結</span>
+      將成蟲果蠅腦拆解成約 16,000 個單神經元並重建到標準腦座標，建構出涵蓋全腦的介觀連結圖譜與開放資料庫 FlyCircuit。
+    </div>
+
+    <section class="block">
+      <h2>中文摘要</h2>
+      <p>本研究以 MARCM 單神經元標記搭配共軛焦影像，取得約 16,000 個成蟲果蠅單神經元的高解析三維影像（超過全腦神經元的 10%），並將其配準到單一標準模型腦中組成虛擬果蠅腦。由此建構出涵蓋全腦的介觀連結圖譜，包含 41 個局部處理單元（LPU）、6 個 hub 與 58 條神經纖維束，並建立開放取用的 FlyCircuit 影像資料庫供線上典藏、檢索、分析與三維視覺化。</p>
+    </section>
+
+    <section class="block">
+      <h2>關鍵發現</h2>
+      <ul>
+      <li>蒐集約 16,000 個單神經元高解析三維影像，佔成蟲雌蟲腦神經元逾 10%，並配準到標準模型腦。</li>
+      <li>果蠅全腦可拆解為 41 個局部處理單元（LPU）、6 個 hub 與 58 條跨區神經纖維束。</li>
+      <li>神經元可分為侷限於單一腦區的局部中間神經元（LN）與連接多個腦區的投射神經元（PN）；儘管個體有差異，LN 聚集與 PN 連結模式具不變性。</li>
+      <li>有限尺度分析顯示僅用全腦約 10%（少於 5,000 個）神經元，跨區連結矩陣的相關係數即可達 0.97 以上，足以近似整體連結模式。</li>
+      <li>不同功能模組傾向使用不同神經傳導物質；細胞出生時序分析顯示運動、視覺、嗅覺、聽覺模組神經元的誕生時期各異，且 fru 神經元呈現性別差異。</li>
+      <li>建立開放取用的 FlyCircuit 資料庫（flycircuit.tw），提供單神經元、LPU、wiring diagram 與神經束的線上典藏與三維視覺化。</li>
+      </ul>
+    </section>
+
+    <section class="block">
+      <h2>方法</h2>
+      <p>以可抑制細胞標記的遺傳鑲嵌分析（MARCM）在特定發育時間標記單一神經元並表現 GFP，經改良製備後以共軛焦顯微鏡取得高解析三維影像。利用 anti-DLG 染色將每張影像以全域仿射配準（12 自由度）對位到雌、雄各一的標準模型腦，再追蹤神經纖維骨架，並將空間分佈轉為 58 個 neuropil 區的體素分佈統計，據以定義 LPU、纖維束與連結矩陣。</p>
+    </section>
+
+    <section class="block">
+      <h2>重要性與定位</h2>
+      <p>這是果蠅連結體研究的奠基性工作，首次以單細胞解析度建立涵蓋全腦的介觀 wiring map，並催生 FlyCircuit 這個開放資料庫。後續關於資訊流分析、社群結構、視覺化、神經元檢索與神經氈分割等研究皆以此資料集為基礎，是整個 FlyCircuit 脈絡的起點。</p>
+    </section>
+
+    <section class="block">
+      <h2>相關論文</h2>
+      <div class="related-grid">
+      <a href="shih-2015-information-flow.html"><span class="ry">2015 · Current Biology</span><br><span class="rt">以連結體學分析果蠅腦中的資訊流</span></a>
+      <a href="kaleido-2018.html"><span class="ry">2018 · Neuroinformatics</span><br><span class="rt">Kaleido：以自動配色法視覺化大規模腦部單神經元影像資料</span></a>
+      <a href="community-2019.html"><span class="ry">2019 · Neuroinformatics</span><br><span class="rt">果蠅腦神經元層級連結體中多樣的社群結構</span></a>
+      <a href="neuroretriever-2021.html"><span class="ry">2021 · Frontiers in Systems Neuroscience</span><br><span class="rt">NeuroRetriever：用於連結體組裝的自動化神經元分割演算法</span></a>
+      <a href="lynsu-2024.html"><span class="ry">2024 · Frontiers in Neuroinformatics</span><br><span class="rt">LYNSU：果蠅腦螢光影像的自動化 3D 神經氈分割方法</span></a>
+      </div>
+    </section>
+  </article>
+</div>
+<div class="foot">
+  本頁由 LLM 依原始 PDF 整理；中文重點為摘要性質，引用前請以原文為準。｜id: <code>chiang-2011-flycircuit</code>
+</div>
+</body>
+</html>
