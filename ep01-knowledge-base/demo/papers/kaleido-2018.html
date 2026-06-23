@@ -59,8 +59,7 @@
     "整合為 FlyCircuit 的線上外掛，提供網頁介面、批次運算、orthoslice 檢視器與 NeuronID 回溯查詢，並可輸出 3D TIFF 或 Avizo mesh 檔。"
   ],
   "methods": "先將各單神經元影像對位至標準腦並以 100 個隨機體素估算神經元兩兩距離矩陣，再隨機指派色相角作為初始組態。接著用 Monte Carlo 演算法最小化能量函數（相鄰且色相相近的神經元成本高），交換色相角直到收斂，得到對比最佳的配色。最後以 HSV 模型（色相由配色決定、飽和度設為 1、明度為正規化訊號強度、原始強度作為 α 不透明度）轉成 RGBA，合併為單一 Avizo mesh 或 3D TIFF。整套以 C++ 實作並包成 Bootstrap 網頁介面。",
-  "significance": "Kaleido 直接解決了 FlyCircuit 等大型果蠅連結體資料庫「上萬神經元無法同時視覺化」的瓶頸，讓研究者能在合理的記憶體下人工檢視大規模連結體資料。它與 Chiang 2011（提供影像資料來源）及 Shih 2015（提供所視覺化的嗅覺社群與資訊流分析）緊密銜接，是 FlyCircuit 生態系中支援連結體探索與生物意義解讀的關鍵視覺化工具。",
-  "source_pdf": "F:/FlyCircuit/Papers/2018-Neuroinformatics-Kaleido Visualizing Big Brain Data with Automatic Color Assignment.pdf"
+  "significance": "Kaleido 直接解決了 FlyCircuit 等大型果蠅連結體資料庫「上萬神經元無法同時視覺化」的瓶頸，讓研究者能在合理的記憶體下人工檢視大規模連結體資料。它與 Chiang 2011（提供影像資料來源）及 Shih 2015（提供所視覺化的嗅覺社群與資訊流分析）緊密銜接，是 FlyCircuit 生態系中支援連結體探索與生物意義解讀的關鍵視覺化工具。"
 }
 </script>
 </head>
@@ -82,7 +81,7 @@
       <div class="badges">
         <span class="badge scale" style="background:#ea580c">方法/工具</span><span class="badge muted">2018</span><span class="badge muted">Neuroinformatics</span><span class="badge">Drosophila</span><span class="badge">FlyCircuit</span><span class="badge muted">3D visualization</span><span class="badge muted">automatic color assignment</span><span class="badge muted">Monte Carlo optimization</span><span class="badge muted">volume rendering</span><span class="badge muted">energy function minimization</span>
       </div>
-      <p class="meta-line">Neuroinformatics (2018) · DOI: <a href="https://doi.org/10.1007/s12021-018-9363-3" target="_blank" rel="noopener">10.1007/s12021-018-9363-3</a> · <a href="file:///F:/FlyCircuit/Papers/2018-Neuroinformatics-Kaleido%20Visualizing%20Big%20Brain%20Data%20with%20Automatic%20Color%20Assignment.pdf">原始 PDF ↗</a></p>
+      <p class="meta-line">Neuroinformatics (2018) · DOI: <a href="https://doi.org/10.1007/s12021-018-9363-3" target="_blank" rel="noopener">10.1007/s12021-018-9363-3</a></p>
     </header>
 
     <div class="callout">

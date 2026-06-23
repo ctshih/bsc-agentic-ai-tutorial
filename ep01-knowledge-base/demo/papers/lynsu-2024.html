@@ -61,8 +61,7 @@
     "以不同訓練集訓練的兩個 LYNSU 模型推論結果高度一致（線性回歸斜率 0.97），證明模型穩定可靠、非模型特異性假象。"
   ],
   "methods": "採用偵測導向的兩階段流程：先將 3D 腦影像沿 Z 軸投影為最大值與平均值兩張 2D 影像，以 YOLOv7 定位三個 ROI（AL、MB/CAL、中央複合體 FB/EB/PB）；再對各 ROI 擷取 3D 影像，用以 ResNet-50 為編解碼骨幹的 3D U-Net 逐 voxel 分割。訓練資料來自 18 個不同 Gal4 driver 的人工標註腦，透過 zero-padding、重疊滑動視窗與 Z 軸鏡像做資料增強，並以 Weighted Dice Loss 加 Categorical Focal Loss 的複合損失函數處理類別不平衡。",
-  "significance": "LYNSU 讓研究者可在原始個體影像上直接分割神經氈，免除 warping/registration 對齊標準腦模板所引入的空間誤差，同時將原需 4 小時的人工分割壓縮到約 7 秒。這對 FlyCircuit 等大型資料庫的高通量解剖分析與連結體（connectomics）建構至關重要，並能更精準量化個體差異與基因在不同神經氈的分佈。",
-  "source_pdf": "F:/FlyCircuit/Papers/2024-LYNSU automated 3D neuropil segmentation of fluorescent images for Drosophila brains.pdf"
+  "significance": "LYNSU 讓研究者可在原始個體影像上直接分割神經氈，免除 warping/registration 對齊標準腦模板所引入的空間誤差，同時將原需 4 小時的人工分割壓縮到約 7 秒。這對 FlyCircuit 等大型資料庫的高通量解剖分析與連結體（connectomics）建構至關重要，並能更精準量化個體差異與基因在不同神經氈的分佈。"
 }
 </script>
 </head>
@@ -84,7 +83,7 @@
       <div class="badges">
         <span class="badge scale" style="background:#ea580c">方法/工具</span><span class="badge muted">2024</span><span class="badge muted">Frontiers in Neuroinformatics</span><span class="badge">Drosophila</span><span class="badge">FlyCircuit</span><span class="badge muted">deep learning</span><span class="badge muted">3D neuropil segmentation</span><span class="badge muted">YOLOv7 object detection</span><span class="badge muted">3D U-Net</span><span class="badge muted">confocal fluorescence imaging</span>
       </div>
-      <p class="meta-line">Frontiers in Neuroinformatics (2024) · DOI: <a href="https://doi.org/10.3389/fninf.2024.1429670" target="_blank" rel="noopener">10.3389/fninf.2024.1429670</a> · <a href="file:///F:/FlyCircuit/Papers/2024-LYNSU%20automated%203D%20neuropil%20segmentation%20of%20fluorescent%20images%20for%20Drosophila%20brains.pdf">原始 PDF ↗</a></p>
+      <p class="meta-line">Frontiers in Neuroinformatics (2024) · DOI: <a href="https://doi.org/10.3389/fninf.2024.1429670" target="_blank" rel="noopener">10.3389/fninf.2024.1429670</a></p>
     </header>
 
     <div class="callout">

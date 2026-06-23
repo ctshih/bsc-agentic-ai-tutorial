@@ -58,8 +58,7 @@
     "效率上 NR 可 24 小時不間斷平行運算，使用 200 核心 AMD Opteron 叢集於兩週內分割完整個 FlyCircuit 資料集，且結果具決定性、無人為偏誤，並能找出人工漏判的神經元。"
   ],
   "methods": "以多重全域強度閾值對原始共軛焦影像產生一系列影像，對每張套用 FAST 追蹤骨架並計算每個體素的分支分數（BS），加總後得到分支穩健性分數（BRS）。再依 BRS 門檻（FlyCircuit 預設 m=40）自動生成 HDR 閾值遮罩，與原始影像取交集以分割出單一神經元，使用者可調整 m 值優化細節。最後以質心距離、迴轉半徑、慣性矩、主軸方向等形態參數與體素層級的 recall/precision 計算全域相似度 GS，並由專家做視覺驗證（matched/broken/tangled 三類）。",
-  "significance": "在果蠅全腦連結體與 FlyCircuit 脈絡中，單神經元分割長期是高通量連結體重建的速率限制步驟。NeuroRetriever 提供決定性、無偏誤且可大規模平行的自動分割方案，將原本仰賴人工的瓶頸自動化，直接支援 FlyCircuit 等大型影像資料庫的單神經元三維重建與後續資訊流分析。",
-  "source_pdf": "F:/FlyCircuit/Papers/2021-Frontiers-Systems-Neuroscience-NeuroRetriever.pdf"
+  "significance": "在果蠅全腦連結體與 FlyCircuit 脈絡中，單神經元分割長期是高通量連結體重建的速率限制步驟。NeuroRetriever 提供決定性、無偏誤且可大規模平行的自動分割方案，將原本仰賴人工的瓶頸自動化，直接支援 FlyCircuit 等大型影像資料庫的單神經元三維重建與後續資訊流分析。"
 }
 </script>
 </head>
@@ -81,7 +80,7 @@
       <div class="badges">
         <span class="badge scale" style="background:#ea580c">方法/工具</span><span class="badge muted">2021</span><span class="badge muted">Frontiers in Systems Neuroscience</span><span class="badge">Drosophila</span><span class="badge">FlyCircuit</span><span class="badge muted">image segmentation</span><span class="badge muted">neuron tracing/skeletonization</span><span class="badge muted">high-dynamic-range (HDR) thresholding</span><span class="badge muted">confocal fluorescence imaging</span>
       </div>
-      <p class="meta-line">Frontiers in Systems Neuroscience (2021) · DOI: <a href="https://doi.org/10.3389/fnsys.2021.687182" target="_blank" rel="noopener">10.3389/fnsys.2021.687182</a> · <a href="file:///F:/FlyCircuit/Papers/2021-Frontiers-Systems-Neuroscience-NeuroRetriever.pdf">原始 PDF ↗</a></p>
+      <p class="meta-line">Frontiers in Systems Neuroscience (2021) · DOI: <a href="https://doi.org/10.3389/fnsys.2021.687182" target="_blank" rel="noopener">10.3389/fnsys.2021.687182</a></p>
     </header>
 
     <div class="callout">
