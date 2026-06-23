@@ -1,0 +1,6 @@
+# OS / 編輯器產生的雜物
+.DS_Store
+Thumbs.db
+desktop.ini
+*.tmp
+*~

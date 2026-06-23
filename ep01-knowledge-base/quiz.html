@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>隨堂測驗｜用 Agentic AI 建立連結體論文知識庫</title>
+<style>
+  :root{
+    --ink:#1b2733; --soft:#5a6b7b; --faint:#8b98a5;
+    --bg:#f7f8fa; --surface:#ffffff; --border:#e4e8ee;
+    --accent:#2563eb; --accent-soft:#eff4ff;
+    --green:#16a34a; --green-soft:#e9f7ef; --red:#dc2626; --red-soft:#fdecec;
+    --radius:12px; --maxw:820px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);line-height:1.7;font-size:16.5px;
+    font-family:-apple-system,"Segoe UI","Noto Sans TC","Microsoft JhengHei","PingFang TC",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px 90px}
+  header.hero{max-width:var(--maxw);margin:0 auto;padding:46px 22px 8px}
+  .topbar{height:12px;background:var(--accent);position:fixed;top:0;left:0;right:0;z-index:10}
+  .eyebrow{color:var(--accent);font-weight:700;font-size:13px;letter-spacing:.08em;margin:0 0 8px}
+  h1{font-size:30px;margin:0 0 8px;line-height:1.3}
+  .sub{color:var(--soft);margin:0 0 4px}
+  .meta{color:var(--faint);font-size:13.5px}
+  a.back{color:var(--accent);text-decoration:none;font-size:14px}
+  a.back:hover{text-decoration:underline}
+
+  /* 結果橫幅 */
+  #result{display:none;margin:22px 0 8px;background:var(--surface);border:1px solid var(--border);
+    border-radius:var(--radius);padding:24px 26px;text-align:center;box-shadow:0 6px 24px rgba(16,24,40,.08)}
+  #result.show{display:block}
+  #result .score{font-size:46px;font-weight:800;color:var(--accent);line-height:1.1}
+  #result .score small{font-size:24px;color:var(--faint);font-weight:600}
+  #result .rmsg{font-size:18px;margin:6px 0 16px}
+  #result button{font:inherit;font-size:15px;padding:9px 22px;border-radius:10px;border:1px solid var(--accent);
+    background:var(--accent);color:#fff;cursor:pointer}
+  #result button:hover{background:#1d50c9}
+
+  .progress{position:sticky;top:12px;z-index:5;background:color-mix(in srgb,var(--bg) 85%,transparent);
+    backdrop-filter:blur(6px);padding:10px 0;font-size:14px;color:var(--soft)}
+  .progress b{color:var(--accent)}
+
+  .qcard{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+    padding:20px 22px;margin:16px 0;box-shadow:0 1px 3px rgba(16,24,40,.05);transition:box-shadow .2s}
+  .qcard.flash{box-shadow:0 0 0 3px rgba(220,38,38,.35)}
+  .qhead{display:flex;gap:12px;align-items:flex-start;margin-bottom:14px}
+  .qnum{flex:none;width:30px;height:30px;border-radius:8px;background:var(--accent);color:#fff;
+    font-weight:700;text-align:center;line-height:30px;font-size:15px}
+  .qtext{font-size:17px;font-weight:500;padding-top:2px}
+  .opts{display:grid;gap:9px;padding-left:42px}
+  .opt{display:flex;gap:11px;align-items:flex-start;padding:11px 14px;border:1px solid var(--border);
+    border-radius:10px;cursor:pointer;transition:border-color .15s,background .15s}
+  .opt:hover{border-color:var(--accent);background:var(--accent-soft)}
+  .opt input{position:absolute;opacity:0;width:0;height:0}
+  .opt .mark{flex:none;width:20px;height:20px;border:2px solid #c3ccd6;border-radius:50%;margin-top:2px;
+    position:relative;transition:border-color .15s}
+  .opt input:checked ~ .mark{border-color:var(--accent)}
+  .opt input:checked ~ .mark::after{content:"";position:absolute;inset:3px;border-radius:50%;background:var(--accent)}
+  .opt .otext{font-size:15.5px}
+  .opt.correct{border-color:var(--green);background:var(--green-soft)}
+  .opt.correct .mark{border-color:var(--green)}
+  .opt.correct .mark::after{content:"";position:absolute;inset:3px;border-radius:50%;background:var(--green)}
+  .opt.wrong{border-color:var(--red);background:var(--red-soft)}
+  .opt.wrong .mark{border-color:var(--red)}
+  .opt.wrong .mark::after{content:"";position:absolute;inset:3px;border-radius:50%;background:var(--red)}
+  .graded .opt{cursor:default}
+  .graded .opt:hover{background:inherit;border-color:var(--border)}
+  .graded .opt.correct:hover{border-color:var(--green)}
+  .graded .opt.wrong:hover{border-color:var(--red)}
+  .explain{margin:12px 0 0 42px;padding:11px 14px;background:var(--accent-soft);border-left:3px solid var(--accent);
+    border-radius:0 8px 8px 0;font-size:14.5px;color:var(--ink)}
+
+  .actions{margin:26px 0 0;text-align:center}
+  .name-input{display:block;margin:0 auto 14px;width:300px;max-width:90%;font:inherit;font-size:15px;padding:11px 16px;border:1px solid var(--border);border-radius:10px;background:var(--surface);color:var(--ink)}
+  .name-input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(37,99,235,.15)}
+  #submit{font:inherit;font-size:17px;font-weight:600;padding:13px 40px;border-radius:12px;border:none;
+    background:var(--accent);color:#fff;cursor:pointer;box-shadow:0 4px 14px rgba(37,99,235,.3)}
+  #submit:hover{background:#1d50c9}
+  .foot{max-width:var(--maxw);margin:0 auto;padding:24px 22px;color:var(--faint);font-size:12.5px;border-top:1px solid var(--border)}
+  @media(max-width:560px){.opts,.explain{padding-left:0;margin-left:0}}
+</style>
+</head>
+<body>
+<div class="topbar"></div>
+
+<header class="hero">
+  <p class="eyebrow">隨堂測驗 · 10 題單選</p>
+  <h1>你掌握了多少？</h1>
+  <p class="sub">這份測驗對應教學文件〈用 Agentic AI 從零建立連結體論文知識庫〉。</p>
+  <p class="meta">答完點「交卷看分數」當場計分並顯示解析。純前端、不會送出任何資料。　<a class="back" href="index.html">← 回教學文件</a></p>
+</header>
+
+<div class="wrap">
+  <div id="result"></div>
+  <div class="progress">已作答 <b id="answered">0</b> / 10 題</div>
+  <div id="quiz-list"></div>
+  <div class="actions">
+    <input id="name" class="name-input" type="text" placeholder="姓名（選填，老師統計用）" maxlength="20" autocomplete="off">
+    <button id="submit">交卷看分數</button>
+  </div>
+</div>
+
+<div class="foot">用 Agentic AI 建立連結體論文知識庫 · 隨堂測驗（純前端 HTML，可離線使用）</div>
+
+<script>
+// ↓↓↓ 部署「Google 試算表記分」用：把你的 Google Apps Script 網址貼進引號內。
+//     留空＝只在本機計分、不送出任何資料（一樣可正常使用）。
+const SCRIPT_URL = '';
+
+const QUIZ = [
+  {q:"「Agentic AI」（會自己動手的 AI）和一般聊天機器人最大的不同是？",
+   options:["它能直接讀檔、寫檔、執行程式，完成多步驟任務","它回答問題的速度更快","它只會聊天，絕不會碰你的檔案","它一定要工程師操作才能用"],
+   answer:0, explain:"Agentic AI 不只「回答」，還能實際在你的電腦上動手——讀寫檔案、跑程式、截圖、分工。"},
+
+  {q:"這個專案刻意用 HTML（而不是 Markdown／Obsidian）來做知識庫，主因是？",
+   options:["HTML 執行效率比較高","對人類更易讀、資訊更豐富，瀏覽器雙擊就能看","HTML 完全不需要維護","Markdown 不支援中文"],
+   answer:1, explain:"HTML 是「給人看的格式」，對非工程背景讀者更友善，也能放圖、表格與互動。"},
+
+  {q:"「LLM Wiki」和傳統 RAG 最關鍵的差別是？",
+   options:["LLM Wiki 完全不用 AI","LLM Wiki 讓知識持續累積、複利成長，而非每次提問才從頭撈","LLM Wiki 只能處理英文","RAG 比較新所以比較好"],
+   answer:1, explain:"RAG 每次臨時撈片段、不累積；LLM Wiki 一進新資料就整理進庫，越用越完整。"},
+
+  {q:"投影片說「一頁，兩種讀者」，指的是每篇論文頁同時含有？",
+   options:["中文版和英文版","給人看的豐富內容 ＋ 給機器讀的 metadata","正式版和草稿版","線上版和離線版"],
+   answer:1, explain:"同一個 HTML 檔，人讀豐富排版、程式讀內嵌 metadata，所以「好看」和「可自動處理」不衝突。"},
+
+  {q:"AI 在過程中「跳出決策選單」讓你二選一／多選一，最主要的用意是？",
+   options:["拖延時間","遇到該由人決定的岔路時停下來問，而不是替你猜","測試使用者有沒有在看","因為 AI 不會做任何決定"],
+   answer:1, explain:"當有兩種以上明顯不同的做法，那就是該由人出場決策的時候。"},
+
+  {q:"為什麼 AI 要派多個「Subagent（分身）」去讀那 6 篇 PDF？",
+   options:["為了增加費用","讓分身平行各讀一篇、保持主對話乾淨，又比較快","因為主程式壞了","為了把 PDF 翻成英文"],
+   answer:1, explain:"一篇篇在主對話讀會塞爆記憶體；派分身平行處理，主線清爽、速度也快。"},
+
+  {q:"知識庫的目錄、連結網路、時間軸這些導覽頁是怎麼產生的？",
+   options:["人手動一頁一頁編寫","由 build.py 掃描每篇論文頁自動生成","從 PDF 直接轉檔","從網路即時下載"],
+   answer:1, explain:"真實來源只有論文頁一份，導覽頁全部自動生成，避免兩份資料不同步。"},
+
+  {q:"放在資料夾裡的 CLAUDE.md 檔案，作用是？",
+   options:["存放論文 PDF","一份「規則書」，讓 AI 之後再開這資料夾時自動照規矩維護","紀錄使用者的密碼","影片的字幕檔"],
+   answer:1, explain:"把架構、欄位、流程寫進 CLAUDE.md，未來每次工作階段 AI 都會先讀它、照規矩做。"},
+
+  {q:"教訓說「驗證成果，不只跑完」，AI 在這專案怎麼驗證？",
+   options:["直接相信程式沒問題","做結構檢查（卡片／節點／連線數對不對）並用瀏覽器截圖看渲染","問使用者有沒有壞","重開機一次"],
+   answer:1, explain:"腳本跑完不等於做對；沒有驗證手段的「完成」不算完成。"},
+
+  {q:"在這次人機協作中，「人」主要負責什麼？",
+   options:["寫所有程式碼","出題、找資料、在岔路上做決策與判斷","什麼都不用做","只負責付錢"],
+   answer:1, explain:"人負責思考與判斷（出題、決策），AI 負責其餘的一切（讀寫、整理、驗證）。"},
+];
+
+const list = document.getElementById('quiz-list');
+QUIZ.forEach((item, qi) => {
+  const card = document.createElement('div');
+  card.className = 'qcard'; card.id = 'q' + qi;
+  const opts = item.options.map((opt, oi) =>
+    `<label class="opt"><input type="radio" name="q${qi}" value="${oi}"><span class="mark"></span><span class="otext">${opt}</span></label>`
+  ).join('');
+  card.innerHTML =
+    `<div class="qhead"><span class="qnum">${qi+1}</span><span class="qtext">${item.q}</span></div>` +
+    `<div class="opts">${opts}</div><div class="explain" hidden></div>`;
+  list.appendChild(card);
+});
+
+const answeredEl = document.getElementById('answered');
+document.addEventListener('change', e => {
+  if (e.target.matches('input[type=radio]')) {
+    const n = new Set([...document.querySelectorAll('input[type=radio]:checked')].map(i=>i.name)).size;
+    answeredEl.textContent = n;
+  }
+});
+
+document.getElementById('submit').addEventListener('click', grade);
+
+function grade(){
+  const unanswered = [];
+  QUIZ.forEach((_, qi) => { if (!document.querySelector(`input[name="q${qi}"]:checked`)) unanswered.push(qi); });
+  if (unanswered.length){
+    alert(`還有 ${unanswered.length} 題沒作答喔！`);
+    const first = document.getElementById('q' + unanswered[0]);
+    first.scrollIntoView({behavior:'smooth', block:'center'});
+    first.classList.add('flash'); setTimeout(()=>first.classList.remove('flash'), 1500);
+    return;
+  }
+  let score = 0;
+  const marks = [];
+  QUIZ.forEach((item, qi) => {
+    const chosen = +document.querySelector(`input[name="q${qi}"]:checked`).value;
+    const card = document.getElementById('q' + qi);
+    card.classList.add('graded');
+    card.querySelectorAll('.opt').forEach((lab, oi) => {
+      lab.querySelector('input').disabled = true;
+      if (oi === item.answer) lab.classList.add('correct');
+      if (oi === chosen && chosen !== item.answer) lab.classList.add('wrong');
+    });
+    const ex = card.querySelector('.explain');
+    ex.innerHTML = (chosen === item.answer ? '✅ <b>答對！</b> ' : '❌ <b>答錯。</b> ') + item.explain;
+    ex.hidden = false;
+    const ok = chosen === item.answer;
+    marks.push(ok ? 1 : 0);
+    if (ok) score++;
+  });
+  showResult(score);
+  document.getElementById('submit').style.display = 'none';
+  logResult(score, marks);
+}
+
+// 把成績送到 Google 試算表（透過 Apps Script）。SCRIPT_URL 留空時不做事。
+function logResult(score, marks){
+  if (!SCRIPT_URL) return;
+  try {
+    fetch(SCRIPT_URL, {
+      method: 'POST', mode: 'no-cors',
+      body: JSON.stringify({
+        name: (document.getElementById('name').value || '').trim(),
+        score: score, total: QUIZ.length, marks: marks, ts: new Date().toISOString()
+      })
+    });
+  } catch (e) { /* 靜默失敗，不影響本機計分 */ }
+}
+
+function showResult(score){
+  let msg;
+  if (score === 10) msg = '滿分！🎉 你完全掌握了。';
+  else if (score >= 8) msg = '很好，觀念很清楚！';
+  else if (score >= 6) msg = '不錯，再複習幾個重點就更穩了。';
+  else if (score >= 4) msg = '及格邊緣，建議重看一遍教學。';
+  else msg = '別灰心，回去再看一次教學吧！';
+  const r = document.getElementById('result');
+  r.innerHTML =
+    `<div class="score">${score} <small>/ 10</small></div>` +
+    `<div class="rmsg">${msg}</div>` +
+    `<button id="retry">重新作答</button>`;
+  r.classList.add('show');
+  document.getElementById('retry').addEventListener('click', () => location.reload());
+  r.scrollIntoView({behavior:'smooth', block:'center'});
+}
+</script>
+</body>
+</html>

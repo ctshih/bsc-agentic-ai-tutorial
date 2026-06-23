@@ -1,0 +1,430 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>用 Agentic AI 從零建立「連結體論文知識庫」｜Claude Code 初學者教學</title>
+<style>
+  :root{
+    --ink:#1b2733; --soft:#5a6b7b; --faint:#8b98a5;
+    --bg:#ffffff; --panel:#f7f8fa; --border:#e4e8ee;
+    --accent:#2563eb; --accent-soft:#eff4ff;
+    --maxw:920px; --radius:12px;
+    --green:#16a34a; --blue:#2563eb; --purple:#9333ea; --amber:#d97706; --red:#dc2626;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,"Segoe UI","Noto Sans TC","Microsoft JhengHei","PingFang TC",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.85; font-size:16.5px; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 22px 120px}
+  header.hero{
+    max-width:var(--maxw); margin:0 auto; padding:54px 22px 26px;
+  }
+  .eyebrow{color:var(--accent); font-weight:700; font-size:13px; letter-spacing:.08em; text-transform:uppercase; margin:0 0 10px}
+  h1{font-size:33px; line-height:1.3; margin:0 0 12px; letter-spacing:-.01em}
+  .subtitle{font-size:18px; color:var(--soft); margin:0 0 26px}
+  .meta-card{
+    background:var(--panel); border:1px solid var(--border); border-radius:var(--radius);
+    padding:18px 22px; font-size:15px;
+  }
+  .meta-card p{margin:6px 0}
+  .meta-card b{color:var(--ink)}
+  h2{font-size:25px; margin:64px 0 8px; padding-top:16px; border-top:2px solid var(--border); line-height:1.35}
+  h2 .pt{color:var(--accent); font-size:15px; display:block; font-weight:700; letter-spacing:.05em; margin-bottom:2px}
+  h3{font-size:19px; margin:38px 0 10px}
+  h4{font-size:16px; margin:24px 0 6px; color:var(--ink)}
+  p{margin:12px 0}
+  a{color:var(--accent); text-decoration:none}
+  a:hover{text-decoration:underline}
+  code{background:var(--panel); border:1px solid var(--border); border-radius:5px; padding:1px 6px; font-family:"Cascadia Code",Consolas,Menlo,monospace; font-size:.86em}
+  pre{background:#0f1622; color:#e6edf3; border-radius:10px; padding:16px 18px; overflow:auto; font-size:13.5px; line-height:1.6}
+  pre code{background:none; border:none; color:inherit; padding:0}
+  ul,ol{padding-left:22px}
+  li{margin:7px 0}
+  blockquote{margin:16px 0; padding:10px 18px; border-left:4px solid var(--accent); background:var(--accent-soft); border-radius:0 8px 8px 0; color:var(--ink)}
+
+  /* 目錄 */
+  nav.toc{background:var(--panel); border:1px solid var(--border); border-radius:var(--radius); padding:20px 26px; margin:30px 0}
+  nav.toc h2{border:none; margin:0 0 10px; padding:0; font-size:18px}
+  nav.toc ol{margin:6px 0 0; columns:2; column-gap:34px}
+  nav.toc a{color:var(--ink)}
+  nav.toc blockquote a{color:var(--accent); text-decoration:underline; font-weight:500}
+  @media(max-width:620px){nav.toc ol{columns:1}}
+
+  /* 五色對話框 */
+  .msg{padding:11px 16px; margin:14px 0; border-radius:5px; font-size:15.5px}
+  .msg .who{font-weight:700; margin-right:4px}
+  .msg.g{background:rgba(34,197,94,.10); border-left:4px solid var(--green)}
+  .msg.b{background:rgba(59,130,246,.10); border-left:4px solid var(--blue)}
+  .msg.p{background:rgba(168,85,247,.12); border-left:4px solid var(--purple)}
+  .msg.y{background:rgba(245,158,11,.13); border-left:4px solid var(--amber)}
+  .msg.r{background:rgba(239,68,68,.10); border-left:4px solid var(--red)}
+  .legend-row{display:flex; flex-wrap:wrap; gap:10px; margin:14px 0}
+  .legend-row .chip{font-size:13.5px; padding:4px 12px; border-radius:999px}
+  .ai{margin:10px 0 22px; padding-left:6px}
+  .ai .tag{display:inline-block; font-size:12px; font-weight:700; color:var(--accent); background:var(--accent-soft); border-radius:5px; padding:1px 8px; margin-right:6px}
+
+  /* 截圖 / 介面圖 */
+  figure{margin:22px 0; padding:0}
+  figure img{width:100%; display:block; border:1px solid var(--border); border-radius:10px; box-shadow:0 6px 24px rgba(16,24,40,.08)}
+  figcaption{font-size:13.5px; color:var(--soft); margin-top:9px; text-align:center}
+  figcaption b{color:var(--ink)}
+
+  /* 介面重現面板 */
+  .ui{border:1px solid var(--border); border-radius:11px; overflow:hidden; margin:22px 0; box-shadow:0 6px 24px rgba(16,24,40,.07); background:#fff}
+  .ui .bar{background:var(--panel); border-bottom:1px solid var(--border); padding:8px 14px; display:flex; align-items:center; gap:8px; font-size:13px; color:var(--soft)}
+  .ui .dot{width:11px; height:11px; border-radius:50%}
+  .ui .body{padding:16px 18px}
+  .ui .repro{font-size:12px; color:var(--faint); float:right}
+  .filerow{display:flex; align-items:center; gap:10px; padding:7px 8px; border-radius:6px; font-size:14px}
+  .filerow:hover{background:var(--panel)}
+  .filerow .ic{color:#d4453b}
+  .filerow .sz{margin-left:auto; color:var(--faint); font-size:12.5px; font-variant-numeric:tabular-nums}
+  .agentcard{border:1px solid var(--border); border-radius:8px; padding:9px 12px; font-size:13.5px; display:flex; gap:10px; align-items:center}
+  .agentcard .st{margin-left:auto; font-size:12px; color:var(--green); font-weight:600}
+  .opt{border:1px solid var(--border); border-radius:9px; padding:11px 14px; margin:9px 0}
+  .opt.sel{border-color:var(--accent); border-width:2px; background:var(--accent-soft)}
+  .opt .ot{font-weight:600}
+  .opt .od{font-size:13.5px; color:var(--soft); margin-top:3px}
+
+  /* 表格 */
+  table{border-collapse:collapse; width:100%; margin:18px 0; font-size:14.5px}
+  th,td{border:1px solid var(--border); padding:9px 12px; text-align:left; vertical-align:top}
+  th{background:var(--panel); font-weight:700}
+  td code{font-size:.9em}
+
+  .callout{background:#fffbeb; border:1px solid #fde68a; border-left:4px solid var(--amber); border-radius:0 8px 8px 0; padding:12px 16px; margin:18px 0; font-size:15px}
+  .note{background:var(--accent-soft); border:1px solid #c7dbff; border-radius:8px; padding:12px 16px; margin:18px 0; font-size:15px}
+  .foot{max-width:var(--maxw); margin:0 auto; padding:30px 22px; color:var(--faint); font-size:13px; border-top:1px solid var(--border)}
+  .lesson{background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:4px 20px 14px; margin:16px 0}
+  .lesson h4{color:var(--accent)}
+  .seg{scroll-margin-top:16px}
+  .num{display:inline-block; min-width:30px; height:30px; line-height:30px; text-align:center; background:var(--accent); color:#fff; border-radius:8px; font-weight:700; font-size:15px; margin-right:8px}
+  .video-box{margin:28px 0 6px}
+  .video-box .vlabel{font-size:14px; color:var(--accent); font-weight:700; letter-spacing:.04em; margin:0 0 10px}
+  .video-wrap{position:relative; width:100%; aspect-ratio:16/9; border-radius:var(--radius); overflow:hidden; box-shadow:0 8px 30px rgba(16,24,40,.14); background:#000}
+  .video-wrap iframe{position:absolute; inset:0; width:100%; height:100%; border:0}
+  .video-box .vcap{font-size:13.5px; color:var(--soft); margin:10px 0 0}
+  .quiz-cta{margin:34px 0 6px; background:var(--accent-soft); border:1px solid #c7dbff; border-radius:var(--radius); padding:24px 26px; text-align:center}
+  .quiz-cta h3{margin:0 0 6px; font-size:19px}
+  .quiz-cta p{margin:0 0 16px; color:var(--soft); font-size:15px}
+  .quiz-cta a{display:inline-block; background:var(--accent); color:#fff; text-decoration:none; font-weight:600; font-size:16px; padding:12px 30px; border-radius:10px; box-shadow:0 4px 14px rgba(37,99,235,.3)}
+  .quiz-cta a:hover{background:#1d50c9}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <p class="eyebrow"><a href="../index.html" style="color:var(--accent);text-decoration:none">← BSC with Agentic AI Tutorial</a> · EP01</p>
+  <h1>用 Agentic AI 從零建立<br>「連結體論文知識庫」</h1>
+  <p class="subtitle">一次真實協作的完整重演：把 6 篇果蠅連結體論文，變成一個會持續長大、人類好讀的 HTML 知識庫。</p>
+  <div class="meta-card">
+    <p><b>這份文件是什麼：</b>把一次 Claude Code 協作從頭到尾拆解給你看——使用者每一句指令、AI 每一步動作、踩過的決策點，全程附圖。</p>
+    <p><b>適合誰讀：</b>BSC（腦空間體中心）同仁，或任何「會用電腦、但第一次接觸 Agentic AI（會自己動手做事的 AI）」的研究者。<b>不需要會寫程式</b>。</p>
+    <p><b>成果（一句話）：</b>從一個空資料夾，到一個知識庫<b>雛形</b>——含 6 篇論文整理頁、可篩選目錄、論文連結網路圖、時間軸，並附自動化建置腳本與維護規則，全部由 AI 寫，人只負責出題與決策。<b>請注意：</b>這是第一版<b>雛形</b>，目的是先把整個流程走通；它還不是最終形態，實際要長成什麼樣子會在後續課程再調整。</p>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="video-box">
+    <p class="vlabel">📺 影片版</p>
+    <div class="video-wrap">
+      <iframe src="https://www.youtube.com/embed/cO_6-tsYQpM" title="用 Agentic AI 從零建立連結體論文知識庫" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+    <p class="vcap">不想讀字？可以先看影片導覽，再回來細讀；兩者內容一致。</p>
+  </div>
+
+  <nav class="toc">
+    <h2>目錄</h2>
+    <blockquote>想直接看怎麼實做，可以從 <a href="#part1">Part 1 — 完整對話時序</a> 開始。</blockquote>
+    <ol>
+      <li><a href="#colors">對話框顏色說明</a></li>
+      <li><a href="#glossary">名詞速查表</a></li>
+      <li><a href="#quickstart">Claude Code 快速入門</a></li>
+      <li><a href="#part1">Part 1 — 完整對話時序</a></li>
+      <li><a href="#part2">Part 2 — 最佳實踐清單</a></li>
+      <li><a href="#part3">Part 3 — 本次成果（雛形）</a></li>
+      <li><a href="#part4">Part 4 — 9 個核心教訓</a></li>
+      <li><a href="#closing">結語：給初學者的下一步</a></li>
+    </ol>
+  </nav>
+
+  <!-- ============ 顏色說明 ============ -->
+  <h2 id="colors">對話框顏色說明</h2>
+  <p>後面 <a href="#part1">Part 1</a> 會逐句重現使用者跟 AI 的對話。為了讓你一眼看出「這句話在做什麼」，所有使用者發言用五種顏色標示。這個分類本身就是一個重要觀念：<b>跟 AI 協作不是只會「叫它做事」，更重要的是在對的時機問問題、做決策、踩剎車</b>。</p>
+  <div class="msg g"><span class="who">🟢 使用者：</span>請求動作 — 叫 AI 去做一件事（「幫我建立第一版」）。</div>
+  <div class="msg b"><span class="who">🔵 使用者：</span>問問題 — 詢問現況、估算、細節（「這個 repo 在做什麼？」）。</div>
+  <div class="msg p"><span class="who">🟣 使用者：</span>關鍵決策 — 在 AI 攤開的選項中二選一／多選一。</div>
+  <div class="msg y"><span class="who">🟡 使用者：</span>中斷 / 澄清 — 打斷 AI、修正誤會、補充條件。</div>
+  <div class="msg r"><span class="who">🔴 使用者：</span>設計回饋 / 糾錯 — 指出方案方向上的根本問題。</div>
+  <p class="note">小提醒：好的教訓往往來自 🔴 與 🟡。當你「指出方向」或「喊停」時，AI 才會修正路線，而不是一路把錯的方向做到底。</p>
+
+  <!-- ============ 名詞速查表 ============ -->
+  <h2 id="glossary">名詞速查表</h2>
+  <p>看到不懂的詞先回來查。兩張表分別對應這個專案的兩個面向。</p>
+
+  <h3>A. 知識庫 / 網頁技術</h3>
+  <table>
+    <tr><th>名詞</th><th>白話解釋</th></tr>
+    <tr><td><b>知識庫 (knowledge base)</b></td><td>把資料整理成彼此連結、可持續累積的結構，而不是一堆散落的檔案。</td></tr>
+    <tr><td><b>真實來源 (source of truth)</b></td><td>同一份資訊「以哪個檔案為準」。本專案以每篇論文的 HTML 頁為準，其餘自動生成。</td></tr>
+    <tr><td><b>metadata（後設資料）</b></td><td>「描述資料的資料」，例如一篇論文的年份、作者、物種、方法。本專案把它藏在每頁 HTML 裡，給程式讀。</td></tr>
+    <tr><td><b>HTML / CSS</b></td><td>HTML 是網頁的內容，CSS 是它的外觀。雙擊就能用瀏覽器打開，不必安裝任何軟體。</td></tr>
+    <tr><td><b>build script（建置腳本）</b></td><td>一支小程式（這裡是 <code>build.py</code>），掃過所有論文頁，自動產生目錄、網路圖、時間軸。</td></tr>
+    <tr><td><b>headless 瀏覽器</b></td><td>沒有視窗、在背景跑的瀏覽器。本專案用它把網頁「自動截圖」成圖檔。</td></tr>
+  </table>
+
+  <h3>B. Claude Code / Agentic AI 工具</h3>
+  <table>
+    <tr><th>名詞</th><th>白話解釋</th></tr>
+    <tr><td><b>Agentic AI</b></td><td>「會自己動手」的 AI——不只回答問題，還能讀檔、寫檔、執行指令、截圖、分工，完成多步驟任務。</td></tr>
+    <tr><td><b>Claude Code</b></td><td>本案例用的 Agentic AI 工具。它能直接在你的電腦上讀寫檔案、跑程式。</td></tr>
+    <tr><td><b>context（上下文）</b></td><td>AI 當下「記得」的所有對話與檔案內容。空間有限，所以要保持乾淨、別塞無關的東西。</td></tr>
+    <tr><td><b>Subagent（子代理）</b></td><td>AI 派出去做單一任務的分身。本專案派 6 個分身同時各讀一篇 PDF，主線不被淹沒。</td></tr>
+    <tr><td><b>Skill（技能）</b></td><td>預先寫好的「工作流模板」。這份教學本身就是用一個叫 <code>claude-code-research-tutorial</code> 的 Skill 產出的。</td></tr>
+    <tr><td><b>決策選單 (AskUserQuestion)</b></td><td>AI 遇到「該由你決定」的岔路時，跳出選項讓你點選，而不是替你猜。</td></tr>
+    <tr><td><b>CLAUDE.md</b></td><td>放在資料夾裡的「規則書」。AI 之後再打開這個資料夾，會自動先讀它、照規則做。</td></tr>
+  </table>
+
+  <!-- ============ 快速入門 ============ -->
+  <h2 id="quickstart">Claude Code 快速入門（6 個核心觀念）</h2>
+  <p>第一次跟 Agentic AI 協作，先記住這 6 件事，就能避開大部分新手坑：</p>
+  <ol>
+    <li><b>它真的會自己動手。</b>你說「建立知識庫」，它會真的在硬碟上建資料夾、寫檔案、跑程式——不是只給你一段教學文字。</li>
+    <li><b>你隨時可以打斷。</b>方向不對就喊停、補充條件。越早糾正越省事（這就是 🟡🔴 對話框存在的原因）。</li>
+    <li><b>大任務先要計畫，再要結果。</b>對中大型工作，先說「在動手前，先給我你的計畫」，看過再放行。</li>
+    <li><b>研究與探索丟給 Subagent。</b>讀一堆論文、查資料這種「會塞爆對話」的工作，讓它派分身去做，主線保持清爽。</li>
+    <li><b>不可逆的事它會先問你。</b>刪檔、覆寫、送出、付款這類動作，AI 應該停下來確認，不會自作主張。</li>
+    <li><b>把規則寫進 CLAUDE.md。</b>你不必每次重講一遍偏好——寫進規則書，未來每個工作階段它都會自動遵守。</li>
+  </ol>
+  <div class="callout">💡 這個專案<b>沒有用到 git（版本控制）</b>，因為目標是「先做出第一版」。等知識庫穩定、要長期維護時，把整個資料夾變成一個 git repo，就能免費獲得「改了什麼、何時改的、隨時還原」的歷史紀錄。對初學者：先把東西做出來，版本控制可以之後再加。</div>
+
+  <!-- ============ PART 1 ============ -->
+  <h2 id="part1"><span class="pt">PART 1</span>完整對話時序</h2>
+  <p>以下按時間順序，重現整個協作。每段：<b>編號</b> → 使用者說了什麼（彩色框）→ AI 做了什麼。穿插的截圖與介面圖讓你看到實際畫面。</p>
+
+  <h3 class="seg" id="s1"><span class="num">1</span>看懂參考設計</h3>
+  <div class="msg b"><span class="who">🔵 使用者：</span>請先看一下這個 repo 的內容，告訴我它在做什麼：<code>gist.github.com/karpathy/442a6bf...</code></div>
+  <figure>
+    <img src="images/dialog-1.png" alt="實際對話：請 AI 看懂這份參考文件">
+    <figcaption><b>實際對話截圖：</b>請 AI 先看懂那份參考文件、並回報它在做什麼。</figcaption>
+  </figure>
+  <div class="ai"><span class="tag">AI 做了什麼</span>用網頁抓取工具讀了那份文件，發現它是 Andrej Karpathy 提出的「LLM Wiki」模式——一種<b>讓 AI 持續維護、會越長越大的個人知識庫</b>設計。為求精準，AI 又抓了一次原始全文逐字確認（見教訓①），整理出它的三層架構（原始來源 / wiki / 設定檔）與三種操作（收錄 / 查詢 / 健檢）回報。</div>
+  <div class="note">
+    <p style="margin:0 0 8px"><b>誰是 Karpathy？</b>Andrej Karpathy 是全球知名的 AI 研究者：OpenAI 創始成員之一、曾領導特斯拉（Tesla）的自動駕駛 AI，之後創辦教育新創 Eureka Labs；<b>2026 年 5 月加入 Anthropic（也就是開發 Claude 的公司）的 pre-training 團隊</b>。他以把複雜觀念講得淺顯易懂著稱。這套「用 LLM 維護知識庫」的點子，就是他寫成一份公開文件分享出來的。</p>
+    <p style="margin:0 0 10px">📄 原始文件：<a href="https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f" target="_blank" rel="noopener">Karpathy 的「LLM Wiki」gist</a></p>
+    <p style="margin:0 0 8px"><b>什麼是「LLM Wiki」？</b>多數人用 AI 讀文件靠的是 <b>RAG</b>（檢索增強生成）——你上傳一堆檔案，每次提問時 AI 才臨時去原始文件裡撈出相關片段、現場拼一個答案。問題是知識<b>不會累積</b>：同樣一個需要綜合五份文件的問題，它每次都得重新翻找、重新拼湊，沒有任何東西被「建立」起來。</p>
+    <p style="margin:0 0 8px">LLM Wiki 反過來做：<b>新資料一進來，就讓 AI 當場讀懂、抽出重點、寫成一頁，並和既有內容互相連結、標出矛盾</b>。知識被「編譯」一次後就<b>持續保持更新</b>，而不是每次提問才重算。於是它成為一個會<b>複利成長</b>的產物——交叉引用早就建好、該標的矛盾早就標好、整體脈絡反映了你讀過的所有東西。問越多、加越多，它就越完整。</p>
+    <p style="margin:0 0 8px"><b>三層架構：</b>① <b>原始來源</b>——你蒐集的 PDF、文章、圖，不可變，AI 只讀不改；② <b>Wiki</b>——AI 生成、也完全由 AI 維護的一頁頁筆記，互相連結；③ <b>設定檔</b>（在 Claude Code 裡就是 <code>CLAUDE.md</code>）——告訴 AI 這個知識庫怎麼組織、收錄／查詢／健檢各照什麼規矩走。這份設定檔正是讓 AI 變成「有紀律的維護者」而非普通聊天機器人的關鍵。</p>
+    <p style="margin:0"><b>為什麼有效？</b>維護知識庫真正累人的不是讀、也不是想，而是<b>瑣碎的後勤</b>：更新交叉引用、讓摘要保持最新、發現新資料和舊結論衝突、在幾十頁之間維持一致。人會放棄維護 wiki，正是因為這些後勤成本長得比價值還快。但 AI 不會累、不會忘記更新某個連結，一次能改十幾個檔——維護成本趨近於零。人只負責<b>找資料、出題、提問與判斷</b>，AI 負責其餘的一切。本專案就是把這個想法，改用 HTML（而非 Karpathy 原本的 Markdown）具體做出來。</p>
+  </div>
+
+  <h3 class="seg" id="s2"><span class="num">2</span>把參考素材存檔</h3>
+  <div class="msg g"><span class="who">🟢 使用者：</span>把那份文件的完整原文抓下來存檔。</div>
+  <div class="ai"><span class="tag">AI 做了什麼</span>用一行指令把原文下載成 <code>references/karpathy-llm-wiki.md</code>（約 12 KB），讀完整份確認無誤。教訓：當作教材的參考素材，要落地成檔案，而不是只留在對話裡。</div>
+
+  <h3 class="seg" id="s3"><span class="num">3</span>提出不同方向：改用 HTML</h3>
+  <div class="msg r"><span class="who">🔴 使用者：</span>我跟他的作法有點不一樣，我不要用 markdown 跟 obsidian 來管理，我想要用 html，對人類更加易讀，而且資訊較豐富。</div>
+  <figure>
+    <img src="images/dialog-2.png" alt="實際對話：提出改用 HTML 的方向">
+    <figcaption><b>實際對話截圖：</b>使用者提出改用 HTML、不要 Markdown／Obsidian。</figcaption>
+  </figure>
+  <div class="ai"><span class="tag">AI 做了什麼</span>沒有直接照做，而是先<b>拆清楚需求</b>（教訓②）：指出「人看的格式」和「AI 維護的真實來源」是兩件事，HTML 解決的是前者；後者還有選擇空間。接著攤開三個可行方案，準備讓使用者決策。</div>
+
+  <h3 class="seg" id="s4"><span class="num">4</span>關鍵決策：知識庫以什麼為準？</h3>
+  <p>這是整個專案最重要的岔路。AI 沒有替使用者猜，而是跳出<b>決策選單</b>（這是 Agentic AI 很關鍵的一個互動——遇到該由人決定的事，就停下來問）：</p>
+  <figure>
+    <img src="images/ui-decision.png" alt="Claude Code 決策選單：知識庫真實來源要用哪種形式的三個選項卡片">
+    <figcaption><b>真實截圖：</b>AI 跳出的決策選單（AskUserQuestion）。遇到該由人決定的岔路，它列出選項與各自代價讓使用者點選——這次使用者選了「兩者混合」。</figcaption>
+  </figure>
+  <div class="msg p"><span class="who">🟣 使用者：</span>（在選單中點選）兩者混合。</div>
+  <div class="ai"><span class="tag">AI 做了什麼</span>依這個決策，定下核心架構：<b>每篇論文一頁 HTML（人讀）＋ 頁內嵌 JSON metadata（機器讀）</b>，再用腳本自動生成導覽頁。</div>
+
+  <h3 class="seg" id="s5"><span class="num">5</span>定案架構、提供素材</h3>
+  <div class="msg g"><span class="who">🟢 使用者：</span>就用這樣的架構。我在 <code>F:\FlyCircuit\Papers</code> 放了幾篇我自己的文章，請用它們建立第一個版本的知識庫。</div>
+  <figure>
+    <img src="images/dialog-3.png" alt="實際對話：告訴 AI 論文放在哪個資料夾">
+    <figcaption><b>實際對話截圖：</b>使用者定案架構、並告知論文 PDF 放在 <code>F:\FlyCircuit\Papers</code>。</figcaption>
+  </figure>
+  <p>使用者提供的原始素材——6 篇 PDF 論文，這就是知識庫的「原始來源」層：</p>
+  <figure>
+    <img src="images/ui-sources.png" alt="檔案總管顯示 F:\FlyCircuit\Papers 裡的 6 篇來源 PDF">
+    <figcaption><b>真實截圖：</b>使用者提供的 6 篇來源 PDF（<code>F:\FlyCircuit\Papers</code>），這就是知識庫的「原始來源」層。</figcaption>
+  </figure>
+  <div class="ai"><span class="tag">AI 做了什麼</span>先設計資料夾結構與 metadata 欄位（年份、作者、物種、研究尺度、方法、相關論文…），並就欄位徵詢使用者確認，再開始建置。</div>
+
+  <h3 class="seg" id="s6"><span class="num">6</span>派 6 個 Subagent 平行讀論文</h3>
+  <div class="ai"><span class="tag">AI 做了什麼</span>6 篇 PDF 若在主對話逐一讀會塞爆記憶體。AI 改派 <b>6 個子代理同時各讀一篇</b>，每個分身只做一件事：讀 PDF → 抽出 metadata 與中文重點 → 回傳結構化結果。並先給每篇一個固定代號，好讓它們互相標註「相關論文」。</div>
+  <figure style="max-width:380px; margin-left:auto; margin-right:auto">
+    <img src="images/ui-subagents.png" alt="Claude Code 6 個 subagent 並行讀取 6 篇 PDF 的執行畫面">
+    <figcaption><b>真實截圖：</b>6 個 subagent 同時各讀一篇 PDF、各自抽取 metadata（每個顯示花費的 token 與工具次數）。它們平行工作，主線對話不被淹沒。</figcaption>
+  </figure>
+  <p>結果發現這 6 篇構成一條清楚的脈絡：<b>2011 建庫 → 2015／2019 網路分析 → 2018／2021／2024 工具</b>，而且 2015、2019、2021 等多篇都掛使用者本人（Chi-Tin Shih）的名字。</p>
+
+  <h3 class="seg" id="s7"><span class="num">7</span>生成知識庫</h3>
+  <div class="ai"><span class="tag">AI 做了什麼</span>把 6 份整理結果寫成資料，接著建立：共用樣式 <code>style.css</code>、互動腳本 <code>wiki.js</code>、產生論文頁的 <code>scaffold.py</code>、產生導覽頁的 <code>build.py</code>。執行後得到 6 個論文頁，以及自動生成的目錄、網路圖、時間軸。每個論文頁同時含「人讀內容」與「機器讀 metadata」：</p>
+  <pre><code>&lt;script type="application/json" id="meta"&gt;
+{
+  "id": "shih-2015-information-flow",
+  "year": 2015, "venue": "Current Biology",
+  "species": "Drosophila (adult female)",
+  "scale": "mesoscale",
+  "related": ["chiang-2011-flycircuit", "community-2019"]
+}
+&lt;/script&gt;</code></pre>
+  </div>
+
+  <h3 class="seg" id="s8"><span class="num">8</span>驗證：結構檢查 + 真實截圖</h3>
+  <div class="ai"><span class="tag">AI 做了什麼</span>先用指令確認結構正確（6 張卡片、6 個節點、10 條連線、每篇都含 metadata），再用 headless 瀏覽器把頁面截圖出來，親眼確認渲染無誤。這就是成果的目錄頁：</div>
+  <figure>
+    <img src="images/page-index.png" alt="知識庫目錄頁截圖">
+    <figcaption><b>真實截圖：</b>目錄頁（index.html）。上方統計、可依物種／尺度／方法篩選，下方是 6 篇論文卡片。</figcaption>
+  </figure>
+
+  <h3 class="seg" id="s9"><span class="num">9</span>寫下規則書 CLAUDE.md</h3>
+  <div class="ai"><span class="tag">AI 做了什麼</span>建立 <code>CLAUDE.md</code>，把架構、欄位定義、命名規則、收錄/查詢/健檢流程、受控詞彙都寫下來。如此一來，<b>未來任何一次工作階段一打開這個資料夾，AI 都會自動先讀規則、照規矩維護</b>，不會走樣。</div>
+
+  <h3 class="seg" id="s10"><span class="num">10</span>轉向：做一份初學者教學</h3>
+  <div class="msg g"><span class="who">🟢 使用者：</span>A（寫教學文件），同樣用 HTML，但先獨立、不跟知識庫連結。因為是給 Agentic AI 初學者看的，過程盡量詳細呈現，多用螢幕截圖。</div>
+  <div class="ai"><span class="tag">AI 做了什麼</span>載入專門的 Skill（<code>claude-code-research-tutorial</code>），沿用它的結構（五色對話框、名詞速查表、四大 Part），改寫成你正在讀的這份獨立 HTML。</div>
+
+  <h3 class="seg" id="s11"><span class="num">11</span>關鍵決策：截圖要拍什麼</h3>
+  <div class="ai"><span class="tag">AI 做了什麼</span>先測試能否用 headless 瀏覽器自動截成果頁（成功），再就「截圖策略」跳出決策選單。</div>
+  <div class="msg p"><span class="who">🟣 使用者：</span>（在選單中點選）兩者都要——成果頁自動截 + 幾張關鍵的 Claude Code 介面截圖。</div>
+  <div class="ai"><span class="tag">AI 做了什麼</span>用 headless 瀏覽器批次截下目錄、網路圖、時間軸、論文頁等成果頁；介面類畫面則以忠實重現的面板呈現（如本文多處所見）。最後組成這份教學。</div>
+
+  <!-- ============ PART 2 ============ -->
+  <h2 id="part2"><span class="pt">PART 2</span>最佳實踐清單</h2>
+  <p>把上面的經驗濃縮成一張可快速掃描的表。想看實例就點「對應段落」跳回去。</p>
+  <table>
+    <tr><th>實踐</th><th>對應段落</th><th>為什麼重要</th></tr>
+    <tr><td>重要素材看原文，不靠二手摘要</td><td><a href="#s1">①</a></td><td>摘要可能失真，定論前要核對來源。</td></tr>
+    <tr><td>把模糊需求先拆清楚</td><td><a href="#s3">③</a></td><td>「需求」常混了好幾件事，拆開才不會做錯方向。</td></tr>
+    <tr><td>權衡明顯不同時，給選項讓人決策</td><td><a href="#s4">④</a>、<a href="#s11">⑪</a></td><td>該由人決定的事，AI 不該替你猜。</td></tr>
+    <tr><td>人讀層與機器層分離</td><td><a href="#s4">④</a>、<a href="#s7">⑦</a></td><td>同一檔兼顧「好看」與「可自動處理」。</td></tr>
+    <tr><td>真實來源一份，其餘自動生成</td><td><a href="#s7">⑦</a></td><td>避免兩份資料不同步。</td></tr>
+    <tr><td>研究/讀檔派 Subagent</td><td><a href="#s6">⑥</a></td><td>保持主線乾淨，又能平行加速。</td></tr>
+    <tr><td>先立規則與受控詞彙（CLAUDE.md）</td><td><a href="#s9">⑨</a></td><td>讓知識庫長大時不走樣、未來階段自動遵守。</td></tr>
+    <tr><td>驗證成果，不只「跑完」</td><td><a href="#s8">⑧</a></td><td>結構檢查＋真截圖，確認真的做對。</td></tr>
+    <tr><td>重複工作優先自動化</td><td><a href="#s8">⑧</a>、<a href="#s11">⑪</a></td><td>headless 批次截圖勝過一張張手動操作。</td></tr>
+  </table>
+
+  <!-- ============ PART 3 ============ -->
+  <h2 id="part3"><span class="pt">PART 3</span>本次成果（雛形）</h2>
+
+  <div class="callout">⚠️ 這是知識庫的<b>雛形（第一版）</b>。本篇的目的，是先把「從一疊 PDF 到一個能運作的知識庫」整個流程走通；它<b>還不是最終想要的樣子</b>——版面、欄位、分類方式等實際要長成什麼模樣，會在後續課程依需求再調整。請把它當成一個<b>可運作的起點</b>，而不是定稿。</div>
+
+  <h3>知識庫的檔案結構</h3>
+  <pre><code>Knowledge/
+├── CLAUDE.md            # 規則書（AI 維護知識庫的規範）
+├── index.html      ★    # 目錄（可篩選 / 搜尋）          ┐
+├── graph.html      ★    # 論文連結網路圖                 ├ 自動生成
+├── log.html        ★    # 時間軸                         ┘
+├── build.py             # 建置腳本：論文頁 → 上面三個導覽頁
+├── assets/style.css     # 共用樣式
+├── assets/wiki.js       # 共用互動（篩選）
+└── papers/              # ★真實來源：每篇論文一頁 HTML
+    ├── chiang-2011-flycircuit.html
+    ├── shih-2015-information-flow.html
+    └── …（共 6 篇）
+        （★ = 自動生成，不手改）</code></pre>
+
+  <h3>論文之間的連結網路</h3>
+  <p>每篇論文頁裡的「相關論文」欄位，被 <code>build.py</code> 自動連成一張網路圖。節點越大代表關聯越多——可以看到 2011 建庫論文與 2015 資訊流論文是兩個樞紐：</p>
+  <figure>
+    <img src="images/page-graph.png" alt="論文連結網路圖截圖">
+    <figcaption><b>真實截圖：</b>連結網路頁（graph.html）。顏色＝研究尺度，點任一節點可跳到該論文頁。</figcaption>
+  </figure>
+
+  <h3>單篇論文的整理頁</h3>
+  <p>每篇論文都被整理成一頁：標題、一句話總結、中文摘要、關鍵發現、方法、重要性、相關論文，並連回原始 PDF 與 DOI。下圖是使用者本人 2015 年那篇：</p>
+  <figure>
+    <img src="images/page-paper-shih2015.png" alt="單篇論文整理頁截圖">
+    <figcaption><b>真實截圖：</b>論文頁（papers/shih-2015-information-flow.html）。中文重點＋一眼可見的 metadata 標籤。</figcaption>
+  </figure>
+
+  <h3>時間軸</h3>
+  <figure>
+    <img src="images/page-log.png" alt="時間軸頁截圖">
+    <figcaption><b>真實截圖：</b>時間軸（log.html）。記錄知識庫的每一次收錄與重建，方便追溯演進。</figcaption>
+  </figure>
+
+  <h3>數字總結</h3>
+  <table>
+    <tr><th>項目</th><th>內容</th></tr>
+    <tr><td>收錄論文</td><td>6 篇（2011–2024，4 個期刊）</td></tr>
+    <tr><td>論文間關聯</td><td>10 條（自動連成網路圖）</td></tr>
+    <tr><td>產出頁面</td><td>6 篇論文頁 + 目錄 + 網路圖 + 時間軸</td></tr>
+    <tr><td>程式</td><td>scaffold.py、build.py、style.css、wiki.js</td></tr>
+    <tr><td>規則書</td><td>CLAUDE.md（讓未來維護自動遵守）</td></tr>
+    <tr><td>人寫的程式碼</td><td>0 行——全部由 AI 產出，人只負責出題與決策</td></tr>
+  </table>
+
+  <h3>之後怎麼長大</h3>
+  <p>要加一篇新論文，流程很短（都可以交給 AI 做）：</p>
+  <ol>
+    <li>把 PDF 丟進來，叫 AI「收錄這篇」。</li>
+    <li>AI 讀 PDF → 產生一個新的 <code>papers/&lt;id&gt;.html</code> → 更新相關論文的連結。</li>
+    <li>跑一次 <code>python build.py</code>，目錄／網路圖／時間軸自動更新。</li>
+  </ol>
+  <p>知識就這樣一篇篇<b>複利累積</b>，而不是每次都從頭翻 PDF。</p>
+
+  <!-- ============ PART 4 ============ -->
+  <h2 id="part4"><span class="pt">PART 4</span>9 個核心教訓</h2>
+  <p>看完上面整段真實過程，把精髓濃縮成這 9 條帶走——每條都對應你剛剛讀到的某個段落。</p>
+
+  <div class="lesson"><h4>① 不靠二手摘要，直接抓原文</h4>
+  使用者要 AI 先看一個 GitHub 上的設計文件。AI 第一次用「快速摘要工具」讀，但發現那是經過小模型轉述、可能失真，於是<b>再抓一次原始全文逐字確認</b>才回報。教訓：重要素材要看原文，別拿二手摘要當定論。</div>
+
+  <div class="lesson"><h4>② 把模糊的需求拆清楚再動手</h4>
+  使用者說「我想用 HTML，不要 markdown」。AI 沒有直接照做，而是指出這句話其實混了兩件事：<b>「人看的格式」和「AI 維護的真實來源」是兩回事</b>。先拆清楚，後面才不會做錯方向。</div>
+
+  <div class="lesson"><h4>③ 有 2 種以上明顯不同的做法 → 給選項，不要猜</h4>
+  在「知識庫該以什麼為真實來源」這個岔路，AI 列出三個方案、講清楚各自代價，<b>跳出決策選單讓使用者點</b>，而不是替他決定。後來「截圖策略」也是同樣處理。教訓：權衡明顯不同時，停下來讓人決策。</div>
+
+  <div class="lesson"><h4>④ 人讀層與機器維護層分離</h4>
+  最終架構：每篇論文是一頁<b>給人看的豐富 HTML</b>，頁面裡<b>藏一段給程式讀的 metadata</b>。同一個檔案，兩種讀者。這讓「好看」和「可被自動處理」不再衝突。</div>
+
+  <div class="lesson"><h4>⑤ 真實來源只有一份，其餘全部自動生成</h4>
+  論文頁是唯一需要手動維護的東西；目錄、網路圖、時間軸都由 <code>build.py</code> 掃描後重新生成。教訓：能自動生成的，就不要手動維護兩份——否則遲早不同步。</div>
+
+  <div class="lesson"><h4>⑥ 研究/讀檔丟 Subagent，一個分身一個任務</h4>
+  6 篇 PDF（總共約 40 MB）如果在主對話裡逐一讀，會把 AI 的「記憶」塞爆。AI 改派 <b>6 個子代理同時各讀一篇</b>，各自回傳整理好的結果。主線乾淨、速度也快。</div>
+
+  <div class="lesson"><h4>⑦ 先把規則與受控詞彙定下來</h4>
+  AI 建立了一份 <code>CLAUDE.md</code>（規則書），明訂欄位定義、命名規則、維護流程，還規定「研究尺度」只能用固定幾個詞。教訓：先立規矩，知識庫長大才不會亂。</div>
+
+  <div class="lesson"><h4>⑧ 驗證成果，不只「跑完」</h4>
+  腳本跑完不等於做對。AI 先做<b>結構檢查</b>（確認 6 張卡片、6 個節點、10 條連線都在），再用 headless 瀏覽器<b>真的把頁面截圖出來看渲染對不對</b>。教訓：沒有驗證手段的「完成」不算完成。</div>
+
+  <div class="lesson"><h4>⑨ 用對工具：自動化勝過硬幹</h4>
+  要截 6 張成果頁，AI 沒有去一張張手動操作瀏覽器，而是用 headless 瀏覽器<b>一行指令批次截圖</b>，乾淨又可重複。教訓：重複性工作先想有沒有能自動化的工具。</div>
+
+  <!-- ============ 結語 ============ -->
+  <h2 id="closing">結語：給初學者的下一步</h2>
+  <p>如果這份文件你只想記住三句話：</p>
+  <ol>
+    <li><b>先要計畫、再要結果。</b>對中大型任務，先說「動手前先給我你的計畫」。</li>
+    <li><b>每一步都驗證。</b>沒有驗證手段的「完成」不算完成——讓 AI 給你看結構檢查或截圖。</li>
+    <li><b>該你決定的，AI 會停下來問你。</b>看到決策選單，就是輪到你出場的時候。</li>
+  </ol>
+  <p>想動手試試看？最低成本的起點：找一個你熟悉的小主題（幾篇論文、幾份筆記），打開 Claude Code，把它指到那個資料夾，說一句「幫我把這些整理成一個 HTML 知識庫」——然後照這份文件裡的節奏，在岔路上做決策、在每一步要求驗證。你會發現，<b>你負責思考與判斷，AI 負責其餘的一切</b>。</p>
+
+  <div class="quiz-cta">
+    <h3>讀完了？來檢驗一下 ✏️</h3>
+    <p>10 題單選、當場計分，看看你掌握了多少。</p>
+    <a href="quiz.html">來做隨堂測驗 →</a>
+  </div>
+
+</div>
+
+<div class="foot">
+  本教學由 Claude Code 依一次真實協作自動產生（使用 <code>claude-code-research-tutorial</code> Skill）。文中截圖皆為真實畫面：成果頁面以 headless 瀏覽器自動截取，操作介面為實際操作截圖。｜BSC with Agentic AI Tutorial
+</div>
+
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BSC with Agentic AI Tutorial｜教學系列</title>
+<style>
+  :root{
+    --ink:#1b2733; --soft:#5a6b7b; --faint:#8b98a5;
+    --bg:#f7f8fa; --surface:#ffffff; --border:#e4e8ee;
+    --accent:#2563eb; --accent-soft:#eff4ff; --radius:14px; --maxw:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);line-height:1.75;font-size:16.5px;
+    font-family:-apple-system,"Segoe UI","Noto Sans TC","Microsoft JhengHei","PingFang TC",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased}
+  .topbar{height:12px;background:var(--accent)}
+  .hero{max-width:var(--maxw);margin:0 auto;padding:56px 22px 18px}
+  .eyebrow{color:var(--accent);font-weight:700;font-size:13px;letter-spacing:.1em;text-transform:uppercase;margin:0 0 12px}
+  h1{font-size:40px;line-height:1.2;margin:0 0 16px;letter-spacing:-.01em}
+  .sub{color:var(--soft);font-size:18px;margin:0;max-width:680px}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:24px 22px 90px}
+  .sec{font-size:15px;font-weight:700;color:var(--soft);letter-spacing:.04em;margin:24px 0 14px;
+    text-transform:uppercase}
+
+  .ep{display:flex;align-items:stretch;gap:22px;background:var(--surface);border:1px solid var(--border);
+    border-radius:var(--radius);padding:24px 26px;margin:0 0 16px;text-decoration:none;color:inherit;
+    box-shadow:0 1px 3px rgba(16,24,40,.05);transition:border-color .15s,box-shadow .15s,transform .15s}
+  a.ep:hover{border-color:var(--accent);box-shadow:0 10px 30px rgba(16,24,40,.10);transform:translateY(-2px)}
+  .epnum{flex:none;width:74px;height:74px;border-radius:14px;background:var(--accent-soft);color:var(--accent);
+    font-weight:800;font-size:22px;display:flex;align-items:center;justify-content:center;letter-spacing:.02em}
+  .epbody{flex:1;min-width:0}
+  .epbody h3{margin:2px 0 6px;font-size:21px}
+  .epbody p{margin:0 0 12px;color:var(--soft);font-size:15.5px}
+  .tags{display:flex;flex-wrap:wrap;gap:8px}
+  .tags span{font-size:12.5px;color:var(--accent);background:var(--accent-soft);
+    border:1px solid #c7dbff;border-radius:999px;padding:3px 12px}
+  .epgo{flex:none;align-self:center;color:var(--accent);font-weight:600;font-size:15px;white-space:nowrap}
+
+  .ep.coming{opacity:.7;border-style:dashed;cursor:default;box-shadow:none}
+  .ep.coming .epnum{background:#eef1f5;color:var(--faint)}
+  .ep.coming .epbody h3{color:var(--soft)}
+
+  .foot{max-width:var(--maxw);margin:0 auto;padding:26px 22px;color:var(--faint);font-size:12.5px;
+    border-top:1px solid var(--border)}
+  @media(max-width:560px){.ep{flex-direction:column;gap:14px}.epgo{align-self:flex-start}h1{font-size:32px}}
+</style>
+</head>
+<body>
+<div class="topbar"></div>
+
+<header class="hero">
+  <p class="eyebrow">教學系列</p>
+  <h1>BSC with Agentic AI Tutorial</h1>
+  <p class="sub">給 BSC（腦空間體中心）同仁的 Agentic AI 實戰教材——用真實案例，一步步學會怎麼跟「會自己動手的 AI」協作。</p>
+</header>
+
+<div class="wrap">
+  <p class="sec">課程集數</p>
+
+  <a class="ep" href="ep01-knowledge-base/index.html">
+    <div class="epnum">EP01</div>
+    <div class="epbody">
+      <h3>建立知識庫雛形</h3>
+      <p>用 Agentic AI 從零建立一個「連結體論文知識庫」——完整重演一次人機協作，從第一句指令到最後成果。</p>
+      <div class="tags"><span>案例教學</span><span>📺 影片版</span><span>✏️ 隨堂測驗</span></div>
+    </div>
+    <div class="epgo">開始閱讀 →</div>
+  </a>
+
+  <div class="ep coming">
+    <div class="epnum">EP02</div>
+    <div class="epbody">
+      <h3>敬請期待</h3>
+      <p>更多集數陸續推出。</p>
+    </div>
+  </div>
+</div>
+
+<div class="foot">BSC with Agentic AI Tutorial · 教學系列首頁</div>
+</body>
+</html>
