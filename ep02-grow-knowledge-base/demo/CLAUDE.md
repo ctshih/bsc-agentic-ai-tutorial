@@ -1,4 +1,4 @@
-# CLAUDE.md — FlyCircuit 連結體論文知識庫（schema 層）
+# CLAUDE.md — 腦連結體論文知識庫（schema 層）
 
 > 這是知識庫的「設定檔／維護規則」。任何 LLM agent（Claude Code 等）在這個資料夾工作前，**先讀完本檔**，照規則維護，不要當成一般聊天。
 > 靈感來自 Karpathy 的 LLM Wiki 模式（見 `references/karpathy-llm-wiki.md`），但**改用 HTML** 當人類可讀層，對非工程背景的 BSC 同仁更易讀、資訊更豐富。

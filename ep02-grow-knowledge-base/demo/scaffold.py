@@ -41,7 +41,7 @@ def topbar(active):
     def cls(name):
         return ' class="active"' if name == active else ""
     return f"""<div class="topbar"><div class="inner">
-  <div class="brand">🧠 FlyCircuit 連結體論文知識庫 <small>· BSC Knowledge Base</small></div>
+  <div class="brand">🧠 腦連結體論文知識庫 <small>· BSC Knowledge Base</small></div>
   <nav>
     <a href="../index.html"{cls('index')}>論文目錄</a>
     <a href="../graph.html"{cls('graph')}>連結網路</a>

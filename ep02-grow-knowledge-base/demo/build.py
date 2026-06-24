@@ -64,7 +64,7 @@ def topbar(active, prefix=""):
         f'<a href="{prefix}{k}.html"{" class=\"active\"" if k == active else ""}>{lab}</a>'
         for k, lab in NAV)
     return (f'<div class="topbar"><div class="inner">'
-            f'<div class="brand">🧠 FlyCircuit 連結體論文知識庫 <small>· BSC Knowledge Base</small></div>'
+            f'<div class="brand">🧠 腦連結體論文知識庫 <small>· BSC Knowledge Base</small></div>'
             f'<nav>{nav}</nav></div></div>')
 
 
@@ -116,8 +116,8 @@ def build_index(topics, papers):
 
     body = f"""<div class="wrap wide">
   <header class="home-hero">
-    <h1 class="page-title">FlyCircuit 連結體論文知識庫</h1>
-    <p class="page-sub">關於果蠅（Drosophila）腦連結體與 FlyCircuit 工具鏈的知識庫。先從<b>概念條目</b>建立全貌，再深入個別論文；想找特定主題，到<a href="keywords.html">關鍵字網路</a>點關鍵字即可。</p>
+    <h1 class="page-title">腦連結體論文知識庫</h1>
+    <p class="page-sub">以果蠅（Drosophila）腦連結體與 FlyCircuit 工具鏈為核心，並延伸收錄跨物種的連結體重建與成像方法。先從<b>概念條目</b>建立全貌，再深入個別論文；想找特定主題，到<a href="keywords.html">關鍵字網路</a>點關鍵字即可。</p>
     <div class="stats">
 {stat_html}
     </div>
@@ -156,7 +156,7 @@ def build_index(topics, papers):
   }}));
 }})();
 </script>"""
-    return page("FlyCircuit 連結體論文知識庫", "index", body)
+    return page("腦連結體論文知識庫", "index", body)
 
 
 # ---------------- papers.html（完整論文清單） ----------------
