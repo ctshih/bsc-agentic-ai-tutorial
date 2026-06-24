@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>接線圖之外：從結構連結到神經活性｜FlyCircuit 知識庫</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script type="application/json" id="meta">
+{
+  "id": "topic-function",
+  "type": "topic",
+  "title": "接線圖之外：從結構連結到神經活性",
+  "keywords": [
+    "神經活性記錄",
+    "神經光子學",
+    "體積成像",
+    "資訊流",
+    "網路分析",
+    "連結體"
+  ],
+  "related": [
+    "cheng-2025-mushroom-body",
+    "moreaux-2020-neurophotonics",
+    "shih-2015-information-flow"
+  ],
+  "tldr": "連結體只畫出「誰連到誰」的結構接線圖；要真正理解大腦運作，還得知道訊號怎麼跑、迴路怎麼動——這就是從結構連結走向神經活性（功能）的那一步。"
+}
+</script>
+</head>
+<body>
+<div class="topbar"><div class="inner">
+  <div class="brand">🧠 FlyCircuit 連結體論文知識庫 <small>· BSC Knowledge Base</small></div>
+  <nav>
+    <a href="../index.html">首頁</a>
+    <a href="../graph.html">論文網路</a>
+    <a href="../keywords.html">關鍵字網路</a>
+    <a href="../log.html">時間軸</a>
+  </nav>
+</div></div>
+<div class="wrap">
+  <article>
+    <header class="paper-header">
+      <span class="badge scale" style="background:#7c3aed">概念條目</span>
+      <h1>接線圖之外：從結構連結到神經活性</h1>
+      <div class="badges" style="margin-top:14px"><a class="badge" href="../keywords.html?kw=神經活性記錄">神經活性記錄</a><a class="badge" href="../keywords.html?kw=神經光子學">神經光子學</a><a class="badge" href="../keywords.html?kw=體積成像">體積成像</a><a class="badge" href="../keywords.html?kw=資訊流">資訊流</a><a class="badge" href="../keywords.html?kw=網路分析">網路分析</a><a class="badge" href="../keywords.html?kw=連結體">連結體</a></div>
+    </header>
+    <div class="callout"><span class="label">一句話</span>連結體只畫出「誰連到誰」的結構接線圖；要真正理解大腦運作，還得知道訊號怎麼跑、迴路怎麼動——這就是從結構連結走向神經活性（功能）的那一步。</div>
+
+    <section class="block"><h2>連結體只是「結構」</h2>
+    <p>連結體（connectome）是一張接線圖：它告訴你哪一顆神經元連到哪一顆、誰輸入誰輸出。這份結構地圖極為珍貴，卻只說了一半的故事。同樣一組元件、不同的接線會產生不同行為，但<b>就算接線完全確定，光看圖也看不出訊號實際怎麼跑</b>——哪條路徑正在傳遞、哪個迴路正在回盪、哪些細胞此刻正被點亮。要理解大腦如何運作，必須在靜態的「結構」之上補進動態的「功能／活性」：訊號流向、時間動態與迴路的即時狀態。這正是從接線圖跨向神經活性的那一步。</p></section>
+
+    <section class="block"><h2>從連結推功能</h2>
+    <p>第一條路徑是<b>從結構反推功能</b>。<a href="../papers/cheng-2025-mushroom-body.html">Cheng 等（2025）</a>用突觸級 hemibrain 連結體解析蕈狀體的 PN→KC「L 型混合」接線，再結合氣味資料庫模擬與活體鈣離子影像，把連接結構一路連到果蠅的嗅覺反應與行為偏好。<a href="../papers/shih-2015-information-flow.html">Shih 等（2015）</a>則從有向加權的中尺度連結體出發，用網路科學找出模組、富俱樂部與迴路，並以訊號傳播模擬推估訊息流向。兩者都展示了：在好的結構地圖上，已能對功能做出可檢驗的預測——但仍是「由線路推活性」，而非直接量到活性。</p></section>
+
+    <section class="block"><h2>直接讀活性：整合神經光子學</h2>
+    <p>另一條路徑是<b>直接量測神經活性</b>。<a href="../papers/moreaux-2020-neurophotonics.html">Moreaux 等（2020）</a>提出「整合神經光子學（integrated neurophotonics）」：把一整套無透鏡成像系統做成可植入的矽探針，在探針上密布微米級的發光像素與偵測像素，靠腦組織以前向散射為主的物理特性，在任意深度、即時、密集地讀取單細胞層級的活性。傳統電生理一根電極約只能解出一顆神經元、自由空間光學又受散射限深，而這套構想直接補上結構之外的功能維度，甚至展望同時讀取放電、神經化學等多重訊號。</p></section>
+
+    <section class="block"><h2>結構與功能的會合</h2>
+    <p>「從連結推功能」與「直接讀活性」並不是競爭，而是<b>互補</b>：前者讓接線圖長出可預測的功能假說，後者提供能驗證或推翻這些假說的即時實測。理想狀態是兩者疊在一起看——把連結體當底圖，把活訊號鋪在上頭，就能追問訊號真的沿著哪些迴路流動、結構樞紐是否就是功能樞紐。<a href="../papers/cheng-2025-mushroom-body.html">Cheng（2025）</a>用鈣離子影像驗證連結預測，已是這種「接線圖＋活訊號」整合的縮影；而 <a href="../papers/moreaux-2020-neurophotonics.html">Moreaux（2020）</a>所描繪的深部活性讀取，則指向把結構與功能完整合一的未來。</p></section>
+
+    <section class="block">
+      <h2>相關論文</h2>
+      <div class="related-grid">
+      <a href="../papers/cheng-2025-mushroom-body.html"><span class="ry">2025 · 論文</span><br><span class="rt">果蠅蕈狀體中的混合神經網路驅動嗅覺偏好</span></a>
+      <a href="../papers/moreaux-2020-neurophotonics.html"><span class="ry">2020 · 論文</span><br><span class="rt">整合神經光子學：邁向深部、即時、密集的腦迴路活性讀取</span></a>
+      <a href="../papers/shih-2015-information-flow.html"><span class="ry">2015 · 論文</span><br><span class="rt">以連結體學分析果蠅腦中的資訊流</span></a>
+      </div>
+    </section>
+  </article>
+</div>
+<div class="foot">概念條目由 LLM 綜整本知識庫論文撰寫；點關鍵字可在「關鍵字網路」看到所有相關頁面。｜id: <code>topic-function</code></div>
+</body>
+</html>

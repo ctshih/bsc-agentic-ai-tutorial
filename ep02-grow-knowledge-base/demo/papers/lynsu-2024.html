@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LYNSU：果蠅腦螢光影像的自動化 3D 神經氈分割方法｜FlyCircuit 知識庫</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script type="application/json" id="meta">
+{
+  "id": "lynsu-2024",
+  "title": "LYNSU: automated 3D neuropil segmentation of fluorescent images for Drosophila brains",
+  "title_zh": "LYNSU：果蠅腦螢光影像的自動化 3D 神經氈分割方法",
+  "authors": [
+    "Kai-Yi Hsu",
+    "Chi-Tin Shih",
+    "Nan-Yow Chen",
+    "Chung-Chuan Lo"
+  ],
+  "year": 2024,
+  "venue": "Frontiers in Neuroinformatics",
+  "doi": "10.3389/fninf.2024.1429670",
+  "bib": {
+    "journal": "Frontiers in Neuroinformatics",
+    "volume": "18",
+    "issue": "",
+    "pages": "1429670",
+    "published": "2024 年 7 月",
+    "institutions": [
+      "National Tsing Hua University",
+      "Tunghai University",
+      "National Center for High-Performance Computing"
+    ]
+  },
+  "species": "Drosophila",
+  "scale": "method/tool",
+  "technique": [
+    "deep learning",
+    "3D neuropil segmentation",
+    "YOLOv7 object detection",
+    "3D U-Net",
+    "confocal fluorescence imaging"
+  ],
+  "region": [
+    "AL",
+    "MB",
+    "CAL",
+    "FB",
+    "EB",
+    "PB"
+  ],
+  "dataset": "FlyCircuit",
+  "tags": [
+    "影像分割",
+    "deep learning",
+    "YOLO",
+    "U-Net",
+    "connectomics",
+    "FlyCircuit"
+  ],
+  "related": [
+    "chiang-2011-flycircuit",
+    "neuroretriever-2021",
+    "shih-2015-information-flow",
+    "januszewski-2018-ffn",
+    "sheridan-2023-lsd",
+    "tavakoli-2025-liconn"
+  ],
+  "tldr": "LYNSU 結合 YOLOv7 定位與 3D U-Net 分割，在約 7 秒內自動分割果蠅腦螢光影像中的神經氈，精度媲美人工標註。",
+  "abstract_zh": "本研究針對 FlyCircuit 資料庫的果蠅腦螢光影像，提出兩階段自動化神經氈分割方法 LYNSU（Locating by YOLO and Segmenting by U-Net）。第一階段以 YOLOv7 快速定位神經氈並擷取小尺度 3D 影像（定位準確率 99.4%），第二階段以 3D U-Net 進行分割，僅用 16 個腦的訓練集即達到 3D IoU 最高 0.869、媲美專業人工標註的精度。此方法讓未來腦圖譜研究可在個體層級直接分析，無需 warping 與對齊到標準腦模板，避免空間誤差。",
+  "key_findings": [
+    "YOLOv7 神經氈定位準確率達 99.4%（成功率 99.28%），每張影像偵測僅需約 10 毫秒。",
+    "3D U-Net 分割的 3D IoU 最高達 0.869，與人工標註（標註者間 IoU 0.85）相當，且每個神經氈僅需約 7 秒（人工需約 4 小時）。",
+    "LYNSU 在 Recall、Precision、F1、3D-IoU 四項指標上全面勝過 FCN、2D U-Net；平均 3D IoU 0.833 高於純 3D U-Net 的 0.763，最高提升達 15.5%。",
+    "應用於 FlyCircuit 全部 22,835 個雌性果蠅腦，篩選出 10,337 個含左右蕈狀體（MB）的影像，1000 隨機樣本人工驗證 MB 分割準確率 98.8%。",
+    "發現約 10.14%（883/8,703 有效樣本）果蠅左右 MB 體積差異超過 10%，且此不對稱並非源自整體腦半球不對稱（半球體積差僅 1.2–6.4%）。",
+    "以不同訓練集訓練的兩個 LYNSU 模型推論結果高度一致（線性回歸斜率 0.97），證明模型穩定可靠、非模型特異性假象。"
+  ],
+  "methods": "採用偵測導向的兩階段流程：先將 3D 腦影像沿 Z 軸投影為最大值與平均值兩張 2D 影像，以 YOLOv7 定位三個 ROI（AL、MB/CAL、中央複合體 FB/EB/PB）；再對各 ROI 擷取 3D 影像，用以 ResNet-50 為編解碼骨幹的 3D U-Net 逐 voxel 分割。訓練資料來自 18 個不同 Gal4 driver 的人工標註腦，透過 zero-padding、重疊滑動視窗與 Z 軸鏡像做資料增強，並以 Weighted Dice Loss 加 Categorical Focal Loss 的複合損失函數處理類別不平衡。",
+  "significance": "LYNSU 讓研究者可在原始個體影像上直接分割神經氈，免除 warping/registration 對齊標準腦模板所引入的空間誤差，同時將原需 4 小時的人工分割壓縮到約 7 秒。這對 FlyCircuit 等大型資料庫的高通量解剖分析與連結體（connectomics）建構至關重要，並能更精準量化個體差異與基因在不同神經氈的分佈。",
+  "keywords": [
+    "果蠅腦",
+    "FlyCircuit",
+    "神經氈",
+    "影像分割",
+    "深度學習"
+  ],
+  "node_label": "Neuropil/LYNSU/2024"
+}
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
+</head>
+<body>
+<div class="topbar"><div class="inner">
+  <div class="brand">🧠 FlyCircuit 連結體論文知識庫 <small>· BSC Knowledge Base</small></div>
+  <nav>
+    <a href="../index.html">首頁</a>
+    <a href="../graph.html">論文網路</a>
+    <a href="../keywords.html">關鍵字網路</a>
+    <a href="../log.html">時間軸</a>
+  </nav>
+</div></div>
+<div class="wrap">
+  <article>
+    <header class="paper-header">
+      <h1>LYNSU: automated 3D neuropil segmentation of fluorescent images for Drosophila brains</h1>
+      <p class="title-zh">LYNSU：果蠅腦螢光影像的自動化 3D 神經氈分割方法</p>
+      <p class="authors">Kai-Yi Hsu、Chi-Tin Shih、Nan-Yow Chen、Chung-Chuan Lo</p>
+      <div class="badges">
+        <span class="badge scale" style="background:#ea580c">方法/工具</span><span class="badge muted">2024</span><span class="badge muted">Frontiers in Neuroinformatics</span><span class="badge">Drosophila</span><span class="badge">FlyCircuit</span><span class="badge muted">deep learning</span><span class="badge muted">3D neuropil segmentation</span><span class="badge muted">YOLOv7 object detection</span><span class="badge muted">3D U-Net</span><span class="badge muted">confocal fluorescence imaging</span>
+      </div>
+      <p class="meta-line">Frontiers in Neuroinformatics (2024) · DOI: <a href="https://doi.org/10.3389/fninf.2024.1429670" target="_blank" rel="noopener">10.3389/fninf.2024.1429670</a></p>
+    </header>
+
+    <div class="callout">
+      <span class="label">一句話總結</span>
+      LYNSU 結合 YOLOv7 定位與 3D U-Net 分割，在約 7 秒內自動分割果蠅腦螢光影像中的神經氈，精度媲美人工標註。
+    </div>
+
+    <section class="block bib-block">
+      <h2>論文基本資料</h2>
+      <dl class="bib">
+        <div><dt>期刊</dt><dd>Frontiers in Neuroinformatics</dd></div>
+        <div><dt>卷期</dt><dd>第 18 卷</dd></div>
+        <div><dt>頁碼</dt><dd>文章編號 1429670</dd></div>
+        <div><dt>發表</dt><dd>2024 年 7 月</dd></div>
+        <div><dt>機構</dt><dd>National Tsing Hua University；Tunghai University；National Center for High-Performance Computing</dd></div>
+      </dl>
+    </section>
+
+    <section class="block">
+      <h2>中文摘要</h2>
+      <p>本研究針對 FlyCircuit 資料庫的果蠅腦螢光影像，提出兩階段自動化神經氈分割方法 LYNSU（Locating by YOLO and Segmenting by U-Net）。第一階段以 YOLOv7 快速定位神經氈並擷取小尺度 3D 影像（定位準確率 99.4%），第二階段以 3D U-Net 進行分割，僅用 16 個腦的訓練集即達到 3D IoU 最高 0.869、媲美專業人工標註的精度。此方法讓未來腦圖譜研究可在個體層級直接分析，無需 warping 與對齊到標準腦模板，避免空間誤差。</p>
+    </section>
+
+    <section class="block popsci-block">
+      <h2>科普版介紹<span class="aud aud-pop">給對科學有興趣的高中生</span></h2>
+<p>我們的大腦不是一團均勻的灰泥，而是由許多功能不同的「區塊」組成的——掌管視覺的、處理氣味的、負責記憶的，各司其職。果蠅雖然只有一顆比針頭還小的腦，卻同樣被精細地劃分成多達 58 個「神經氈（neuropil）」這樣的功能小區。所謂腦圖譜（brain atlas），就是把基因、蛋白質、神經元或這些解剖區域的分布標示出來的地圖，是現代神經科學最重要的工具之一。如果科學家想知道某個基因、某種蛋白質，或某一條神經迴路究竟落在哪個區塊裡，第一步就得先把這些區塊一個個「畫」出來、分割開。問題是：要怎麼讓電腦自動、又準確地把一顆果蠅腦切成一塊塊的神經氈？這正是這篇來自清華大學、東海大學與國家高速網路與計算中心團隊的論文想解決的事。</p>
+
+<p>過去科學家有兩條路可走，但都不夠好。第一條是「人工描邊」：請受過訓練的標註員盯著螢光顯微影像，一層一層手動把神經氈的邊界描出來。準確是準確，但平均每描一個神經氈就要花上大約 4 小時——光是這篇論文用到的 18 顆訓練腦，標註團隊就投入了約 432 小時。要處理資料庫裡上萬顆腦，根本不切實際。第二條路是「對位到標準腦」：把每顆腦的影像扭曲變形（warping），硬套到一個已經切好區塊的「標準果蠅腦模板」上，再把模板的分區套回來。這雖然方便，卻會在扭曲對位的過程中引入空間誤差，讓後續分析失真，連帶降低研究結論的可信度。研究團隊想要兩全其美：既保留在每顆腦的原始個體影像上分析的精準，又要有自動化的速度。</p>
+
+<p>他們的答案叫 LYNSU，名字其實是整個流程的縮寫：Locating by YOLO and Segmenting by U-Net（用 YOLO 定位、用 U-Net 分割）。這是一套「先找位置、再精細切割」的兩階段策略，背後的巧思在於：與其讓電腦對著一整顆腦傻傻地硬切，不如先快速找到目標大概在哪，再把力氣花在那一小塊上。第一階段就像在一張全家福照片裡先用方框把每個人的臉框出來：系統先把 3D 腦影像沿著 Z 軸「壓扁」成兩張 2D 投影圖（一張取最大亮度、一張取平均亮度，讓模型看到不同的亮度線索），再交給以「即時物件偵測」聞名的 YOLOv7 模型，快速框出目標神經氈所在的小區域（ROI，感興趣區域）。這一步快到每張影像只要約 10 毫秒，定位準確率高達 99.4%。由於有些神經氈在空間上彼此重疊，團隊讓系統只需偵測三種框：MB 與 CAL 共用一框、中央複合體的 FB／EB／PB 共用一框、AL 自己一框。</p>
+
+<p>有了這個小框框，第二階段才真正動刀。系統只把框內的那一小塊 3D 影像取出來，交給專門處理立體影像的 3D U-Net 模型，逐一判斷每個體素（voxel，也就是 3D 版的像素）到底屬於神經氈還是背景。為什麼非得先框再切不可？因為直接對整顆腦做 3D 分割既慢又容易出錯；先縮小範圍，模型就能把寶貴的運算火力集中在重點區域，又快又準，還能省下顯示卡的記憶體。團隊還用了好幾個聰明的小技巧，讓區區 16 顆腦的訓練資料發揮最大效果：把影像沿 Z 軸做鏡像翻轉、用會重疊的滑動視窗把每顆腦切成上百個小立方體來「擴增」資料（光是 MB 一種神經氈，16 顆腦就能變出 2304 個訓練樣本），並特別設計了損失函數，提醒模型別因為背景體素數量太多，就忽略了在畫面裡佔比很小、卻才是主角的神經氈。</p>
+
+<p>結果非常亮眼。LYNSU 只用了 16 顆腦當訓練資料，分割六種神經氈或腦結構（AL、MB、CAL、FB、EB、PB）的立體重疊度（3D IoU，數字越接近 1 代表切得越像）最高達到 0.869，幾乎和專業標註員彼此之間的一致度（0.85）一樣好——換句話說，機器切得跟人一樣準。但速度天差地別：人工要 4 小時，LYNSU 只要大約 7 秒，等於把同一件事加速了上千倍。和其他主流方法正面交鋒時，它在召回率、精確率、F1 與 3D IoU 四項指標上全面勝過 FCN 與 2D U-Net；即使對手是同樣處理立體影像、但少了第一階段定位的純 3D U-Net，LYNSU 的平均 3D IoU（超過 0.833）也高於對方的 0.763，最多領先達 15.5%。這證明「先定位再分割」這個設計確實是關鍵。</p>
+
+<p>為了證明這套工具真能派上用場，團隊把 LYNSU 用在 FlyCircuit 資料庫裡全部 22,835 顆雌果蠅腦上，專門研究「蕈狀體（MB）」——果蠅的學習與記憶中樞。他們想回答一個看似簡單、卻因為工程量太大而一直難以回答的問題：在族群尺度上，左右兩邊的蕈狀體是不是一樣大？在隨機抽驗的 1000 顆腦中，分割準確率高達 98.8%（只有 12 顆失敗）。而真正有趣的發現是：大約 10.14% 的果蠅，左右兩側 MB 的體積差距超過 10%。而且這種左右不對稱，並不是因為整顆腦本來就歪——在能看到完整全腦的樣本裡，左右半腦的體積差只有 1.2% 到 6.4%，MB 卻差了 13% 以上。為了確認這不是某個特定模型亂切造成的假象，他們又用另一套以不同資料訓練的模型重做一次，兩者結果高度吻合（線性回歸斜率 0.97），證實這是真實存在的個體差異。</p>
+
+<p>這項研究的意義，遠不只是「切圖切得快」。它讓科學家終於能在每一顆腦的原始影像上直接、準確地量測神經氈，不必再忍受扭曲對位帶來的空間誤差。對於要處理成千上萬顆腦的連結體（connectomics）研究——也就是繪製整個大腦「線路圖」的科學——來說，這種既高通量又精準的自動分割，正是打開大規模個體差異研究、以及探索基因如何形塑大腦結構這扇門的一把關鍵鑰匙。團隊也預告，未來可以把所有神經氈合併訓練成單一個 YOLO 模型（初步測試甚至達到 100% 的偵測準確率），讓這套工具跑得更有效率，甚至有機會推廣到其他昆蟲，乃至哺乳類的腦。</p>
+    </section>
+
+    <section class="block academic-block">
+      <h2>學術版介紹<span class="aud aud-aca">給研究生以上的專業讀者</span></h2>
+      <h3>關鍵發現</h3>
+<ul>
+<li><strong>YOLOv7 定位（第一階段）</strong>：以 1000 張影像中標註的 440 張、取 400 張訓練／40 張測試，訓練 100 次迭代後在測試集達 \(\text{mAP}@0.5=0.9955\)、\(\text{mAP}@0.5{:}0.95=0.8489\)；在另外未參與訓練的 560 張影像上目視驗證成功率 99.28%（摘要稱定位準確率 99.4%），每張影像偵測僅約 10 毫秒。</li>
+<li><strong>3D U-Net 分割（第二階段）</strong>：僅用 16 顆腦的訓練集即達到與專業人工標註相當的精度，六種神經氈／結構的 3D IoU 最高達 0.869，逼近標註者之間的一致度（inter-annotator 3D IoU 0.85）；每個神經氈分割僅需約 7 秒，人工則約需 4 小時。</li>
+<li><strong>勝過所有基準方法</strong>：在 Recall、Precision、F1、3D-IoU 四項指標上，LYNSU 大幅勝過 FCN 與 2D U-Net；在 10 次隨機切分（16 顆訓練／2 顆測試）下，六種神經氈／結構的平均 3D IoU 超過 0.833，高於不含 YOLO 定位的純 3D U-Net 的 0.763，最高提升達 15.5%。</li>
+<li><strong>大規模應用</strong>：套用於 FlyCircuit 全部 22,835 顆雌果蠅腦，以 skimage measure 模組的自動篩選演算法挑出 10,337 顆同時含左右蕈狀體（MB）的影像；隨機抽 1000 顆人工驗證，MB 分割準確率達 98.8%（僅 12 顆判為失敗）。</li>
+<li><strong>MB 體積不對稱</strong>：2,404 顆腦的左右 MB 體積差異 \(&gt;10\%\)，人工驗證其中 883 顆為有效樣本；以 1000 樣本中 84.2% 有效率推估有效母體約 8,703 顆，得出約 \(10.14\%\)（\(883/8{,}703\)）的果蠅左右 MB 體積不對稱 \(&gt;10\%\)。</li>
+<li><strong>不對稱非全腦假象</strong>：在能看到完整全腦的三顆樣本中，左右半腦體積差僅 \(1.2\%\text{–}6.4\%\)，但 MB 體積差皆 \(&gt;13\%\)，顯示 MB 不對稱並非整體腦半球不對稱的反映。</li>
+<li><strong>模型穩定性</strong>：以不同訓練集訓練的第二個 LYNSU 模型（Model 2）重做 883 顆腦，兩模型與 Ground Truth 的體積差異僅 \(1.19\%\) 與 \(2.16\%\)；兩模型推得的左右 MB 體積差線性回歸斜率為 \(0.97\)，證明結果高度一致、非模型特異性假象。</li>
+</ul>
+      <h3>方法</h3>
+<p><strong>資料來源與規模。</strong>所有 3D 螢光影像取自 FlyCircuit 資料庫（共 28,573 顆果蠅腦），以高解析共軛焦顯微鏡取得。每顆腦含兩個通道：個別神經元的 GAL4 訊號，以及標示神經氈的 anti-DLG 染色；每個體素亮度值為 0–255。校正後體素大小為 \(x{:}y{:}z = 0.32\times 0.32\times 1\,\mu\mathrm{m}\)，XY 平面解析度 \(1024\times 1024\)。</p>
+<p><strong>兩套訓練資料集。</strong>(1) YOLOv7 偵測用：從資料庫隨機取 1000 張 3D 影像，以 Labelimg 工具標註其中 440 張的神經氈邊界框，再取 400 張為訓練集、40 張為測試集。(2) 3D U-Net 分割用：隨機取 18 顆分屬不同 Gal4 driver 的腦（涵蓋多種亮度特性），由受訓標註員以 ZEISS arivis Cloud 工具手動分割 AL、MB、CAL、FB、EB、PB 六種目標神經氈／結構；平均每個神經氈標註約 4 小時，總計約投入 432 小時，並讓多位標註員標註同一顆腦以驗證一致性（標註者間 3D IoU 達 0.85）。</p>
+<p><strong>第一階段——偵測與定位。</strong>先把 3D 腦影像沿 Z 軸投影成兩張 2D 影像（一張取亮度總和、一張取最大亮度），讓 YOLOv7 接觸到不同亮度資訊。由於神經氈在空間上有重疊，部分共用同一 ROI：MB 與 CAL 共用一個 ROI，FB、EB、PB 共用中央複合體（central complex）ROI，AL 自成一個 ROI，因此僅訓練 YOLOv7 偵測這三種 ROI。第一階段模型訓練使用 NVIDIA A100 40GB GPU。</p>
+<p><strong>第二階段——神經氈分割。</strong>先用 YOLOv7 從 18 顆已人工分割的腦取出 ROI 並擷取對應 3D 影像。資料增強上：沿 Z 軸做 zero-padding 補到 124 層、同時把 XY 平面降採樣到 \(168\times 168\)；再以重疊滑動視窗策略（視窗 \(64\times 128\times 128\)、每次滑動距離 20）切割，並沿 Z 軸做鏡像翻轉。以 MB 為例，每顆腦可產生 144 個立方體，16 顆腦即得 2,304 個立方體作為 3D U-Net 訓練資料。為每一種神經氈獨立訓練一個 3D U-Net 模型。</p>
+<p><strong>網路架構與訓練設定。</strong>編碼器與解碼器皆採六層 ResNet-50 骨幹以強化特徵擷取；網路經過 5 次 MaxPooling3D 降維與 5 次 UpSampling3D 重建，最後一層以 softmax 對每個體素分類。學習率設為 \(\text{lr}=0.0001\)、優化器選 Adam、batch size 為 2、訓練 10 個 epoch，並在驗證集出現更低 loss 時存檔（checkpoint）保留最佳模型以避免過擬合。</p>
+<p><strong>損失函數。</strong>採複合損失：Weighted Dice Loss 加上 Categorical Focal Loss。Dice loss 適合處理類別不平衡，背景與神經氈的權重比設為 \(0.4\) 與 \(0.6\)；Categorical Focal Loss 透過 \(\gamma\) 參數降低易分類（多數）背景體素的損失貢獻，使模型更聚焦在佔少數的神經氈。總損失為
+\[ \mathcal{L}=\mathcal{L}_{\text{wDice}}+\lambda\,\mathcal{L}_{\text{focal}} \]
+其中 \(\lambda\) 預設為 \(1\)（兩者等權）。</p>
+<p><strong>基準比較。</strong>在相同資料集與訓練設定（Adam 優化器、卷積層 ReLU、輸出層 softmax）下，將 LYNSU 與三種主流方法比較：FCN（設定為 FCN8s，含 5 次 MaxPooling2D 與 3 層 Conv2DTranspose）、2D U-Net（4 次 MaxPooling2D 與 UpSampling2D，以 Dice loss 訓練，batch size 16、5 epochs），以及不含 YOLO 定位、直接處理整張 3D 影像的 3D U-Net（其餘設定與 LYNSU 第二階段相同）。評估指標為 Recall、Precision、F1 與 3D-IoU，並在 10 次隨機切分（16 訓練／2 測試）下逐一比較六種神經氈。</p>
+<p><strong>體積分析與一致性驗證。</strong>對 22,835 顆雌果蠅腦套用 LYNSU 分割左右 MB；以 skimage 的 measure 模組掃描分割結果，挑出「恰含兩個封閉 3D 物件、且最大物件體積不超過第二大兩倍」的影像，篩出 10,337 顆供人工驗證。左右 MB 體積以分割區域的體素數計算，相對差異定義為
+\[ \frac{V_{\text{right}}-V_{\text{left}}}{(V_{\text{right}}+V_{\text{left}})/2} \]
+（負值代表左大、正值代表右大）。半球體積差以類似公式計算，左右半球以各影像中人工標註的中線（midline）為界。為排除模型特異性假象，另以不同訓練集訓練第二個 LYNSU 模型（Model 2）對 883 顆腦重做並做線性回歸比對。</p>
+      <h3>重要性與定位</h3>
+<p><strong>核心貢獻。</strong>LYNSU 提出「先用 YOLOv7 定位、再用 3D U-Net 分割」的偵測導向兩階段流程，首度為果蠅腦螢光影像建立可用、準確且高通量的自動神經氈分割方法。過去果蠅腦光學影像缺乏類似 CT／MRI 的成熟分割工具；LYNSU 把原需 4 小時的人工分割壓縮到約 7 秒，且僅用 16 顆腦訓練即達到媲美專業標註的精度（3D IoU 最高 0.869），同時全面勝過 FCN、2D U-Net 與不含定位的純 3D U-Net。</p>
+<p><strong>對領域的推進。</strong>它讓研究者可直接在每顆腦的原始個體影像上分割神經氈，免除「扭曲變形並對位到標準腦模板（warping/registration）」所引入的空間誤差——這正是當前連結體研究的痛點之一。憑此，團隊得以在大規模、個體層級量化蕈狀體（MB）的左右不對稱（約 10.14% 的雌果蠅 MB 體積差異超過 10%），這是過去受限於影像對位誤差而難以精確進行的分析。論文也指出未來可整合各神經氈標籤訓練單一 YOLO 模型（初步測試達 100% 偵測準確率），並有機會推廣到其他昆蟲、甚至以不同染色技術用於哺乳類腦（需額外標註與調校）。</p>
+<p><strong>在 FlyCircuit／連結體脈絡中的定位。</strong>本研究承接 Chiang 等人（2011，<a href="chiang-2011-flycircuit.html">chiang-2011-flycircuit</a>）建立的 FlyCircuit 單細胞解析度全腦資料庫——該文界定了果蠅腦的 58 個神經氈，正是 LYNSU 要自動分割的對象與資料來源。在工具鏈上，它與同團隊用於連結體組裝的自動神經元分割演算法 NeuroRetriever（2021，<a href="neuroretriever-2021.html">neuroretriever-2021</a>）互補：後者處理「單一神經元」的擷取，LYNSU 則處理「腦區／神經氈」層級的分割，兩者共同支撐從原始影像到連結體的高通量解剖分析管線，為大規模個體差異與基因—結構關係研究奠定基礎。</p>
+    </section>
+
+    <section class="block">
+      <h2>相關論文</h2>
+      <div class="related-grid">
+      <a href="chiang-2011-flycircuit.html"><span class="ry">2011 · Current Biology</span><br><span class="rt">果蠅全腦連結網路的單細胞解析度三維重建</span></a>
+      <a href="neuroretriever-2021.html"><span class="ry">2021 · Frontiers in Systems Neuroscience</span><br><span class="rt">NeuroRetriever：用於連結體組裝的自動化神經元分割演算法</span></a>
+      <a href="shih-2015-information-flow.html"><span class="ry">2015 · Current Biology</span><br><span class="rt">以連結體學分析果蠅腦中的資訊流</span></a>
+      <a href="januszewski-2018-ffn.html"><span class="ry">2018 · Nature Methods</span><br><span class="rt">以漫淹式填充網路高精度自動重建神經元</span></a>
+      <a href="sheridan-2023-lsd.html"><span class="ry">2023 · Nature Methods</span><br><span class="rt">用於神經元分割的局部形狀描述子</span></a>
+      <a href="tavakoli-2025-liconn.html"><span class="ry">2025 · Nature</span><br><span class="rt">以光學顯微鏡為基礎的哺乳類腦組織連結體重建（LICONN）</span></a>
+      </div>
+    </section>
+  </article>
+</div>
+<div class="foot">
+  本頁由 LLM 依原始 PDF 整理；中文重點為摘要性質，引用前請以原文為準。｜id: <code>lynsu-2024</code>
+</div>
+</body>
+</html>

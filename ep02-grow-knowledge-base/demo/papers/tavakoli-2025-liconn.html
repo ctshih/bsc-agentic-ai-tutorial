@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>以光學顯微鏡為基礎的哺乳類腦組織連結體重建（LICONN）｜FlyCircuit 知識庫</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script type="application/json" id="meta">
+{
+  "id": "tavakoli-2025-liconn",
+  "title": "Light-microscopy-based connectomic reconstruction of mammalian brain tissue",
+  "title_zh": "以光學顯微鏡為基礎的哺乳類腦組織連結體重建（LICONN）",
+  "authors": [
+    "Mojtaba R. Tavakoli",
+    "Julia Lyudchik",
+    "Michał Januszewski",
+    "Vitali Vistunou",
+    "Nathalie Agudelo Dueñas",
+    "Jakob Vorlaufer",
+    "et al."
+  ],
+  "year": 2025,
+  "venue": "Nature",
+  "doi": "10.1038/s41586-025-08985-1",
+  "species": "Mouse",
+  "scale": "method/tool",
+  "technique": [
+    "expansion microscopy",
+    "iterative hydrogel expansion",
+    "spinning-disc confocal microscopy",
+    "protein-density (pan-protein) staining",
+    "flood-filling networks (FFN)",
+    "deep-learning segmentation",
+    "deep-learning molecule prediction",
+    "post-expansion immunolabelling",
+    "block-face imaging"
+  ],
+  "region": "primary somatosensory cortex; hippocampus (CA1/CA3); also hypothalamus, piriform area, cerebellum, white matter",
+  "dataset": "LICONN public datasets (neuroglancer-demo)",
+  "tags": [
+    "connectome",
+    "expansion microscopy",
+    "light microscopy",
+    "mouse brain",
+    "synapse detection",
+    "FFN",
+    "deep learning",
+    "突觸級連結體",
+    "光學連結體"
+  ],
+  "keywords": [
+    "連結體",
+    "影像分割",
+    "深度學習",
+    "光學顯微鏡連結體",
+    "擴展顯微術",
+    "哺乳類腦",
+    "突觸級連結體",
+    "連結體重建"
+  ],
+  "node_label": "Recon/LICONN/2025",
+  "related": [
+    "januszewski-2018-ffn",
+    "sheridan-2023-lsd",
+    "neuroretriever-2021",
+    "lynsu-2024"
+  ],
+  "tldr": "LICONN 用工程化的可膨脹水膠把小鼠腦組織等向放大約 16 倍，再以一般旋轉盤共軛焦光學顯微鏡＋深度學習（FFN）分割，首度在光學顯微鏡下達成突觸級的緻密連結體重建，且能同時讀取分子資訊。",
+  "bib": {
+    "journal": "Nature",
+    "volume": "642",
+    "issue": "",
+    "pages": "398-410",
+    "published": "2025 年 6 月",
+    "institutions": [
+      "Institute of Science and Technology Austria (ISTA)",
+      "Google Research"
+    ]
+  },
+  "abstract_zh": "腦的資訊處理能力取決於神經元之間的實體連線，以及其分子與功能特性。要繪製神經元並解析其個別突觸連結，需在奈米尺度做緻密標記的體積成像。光學顯微鏡在「可視化特定分子」上具有獨特優勢，但因解析度、對比與體積成像能力受限，過去無法用光學顯微鏡做緻密、突觸級的迴路重建。本研究提出「光學顯微鏡連結體（LICONN）」：將特製的水膠包埋與擴展（expansion）技術，結合全面的深度學習分割與連結性分析，並把分子資訊直接整合進突觸級的腦組織重建中。作者開發了高保真的「迭代式」水膠膨脹方案（三層互穿水膠網絡），搭配蛋白質密度染色與高速繞射極限讀取，使人工神經追蹤與深度學習細胞分割成為可能。他們以稀疏正向螢光標記做為獨立的「真值（ground truth）」驗證軸突追蹤與棘突可追蹤性，並把神經連結的統計數據與既有電子顯微鏡（EM）量測結果做交叉比對。LICONN 讓研究者能用廣泛可得的標準光學顯微鏡硬體，對腦組織做分子資訊充分的突觸級表型分析，且導入門檻不高。",
+  "key_findings": [
+    "在標準旋轉盤共軛焦顯微鏡＋約 16 倍（exF = 15.44 ± 1.68）等向膨脹下，達成有效解析度約 20 nm（橫向）與約 50 nm（軸向），可在緻密神經氈中清楚分辨個別神經元、軸突與樹突棘。",
+    "成像了約 1×10^6 µm³（原組織尺度；396 × 109 × 22 µm³）的小鼠初級體感覺皮質第 II/III–IV 層體積，由 132 個子體積拼接，膨脹後約 4.2×10^9 µm³（0.47 兆體素）在 6.5 小時內完成，有效體素率約 17 MHz。",
+    "人工追蹤精度高：37 條軸突僅 1 條走錯（1.1 errors/mm）；海馬樹突棘 289 個中正確辨識 259 個（90%）；皮質 306 個棘突中 285 個（93.1%）能無歧義追溯至母樹突，排除大量「孤兒棘突」。",
+    "採用源自 EM 連結體的 flood-filling networks（FFN）做自動分割：基礎分割 80.1% edge accuracy（0 合併、413 分裂），自動聚合後升至 92.8%（分裂減少 92.5%），人工校對後達 95.6%，準確度可比擬最先進的 EM 結果。",
+    "在 85 × 69 × 14 µm³ 海馬 CA1 體積完成緻密分割並全面校對：得 18,268 條軸突（累計 342.3 mm）與 1,643 條樹突（累計 119.1 mm、含 71,269 個棘突）。",
+    "光學顯微鏡可同時讀取分子資訊：以擴展後免疫標記同時可視化結構與多種突觸蛋白（bassoon、PSD95、SHANK2、MUNC13-1、RIM1/2、CaV2.1、VGLUT1、GLUN1、gephyrin、VGAT 等），bassoon–SHANK2 間距 154 ± 19 nm，GLUN1–SHANK2 質心相距 16 ± 5 nm。",
+    "自動突觸偵測（以免疫標記為真值）達 95% 前/後突觸偵測準確度、90% 完整突觸（F1：前突觸 0.94、後突觸 0.95、完整突觸 0.90）。",
+    "可用結構通道單獨「預測」突觸分子位置：以深度學習從結構通道預測 bassoon 與 SHANK2，F1 皆 > 0.9（前 0.94、後 0.95、完整 0.92），免去額外加色彩通道與成像時間。",
+    "整合結構＋分子可區分興奮性（SHANK2）與抑制性（gephyrin）突觸，量得樹突上興奮:抑制 ≈ 90%:10%；棘頭以興奮性為主、軸幹突觸以抑制性為主（93.5% gephyrin+），與既有 EM 連結體一致。",
+    "能偵測 EM 難以辨識的電性連結（gap junction）：以 connexin-43 + GFAP 標記星形膠細胞間縫隙連接，可在同一迴路同時繪製興奮、抑制與電性連接。",
+    "可做超越連結性的細胞層次分析：分類細胞型別（皮質 78 顆：錐體 82.1%、中間神經元 11.5%、膠細胞 6.4%）、量測初級纖毛長度，並在 Hnrnpu+/− 神經發育疾病小鼠模型中檢驗纖毛表型（結果無顯著差異）。",
+    "以 block-face（切面）成像＋體素精確融合，把成像體積在軸向無損延伸（3×3×12 格、12 輪，軸向達 205 µm），展示朝更大體積擴展的可行性。"
+  ],
+  "methods": "LICONN 以三項核心串成管線：(1) 迭代式水膠膨脹樣品製備；(2) 高速旋轉盤共軛焦成像；(3) 深度學習分割、突觸偵測與分子預測。樣品製備上，先以含丙烯醯胺（AA, 10%）的固定液經心臟灌流小鼠，使細胞分子帶上乙烯基殘基以便與水膠共聚；切片後用多官能環氧化物（GMA、TGE）廣泛把蛋白質官能化以掛載丙烯酸酯並進一步固定生物分子（相較常見胺反應化合物更能凸顯突觸特徵）。接著聚合可膨脹的丙烯醯胺–丙烯酸鈉水膠、以加熱與化學變性破壞機械內聚力（約 4 倍膨脹），可選擇性做免疫標記，再以不可膨脹穩定水膠防止收縮、加入第二層可膨脹水膠並中和未反應基團以確保三層互穿網絡彼此獨立。最後以螢光 NHS 酯做蛋白質密度（pan-protein）染色可視化細胞結構。最終三層水膠–樣品混成體膨脹約 16 倍（exF = 15.44 ± 1.68，n = 4 技術重複、3 隻小鼠），機械上穩固。成像用高數值孔徑（NA = 1.15）水浸物鏡的旋轉盤共軛焦（約 300 焦點並行），綠光下原始解析度約 280 nm（橫向）/730 nm（軸向），經 16× 膨脹換算為有效約 20 nm / 50 nm，需有效體素約 10 × 10 × 25 nm³。多子體積以 SOFIMA（scalable optical flow-based image montaging and alignment）做無縫融合。分割方面，採用 EM 連結體的 flood-filling networks（FFN；原始卷積堆疊架構，33×33×33 體素 FOV、step 8、深度延伸至 20 個 residual module），在 19.4×19.4×25.9 nm³ 有效體素上以 batch 128、學習率 1e−4、AdamW、32 張 V100 訓練至多 30 天（約 880 萬步）。真值以「模型預測＋人工校對」迭代產生，並分三代模型（model 1→3）逐步擴大訓練資料。分割策略先求「基礎分割」少合併（以 seed-order oversegmentation consensus 多檢查點共識），再以多步聚合（agglomeration，含 relaxed acceptance、端點種子 FFN 推論、另訓練 1283-voxel FOV 的 3D U-Net 軸突/樹突模型）把超體素併成大神經突起；最後以 TEASAR/kimimaro 自動骨架化、人工校對殘餘分裂/合併。語意分割（semantic segmentation）用與 FFN 同架構（深度 8、valid 卷積）把片段分為軸突/樹突/髓鞘軸突/寡突膠/星膠等類別。分子整合上採「擴展後免疫標記」（在第一次膨脹後施作），相當於把約 10 nm 抗體「縮小」至 < 1 nm，降低標記位移誤差並提升表位可及性。自動突觸偵測先把 bassoon（前突觸）與 SHANK2（興奮性後突觸）轉成點標記，再用匹配矩陣配對成完整突觸（支援一對一與一對多），以結構通道採樣值區分突觸訊號與背景；對未配對前突觸再依結構 PSD 補判。分子位置「預測」則用 U-Net 影像轉譯架構（image translation），以實測 bassoon/SHANK2 與結構通道配對自動產生訓練資料（無需人工標註，約 16,250 個興奮性突觸），分別訓練前/後突觸兩個模型，再以與免疫標記類似的後處理轉成突觸偵測。驗證採多重獨立真值：Thy1-eGFP 小鼠的稀疏胞質 eGFP（標註者對 eGFP 通道盲化、僅用結構通道追蹤）量化軸突/樹突棘可追蹤性；隨機 2×2×2 µm³ 子體積窮舉式棘突追蹤；以人工骨架評估 edge accuracy 與分裂/合併；並把連結統計與既有 EM 數據交叉比對。軸向擴展用 block-face 成像：先成像一層 slab，用振動切片機在已成像 slab 內切除多數已成像水膠，再成像更深、與前一體積軸向重疊的多片體積，最後做體素精確 3D 融合。",
+  "significance": "LICONN 的核心意義在於把「緻密、突觸級連結體重建」從電子顯微鏡（EM）的專屬領域，帶進廣泛可得的標準光學顯微鏡（旋轉盤共軛焦），讓非專門實驗室也可能例行性地做連結體研究。它同時補足了 EM 的根本短板——EM 在結構解析上無與倫比，但難以直接取得分子資訊；LICONN 則在保留結構可追蹤性與分割準確度（自動 edge accuracy 92.8%、突觸偵測 F1 > 0.9，可比擬最先進 EM）的同時，直接、同步量測空間解析的分子資訊（區分興奮/抑制突觸、辨識電性 gap junction、標記細胞型別與次細胞構造）。在方法脈絡上，LICONN 直接沿用並建立於 EM 連結體的深度學習路線之上：其分割引擎正是 Januszewski 等人的 flood-filling networks（FFN，共同作者 Michał Januszewski、Viren Jain 均來自 Google Research，亦是 FFN 的提出者），把已在蠕蟲、果蠅、小鼠、人腦 EM 上驗證的緻密標註方法移植到光學擴展資料；突觸偵測與分子預測則採 U-Net 類影像轉譯網路，呼應 local shape descriptors（LSD, Sheridan et al. 2023）等以學習式特徵推斷突觸/形態的方向。相對於果蠅連結體工具鏈（如 NeuroRetriever、LYNSU 著重於從共軛焦影像分割單神經元與切分腦區），LICONN 把焦點放在哺乳類（小鼠）腦組織的緻密突觸級重建並原生整合分子標記，開拓了「形態＋連結（含電性）＋分子（蛋白、未來可接空間轉錄體）」多模態描述大腦細胞的路徑，並可延伸到神經發育疾病等基因型–表型研究與其他器官的高解析組織分析。"
+}
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
+</head>
+<body>
+<div class="topbar"><div class="inner">
+  <div class="brand">🧠 FlyCircuit 連結體論文知識庫 <small>· BSC Knowledge Base</small></div>
+  <nav>
+    <a href="../index.html">首頁</a>
+    <a href="../graph.html">論文網路</a>
+    <a href="../keywords.html">關鍵字網路</a>
+    <a href="../log.html">時間軸</a>
+  </nav>
+</div></div>
+<div class="wrap">
+  <article>
+    <header class="paper-header">
+      <h1>Light-microscopy-based connectomic reconstruction of mammalian brain tissue</h1>
+      <p class="title-zh">以光學顯微鏡為基礎的哺乳類腦組織連結體重建（LICONN）</p>
+      <p class="authors">Mojtaba R. Tavakoli、Julia Lyudchik、Michał Januszewski、Vitali Vistunou、Nathalie Agudelo Dueñas、Jakob Vorlaufer、et al.</p>
+      <div class="badges">
+        <span class="badge scale" style="background:#ea580c">方法/工具</span><span class="badge muted">2025</span><span class="badge muted">Nature</span><span class="badge">Mouse</span><span class="badge">LICONN public datasets (neuroglancer-demo)</span><span class="badge muted">expansion microscopy</span><span class="badge muted">iterative hydrogel expansion</span><span class="badge muted">spinning-disc confocal microscopy</span><span class="badge muted">protein-density (pan-protein) staining</span><span class="badge muted">flood-filling networks (FFN)</span><span class="badge muted">deep-learning segmentation</span><span class="badge muted">deep-learning molecule prediction</span><span class="badge muted">post-expansion immunolabelling</span><span class="badge muted">block-face imaging</span>
+      </div>
+      <p class="meta-line">Nature (2025) · DOI: <a href="https://doi.org/10.1038/s41586-025-08985-1" target="_blank" rel="noopener">10.1038/s41586-025-08985-1</a></p>
+    </header>
+
+    <div class="callout">
+      <span class="label">一句話總結</span>
+      LICONN 用工程化的可膨脹水膠把小鼠腦組織等向放大約 16 倍，再以一般旋轉盤共軛焦光學顯微鏡＋深度學習（FFN）分割，首度在光學顯微鏡下達成突觸級的緻密連結體重建，且能同時讀取分子資訊。
+    </div>
+
+    <section class="block bib-block">
+      <h2>論文基本資料</h2>
+      <dl class="bib">
+        <div><dt>期刊</dt><dd>Nature</dd></div>
+        <div><dt>卷期</dt><dd>第 642 卷</dd></div>
+        <div><dt>頁碼</dt><dd>398–410 頁</dd></div>
+        <div><dt>發表</dt><dd>2025 年 6 月</dd></div>
+        <div><dt>機構</dt><dd>Institute of Science and Technology Austria (ISTA)；Google Research</dd></div>
+      </dl>
+    </section>
+
+    <section class="block">
+      <h2>中文摘要</h2>
+      <p>腦的資訊處理能力取決於神經元之間的實體連線，以及其分子與功能特性。要繪製神經元並解析其個別突觸連結，需在奈米尺度做緻密標記的體積成像。光學顯微鏡在「可視化特定分子」上具有獨特優勢，但因解析度、對比與體積成像能力受限，過去無法用光學顯微鏡做緻密、突觸級的迴路重建。本研究提出「光學顯微鏡連結體（LICONN）」：將特製的水膠包埋與擴展（expansion）技術，結合全面的深度學習分割與連結性分析，並把分子資訊直接整合進突觸級的腦組織重建中。作者開發了高保真的「迭代式」水膠膨脹方案（三層互穿水膠網絡），搭配蛋白質密度染色與高速繞射極限讀取，使人工神經追蹤與深度學習細胞分割成為可能。他們以稀疏正向螢光標記做為獨立的「真值（ground truth）」驗證軸突追蹤與棘突可追蹤性，並把神經連結的統計數據與既有電子顯微鏡（EM）量測結果做交叉比對。LICONN 讓研究者能用廣泛可得的標準光學顯微鏡硬體，對腦組織做分子資訊充分的突觸級表型分析，且導入門檻不高。</p>
+    </section>
+
+    <section class="block popsci-block">
+      <h2>科普版介紹<span class="aud aud-pop">給對科學有興趣的高中生</span></h2>
+<p>想知道大腦怎麼運作，最根本的問題之一是：神經元彼此如何「接線」？一個神經元伸出細長的軸突，碰到另一個神經元的樹突或樹突上的小突起（稱為「棘突」），在交會處形成「突觸」——這就是訊號傳遞的接點。要把一整塊腦組織裡，每一條線、每一個接點都畫出來，就是「連結體（connectome）」研究在做的事。難處在於，這些結構細到只有幾十奈米（1 奈米是百萬分之一公釐），而且密密麻麻擠在一起，像把幾千條電線塞進一個火柴盒。</p><p>過去唯一能看清這種細節的，是電子顯微鏡（EM）。它解析度極高，能把每條軸突、每個突觸都看得一清二楚，世界上的蠕蟲、果蠅、小鼠甚至人腦連結體幾乎都靠它。但 EM 有個大缺點：它看得到「形狀」，卻幾乎看不到「分子」。也就是說，你能畫出線路圖，卻很難知道某個突觸是用哪種蛋白質、是興奮性還是抑制性、有沒有某種受體。而這些分子資訊，恰恰是理解大腦運作、研究疾病的關鍵。</p><p>光學顯微鏡剛好相反：它最擅長「看分子」——只要替特定蛋白質貼上會發光的螢光標記，就能直接看到它在哪裡。問題是，傳統光學顯微鏡的解析度太差（橫向約 200–300 奈米，沿著深度方向甚至差到約 1000 奈米），根本分不清擠在一起的細小神經元。這就是為什麼長久以來，大家覺得「用光學顯微鏡做突觸級連結體」是不可能的任務。</p><p>這篇發表在《Nature》的研究提出的 LICONN（光學顯微鏡連結體），用一個巧妙的點子繞過這道牆：與其想辦法把顯微鏡做得更厲害，不如把「樣本本身撐大」。他們把腦組織泡進一種特製的水膠（想像成嬰兒尿布裡那種會吸水膨脹的高分子），讓組織裡的分子都牢牢黏在水膠網絡上，然後讓水膠吸水膨脹，把整塊組織「等比例放大」約 16 倍。這裡的關鍵是「等比例」三個字：如果膨脹時東歪西扭、放大倍率忽大忽小，原本的形狀就毀了、線路也接不回去。所以團隊花了很多力氣讓組織膨脹得既均勻又不變形。原本擠在一起、分不開的結構，撐大後就拉開了距離——這時就算用普通的光學顯微鏡，也能一根一根看清楚。這種「把樣本撐大來提升解析度」的技術叫做「擴展顯微術（expansion microscopy）」。它聰明的地方在於：解析度的提升其實是「免費」的——你沒有換更貴的鏡頭，只是把要看的東西放大了，相當於用一台普通顯微鏡達到了超高解析度的效果。換算回原本的尺寸，他們的有效解析度達到約 20 奈米，足以分辨最細的軸突和棘突。</p><p>但光是撐大還不夠，研究團隊解決了兩個關鍵難題。第一是「撐大時不能變形」：他們設計了三層互相穿插、彼此獨立的水膠網絡，加上特別的化學固定方式，讓組織均勻膨脹而不扭曲、不破碎，膨脹後還夠強韌，方便長時間成像。第二是「資料太多看不完」：撐大後的一小塊腦組織會變成接近半兆個像素（voxel）的龐大 3D 影像，不可能靠人一條條描。於是他們借用電子顯微鏡連結體界已經成熟的人工智慧——一種叫「洪水填充網路（flood-filling networks, FFN）」的深度學習模型，自動把每個神經元的形狀分割出來。值得一提的是，這套 AI 的原作者（來自 Google）也是這篇論文的共同作者。經過 AI 自動分割再加上人工校對，準確度可以媲美最先進的電子顯微鏡結果。</p><p>LICONN 真正的魔法在於「魚與熊掌兼得」。因為用的是光學顯微鏡，它在畫出線路的同時，還能貼上螢光標記直接讀分子：哪些是興奮性突觸（會「催油門」）、哪些是抑制性突觸（會「踩煞車」）、哪裡有特定受體、甚至哪裡有神經元之間直接「短路」的電性連接（gap junction，這在電子顯微鏡裡特別難找）。研究團隊還更進一步：因為突觸蛋白的位置和結構特徵高度相關，他們訓練 AI 學會「只看結構通道就預測分子在哪裡」，這樣連螢光標記都可以省下來，準確度依然很高（F1 分數超過 0.9）。</p><p>為了證明這不是看走眼，他們做了嚴謹的驗證：在一部分神經元裡讓它們發出綠色螢光當作「標準答案」，再請完全看不到綠光的標註者只憑結構影像去描同一條神經，比對之下軸突每公釐只錯約 1 處、九成以上的棘突都能正確接回母樹突。他們也把測得的突觸密度、興奮與抑制的比例拿去和過去的電子顯微鏡數據比對，結果都吻合。</p><p>這項技術的意義很大。電子顯微鏡又貴又難，全世界只有少數頂尖實驗室玩得起；而 LICONN 用的是許多生物實驗室都有的普通共軛焦顯微鏡，樣品製備也沒有比現有的擴展技術複雜太多，程式碼還開源。換句話說，它有機會讓「看突觸、做連結體」變成一般神經科學實驗室也能做的例行工具。研究團隊甚至示範了用它去研究一種與癲癇、自閉特徵有關的基因突變如何影響神經纖毛，展現它在腦疾病研究上的潛力。未來若再結合「在組織裡直接讀基因表現」的空間轉錄體技術，科學家就有望同時掌握一個腦細胞的形狀、接線、電性連接與基因活動——朝向真正「全方位」理解大腦邁進一大步。</p>
+    </section>
+
+    <section class="block academic-block">
+      <h2>學術版介紹<span class="aud aud-aca">給研究生以上的專業讀者</span></h2>
+      <h3>關鍵發現</h3>
+<ul><li><strong>解析度與膨脹：</strong>以特製三層互穿水膠把小鼠腦組織等向膨脹約 16 倍（exF = 15.44 ± 1.68，n = 4 技術重複、3 隻小鼠），在 NA = 1.15 水浸物鏡的旋轉盤共軛焦下，原始約 280 nm（橫向）/730 nm（軸向）換算為<strong>有效約 20 nm / 50 nm</strong>，有效體素約 10 × 10 × 25 nm³，足以在緻密神經氈中分辨個別軸突與樹突棘。</li><li><strong>成像體積與速度：</strong>單一資料集約 1×10⁶ µm³（原組織尺度，396 × 109 × 22 µm³），由 132 個子體積拼接、以 SOFIMA 無縫融合；膨脹後約 4.2×10⁹ µm³（0.47 兆體素）於 <strong>6.5 小時</strong>完成，有效體素率約 <strong>17 MHz</strong>。</li><li><strong>人工可追蹤性（獨立真值）：</strong>37 條軸突僅 1 條走錯（<strong>1.1 errors/mm</strong>）；海馬樹突棘 289 個中正確辨識 259 個（<strong>90%</strong>）；皮質 306 個棘突中 285 個（<strong>93.1%</strong>）可無歧義追溯母樹突，棘突密度 1.0 ± 0.3 /µm³。</li><li><strong>自動分割準確度（FFN）：</strong>基礎分割 edge accuracy <strong>80.1%</strong>（0 合併、413 分裂）→ 自動聚合 <strong>92.8%</strong>（分裂降 92.5%，由 413→31）→ 人工校對 <strong>95.6%</strong>（僅 1 處形態合併、29 個棘突誤接 2.8%）。準確度可比擬最先進 EM。</li><li><strong>緻密重建規模：</strong>85 × 69 × 14 µm³ 海馬 CA1 體積完成全面校對，得 <strong>18,268 條軸突（累計 342.3 mm）</strong>與 <strong>1,643 條樹突（累計 119.1 mm，含 71,269 個棘突）</strong>。棘頭體積分布與 EM 一致（53% 落在 0.01–0.05 µm³）。</li><li><strong>分子量測：</strong>同步免疫標記多種突觸蛋白（bassoon、PSD95、SHANK2、MUNC13-1、RIM1/2、CaV2.1、VGLUT1、GLUN1、gephyrin、VGAT 等）；bassoon–SHANK2 間距 <strong>154 ± 19 nm</strong>，GLUN1–SHANK2 質心相距 <strong>16 ± 5 nm</strong>；前突觸 dense projection 呈晶格狀（間距 97 ± 28 nm），距 PSD 139 ± 19 nm。</li><li><strong>自動突觸偵測：</strong>以免疫標記為真值，前/後突觸偵測 <strong>95%</strong>、完整突觸 <strong>90%</strong> 準確度（F1：前 0.94、後 0.95、完整 0.90），跨海馬與皮質皆穩健。</li><li><strong>由結構通道預測分子：</strong>深度學習僅憑結構通道預測 bassoon/SHANK2，<strong>F1 &gt; 0.9</strong>（前 0.94、後 0.95、完整 0.92），免去額外色彩通道；可在無免疫標記的資料集上映射出整顆錐體神經元的突觸輸入場（樹突 454 µm 上偵測 705 個興奮性輸入）。</li><li><strong>興奮/抑制平衡：</strong>樹突上興奮:抑制 ≈ <strong>90%:10%</strong>（SHANK2 2.6 ± 1.1 /µm vs gephyrin 0.3 ± 0.2 /µm）；棘頭 95.7% 僅 SHANK2+，軸幹突觸 93.5% 為抑制性，與 EM 連結體一致。</li><li><strong>電性連結與細胞型別：</strong>以 connexin-43 + GFAP 偵測星膠 gap junction（密度 0.054 ± 0.015 /µm³），可同時繪製興奮、抑制與電性連接；分類皮質 78 顆細胞為錐體 82.1%、中間神經元 11.5%、膠細胞 6.4%；量測各型別初級纖毛長度，並在 Hnrnpu+/− 疾病模型檢驗纖毛表型（與野生型無顯著差異，t-test P = 0.64）。</li><li><strong>軸向無損延伸：</strong>block-face 成像＋體素精確 3D 融合，跨 3×3×12 格、12 輪達軸向 205 µm，示範朝更大體積擴展的可行性。</li></ul>
+      <h3>方法</h3>
+<h3>水膠包埋與迭代式膨脹</h3><p>以含丙烯醯胺（AA，10%，較舊法低濃度以改善細胞保存）的固定液經心臟灌流小鼠，使細胞分子帶上乙烯基殘基以便與水膠共聚。切片後利用多官能<strong>環氧化物（GMA、TGE，後者帶三個環氧環）</strong>把蛋白質廣泛官能化、掛載丙烯酸酯並進一步固定生物分子（較常見胺反應化合物更能凸顯突觸特徵；亦可改用 NAS 胺反應錨定）。接著聚合可膨脹的丙烯醯胺–丙烯酸鈉水膠，以加熱＋化學變性破壞機械內聚力（約 4 倍膨脹），可選擇性免疫標記；再用<strong>不可膨脹穩定水膠</strong>防收縮，加入<strong>第二層可膨脹水膠</strong>形成三層互穿網絡，並在每次聚合後中和未反應基團、消除水膠間交聯以確保各層獨立。最後以螢光 NHS 酯做<strong>蛋白質密度（pan-protein）染色</strong>可視化結構。最終混成體膨脹 <strong>exF = 15.44 ± 1.68</strong>（約 16×），機械穩固、膨脹畸變與前人相當。長度量測一律用 exF 換算回原組織尺度。</p><h3>成像與融合</h3><p>用 NA = 1.15 水浸物鏡的<strong>旋轉盤共軛焦顯微鏡（Andor Dragonfly）</strong>，約 300 焦點並行；綠光下原始解析度約 280 nm（橫向）/730 nm（軸向），經 16× 膨脹得<strong>有效約 20 nm / 50 nm</strong>，有效體素約 9.7 × 9.7 × 13.0 或 9.7 × 9.7 × 25.9 nm³。多子體積以 <strong>SOFIMA（scalable optical flow-based image montaging and alignment）</strong>做無縫 3D 融合。為突破物鏡工作距離（約 600 µm）的軸向限制，另以 <strong>block-face 成像</strong>：成像一層 slab → 振動切片機在已成像 slab 內切除大部分水膠 → 成像更深且軸向重疊的多片體積 → 體素精確 3D 融合（示範 3×3×12 格、12 輪、軸向 205 µm）。</p><h3>深度學習實例分割（FFN）</h3><p>採用 EM 連結體的 <strong>flood-filling networks（FFN，google/ffn）</strong>：原始卷積堆疊架構、<strong>33×33×33 體素 FOV、step 8、深度延伸至 20 個 residual module</strong>，作用於 19.4×19.4×25.9 nm³ 有效體素。訓練用 <strong>batch 128、學習率 1e−4、AdamW、32 張 V100、至多 30 天（約 880 萬步）</strong>。真值以「模型預測＋人工校對」迭代產生，分三代模型（model 1 用 Fig.1g 單片 162 片段→ model 2 加入手動聚合資料→ model 3 再加入 540 條軸突/314 條樹突的校對資料）。分割策略<strong>先求基礎分割少合併</strong>（seed-order oversegmentation consensus＋多檢查點共識），再以 TEASAR/kimimaro 自動骨架化、heuristic 找端點。<strong>語意分割</strong>用同架構（深度 8、valid 卷積、16 張 V100）把片段分成軸突/樹突/髓鞘軸突/寡突膠/星膠五類。</p><h3>多步聚合（agglomeration）</h3><p>基礎超體素以多步聚合併成完整神經突起：先用 relaxed acceptance criterion，再以端點種子 FFN 推論判斷一對鄰近片段是否在 (200 體素)³ 子體積內互相回收 ≥90% 體素而合併；另訓練兩個 <strong>3D U-Net（1283 體素 FOV、無 FOV 移動策略）</strong>分別只學軸突或樹突，用於端點延伸。聚合後 edge accuracy 由 80.1% 升至 92.8%。</p><h3>分子整合與突觸偵測</h3><p>採<strong>擴展後免疫標記</strong>（第一次膨脹後施作），相當把約 10 nm 抗體「縮小」至 &lt; 1 nm、降低標記位移誤差並提升表位可及性。自動突觸偵測：把 bassoon（前突觸）與 SHANK2（興奮性後突觸）轉成點標記，建匹配矩陣 \( M_{ij} \) 兩階段配對成完整突觸（支援一對一與一對多）：第一輪每個後突觸配最近且距離 &lt; \( d_{matching} \) 的前突觸；第二輪處理「漂浮」未配對前突觸。並以結構通道採樣值區分突觸訊號與免疫背景，對未配對者再依結構 PSD 補判，並做自動後處理找回漏偵測的突觸。驗證以人工標註真值計算 \( F_1 = \dfrac{2PR}{P+R} \)（範圍 0–1，結合 precision 與 recall）。</p><h3>由結構通道預測分子位置</h3><p>用 <strong>U-Net 影像轉譯（image translation）</strong>架構，以實測 bassoon/SHANK2 與結構通道配對<strong>自動生成訓練資料（無需人工標註，約 16,250 個興奮性突觸、16,699 µm³）</strong>，分別訓練前/後突觸兩個模型，再以與免疫標記類似的後處理轉成突觸偵測，F1 皆 &gt; 0.9。</p><h3>驗證</h3><p>採多重獨立真值：<strong>Thy1-eGFP</strong> 小鼠的稀疏胞質 eGFP（以 webKnossos 盲化，標註者僅憑結構通道追蹤）量化軸突/樹突棘可追蹤性；隨機 2×2×2 µm³ 子體積窮舉式棘突追蹤；以人工骨架評估 edge accuracy 與分裂/合併；並把突觸密度、興奮/抑制比例與既有 EM 數據交叉比對。骨架化用 webKnossos、人工分割用 VAST。</p>
+      <h3>重要性與定位</h3>
+<p>LICONN 的核心意義，是把「緻密、突觸級的連結體重建」從電子顯微鏡（EM）的專屬領域，帶進廣泛可得的<strong>標準光學顯微鏡（旋轉盤共軛焦）</strong>，讓非專門的神經科學實驗室也可能例行性地投入連結體研究。它同時補足了 EM 的根本短板：EM 在結構解析上無與倫比，卻幾乎無法直接取得分子資訊；LICONN 在保留結構可追蹤性與分割準確度（自動 edge accuracy 92.8%、突觸偵測 F1 &gt; 0.9，可比擬最先進 EM）的同時，<strong>直接、同步量測空間解析的分子資訊</strong>——區分興奮/抑制突觸、辨識 EM 難以偵測的電性 gap junction、標記細胞型別與纖毛等次細胞構造。</p><p>在方法脈絡上，LICONN 並非另起爐灶，而是<strong>直接站在 EM 連結體深度學習路線的肩膀上</strong>。其自動分割引擎正是 Januszewski 等人提出的 <strong>flood-filling networks（FFN）</strong>——論文共同作者 Michał Januszewski、Viren Jain（皆來自 Google Research）正是 FFN 的核心開發者，等於把已在蠕蟲、果蠅、小鼠、人腦 EM 上驗證的緻密標註方法，無痛移植到光學擴展資料上。其突觸偵測與「由結構預測分子」採 U-Net 類影像轉譯網路，與以學習式特徵推斷突觸與形態的方向（如 Sheridan 等人的 <strong>local shape descriptors, LSD</strong>）一脈相承，差別在於 LICONN 用真實免疫標記當訓練目標、毋須人工標註。</p><p>相對於果蠅連結體工具鏈（如 <a href="../papers/neuroretriever-2021.html">NeuroRetriever</a> 從共軛焦影像自動分割單神經元、<a href="../papers/lynsu-2024.html">LYNSU</a> 自動切分腦區），那些工作聚焦於果蠅 FlyCircuit 影像的單神經元與腦區層級；LICONN 則把焦點放在<strong>哺乳類（小鼠）腦組織的緻密突觸級重建</strong>，並原生整合分子標記。它開拓了「形態＋連結（含電性）＋分子（蛋白，未來可接空間轉錄體）」的多模態大腦細胞描述路徑，且樣品製備不比現有擴展技術複雜太多、程式碼開源，因而具備在一般實驗室「routine 化」的潛力。作者更以神經發育疾病模型（Hnrnpu 突變對初級纖毛的影響）示範其在基因型–表型研究的應用，並指出技術可延伸至腦以外的其他器官高解析組織分析。</p>
+    </section>
+
+    <section class="block">
+      <h2>相關論文</h2>
+      <div class="related-grid">
+      <a href="januszewski-2018-ffn.html"><span class="ry">2018 · Nature Methods</span><br><span class="rt">以漫淹式填充網路高精度自動重建神經元</span></a>
+      <a href="sheridan-2023-lsd.html"><span class="ry">2023 · Nature Methods</span><br><span class="rt">用於神經元分割的局部形狀描述子</span></a>
+      <a href="neuroretriever-2021.html"><span class="ry">2021 · Frontiers in Systems Neuroscience</span><br><span class="rt">NeuroRetriever：用於連結體組裝的自動化神經元分割演算法</span></a>
+      <a href="lynsu-2024.html"><span class="ry">2024 · Frontiers in Neuroinformatics</span><br><span class="rt">LYNSU：果蠅腦螢光影像的自動化 3D 神經氈分割方法</span></a>
+      </div>
+    </section>
+  </article>
+</div>
+<div class="foot">
+  本頁由 LLM 依原始 PDF 整理；中文重點為摘要性質，引用前請以原文為準。｜id: <code>tavakoli-2025-liconn</code>
+</div>
+</body>
+</html>

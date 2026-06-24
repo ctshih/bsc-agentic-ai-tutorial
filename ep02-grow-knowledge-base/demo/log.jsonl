@@ -1,0 +1,26 @@
+{"date": "2026-06-22", "op": "ingest", "id": "chiang-2011-flycircuit", "title": "果蠅全腦連結網路的單細胞解析度三維重建", "note": "由原始 PDF 抽取 metadata 與中文重點，建立論文頁"}
+{"date": "2026-06-22", "op": "ingest", "id": "shih-2015-information-flow", "title": "以連結體學分析果蠅腦中的資訊流", "note": "由原始 PDF 抽取 metadata 與中文重點，建立論文頁"}
+{"date": "2026-06-22", "op": "ingest", "id": "kaleido-2018", "title": "Kaleido：以自動配色法視覺化大規模腦部單神經元影像資料", "note": "由原始 PDF 抽取 metadata 與中文重點，建立論文頁"}
+{"date": "2026-06-22", "op": "ingest", "id": "community-2019", "title": "果蠅腦神經元層級連結體中多樣的社群結構", "note": "由原始 PDF 抽取 metadata 與中文重點，建立論文頁"}
+{"date": "2026-06-22", "op": "ingest", "id": "neuroretriever-2021", "title": "NeuroRetriever：用於連結體組裝的自動化神經元分割演算法", "note": "由原始 PDF 抽取 metadata 與中文重點，建立論文頁"}
+{"date": "2026-06-22", "op": "ingest", "id": "lynsu-2024", "title": "LYNSU：果蠅腦螢光影像的自動化 3D 神經氈分割方法", "note": "由原始 PDF 抽取 metadata 與中文重點，建立論文頁"}
+{"date": "2026-06-22", "op": "build", "id": "", "title": "建立第一版知識庫 (v1)", "note": "6 篇論文，產生目錄、連結網路與時間軸"}
+{"date": "2026-06-24", "op": "ingest", "id": "topic-connectome", "title": "連結體（Connectome）是什麼", "note": "綜整論文撰寫的概念條目（wiki）"}
+{"date": "2026-06-24", "op": "ingest", "id": "topic-fly-brain", "title": "果蠅作為模式生物與大腦構造", "note": "綜整論文撰寫的概念條目（wiki）"}
+{"date": "2026-06-24", "op": "ingest", "id": "topic-flycircuit", "title": "FlyCircuit：單神經元解析度的果蠅連結體資料庫", "note": "綜整論文撰寫的概念條目（wiki）"}
+{"date": "2026-06-24", "op": "ingest", "id": "topic-imaging", "title": "從影像到連結體：分割、重建與視覺化方法", "note": "綜整論文撰寫的概念條目（wiki）"}
+{"date": "2026-06-24", "op": "ingest", "id": "topic-network", "title": "果蠅連結體的網路分析", "note": "綜整論文撰寫的概念條目（wiki）"}
+{"date": "2026-06-24", "op": "build", "id": "", "title": "EP02 改版：新增 5 篇概念條目與關鍵字搜尋網路", "note": "首頁改為概念導向；論文節點改用主題＋年份"}
+{"date": "2026-06-24", "op": "build", "id": "", "title": "首頁與論文網路微調", "note": "概念條目加條列／磚塊切換鈕（預設條列）；完整論文清單獨立為 papers.html，首頁僅留入口；論文網路節點標籤改英文（主題／工具名／年份，可縮寫）；作者含 BSC 成員的論文節點加橘色外框"}
+{"date": "2026-06-24", "op": "ingest", "id": "", "title": "六篇論文頁內容擴充（重讀 PDF）", "note": "每篇新增「論文基本資料」（期刊/卷期/頁碼/年月/機構）、「科普版介紹」（高中生向 1500–2000 字）、「學術版介紹」（關鍵發現／詳細方法／重要性，研究人員向）；機構與卷期等寫進 meta 的 bib"}
+{"date": "2026-06-24", "op": "build", "id": "", "title": "論文頁方程式改用 MathJax（LaTeX）渲染", "note": "六篇論文頁 head 載入 MathJax 3；內文數學式（能量函數、訊號傳播更新式、複合損失函數、各式變數與不等式）改寫為 LaTeX 行內 \\(…\\) 與置中 \\[…\\]；meta JSON 維持純文字不動"}
+{"date": "2026-06-24", "op": "build", "id": "", "title": "關鍵字頁加入關鍵字說明", "note": "點關鍵字後，頁面清單上方顯示該關鍵字約 300 字說明（19 個關鍵字）；說明存於 keyword_notes.json，由 build.py 嵌入 keywords.html"}
+{"date": "2026-06-24", "op": "ingest", "id": "cheng-2025-mushroom-body", "title": "果蠅蕈狀體混合神經網路驅動嗅覺偏好", "note": "重讀 PDF；BSC 團隊果蠅連結體論文，含基本資料/科普版/學術版"}
+{"date": "2026-06-24", "op": "ingest", "id": "januszewski-2018-ffn", "title": "以漫淹式填充網路高精度自動重建神經元", "note": "重讀 PDF；通用 EM 神經元分割（FFN）"}
+{"date": "2026-06-24", "op": "ingest", "id": "sheridan-2023-lsd", "title": "用於神經元分割的局部形狀描述子", "note": "重讀 PDF；通用 EM 神經元分割（LSD）"}
+{"date": "2026-06-24", "op": "ingest", "id": "tavakoli-2025-liconn", "title": "光學顯微鏡為基礎的哺乳類腦組織連結體重建", "note": "重讀 PDF；LICONN，光學顯微鏡＋擴展顯微術達突觸級（哺乳類）"}
+{"date": "2026-06-24", "op": "ingest", "id": "moreaux-2020-neurophotonics", "title": "整合神經光子學：朝向腦迴路活性的深部即時密集探測", "note": "重讀 PDF；Neuron Perspective，神經活性記錄技術展望"}
+{"date": "2026-06-24", "op": "ingest", "id": "topic-modality", "title": "電子顯微鏡 vs 光學顯微鏡：兩條連結體重建路線", "note": "新增概念條目：因收錄通用/哺乳類方法論文而擴建主題地圖"}
+{"date": "2026-06-24", "op": "ingest", "id": "topic-function", "title": "接線圖之外：從結構連結到神經活性", "note": "新增概念條目：因收錄通用/哺乳類方法論文而擴建主題地圖"}
+{"date": "2026-06-24", "op": "ingest", "id": "topic-cross-species", "title": "跨物種連結體：從果蠅到哺乳類", "note": "新增概念條目：因收錄通用/哺乳類方法論文而擴建主題地圖"}
+{"date": "2026-06-24", "op": "build", "id": "", "title": "關鍵字網路節點依分類上色", "note": "31 個關鍵字分 5 類（連結體與資料庫／腦結構與生物／成像與分割方法／網路分析／神經活性與功能），節點以飽和色標記並加圖例；分類表在 build.py 的 KW_CATEGORIES，點選節點保留其分類色＋深色外框"}

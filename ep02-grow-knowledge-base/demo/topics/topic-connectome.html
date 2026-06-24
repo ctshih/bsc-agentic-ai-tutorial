@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>連結體（Connectome）是什麼｜FlyCircuit 知識庫</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script type="application/json" id="meta">
+{
+  "id": "topic-connectome",
+  "type": "topic",
+  "title": "連結體（Connectome）是什麼",
+  "keywords": [
+    "連結體",
+    "連結體尺度",
+    "網路分析",
+    "果蠅腦"
+  ],
+  "related": [
+    "chiang-2011-flycircuit",
+    "shih-2015-information-flow",
+    "community-2019",
+    "neuroretriever-2021",
+    "lynsu-2024",
+    "kaleido-2018",
+    "cheng-2025-mushroom-body"
+  ],
+  "tldr": "連結體就是一個神經系統裡「哪個神經元連到哪個神經元」的完整線路圖；本知識庫的所有論文，都是在「建立」或「分析」果蠅腦的連結體。"
+}
+</script>
+</head>
+<body>
+<div class="topbar"><div class="inner">
+  <div class="brand">🧠 FlyCircuit 連結體論文知識庫 <small>· BSC Knowledge Base</small></div>
+  <nav>
+    <a href="../index.html">首頁</a>
+    <a href="../graph.html">論文網路</a>
+    <a href="../keywords.html">關鍵字網路</a>
+    <a href="../log.html">時間軸</a>
+  </nav>
+</div></div>
+<div class="wrap">
+  <article>
+    <header class="paper-header">
+      <span class="badge scale" style="background:#7c3aed">概念條目</span>
+      <h1>連結體（Connectome）是什麼</h1>
+      <div class="badges" style="margin-top:14px"><a class="badge" href="../keywords.html?kw=連結體">連結體</a><a class="badge" href="../keywords.html?kw=連結體尺度">連結體尺度</a><a class="badge" href="../keywords.html?kw=網路分析">網路分析</a><a class="badge" href="../keywords.html?kw=果蠅腦">果蠅腦</a></div>
+    </header>
+    <div class="callout"><span class="label">一句話</span>連結體就是一個神經系統裡「哪個神經元連到哪個神經元」的完整線路圖；本知識庫的所有論文，都是在「建立」或「分析」果蠅腦的連結體。</div>
+    
+    <section class="block"><h2>一句話定義</h2>
+    <p><b>連結體（connectome）</b>是一個神經系統中所有神經元、以及它們之間連結的完整地圖——簡單說，就是「<b>誰連到誰</b>」的線路圖。就像基因體（genome）是一個生物的完整基因清單，連結體是一個腦的完整接線清單。研究連結體的領域稱為 <b>connectomics（連結體學）</b>。</p></section>
+
+    <section class="block"><h2>為什麼重要？</h2>
+    <p>大腦的功能不只取決於有哪些神經元，更取決於它們<b>怎麼連</b>。同樣的元件、不同的接線，會產生完全不同的行為。因此「結構（誰連到誰）」是理解「功能（腦如何運作）」的基礎。有了連結體，研究者才能追問：訊息怎麼在腦中流動？哪些區域是樞紐？記憶、感覺、運動各靠哪些迴路？</p></section>
+
+    <section class="block"><h2>連結體的「尺度」</h2>
+    <p>連結體可以畫在不同的解析度，本知識庫用一套<b>受控詞彙</b>標示每篇論文的尺度：</p>
+    <ul>
+      <li><b>突觸級（synaptic）</b>：用電子顯微鏡看到每一個突觸，最精細，但資料量巨大。</li>
+      <li><b>單細胞（single-cell）</b>：以「單一神經元」為單位，看神經元對神經元的連結。<a href="../papers/community-2019.html">果蠅腦神經元層級連結體中多樣的社群結構（2019）</a> 就是這個層級。</li>
+      <li><b>中尺度（mesoscale）</b>：把腦分成功能區塊（如 LPU），看區塊對區塊的連結。<a href="../papers/chiang-2011-flycircuit.html">果蠅全腦連結網路的單細胞解析度三維重建（2011）</a> 與 <a href="../papers/shih-2015-information-flow.html">以連結體學分析果蠅腦中的資訊流（2015）</a> 屬此。</li>
+      <li><b>巨觀（macroscale）</b>：全腦影像層級（如人腦的 fMRI / DTI）。</li>
+    </ul>
+    <p>尺度越精細，資料越完整、但取得與處理越困難。果蠅之所以成為理想對象，正是因為牠的腦夠小，能在單細胞解析度建出近乎完整的連結體。</p></section>
+
+    <section class="block"><h2>在本知識庫中</h2>
+    <p>這裡收錄的論文可分成兩大類，恰好對應連結體研究的兩個階段：<b>建立</b>連結體（取得影像、分割神經元、重建線路——見「<a href="topic-flycircuit.html">FlyCircuit 資料庫</a>」與「<a href="topic-imaging.html">影像方法</a>」），以及<b>分析</b>連結體（用網路科學找出其組織原則——見「<a href="topic-network.html">網路分析</a>」）。</p></section>
+    
+    <section class="block">
+      <h2>相關論文</h2>
+      <div class="related-grid">
+      <a href="../papers/chiang-2011-flycircuit.html"><span class="ry">2011 · 論文</span><br><span class="rt">果蠅全腦連結網路的單細胞解析度三維重建</span></a>
+      <a href="../papers/shih-2015-information-flow.html"><span class="ry">2015 · 論文</span><br><span class="rt">以連結體學分析果蠅腦中的資訊流</span></a>
+      <a href="../papers/community-2019.html"><span class="ry">2019 · 論文</span><br><span class="rt">果蠅腦神經元層級連結體中多樣的社群結構</span></a>
+      <a href="../papers/neuroretriever-2021.html"><span class="ry">2021 · 論文</span><br><span class="rt">NeuroRetriever：用於連結體組裝的自動化神經元分割演算法</span></a>
+      <a href="../papers/lynsu-2024.html"><span class="ry">2024 · 論文</span><br><span class="rt">LYNSU：果蠅腦螢光影像的自動化 3D 神經氈分割方法</span></a>
+      <a href="../papers/kaleido-2018.html"><span class="ry">2018 · 論文</span><br><span class="rt">Kaleido：以自動配色法視覺化大規模腦部單神經元影像資料</span></a>
+      <a href="../papers/cheng-2025-mushroom-body.html"><span class="ry">2025 · 論文</span><br><span class="rt">果蠅蕈狀體中的混合神經網路驅動嗅覺偏好</span></a>
+      </div>
+    </section>
+  </article>
+</div>
+<div class="foot">概念條目由 LLM 綜整本知識庫論文撰寫；點關鍵字可在「關鍵字網路」看到所有相關頁面。｜id: <code>topic-connectome</code></div>
+</body>
+</html>

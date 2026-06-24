@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FlyCircuit 連結體論文知識庫</title>
+<link rel="stylesheet" href="assets/style.css">
+
+</head>
+<body>
+<div class="topbar"><div class="inner"><div class="brand">🧠 FlyCircuit 連結體論文知識庫 <small>· BSC Knowledge Base</small></div><nav><a href="index.html" class="active">首頁</a><a href="graph.html">論文網路</a><a href="keywords.html">關鍵字網路</a><a href="log.html">時間軸</a></nav></div></div>
+<div class="wrap wide">
+  <header class="home-hero">
+    <h1 class="page-title">FlyCircuit 連結體論文知識庫</h1>
+    <p class="page-sub">關於果蠅（Drosophila）腦連結體與 FlyCircuit 工具鏈的知識庫。先從<b>概念條目</b>建立全貌，再深入個別論文；想找特定主題，到<a href="keywords.html">關鍵字網路</a>點關鍵字即可。</p>
+    <div class="stats">
+    <div class="stat"><div class="n">8</div><div class="l">概念條目</div></div>
+    <div class="stat"><div class="n">11</div><div class="l">收錄論文</div></div>
+    <div class="stat"><div class="n">31</div><div class="l">關鍵字</div></div>
+    </div>
+  </header>
+
+  <div class="sec-head">
+    <h2 class="sec-title">主題地圖 · 概念條目</h2>
+    <div class="view-toggle" role="group" aria-label="檢視方式">
+      <button type="button" data-view="list">≣&nbsp; 條列</button>
+      <button type="button" data-view="grid">▦&nbsp; 磚塊</button>
+    </div>
+  </div>
+  <div id="topics" class="topic-wrap view-list">
+    <a class="topic-card" href="topics/topic-connectome.html">
+      <h3>連結體（Connectome）是什麼</h3>
+      <p>連結體就是一個神經系統裡「哪個神經元連到哪個神經元」的完整線路圖；本知識庫的所有論文，都是在「建立」或「分析」果蠅腦的連結體。</p>
+      <div class="kw-row"><span class="kw-chip">連結體</span><span class="kw-chip">連結體尺度</span><span class="kw-chip">網路分析</span><span class="kw-chip">果蠅腦</span></div>
+    </a>
+    <a class="topic-card" href="topics/topic-cross-species.html">
+      <h3>跨物種連結體：從果蠅到哺乳類</h3>
+      <p>果蠅腦夠小，有機會「整顆」畫出連結體；哺乳類腦大上好幾個數量級，目前連 LICONN 也只能在小鼠腦的一小塊組織做突觸級重建——連結體研究就在「物種大小」與「解析度」兩軸之間權衡，而分割工具則在不同物種間流動。</p>
+      <div class="kw-row"><span class="kw-chip">果蠅腦</span><span class="kw-chip">哺乳類腦</span><span class="kw-chip">連結體尺度</span><span class="kw-chip">突觸級連結體</span><span class="kw-chip">連結體</span></div>
+    </a>
+    <a class="topic-card" href="topics/topic-fly-brain.html">
+      <h3>果蠅作為模式生物與大腦構造</h3>
+      <p>果蠅腦只有約十萬個神經元、又有強大的遺傳工具，是建立完整連結體最實際的模式生物；牠的腦由一塊塊「神經氈」組成，可進一步歸納成數十個「局部處理單元（LPU）」。</p>
+      <div class="kw-row"><span class="kw-chip">果蠅腦</span><span class="kw-chip">神經氈</span><span class="kw-chip">LPU</span><span class="kw-chip">單神經元</span><span class="kw-chip">蕈狀體</span></div>
+    </a>
+    <a class="topic-card" href="topics/topic-flycircuit.html">
+      <h3>FlyCircuit：單神經元解析度的果蠅連結體資料庫</h3>
+      <p>FlyCircuit 是把上萬個果蠅單神經元影像配準到同一個標準腦、開放取用的資料庫，源自 2011 年的奠基論文，是本知識庫所有後續分析與工具的共同基礎。</p>
+      <div class="kw-row"><span class="kw-chip">FlyCircuit</span><span class="kw-chip">單神經元</span><span class="kw-chip">開放資料庫</span><span class="kw-chip">影像配準</span><span class="kw-chip">果蠅腦</span></div>
+    </a>
+    <a class="topic-card" href="topics/topic-function.html">
+      <h3>接線圖之外：從結構連結到神經活性</h3>
+      <p>連結體只畫出「誰連到誰」的結構接線圖；要真正理解大腦運作，還得知道訊號怎麼跑、迴路怎麼動——這就是從結構連結走向神經活性（功能）的那一步。</p>
+      <div class="kw-row"><span class="kw-chip">神經活性記錄</span><span class="kw-chip">神經光子學</span><span class="kw-chip">體積成像</span><span class="kw-chip">資訊流</span><span class="kw-chip">網路分析</span><span class="kw-chip">連結體</span></div>
+    </a>
+    <a class="topic-card" href="topics/topic-imaging.html">
+      <h3>從影像到連結體：分割、重建與視覺化方法</h3>
+      <p>原始顯微影像要先「分割」出單一神經元或神經氈、重建形態、再「視覺化」，才能變成可分析的連結體；這條工具鏈是建立連結體的速率限制步驟，本知識庫有三篇論文專門在改良它。</p>
+      <div class="kw-row"><span class="kw-chip">影像分割</span><span class="kw-chip">深度學習</span><span class="kw-chip">神經元追蹤</span><span class="kw-chip">視覺化</span><span class="kw-chip">影像配準</span><span class="kw-chip">神經氈</span><span class="kw-chip">連結體重建</span><span class="kw-chip">突觸級連結體</span><span class="kw-chip">電子顯微鏡</span></div>
+    </a>
+    <a class="topic-card" href="topics/topic-modality.html">
+      <h3>電子顯微鏡 vs 光學顯微鏡：兩條連結體重建路線</h3>
+      <p>「用什麼方式看」決定了「能畫出怎樣的連結體」：電子顯微鏡能看到每個突觸但分割是惡夢，光學顯微鏡快又能標分子卻解析度較低，而擴展顯微術讓光學也達到突觸級——兩條路線最終都靠同一套深度學習分割引擎。</p>
+      <div class="kw-row"><span class="kw-chip">連結體重建</span><span class="kw-chip">突觸級連結體</span><span class="kw-chip">電子顯微鏡</span><span class="kw-chip">光學顯微鏡連結體</span><span class="kw-chip">擴展顯微術</span><span class="kw-chip">影像分割</span><span class="kw-chip">深度學習</span><span class="kw-chip">連結體尺度</span></div>
+    </a>
+    <a class="topic-card" href="topics/topic-network.html">
+      <h3>果蠅連結體的網路分析</h3>
+      <p>把連結體當成一張「圖」，用網路科學的工具（社群、中心性、富俱樂部、小世界）來分析，就能找出果蠅腦的組織原則：模組化、有樞紐、訊息怎麼流動。</p>
+      <div class="kw-row"><span class="kw-chip">網路分析</span><span class="kw-chip">資訊流</span><span class="kw-chip">社群結構</span><span class="kw-chip">富俱樂部</span><span class="kw-chip">小世界</span><span class="kw-chip">中心性</span><span class="kw-chip">連結體</span></div>
+    </a>
+  </div>
+
+  <a class="all-papers" href="papers.html">
+    <span class="ap-ico">📄</span>
+    <span class="ap-txt"><b>收錄論文（11 篇）</b><br><span class="ap-sub">查看完整論文清單 →</span></span>
+  </a>
+</div>
+<div class="foot">由 build.py 自動生成 · 8 概念條目 / 11 論文 · 編輯 topics 或 papers 的 *.html 後重跑 build.py</div>
+<script>
+(function(){
+  const wrap = document.getElementById('topics');
+  const btns = document.querySelectorAll('.view-toggle button');
+  function apply(v){
+    wrap.classList.toggle('view-grid', v === 'grid');
+    wrap.classList.toggle('view-list', v !== 'grid');
+    btns.forEach(b => b.classList.toggle('active', b.dataset.view === v));
+  }
+  let v = localStorage.getItem('kb-topic-view') || 'list';   // 預設條列
+  apply(v);
+  btns.forEach(b => b.addEventListener('click', () => {
+    v = b.dataset.view; localStorage.setItem('kb-topic-view', v); apply(v);
+  }));
+})();
+</script>
+</body>
+</html>

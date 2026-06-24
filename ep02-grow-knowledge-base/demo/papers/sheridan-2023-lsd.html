@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>用於神經元分割的局部形狀描述子｜FlyCircuit 知識庫</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script type="application/json" id="meta">
+{
+  "id": "sheridan-2023-lsd",
+  "title": "Local shape descriptors for neuron segmentation",
+  "title_zh": "用於神經元分割的局部形狀描述子",
+  "authors": [
+    "Arlo Sheridan",
+    "Tri M. Nguyen",
+    "Diptodip Deb",
+    "Wei-Chung Allen Lee",
+    "Stephan Saalfeld",
+    "Srinivas C. Turaga",
+    "Uri Manor",
+    "Jan Funke"
+  ],
+  "year": 2023,
+  "venue": "Nature Methods",
+  "doi": "10.1038/s41592-022-01711-z",
+  "species": "N/A",
+  "scale": "method/tool",
+  "technique": [
+    "局部形狀描述子（LSD）",
+    "輔助學習任務",
+    "3D U-Net",
+    "親和度預測（affinity）",
+    "watershed 過分割",
+    "階層式 agglomeration",
+    "auto-context 級聯",
+    "block-wise 平行處理"
+  ],
+  "region": "N/A",
+  "dataset": "ZEBRAFINCH (SBFSEM)、HEMI-BRAIN、FIB-25 (FIB-SEM)、mouse visual cortex",
+  "tags": [
+    "connectome",
+    "neuron segmentation",
+    "electron microscopy",
+    "affinity",
+    "flood-filling network",
+    "VOI",
+    "ERL",
+    "min-cut metric",
+    "Drosophila",
+    "zebra finch"
+  ],
+  "keywords": [
+    "影像分割",
+    "深度學習",
+    "電子顯微鏡",
+    "突觸級連結體",
+    "連結體重建"
+  ],
+  "node_label": "Seg/LSD/2023",
+  "related": [
+    "neuroretriever-2021",
+    "lynsu-2024",
+    "januszewski-2018-ffn",
+    "tavakoli-2025-liconn"
+  ],
+  "tldr": "提出「局部形狀描述子（LSD）」作為神經元分割的輔助學習任務，與親和度結合後讓快速可平行的親和度方法追平 FFN 的準確度，計算效率卻高出約兩個數量級。",
+  "bib": {
+    "journal": "Nature Methods",
+    "volume": "20",
+    "issue": "2",
+    "pages": "295–303",
+    "published": "2023 年 2 月",
+    "institutions": [
+      "HHMI Janelia Research Campus",
+      "Waitt Advanced Biophotonics Center, Salk Institute for Biological Studies",
+      "Harvard Medical School",
+      "Boston Children's Hospital"
+    ]
+  },
+  "abstract_zh": "本文提出一個用於電子顯微鏡（EM）體積中神經元分割的輔助學習任務——預測「局部形狀描述子（local shape descriptors，LSD）」，並將其與傳統逐體素的直接鄰居親和度結合來偵測神經元邊界。LSD 捕捉待分割神經元的局部統計量，例如直徑、伸長程度與方向。在橫跨多種樣本、成像技術與解析度的比較研究中，加入 LSD 的輔助學習能在多種度量上一致提升親和度方法的分割準確度，並使親和度方法達到與當前最佳方法「洪水填充網路（FFN）」相當的水準，同時計算效率高出約兩個數量級——這對未來 PB 等級資料集的處理至關重要。",
+  "key_findings": [
+    "在 ZEBRAFINCH、HEMI-BRAIN、FIB-25 及小鼠視覺皮質上，LSD 方法（MTLSD／ACLSD／ACRLSD）在多種度量下一致優於 BASELINE、長程親和度與 MALIS 等親和度方法。",
+    "以 VOI 衡量，最佳 ACRLSD 與 FFN 平起平坐（VOI 總和 2.239 vs 2.256），但計算量便宜約兩個數量級。",
+    "ERL 對合併錯誤極度敏感：ACRLSD 的 VOI 合併分量較高（1.436 vs FFN 1.118），導致 ERL 較低（13.5 µm vs 16.7 µm）。",
+    "方法排名隨評估 ROI 大小變動，小體積測試難以外推到大資料集表現。",
+    "提出 min-cut metric（MCM）量測校對所需操作次數，與 VOI 在方法排名上大致一致。",
+    "使用神經氈遮罩排除胞體、血管、髓鞘等結構對準確度至關重要。"
+  ],
+  "methods": "對每個體素，取以其為中心、半徑 σ 的 3D 球與所屬分割相交得到子集 S_v，計算大小（體素數）、平均座標偏移（重心）與座標共變異數，串接成 10 維 LSD；以二值遮罩與球形視窗核的卷積高效計算目標 LSD。LSD 作為親和度預測的輔助學習任務，逼網路動用整個感受野。三種架構：MTLSD（單一 3D U-Net 同時輸出 LSD 與親和度）、ACLSD 與 ACRLSD（auto-context，第二個 U-Net 由 LSD［ACRLSD 另加原始影像］產生親和度）。後處理採距離轉換種子 + watershed 過分割 + RAG 階層式 agglomeration，並以 daisy 做 block-wise 平行。對照七種方法（BASELINE／LR／MALIS／FFN／MTLSD／ACLSD／ACRLSD），固定訓練管線與超參數，僅以分割方法為變因；評估採 VOI、ERL 與新提 MCM。",
+  "significance": "在連結體自動重建中，LSD 讓快速、易平行的親和度方法以幾乎零額外成本追平 FFN 的準確度，效率卻高約兩個數量級，使一般算力的實驗室也能產出頂尖分割。它在 EM 突觸級分割端與 NeuroRetriever、LYNSU 等共聚焦／腦區層級工具互補，並提供公開、多資料集、多度量的可重現基準供後續方法比較。"
+}
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
+</head>
+<body>
+<div class="topbar"><div class="inner">
+  <div class="brand">🧠 FlyCircuit 連結體論文知識庫 <small>· BSC Knowledge Base</small></div>
+  <nav>
+    <a href="../index.html">首頁</a>
+    <a href="../graph.html">論文網路</a>
+    <a href="../keywords.html">關鍵字網路</a>
+    <a href="../log.html">時間軸</a>
+  </nav>
+</div></div>
+<div class="wrap">
+  <article>
+    <header class="paper-header">
+      <h1>Local shape descriptors for neuron segmentation</h1>
+      <p class="title-zh">用於神經元分割的局部形狀描述子</p>
+      <p class="authors">Arlo Sheridan、Tri M. Nguyen、Diptodip Deb、Wei-Chung Allen Lee、Stephan Saalfeld、Srinivas C. Turaga、Uri Manor、Jan Funke</p>
+      <div class="badges">
+        <span class="badge scale" style="background:#ea580c">方法/工具</span><span class="badge muted">2023</span><span class="badge muted">Nature Methods</span><span class="badge">ZEBRAFINCH (SBFSEM)、HEMI-BRAIN、FIB-25 (FIB-SEM)、mouse visual cortex</span><span class="badge muted">局部形狀描述子（LSD）</span><span class="badge muted">輔助學習任務</span><span class="badge muted">3D U-Net</span><span class="badge muted">親和度預測（affinity）</span><span class="badge muted">watershed 過分割</span><span class="badge muted">階層式 agglomeration</span><span class="badge muted">auto-context 級聯</span><span class="badge muted">block-wise 平行處理</span>
+      </div>
+      <p class="meta-line">Nature Methods (2023) · DOI: <a href="https://doi.org/10.1038/s41592-022-01711-z" target="_blank" rel="noopener">10.1038/s41592-022-01711-z</a></p>
+    </header>
+
+    <div class="callout">
+      <span class="label">一句話總結</span>
+      提出「局部形狀描述子（LSD）」作為神經元分割的輔助學習任務，與親和度結合後讓快速可平行的親和度方法追平 FFN 的準確度，計算效率卻高出約兩個數量級。
+    </div>
+
+    <section class="block bib-block">
+      <h2>論文基本資料</h2>
+      <dl class="bib">
+        <div><dt>期刊</dt><dd>Nature Methods</dd></div>
+        <div><dt>卷期</dt><dd>第 20 卷第 2 期</dd></div>
+        <div><dt>頁碼</dt><dd>295–303 頁</dd></div>
+        <div><dt>發表</dt><dd>2023 年 2 月</dd></div>
+        <div><dt>機構</dt><dd>HHMI Janelia Research Campus；Waitt Advanced Biophotonics Center, Salk Institute for Biological Studies；Harvard Medical School；Boston Children&#x27;s Hospital</dd></div>
+      </dl>
+    </section>
+
+    <section class="block">
+      <h2>中文摘要</h2>
+      <p>本文提出一個用於電子顯微鏡（EM）體積中神經元分割的輔助學習任務——預測「局部形狀描述子（local shape descriptors，LSD）」，並將其與傳統逐體素的直接鄰居親和度結合來偵測神經元邊界。LSD 捕捉待分割神經元的局部統計量，例如直徑、伸長程度與方向。在橫跨多種樣本、成像技術與解析度的比較研究中，加入 LSD 的輔助學習能在多種度量上一致提升親和度方法的分割準確度，並使親和度方法達到與當前最佳方法「洪水填充網路（FFN）」相當的水準，同時計算效率高出約兩個數量級——這對未來 PB 等級資料集的處理至關重要。</p>
+    </section>
+
+    <section class="block popsci-block">
+      <h2>科普版介紹<span class="aud aud-pop">給對科學有興趣的高中生</span></h2>
+<p>想像你拿到一疊厚達數萬張的腦組織顯微照片，每一張只比頭髮還薄。你的任務是：把照片裡同一條神經細胞的所有切面「上同一個顏色」，從頭到尾不能接錯也不能斷掉。一隻果蠅的腦約有十萬個神經元，若全部用人工描繪，估計要花上一百二十五年。這就是「連結體（connectome）」研究最大的瓶頸：影像分割（segmentation）——把密密麻麻、交纏在一起的神經元一條一條切開、辨認出來。</p>
+
+<p>過去最常見的自動分割做法叫「親和度（affinity）」。簡單說，電腦會看每一個小立方體（體素，voxel）和它正上下、左右、前後的鄰居，判斷「我們是不是同一條神經元？」如果是，就連起來；如果中間有細胞膜擋著，就切開。這方法很快、也容易平行運算，但有個弱點：它只盯著體素正中心附近那一小撮畫面看。當細胞膜的影像模糊、有雜訊、或剛好被粒線體之類的暗點干擾時，電腦就容易「眼花」，把兩條不同的神經元接在一起（合併錯誤），或把一條神經元誤切成兩段（分裂錯誤）。在巨大的資料集裡，就算只有極少數地方判斷錯，累積起來也會造成大量需要人工修正的錯誤。</p>
+
+<p>這篇論文提出的「局部形狀描述子（local shape descriptors，簡稱 LSD）」，就是要強迫電腦「抬起頭、看清楚整體」。它的核心點子是：除了預測親和度，再多叫網路做一件附帶的功課——猜出每個體素所屬神經元在它周圍一小球範圍內的「局部形狀統計」。具體包括三類資訊：這條神經元在這附近有多粗（大小／直徑）、它的「重心」偏在哪個方向（中心偏移），以及它往哪個方向延伸、是細長還是圓胖（座標的共變異數，能反映方向與伸長程度）。把這些統計量打包起來，就是一個十維的數字向量。</p>
+
+<p>為什麼這招有用？打個比方：如果只叫你「看正中央那一小格有沒有黑線（細胞膜）」，你瞄一眼就能交差，遇到模糊處就容易猜錯。但如果同時要求你回答「這條神經纖維有多粗、往哪走、是橫的還是直的」，你就非得把整個視野都看過一遍、考慮上下文不可。為了回答這個比較難的形狀問題，網路被迫去理解物體的整體結構，而不是只盯著一條膜。研究者發現，這種「被逼著看更廣」的訓練，會讓網路對細胞膜的判斷也跟著變穩——即使局部證據很弱，它也能從周遭形狀「腦補」出細胞膜應該在哪裡。換句話說，形狀這個「附帶任務」反過來幫助了主要任務（找邊界）。</p>
+
+<p>作者設計了三種把 LSD 接進網路的方式。第一種 MTLSD，是讓同一個 3D U-Net 一口氣同時吐出「形狀描述子」和「親和度」，兩個任務共用幾乎整個網路。另外兩種叫「自我接力（auto-context）」：先用第一個網路算出 LSD，再把這些形狀資訊餵給第二個網路去產生親和度；其中 ACLSD 只看第一階段的 LSD，ACRLSD 則連原始影像也一起看。有趣的是，作者也試過「親和度接親和度」（不放 LSD），結果幾乎沒有進步——因為第二個網路只是把第一階段的答案抄一遍。但「從形狀翻譯成親和度」是一件夠不一樣的工作，逼網路真的去利用新的形狀線索，所以才有效。</p>
+
+<p>他們在好幾個真實資料集上做了公平比較：斑胸草雀（zebra finch）腦、果蠅腦兩個 FIB-SEM 資料集，還有小鼠視覺皮質。結果一致顯示：加了 LSD 的方法，分割準確度穩定贏過其他親和度方法。更厲害的是，最好的 LSD 版本（ACRLSD）品質追平了當時的業界天花板——「洪水填充網路（flood-filling networks，FFN）」，但計算量卻便宜了大約一百倍（兩個數量級）。FFN 雖然準，但極度吃運算資源，要處理一顆小鼠腦得花上百年的算力；而 LSD 既保有親和度方法「容易切塊、平行處理」的優點，又把準確度推到頂尖。對沒有超級電腦的實驗室來說，這意味著用一般設備也能做出夠好的神經元分割。在面對未來 PB（千兆位元組）等級的巨量腦影像時，「又快又準又能平行」正是關鍵。</p>
+    </section>
+
+    <section class="block academic-block">
+      <h2>學術版介紹<span class="aud aud-aca">給研究生以上的專業讀者</span></h2>
+      <h3>關鍵發現</h3>
+<ul>
+<li><strong>LSD 一致提升親和度方法的準確度：</strong>在 ZEBRAFINCH、HEMI-BRAIN、FIB-25 三個資料集，以及小鼠視覺皮質的延伸實驗中，無論用多任務（MTLSD）或自我接力（ACLSD／ACRLSD）架構，LSD 方法在多種度量下都穩定優於 BASELINE、長程親和度（LR）、MALIS 等其他親和度方法。</li>
+<li><strong>追平業界頂尖（FFN）：</strong>以 VOI（variation of information，越低越好）衡量，最佳自我接力網路 ACRLSD 與 FFN 平起平坐——ACRLSD 的 VOI 總和 2.239，甚至略低於 FFN 的 2.256。</li>
+<li><strong>效率快兩個數量級：</strong>計算量（FLOPs）上，最貴的 LSD 架構 ACRLSD 仍比 FFN 便宜約 100 倍（兩個數量級），且品質相當。由於 LSD 只在 U-Net 輸出多加幾張特徵圖，與純 BASELINE 親和度相比幾乎沒有額外開銷，因此能像親和度一樣輕易平行化（block-wise 處理）。</li>
+<li><strong>度量之間的張力：</strong>ERL（expected run length，越高越好）對合併錯誤極度敏感——只要一條神經元被併入一小片他人碎片，整條就算錯。雖然 ACRLSD 的總 VOI 低於 FFN，但其 VOI 合併分量較高（ACRLSD 1.436 vs FFN 1.118），導致 ERL 反而較低（ACRLSD 13.5 µm vs FFN 16.7 µm）。作者指出 ERL 在不同 ROI 大小下會出現不單調、難以外推的「跳動」分數。</li>
+<li><strong>排名隨評估體積大小而變：</strong>即使是單調度量 VOI，小 ROI（約 54 µm 以下）上的表現也無法外推到大資料集；方法排名會隨 ROI 尺寸明顯變動。作者強調：CREMI 三個測試集總體積（約 1,056 µm³）仍小於最小的 ZEBRAFINCH（約 1,260 µm³）或 HEMI-BRAIN（約 1,643 µm³）ROI，因此用小體積測試很難判定真正的「贏家」。</li>
+<li><strong>提出新度量 MCM：</strong>作者提出 min-cut metric（MCM），計算在假設有 min-cut 分割工具的校對流程下，修正分割所需的「切分與合併」操作次數。MCM 隨 ROI 線性增長，且與 VOI 在方法排名上大致一致，支持在此類校對情境下優先採用 VOI。</li>
+<li><strong>遮罩（masking）很重要：</strong>使用神經氈（neuropil）遮罩排除胞體、血管、髓鞘等干擾結構後準確度大幅改善；不做遮罩時，在較大 ROI 上所有方法的準確度都顯著退化。</li>
+</ul>
+      <h3>方法</h3>
+<p><strong>核心概念——局部形狀描述子（LSD）。</strong>設體積中的體素集合為 \(\Omega\subset\mathbb{Z}^3\)，真值分割為 \(y:\Omega\to\{0,\dots,l\}\)。傳統親和度在以體素為中心的鄰域 \(N\subset\mathbb{Z}^3\) 上定義真值親和度：\[\mathrm{aff}^N_y(v)=\big(\,[\,y(v)=y(v+n)\,]\ \big|\ n\in N\,\big),\] 其中 \([\cdot]\) 為 Kronecker 指示函數（命題為真取 1，否則 0）；主要學習目標是從原始資料 \(x\) 學出函數 \(\mathrm{aff}^N_x:\Omega\to[0,1]^{|N|}\) 使其逼近 \(\mathrm{aff}^N_y\)。</p>
+
+<p>LSD 在此之上，額外描述「體素所屬神經元在其周圍局部範圍內的形狀」。對體素 \(v\)，先取一個半徑 \(\sigma\)、以 \(v\) 為中心的 3D 球，與 \(v\) 所屬的分割相交，得到子集 \[S_v=\{\,v'\in\Omega \mid y(v')=y(v),\ \|v'-v\|_2^2\le\sigma\,\}.\] 再用三組統計量描述 \(S_v\) 的形狀：<strong>大小</strong> \(s(S_v)=|S_v|\)（體素數，反映局部直徑／粗細）；<strong>平均座標（重心）</strong> \(m(S_v)=\frac{1}{s(S_v)}\sum_{v'\in S_v} v'\)；以及<strong>座標共變異數</strong> \(c(S_v)=\frac{1}{s(S_v)}\sum_{v'\in S_v}(v'-m(S_v))(v'-m(S_v))^{\mathsf T}\)。共變異數的對角項與非對角項共同編碼了神經纖維的方向與伸長程度（elongation）。最終把三者串接成每體素的 10 維描述子：\[\mathrm{lsd}_y(v)=\Big(\underbrace{s(S_v)}_{\text{size}},\ \underbrace{m(S_v)-v}_{\text{center offset}},\ \underbrace{c(S_v)}_{\text{covariance}}\Big),\] 其中中心以「相對偏移」\(m(S_v)-v\) 表示，使其與位置無關。第一組三維分量 LSD[0:3] 為大小與平均偏移；LSD[3:6]、LSD[6:9] 為共變異數的對角與非對角項；LSD[9:10] 為大小分量（圖 2 的視覺化將方向以 RGB 編碼：藍＝側向、綠＝垂直、紅＝穿面方向移動）。</p>
+
+<p><strong>高效計算。</strong>訓練時逐體素重算上述統計太慢，作者改以卷積實作：對每個分割 \(i\) 取二值遮罩 \(b_i(v)=[\,y(v)=i\,]\)，並以一個代表 3D 球的局部視窗核 \(w\) 進行卷積。局部大小即 \(s_i(v)=(b_i * w)(v)\)；局部重心與共變異數則寫成 \[m_i^k(v)=\frac{(v_k\,b_i * w)(v)}{(b_i * w)(v)},\quad c_i^{kl}(v)=\frac{(v_k v_l\,b_i * w)(v)}{(b_i * w)(v)}-m_i^k(v)\,m_i^l(v),\] \(k,l\in\{x,y,z\}\)。如此可用卷積在 GPU 上密集地對整個體積一次算出目標 LSD。</p>
+
+<p><strong>輔助學習（auxiliary learning）與邊界偵測。</strong>LSD 不是直接拿來分割，而是作為親和度預測的「輔助任務」。直覺上，若只訓練純親和度（邊界）任務，網路可能只盯著視野中央幾個體素就能在訓練時拿到高分；但這策略在邊界證據模糊時會失效，並在大資料集推論時累積大量拓樸錯誤。改而要求網路同時預測局部形狀統計，就逼它動用整個感受野（field of view），形成更穩健的物體內部表徵，使其能「由上下文推斷膜的存在」，即使局部證據薄弱。作者推測，正是因為網路被迫把邊界預測與 LSD 預測關聯起來，邊界預測才從這個輔助目標中獲益。</p>
+
+<p><strong>三種網路架構。</strong>主幹皆為 3D U-Net（Çiçek 等人架構，並沿用 Funke 等人 2019 的設定）。(1) <strong>MTLSD</strong>（multitask）：同一個 U-Net 在單次前向中同時輸出 10 維 LSD 與最近鄰親和度，兩任務共享除最後一層卷積外的所有層。(2) <strong>ACLSD</strong>（auto-context）：第一個 U-Net 先預測 LSD，第二個 U-Net 僅以這些 LSD 為輸入產生親和度。(3) <strong>ACRLSD</strong>：同 ACLSD，但第二個網路除 LSD 外也接收原始 EM 影像。作者另測試「親和度接親和度」的 ACBASELINE 對照，發現幾乎無改善——推測第二階段只是複製第一階段結果；而「從 LSD 翻譯成親和度」是夠不同的任務，才真正逼網路納入形狀特徵。訓練以 gunpowder ＋ TensorFlow 實作。</p>
+
+<p><strong>後處理（watershed ＋ agglomeration）。</strong>先用網路得到親和度，閾值化生成二值遮罩，對遮罩做距離轉換並找局部極大值作為 watershed 種子，產生過分割的超體素（supervoxels）；以各超體素重心為節點建立區域鄰接圖（RAG），相鄰超體素間連邊，再依預測親和度為權重、由高至低階層式合併（agglomeration），直到驗證資料線性搜尋得到的閾值。整套以 daisy 框架平行化、block-wise 處理。</p>
+
+<p><strong>比較方法與基準。</strong>每個資料集比較七種方法：BASELINE（單體素鄰域親和度＋MSE 損失）、LR（長程親和度，每方向多三個鄰居作輔助）、MALIS（以 MALIS 損失取代 MSE）、FFN（洪水填充網路，當時 SOTA，每資料集僅提供單一生產級分割）、MTLSD、ACLSD、ACRLSD。為公平比較，所有親和度網路使用相同訓練管線、資料增強、優化器與每資料集相同超參數，並沿用 FFN 使用的相同遮罩，僅讓「分割方法」本身成為變因。</p>
+
+<p><strong>資料集與評估。</strong>ZEBRAFINCH：斑胸草雀腦，SBFSEM，解析度 9×9×20 nm，用 33 個真值體積（共約 200 µm³）訓練、50 條人工骨架（97 mm）測試、12 條驗證骨架調閾值，並在 11–76 µm 等十個立方 ROI 上評估度量隨體積的變化。果蠅 FIB-25 與 HEMI-BRAIN：FIB-SEM 8 nm（HEMI-BRAIN 實驗限於 ellipsoid body）。另在小鼠視覺皮質小體積上做延伸實驗。評估度量採 VOI、ERL，並新增 MCM（限算於最小的三個 ROI，因 min-cut 在大碎片圖上計算昂貴；且 MCM 需超體素圖，無法用於僅有單一分割的 FFN）。效率分析只計 GPU 推論的 FLOPs（agglomeration 為 CPU 後處理不計），FFN 數字取自 Januszewski 等人 2018 的前向＋反向傳遞。所有方法、資料與程式碼公開於 github.com/funkelab/lsd（MIT 授權）。</p>
+      <h3>重要性與定位</h3>
+<p>這篇論文在連結體（connectome）自動重建的脈絡中，回答了一個關鍵的工程取捨：<strong>準確度 vs. 計算效率</strong>。在它之前，洪水填充網路（FFN，<a href="../papers/januszewski-2018-ffn.html">Januszewski 等人 2018</a>）以遞迴式逐物體填充取得當時最高的分割準確度，但運算極度昂貴、難以平行化，面對 PB 等級資料時成本難以承受。LSD 的貢獻是讓「又快又易平行」的親和度方法，藉一個幾乎零額外成本的形狀輔助任務，把品質推到與 FFN 相當——同時便宜約兩個數量級。這讓沒有超大算力的實驗室也能產出頂尖品質的神經元分割。</p>
+
+<p>在 FlyCircuit 與果蠅連結體的工具鏈中，LSD 屬於「影像分割」這一環，與其他分割／重建工具互補。<a href="../papers/neuroretriever-2021.html">NeuroRetriever（2021）</a>處理的是 FlyCircuit 共聚焦影像中單一神經元的自動分割，尺度與影像模態與本文的 EM（電子顯微鏡）突觸級分割不同，但同屬「把神經元從影像中切出來」的核心問題；<a href="../papers/lynsu-2024.html">LYNSU（2024）</a>則進一步處理腦區（neuropil）層級的定位與分割。LSD 提供的是 EM 突觸級連結體重建的底層分割引擎，可視為這條工具鏈在更高解析度端的對應方法。</p>
+
+<p>更晚近的工作延續了「高效、可擴展的大體積重建」這條線：<a href="../papers/tavakoli-2025-liconn.html">LICONN（Tavakoli 等人 2025）</a>等以光學擴張顯微鏡為基礎的連結體方法，同樣需要面對巨量影像的自動分割與校對瓶頸；LSD 所強調的「最小化取得連結體的總時間（計算＋人工校對）」與「用 VOL／MCM 等度量逼近校對工時」的思路，對這些後續方法在評估與流程設計上具有參考價值。整體而言，本文不僅提出一個方法，也提供了一個公開、可重現的基準（含三個多樣資料集與多種度量），供未來連結體分割方法在可比較的條件下競爭。</p>
+    </section>
+
+    <section class="block">
+      <h2>相關論文</h2>
+      <div class="related-grid">
+      <a href="neuroretriever-2021.html"><span class="ry">2021 · Frontiers in Systems Neuroscience</span><br><span class="rt">NeuroRetriever：用於連結體組裝的自動化神經元分割演算法</span></a>
+      <a href="lynsu-2024.html"><span class="ry">2024 · Frontiers in Neuroinformatics</span><br><span class="rt">LYNSU：果蠅腦螢光影像的自動化 3D 神經氈分割方法</span></a>
+      <a href="januszewski-2018-ffn.html"><span class="ry">2018 · Nature Methods</span><br><span class="rt">以漫淹式填充網路高精度自動重建神經元</span></a>
+      <a href="tavakoli-2025-liconn.html"><span class="ry">2025 · Nature</span><br><span class="rt">以光學顯微鏡為基礎的哺乳類腦組織連結體重建（LICONN）</span></a>
+      </div>
+    </section>
+  </article>
+</div>
+<div class="foot">
+  本頁由 LLM 依原始 PDF 整理；中文重點為摘要性質，引用前請以原文為準。｜id: <code>sheridan-2023-lsd</code>
+</div>
+</body>
+</html>

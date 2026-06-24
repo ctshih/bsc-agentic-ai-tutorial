@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FlyCircuit：單神經元解析度的果蠅連結體資料庫｜FlyCircuit 知識庫</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script type="application/json" id="meta">
+{
+  "id": "topic-flycircuit",
+  "type": "topic",
+  "title": "FlyCircuit：單神經元解析度的果蠅連結體資料庫",
+  "keywords": [
+    "FlyCircuit",
+    "單神經元",
+    "開放資料庫",
+    "影像配準",
+    "果蠅腦"
+  ],
+  "related": [
+    "chiang-2011-flycircuit",
+    "kaleido-2018",
+    "neuroretriever-2021",
+    "lynsu-2024",
+    "shih-2015-information-flow",
+    "community-2019"
+  ],
+  "tldr": "FlyCircuit 是把上萬個果蠅單神經元影像配準到同一個標準腦、開放取用的資料庫，源自 2011 年的奠基論文，是本知識庫所有後續分析與工具的共同基礎。"
+}
+</script>
+</head>
+<body>
+<div class="topbar"><div class="inner">
+  <div class="brand">🧠 FlyCircuit 連結體論文知識庫 <small>· BSC Knowledge Base</small></div>
+  <nav>
+    <a href="../index.html">首頁</a>
+    <a href="../graph.html">論文網路</a>
+    <a href="../keywords.html">關鍵字網路</a>
+    <a href="../log.html">時間軸</a>
+  </nav>
+</div></div>
+<div class="wrap">
+  <article>
+    <header class="paper-header">
+      <span class="badge scale" style="background:#7c3aed">概念條目</span>
+      <h1>FlyCircuit：單神經元解析度的果蠅連結體資料庫</h1>
+      <div class="badges" style="margin-top:14px"><a class="badge" href="../keywords.html?kw=FlyCircuit">FlyCircuit</a><a class="badge" href="../keywords.html?kw=單神經元">單神經元</a><a class="badge" href="../keywords.html?kw=開放資料庫">開放資料庫</a><a class="badge" href="../keywords.html?kw=影像配準">影像配準</a><a class="badge" href="../keywords.html?kw=果蠅腦">果蠅腦</a></div>
+    </header>
+    <div class="callout"><span class="label">一句話</span>FlyCircuit 是把上萬個果蠅單神經元影像配準到同一個標準腦、開放取用的資料庫，源自 2011 年的奠基論文，是本知識庫所有後續分析與工具的共同基礎。</div>
+    
+    <section class="block"><h2>它是什麼</h2>
+    <p><b>FlyCircuit</b>（flycircuit.tw）是一個開放取用的果蠅<b>單神經元</b>三維影像資料庫。它把成千上萬個果蠅神經元，一個一個地拍下來、配準到同一個標準腦上，組成一個「虛擬果蠅腦」，供線上檢索、視覺化與分析。它是 <a href="../papers/chiang-2011-flycircuit.html">果蠅全腦連結網路的單細胞解析度三維重建（2011）</a> 的核心產物。</p></section>
+
+    <section class="block"><h2>怎麼建出來的</h2>
+    <ul>
+      <li><b>單神經元標記</b>：用可控制的遺傳鑲嵌技術（MARCM）一次只讓<b>一個</b>神經元發出螢光，再以共軛焦顯微鏡取得它的高解析三維形態。</li>
+      <li><b>配準到標準腦</b>：用全腦染色把每張影像對位到單一標準模型腦，使不同個體的神經元能放在同一座標系比較。</li>
+      <li><b>規模</b>：奠基論文蒐集了約 <b>16,000 個</b>單神經元（佔全腦神經元逾 10%），據此定義出 41 個 LPU 與跨區纖維束。</li>
+    </ul></section>
+
+    <section class="block"><h2>為什麼是「基礎建設」</h2>
+    <p>FlyCircuit 提供了後續研究共同的資料底座，本知識庫的論文幾乎都建立在它之上：<a href="../papers/neuroretriever-2021.html">NeuroRetriever：用於連結體組裝的自動化神經元分割演算法（2021）</a> 與 <a href="../papers/lynsu-2024.html">LYNSU：果蠅腦螢光影像的自動化 3D 神經氈分割方法（2024）</a> 改良它的影像分割流程、<a href="../papers/kaleido-2018.html">Kaleido：以自動配色法視覺化大規模腦部單神經元影像資料（2018）</a> 解決它上萬神經元的視覺化瓶頸、而 <a href="../papers/shih-2015-information-flow.html">以連結體學分析果蠅腦中的資訊流（2015）</a> 與 <a href="../papers/community-2019.html">果蠅腦神經元層級連結體中多樣的社群結構（2019）</a> 則把它的影像資料推進為可做圖論分析的網路。</p></section>
+
+    <section class="block"><h2>開放資料的價值</h2>
+    <p>把資料<b>開放</b>出來，讓不同團隊能在同一份基礎上各自發展工具與分析，是 FlyCircuit 影響力的關鍵——這也呼應了本知識庫想傳達的精神：好的基礎建設會讓知識複利成長。</p></section>
+    
+    <section class="block">
+      <h2>相關論文</h2>
+      <div class="related-grid">
+      <a href="../papers/chiang-2011-flycircuit.html"><span class="ry">2011 · 論文</span><br><span class="rt">果蠅全腦連結網路的單細胞解析度三維重建</span></a>
+      <a href="../papers/kaleido-2018.html"><span class="ry">2018 · 論文</span><br><span class="rt">Kaleido：以自動配色法視覺化大規模腦部單神經元影像資料</span></a>
+      <a href="../papers/neuroretriever-2021.html"><span class="ry">2021 · 論文</span><br><span class="rt">NeuroRetriever：用於連結體組裝的自動化神經元分割演算法</span></a>
+      <a href="../papers/lynsu-2024.html"><span class="ry">2024 · 論文</span><br><span class="rt">LYNSU：果蠅腦螢光影像的自動化 3D 神經氈分割方法</span></a>
+      <a href="../papers/shih-2015-information-flow.html"><span class="ry">2015 · 論文</span><br><span class="rt">以連結體學分析果蠅腦中的資訊流</span></a>
+      <a href="../papers/community-2019.html"><span class="ry">2019 · 論文</span><br><span class="rt">果蠅腦神經元層級連結體中多樣的社群結構</span></a>
+      </div>
+    </section>
+  </article>
+</div>
+<div class="foot">概念條目由 LLM 綜整本知識庫論文撰寫；點關鍵字可在「關鍵字網路」看到所有相關頁面。｜id: <code>topic-flycircuit</code></div>
+</body>
+</html>

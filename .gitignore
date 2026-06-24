@@ -4,3 +4,7 @@ Thumbs.db
 desktop.ini
 *.tmp
 *~
+
+# Claude Code 預覽伺服器設定（本機用，不入庫）
+.claude/
+**/__pycache__/

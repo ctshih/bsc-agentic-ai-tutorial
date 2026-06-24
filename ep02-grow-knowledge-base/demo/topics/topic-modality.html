@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>電子顯微鏡 vs 光學顯微鏡：兩條連結體重建路線｜FlyCircuit 知識庫</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script type="application/json" id="meta">
+{
+  "id": "topic-modality",
+  "type": "topic",
+  "title": "電子顯微鏡 vs 光學顯微鏡：兩條連結體重建路線",
+  "keywords": [
+    "連結體重建",
+    "突觸級連結體",
+    "電子顯微鏡",
+    "光學顯微鏡連結體",
+    "擴展顯微術",
+    "影像分割",
+    "深度學習",
+    "連結體尺度"
+  ],
+  "related": [
+    "januszewski-2018-ffn",
+    "sheridan-2023-lsd",
+    "tavakoli-2025-liconn",
+    "neuroretriever-2021",
+    "lynsu-2024",
+    "chiang-2011-flycircuit"
+  ],
+  "tldr": "「用什麼方式看」決定了「能畫出怎樣的連結體」：電子顯微鏡能看到每個突觸但分割是惡夢，光學顯微鏡快又能標分子卻解析度較低，而擴展顯微術讓光學也達到突觸級——兩條路線最終都靠同一套深度學習分割引擎。"
+}
+</script>
+</head>
+<body>
+<div class="topbar"><div class="inner">
+  <div class="brand">🧠 FlyCircuit 連結體論文知識庫 <small>· BSC Knowledge Base</small></div>
+  <nav>
+    <a href="../index.html">首頁</a>
+    <a href="../graph.html">論文網路</a>
+    <a href="../keywords.html">關鍵字網路</a>
+    <a href="../log.html">時間軸</a>
+  </nav>
+</div></div>
+<div class="wrap">
+  <article>
+    <header class="paper-header">
+      <span class="badge scale" style="background:#7c3aed">概念條目</span>
+      <h1>電子顯微鏡 vs 光學顯微鏡：兩條連結體重建路線</h1>
+      <div class="badges" style="margin-top:14px"><a class="badge" href="../keywords.html?kw=連結體重建">連結體重建</a><a class="badge" href="../keywords.html?kw=突觸級連結體">突觸級連結體</a><a class="badge" href="../keywords.html?kw=電子顯微鏡">電子顯微鏡</a><a class="badge" href="../keywords.html?kw=光學顯微鏡連結體">光學顯微鏡連結體</a><a class="badge" href="../keywords.html?kw=擴展顯微術">擴展顯微術</a><a class="badge" href="../keywords.html?kw=影像分割">影像分割</a><a class="badge" href="../keywords.html?kw=深度學習">深度學習</a><a class="badge" href="../keywords.html?kw=連結體尺度">連結體尺度</a></div>
+    </header>
+    <div class="callout"><span class="label">一句話</span>「用什麼方式看」決定了「能畫出怎樣的連結體」：電子顯微鏡能看到每個突觸但分割是惡夢，光學顯微鏡快又能標分子卻解析度較低，而擴展顯微術讓光學也達到突觸級——兩條路線最終都靠同一套深度學習分割引擎。</div>
+
+    <section class="block"><h2>看的方式，決定了一切</h2>
+    <p>連結體（connectome）就是大腦的「接線圖」：誰連到誰、在哪裡形成突觸。但在畫圖之前，你得先「看見」這些神經元——而你用什麼成像方式去看，就限定了你能畫出怎樣的連結體。關鍵變數有兩個：<b>成像模態</b>（用電子束的電子顯微鏡 EM，還是用螢光的光學顯微鏡）與它帶來的<b>解析度尺度</b>。EM 能解析到單一突觸，光學顯微鏡傳統上只能看到細胞與纖維的輪廓。解析度愈高，看得愈細，但影像也愈龐大、愈難自動判讀。這篇條目就沿著「EM 路線」與「光學路線」兩條主軸，看連結體重建如何在這道取捨中前進。</p></section>
+
+    <section class="block"><h2>電子顯微鏡路線：看得到每個突觸，但分割是惡夢</h2>
+    <p>電子顯微鏡用電子束取代光，解析度高到能看見單一突觸，是緻密、突觸級連結體的主力工具。代價是影像極度龐大、神經纖維又細又長且彼此緊貼，把每條神經元從中切出來的「分割（segmentation）」成了最大瓶頸——錯接（合併）或切斷（分裂）一處，整條重建就毀了。<a href="../papers/januszewski-2018-ffn.html">FFN（漫淹式填充網路，2018）</a>用遞迴式 3D CNN「一次填一條神經」，把自動分割準確度提升約一個數量級；<a href="../papers/sheridan-2023-lsd.html">LSD（局部形狀描述子，2023）</a>則讓快速、易平行的親和度方法以形狀輔助任務追平 FFN，計算量卻便宜約一百倍。兩者是 EM 連結體深度學習分割的代表。</p></section>
+
+    <section class="block"><h2>光學顯微鏡路線：較粗，但又快又能標分子</h2>
+    <p>光學顯微鏡解析度較低（傳統橫向約 200 至 300 奈米，看不清擠在一起的最細纖維），但成像快、儀器普及，而且能替特定蛋白質貼上螢光標記、直接讀出分子資訊。果蠅連結體就走這條路：<a href="../papers/chiang-2011-flycircuit.html">FlyCircuit（2011）</a>用 MARCM 單神經元標記，逐一收集約 16,000 個果蠅神經元、配準到標準腦，組成單細胞解析度的全腦連結圖譜。隨後的工具把這條管線自動化：<a href="../papers/neuroretriever-2021.html">NeuroRetriever（2021）</a>以 HDR 閾值自動分割單一神經元，<a href="../papers/lynsu-2024.html">LYNSU（2024）</a>用 YOLOv7 加 3D U-Net 在約 7 秒內切出一個神經氈。光學路線換到的是速度、規模與分子標記能力。</p></section>
+
+    <section class="block"><h2>LICONN：把樣本撐大，讓光學也達到突觸級</h2>
+    <p>有沒有辦法同時要到 EM 的解析度與光學的分子能力？<a href="../papers/tavakoli-2025-liconn.html">LICONN（2025）</a>給了一個漂亮的答案：與其強化顯微鏡，不如把樣本本身撐大。它用工程化的可膨脹水膠（三層互穿網絡）把小鼠腦組織等向放大約 16 倍，原本擠在一起、分不開的結構被拉開距離，於是一般旋轉盤共軛焦顯微鏡換算回原尺度後有效解析度達約 20 奈米，足以分辨個別軸突與樹突棘。這種「把要看的東西放大」的技術叫做擴展顯微術（expansion microscopy）。LICONN 首度在哺乳類腦組織以光學顯微鏡達成突觸級的緻密重建，同時還能用螢光標記讀出突觸蛋白、區分興奮與抑制、甚至偵測 EM 難找的電性連接。</p></section>
+
+    <section class="block"><h2>共同的引擎，與尺度的取捨</h2>
+    <p>兩條路線看似分歧，卻共用同一個推手：<b>深度學習分割</b>。最具象徵性的是 LICONN 直接搬用了 EM 連結體的 FFN 來分割光學擴展資料（FFN 原作者也是 LICONN 共同作者），證明分割引擎可以跨模態移植；NeuroRetriever、LYNSU 雖用不同網路，但同屬「把神經元從影像切出來」的家族。差別終究回到<b>連結體尺度</b>：EM 與 LICONN 站在突觸級，看得最細但資料最重；FlyCircuit 在單細胞層級畫全腦輪廓；更上層還有腦區與 LPU 的中尺度。看得愈細，覆蓋的體積就愈小、成本愈高——選哪條路線，本質上就是在「解析度」「規模」「分子資訊」與「成本」之間做取捨。</p></section>
+
+    <section class="block">
+      <h2>相關論文</h2>
+      <div class="related-grid">
+      <a href="../papers/januszewski-2018-ffn.html"><span class="ry">2018 · 論文</span><br><span class="rt">以漫淹式填充網路高精度自動重建神經元</span></a>
+      <a href="../papers/sheridan-2023-lsd.html"><span class="ry">2023 · 論文</span><br><span class="rt">用於神經元分割的局部形狀描述子</span></a>
+      <a href="../papers/tavakoli-2025-liconn.html"><span class="ry">2025 · 論文</span><br><span class="rt">以光學顯微鏡為基礎的哺乳類腦組織連結體重建（LICONN）</span></a>
+      <a href="../papers/neuroretriever-2021.html"><span class="ry">2021 · 論文</span><br><span class="rt">NeuroRetriever：用於連結體組裝的自動化神經元分割演算法</span></a>
+      <a href="../papers/lynsu-2024.html"><span class="ry">2024 · 論文</span><br><span class="rt">LYNSU：果蠅腦螢光影像的自動化 3D 神經氈分割方法</span></a>
+      <a href="../papers/chiang-2011-flycircuit.html"><span class="ry">2011 · 論文</span><br><span class="rt">果蠅全腦連結網路的單細胞解析度三維重建</span></a>
+      </div>
+    </section>
+  </article>
+</div>
+<div class="foot">概念條目由 LLM 綜整本知識庫論文撰寫；點關鍵字可在「關鍵字網路」看到所有相關頁面。｜id: <code>topic-modality</code></div>
+</body>
+</html>

@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>果蠅蕈狀體中的混合神經網路驅動嗅覺偏好｜FlyCircuit 知識庫</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script type="application/json" id="meta">
+{
+  "id": "cheng-2025-mushroom-body",
+  "title": "Hybrid neural networks in the mushroom body drive olfactory preference in Drosophila",
+  "title_zh": "果蠅蕈狀體中的混合神經網路驅動嗅覺偏好",
+  "authors": [
+    "Li-Shan Cheng",
+    "Ching-Che Charng",
+    "Ruei-Huang Chen",
+    "Kuan-Lin Feng",
+    "Ann-Shyn Chiang",
+    "Chung-Chuan Lo",
+    "Ting-Kuo Lee"
+  ],
+  "year": 2025,
+  "venue": "Science Advances",
+  "doi": "10.1126/sciadv.adq9893",
+  "species": "Drosophila (adult)",
+  "scale": "single-cell",
+  "technique": [
+    "連結體分析",
+    "電子顯微鏡連結體（hemibrain）",
+    "網路洗牌虛無模型",
+    "主成分分析（PCA）",
+    "空間核密度與 JSD 分析",
+    "計算模擬",
+    "活體鈣離子影像（GCaMP）"
+  ],
+  "region": "mushroom body (calyx)；antennal lobe；lateral horn",
+  "dataset": "hemibrain v1.2.1 (FlyEM)；FAFB；DoOR",
+  "tags": [
+    "PN-KC connectivity",
+    "Kenyon cell",
+    "projection neuron",
+    "L-shaped hybrid network",
+    "olfactory coding",
+    "Peters' rule",
+    "valence",
+    "hemibrain",
+    "蕈狀體",
+    "嗅覺編碼"
+  ],
+  "keywords": [
+    "果蠅腦",
+    "單神經元",
+    "網路分析",
+    "連結體",
+    "蕈狀體",
+    "投射神經元",
+    "嗅覺"
+  ],
+  "node_label": "MB Net/2025",
+  "related": [
+    "chiang-2011-flycircuit",
+    "shih-2015-information-flow",
+    "kaleido-2018",
+    "community-2019"
+  ],
+  "tldr": "用突觸級 hemibrain 連結體揭示果蠅蕈狀體 PN→KC 為「L 型混合」連接——食物 PN 發散、費洛蒙 PN 收斂於 γ KC，並以模擬與活體鈣離子影像驗證其塑造嗅覺反應與行為偏好。",
+  "bib": {
+    "journal": "Science Advances",
+    "volume": "11",
+    "issue": "22",
+    "pages": "eadq9893",
+    "published": "2025 年 5 月",
+    "institutions": [
+      "National Tsing Hua University",
+      "University of California San Diego",
+      "Academia Sinica",
+      "Kaohsiung Medical University",
+      "National Health Research Institutes",
+      "China Medical University"
+    ]
+  },
+  "abstract_zh": "在黑腹果蠅中，蕈狀體（MB）的嗅覺編碼涉及數千個凱尼恩細胞（KC）處理來自數百個投射神經元（PN）的輸入。近期資料挑戰了 PN 到 KC 隨機連接的觀點，揭示食物相關 PN 與特定 KC 之間存在偏好連接。本研究進一步描繪出更完整的圖像：一個由空間排列支撐的「L 型混合網路」——食物相關 PN 發散投射到各 KC 類別，費洛蒙敏感 PN 則收斂於 γ KC；α/β KC 專精食物氣味，γ KC 整合多樣輸入。這種空間安排更延伸到觸角葉（AL）與側角（LH），形成有系統的嗅覺地景。功能驗證與基於混合連接的 KC 氣味編碼計算預測一致，並將 PN–KC 活性與行為偏好相關聯。模擬亦顯示此網路兼具更高的敏感度與精準的辨別能力，凸顯混合架構在嗅覺處理上的計算優勢。",
+  "key_findings": [
+    "從 hemibrain 連結體取 106 個單嗅小球 PN 與 1745 個 KC，PN→KC 連接呈「L 型混合」結構：食物相關 PN（cluster 3）發散投射、含費洛蒙的 PN（cluster 1）收斂於 γ KC。",
+    "γ KC 為通才（接收所有 PN 群）、α/β KC 為專才（主要接收 cluster 3）；γ 與 α/β 偏好分布強烈負相關（Pearson r=−0.96, P<0.001）。",
+    "連接偏好可由空間排列解釋（連接權重比 vs 空間相似度 r²=0.96, P<0.001），符合 Peters 法則；此空間分隔延伸到 AL 與 LH。",
+    "至少需約 100 個 KC 且連接夠完整才能偵測輸入偏好；以小規模降抽樣可重現過去『看似隨機』的結論，解釋了爭議來源。",
+    "結合 DoOR 與連結體的模擬可預測 KC 對八種氣味的反應，活體 GCaMP 鈣離子影像驗證一致（r²=0.57）。",
+    "嫌惡氣味偏好活化 cluster 1、吸引氣味偏好活化 cluster 3；加權嗅小球活性可預測行為偏好（Spearman rs 最高 0.59, P<0.001）。",
+    "模擬顯示混合 L 型架構兼顧敏銳度（α/β 對食物氣味）與編碼容量（γ KC 維度最高）。"
+  ],
+  "methods": "以突觸級 hemibrain 連結體 v1.2.1（106 個單嗅小球 PN、1745 個 KC；連接定義為≥3 突觸）為主，FAFB 做跨個體重現。以保留每個 bouton 連接容量的洗牌虛無模型計算連接偏好分數 G（|G|>2 為顯著），用 correlation-based PCA 量化輸入偏好，並以核密度＋Jensen–Shannon 散度量化空間分布相似度、DBSCAN 辨識 bouton/claw。整合 DoOR 氣味反應資料庫模擬 MB 葉氣味反應與 KC 編碼（ReLU 模型、以 dimensionality 衡量容量），以 OK107/VT57244-Gal4＋GCaMP 活體鈣離子影像驗證八種氣味反應，並用 Spearman 相關把活性連到行為價數。",
+  "significance": "在 PN→KC「隨機 vs 結構化」長年爭論中提出『L 型混合』調和答案，並以降抽樣說明過去隨機結論源自抽樣不足。承接 community-2019 的社群結構工作並以更嚴謹虛無模型深化，延續 shih-2015 的網路分析取向與 chiang-2011 開啟的全腦線路圖研究路線，補上『結構→功能→行為』的因果驗證；為江安世、施奇廷等 BSC 成員整合連結體、計算與行為的代表性成果。"
+}
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
+</head>
+<body>
+<div class="topbar"><div class="inner">
+  <div class="brand">🧠 FlyCircuit 連結體論文知識庫 <small>· BSC Knowledge Base</small></div>
+  <nav>
+    <a href="../index.html">首頁</a>
+    <a href="../graph.html">論文網路</a>
+    <a href="../keywords.html">關鍵字網路</a>
+    <a href="../log.html">時間軸</a>
+  </nav>
+</div></div>
+<div class="wrap">
+  <article>
+    <header class="paper-header">
+      <h1>Hybrid neural networks in the mushroom body drive olfactory preference in Drosophila</h1>
+      <p class="title-zh">果蠅蕈狀體中的混合神經網路驅動嗅覺偏好</p>
+      <p class="authors">Li-Shan Cheng、Ching-Che Charng、Ruei-Huang Chen、Kuan-Lin Feng、Ann-Shyn Chiang、Chung-Chuan Lo、Ting-Kuo Lee</p>
+      <div class="badges">
+        <span class="badge scale" style="background:#0d9488">單細胞</span><span class="badge muted">2025</span><span class="badge muted">Science Advances</span><span class="badge">hemibrain v1.2.1 (FlyEM)；FAFB；DoOR</span><span class="badge muted">連結體分析</span><span class="badge muted">電子顯微鏡連結體（hemibrain）</span><span class="badge muted">網路洗牌虛無模型</span><span class="badge muted">主成分分析（PCA）</span><span class="badge muted">空間核密度與 JSD 分析</span><span class="badge muted">計算模擬</span><span class="badge muted">活體鈣離子影像（GCaMP）</span>
+      </div>
+      <p class="meta-line">Science Advances (2025) · DOI: <a href="https://doi.org/10.1126/sciadv.adq9893" target="_blank" rel="noopener">10.1126/sciadv.adq9893</a></p>
+    </header>
+
+    <div class="callout">
+      <span class="label">一句話總結</span>
+      用突觸級 hemibrain 連結體揭示果蠅蕈狀體 PN→KC 為「L 型混合」連接——食物 PN 發散、費洛蒙 PN 收斂於 γ KC，並以模擬與活體鈣離子影像驗證其塑造嗅覺反應與行為偏好。
+    </div>
+
+    <section class="block bib-block">
+      <h2>論文基本資料</h2>
+      <dl class="bib">
+        <div><dt>期刊</dt><dd>Science Advances</dd></div>
+        <div><dt>卷期</dt><dd>第 11 卷第 22 期</dd></div>
+        <div><dt>頁碼</dt><dd>文章編號 9893</dd></div>
+        <div><dt>發表</dt><dd>2025 年 5 月</dd></div>
+        <div><dt>機構</dt><dd>National Tsing Hua University；University of California, San Diego；Academia Sinica；Kaohsiung Medical University；National Health Research Institutes；China Medical University</dd></div>
+      </dl>
+    </section>
+
+    <section class="block">
+      <h2>中文摘要</h2>
+      <p>在黑腹果蠅中，蕈狀體（MB）的嗅覺編碼涉及數千個凱尼恩細胞（KC）處理來自數百個投射神經元（PN）的輸入。近期資料挑戰了 PN 到 KC 隨機連接的觀點，揭示食物相關 PN 與特定 KC 之間存在偏好連接。本研究進一步描繪出更完整的圖像：一個由空間排列支撐的「L 型混合網路」——食物相關 PN 發散投射到各 KC 類別，費洛蒙敏感 PN 則收斂於 γ KC；α/β KC 專精食物氣味，γ KC 整合多樣輸入。這種空間安排更延伸到觸角葉（AL）與側角（LH），形成有系統的嗅覺地景。功能驗證與基於混合連接的 KC 氣味編碼計算預測一致，並將 PN–KC 活性與行為偏好相關聯。模擬亦顯示此網路兼具更高的敏感度與精準的辨別能力，凸顯混合架構在嗅覺處理上的計算優勢。</p>
+    </section>
+
+    <section class="block popsci-block">
+      <h2>科普版介紹<span class="aud aud-pop">給對科學有興趣的高中生</span></h2>
+<p>想像你走進一間餐廳，鼻子先聞到香味——可能是炸物的油香、咖啡的焦香，也可能是別人身上的香水味。果蠅雖然只有一顆比針頭還小的腦，卻每天都在做同樣的事：在飄滿各種氣味分子的空氣裡，分辨「這是食物、可以靠近」還是「這是危險、該避開」。這篇研究想知道的是：果蠅腦裡負責處理氣味的線路，到底是怎麼接的？</p>
+
+<p>果蠅聞氣味的流程像一條接力賽。氣味先打在觸角上的「嗅覺受器神經元」（ORN），這些訊號集中到腦中一個叫「觸角葉」（antennal lobe, AL）的地方，那裡有大約 52 個像小球的構造，叫「嗅小球」（glomeruli），每一顆專門對應某一類氣味。接著，大約一百個「投射神經元」（projection neuron, PN）像郵差一樣，把訊號送到下一站——「蕈狀體」（mushroom body, MB）。蕈狀體裡住著大約兩千個「凱尼恩細胞」（Kenyon cell, KC），這些細胞就是果蠅學習與記憶氣味的關鍵。</p>
+
+<p>長久以來，科學家為一個問題吵得不可開交：投射神經元（PN）連到凱尼恩細胞（KC）的方式，到底是「隨機亂接」還是「有規律地接」？有一派認為是隨機的——他們發現不同果蠅之間，同一種氣味活化的細胞長得不太一樣，看起來像是擲骰子決定的。另一派則認為是有規律的——他們看到某些跟食物有關的投射神經元，會特別偏好連到特定的凱尼恩細胞。兩邊都有證據，誰也說服不了誰。</p>
+
+<p>這篇論文的作者用了一套近年才問世的「武器」：hemibrain 連結體資料。這是用電子顯微鏡把一隻母果蠅的半個腦，一刀一刀切成超薄片、再重建成立體線路圖的龐大資料庫，精細到可以看見一個神經元和另一個神經元之間的「突觸」接點。有了這麼完整的地圖，作者得以重新檢視這場爭論。他們挑出 106 個投射神經元和 1745 個凱尼恩細胞，把它們怎麼接線一條一條數清楚。</p>
+
+<p>結果他們發現的答案很有意思：既不是純隨機，也不是純規律，而是一種「混合」（hybrid）結構。如果把連線畫成一張表格，會呈現一個像英文字母「L」的形狀。作者把投射神經元依偏好分成三群。第三群（cluster 3）大多跟「食物氣味」有關，它們很「發散」，會把訊號分送給三大類凱尼恩細胞；第一群（cluster 1）則包含對「費洛蒙」（求偶用的化學訊號）敏感的神經元，它們很「收斂」，幾乎只連到一種叫 γ（gamma）的凱尼恩細胞。</p>
+
+<p>從凱尼恩細胞這一端看也很有趣：γ 類細胞像個「通才」，什麼訊號都收一點；而 α/β 類細胞像個「專才」，幾乎只專心處理食物氣味。換句話說，這顆小腦同時用了兩種策略——一邊保留亂中有序的彈性，一邊維持專一精準的敏銳。</p>
+
+<p>更厲害的是，這種空間上的安排不只出現在蕈狀體，作者追蹤下去，發現它一路延伸到上游的觸角葉，也延伸到旁邊另一個叫「側角」（lateral horn, LH）的腦區。也就是說，這套「食物走一條路、費洛蒙走另一條路」的分工，是貫穿整條嗅覺通道的設計，而不是某一站偶然的結果。作者推測，這跟神經纖維在空間上「誰長在哪裡、就容易跟誰接上」有關——這呼應了神經科學裡有名的「Peters 法則」：軸突和樹突重疊得越多，越容易長出突觸。</p>
+
+<p>光看線路圖還不夠，作者還要證明「這樣接線真的會影響果蠅聞到什麼」。他們先用線路圖加上一個氣味反應資料庫（DoOR），用電腦模擬預測不同凱尼恩細胞對八種氣味會有多強的反應；接著真的抓活果蠅來做實驗，用「鈣離子影像」技術，在顯微鏡下看神經元活化時發出的螢光。結果模擬和實驗對得上：例如某些短鏈酯類氣味確實會讓 α/β 細胞特別興奮。預測和實驗的相關性達到 r²=0.57，對這種跨「電腦模型 vs 活體實驗」的比對來說相當不錯。</p>
+
+<p>他們甚至把這套線路跟果蠅的「好惡行為」連起來。分析顯示，會讓果蠅想逃避的「嫌惡氣味」，多半活化第一群嗅小球；會吸引果蠅靠近的「喜好氣味」，則偏好活化第三群。把這些活化量加權加總起來，竟然能相當程度地預測果蠅實際的行為偏好（相關係數最高到 0.59）。</p>
+
+<p>最後，作者用模擬問了一個更根本的問題：這種「混合 L 型」結構到底好在哪？答案是——它讓這顆小腦兼顧了「敏銳」和「容量」。專才的 α/β 細胞對食物氣味特別靈敏；通才的 γ 細胞則因為接收得雜、編碼維度更高，能把很多種氣味區分得更清楚。就像一支球隊，既要有專精的射手，也要有什麼位置都能補的全能球員，整體戰力才會強。</p>
+
+<p>這項研究的意義在於：它調和了「隨機 vs 規律」這場老爭論，指出真相是兩者的巧妙混合，並且第一次把「線路結構 → 氣味反應 → 行為好惡」這條因果鏈，用連結體、模擬、活體實驗三管齊下地串了起來。對於想了解大腦如何用有限的神經元做出聰明判斷的人來說，這隻小果蠅又一次當了最好的老師。</p>
+    </section>
+
+    <section class="block academic-block">
+      <h2>學術版介紹<span class="aud aud-aca">給研究生以上的專業讀者</span></h2>
+      <h3>關鍵發現</h3>
+<ul>
+<li><b>L 型混合連接結構：</b>從 hemibrain 連結體挑出的 106 個單嗅小球投射神經元（PN）對 1745 個凱尼恩細胞（KC）的連接矩陣呈現「L 形」混合樣式——第三群（食物相關）PN 對三大類 KC 發散投射，第一群（含費洛蒙敏感）PN 則收斂集中於 γ KC。</li>
+<li><b>各 KC 類別有偏好輸入：</b>γ 類對 36 個嗅小球（約 69%）、α′/β′ 類對 19 個（約 36%）、α/β 類對 39 個（約 75%）展現偏好或排斥連接（|G|&gt;2）。52 個嗅小球中有 39 個同時對某些 KC 類別偏好、對另一些排斥。</li>
+<li><b>γ 與 α/β 偏好相反：</b>γ 與 α/β 類的偏好分數分布呈強烈負相關（Pearson r = −0.96，P &lt; 0.001）。</li>
+<li><b>通才與專才：</b>γ KC 為「通才」（generalist），接收所有 PN 群輸入；α/β KC 為「專才」（specialist），主要只接收第三群（食物相關）PN。</li>
+<li><b>空間排列驅動連接：</b>第三群 PN 神經纖維集中於 calyx 腹後側、第一群集中於背前側；連接權重比與空間分布相似度高度相關（r² = 0.96，P &lt; 0.001），支持 Peters 法則。此空間分隔一路延伸到觸角葉（AL）與側角（LH）。</li>
+<li><b>抽樣不足會誤判為隨機：</b>需至少約 100 個 KC（α/β 約 80 個）且連接資料夠完整，才能偵測出輸入偏好；以 Caron et al. 的 200 神經元規模降抽樣，會重現「看似隨機」的結果，解釋了過去爭議的來源。</li>
+<li><b>功能驗證對得上：</b>結合 DoOR 氣味反應資料庫與連結體做模擬，預測八種氣味在 MB 各葉的 KC 反應；活體鈣離子影像（GCaMP）驗證與模擬一致（模擬 vs 實驗 r² = 0.57），且 β 與 γ 葉的差異在 10⁻⁶ 到 10⁻² 稀釋濃度範圍內穩定。</li>
+<li><b>連到行為好惡：</b>嫌惡氣味偏好活化第一群嗅小球、吸引氣味偏好活化第三群；加權加總嗅小球活性可預測行為氣味偏好（Spearman rs 最高至 0.59，P &lt; 0.001）。</li>
+<li><b>計算優勢：</b>模擬顯示 α/β KC 對「第三型（食物）氣味」特別敏銳，γ KC 對「第一型氣味」較敏感且編碼維度（coding capacity）顯著高於 α/β 與 α′/β′——混合結構同時兼顧敏銳度與辨別容量。</li>
+<li><b>多嗅小球 PN（MGPN）：</b>164 個 MGPN 中僅 13 個連到 KC，且皆主要接收第一群嗅小球輸入（橫跨多達 23 個嗅小球），暗示第一群嗅小球涉及更複雜的跨嗅小球整合。</li>
+</ul>
+      <h3>方法</h3>
+<p><b>資料來源。</b>主要使用 <i>Drosophila melanogaster</i> 的 <b>hemibrain 連結體 v1.2.1</b>（FlyEM，源自一隻母果蠅、突觸級電子顯微鏡資料）。將「一個 PN 與一個 KC 之間至少 3 個突觸」定義為一條連接，並以「單一 PN–單一 KC」作為連接單元（神經元層級）。排除 VP 型嗅小球的 PN 與未接收任何單嗅小球 PN 輸入的 KC，最終選出右側腦的 <b>106 個單嗅小球 PN 與 1745 個 KC</b>，涵蓋 52 個嗅覺相關嗅小球。KC 分為 γ、α′/β′、α/β 三大類，並可再細分為 γ-m、γ-d、α′/β′-ap1/ap2/-m、α/β-m/-c/-p/-s 等子類。另用 <b>FAFB 資料集</b>做跨個體重現驗證。</p>
+
+<p><b>連接偏好量化。</b>對每個嗅小球 g 到 KC 類別 k 計算偏好分數，公式為
+\[ G_k = \frac{P^{\text{observed}}_{gk} - P^{\text{random}}_{gk}}{\sigma^{\text{random}}_{gk}}, \quad k = \gamma, \alpha'/\beta', \alpha/\beta \]
+其中 \(P^{\text{observed}}_{gk}\) 為觀測連接比例（對每個 k 正規化使 \(\sum_g P^{\text{observed}}_{gk}=1\)），隨機網路重複 1000 次取均值與標準差。\(|G_k|\le 2\) 視為無顯著偏好。依 \(G_\gamma\) 把 52 個嗅小球分成三群（cluster 1: \(G_\gamma\ge 2\)；cluster 2: 介於 ±2；cluster 3: \(G_\gamma\le -2\)）。</p>
+
+<p><b>洗牌（shuffle）虛無模型。</b>關鍵在於洗牌時<b>保留每個 PN bouton 的連接數</b>（維持各 PN 連到的 KC 數量異質性），以避免抹除 bouton 連接容量差異。包含：<i>(i) 全域洗牌</i>——以 0–100% 比例隨機重指派下游 KC（100% 等同 Caron et al. 的演算法）；<i>(ii) 局部洗牌</i>——先用 DBSCAN 辨識 bouton/claw 結構，只在 claw 間距小於半徑 R 時交換上游 bouton（測 40 μm 等半徑），檢驗空間鄰近對連接的影響；<i>(iii) 類別洗牌</i>——在 neurite、bouton/claw、synapse 三層級隨機重指派神經元的類別歸屬，保留各類總數，用來檢定空間區隔。</p>
+
+<p><b>輸入偏好（PCA）。</b>對「嗅小球→KC」連接矩陣的 Pearson 相關矩陣做 correlation-based PCA（NumPy），以第一主成分（PC1）解釋變異比例衡量輸入組合的相似程度；偏好程度定義為使真實網路與洗牌網路 PC1 變異趨於一致所需的最小洗牌比例 x%。降抽樣分析顯示偵測輸入偏好至少需約 100 個 KC（α/β 約 80）。</p>
+
+<p><b>空間分析。</b>蒐集骨架點、bouton/claw 中心、突觸座標，依 KC 類別或 PN 群以核密度估計（SciPy）建分布，再以 <b>Jensen–Shannon 散度（JSD）</b>計算分布相似度 \(S = 1 - \text{JSD}\)，並用 z-score 量化偏離隨機放置的程度；bouton/claw 以 DBSCAN（最少 3 點、半徑 1.6 μm，中心距 &lt; 2.8 μm 則合併）辨識。</p>
+
+<p><b>氣味反應模擬。</b>整合 <b>DoOR 氣味反應資料庫</b>（52 個嗅覺受器對 693 種氣味的反應，活性 \(A=(F_{\text{activated}}-F_{\text{resting}})/F_{\text{resting}}\)）與連結體。假設 KC 反應與「接收輸入的 claw 百分比」相關，模擬 MB 葉的氣味反應
+\[ \frac{\Delta F}{F} = \frac{\sum_k C_g R_{gk}}{N} \]
+人工氣味模擬中，KC 活性經 ReLU 過濾：\( A_{\text{KC}} = \max(0,\, s_{\text{scaling}} A_{\text{PN}} W_{\text{PN}\to\text{KC}} - \theta) \)（\(\theta=1\)、\(s_{\text{scaling}}=0.3\)，調到 Codor=8 時 KC 活化率約 10%）。以線性回歸斜率定義氣味「敏銳度（acuity）」，並以
+\[ \dim(A_{\text{KC}}) = \frac{(\sum \lambda)^2}{\sum \lambda^2} \]
+（λ 為 PCA 特徵值）衡量「編碼容量（dimensionality）」。</p>
+
+<p><b>行為關聯。</b>取 46 種有行為價數（valence）資料的氣味（Knaden et al. 等），用 DoOR 反應減去油底噪後，與行為偏好排序做 Spearman 相關，並用相關係數加權加總嗅小球/KC 活性以預測行為偏好。</p>
+
+<p><b>活體鈣離子影像驗證。</b>果蠅品系 OK107-Gal4（全 MB）、VT57244-Gal4（α′/β′）搭配 UAS-GCaMP7f/GCaMP6。以 Zeiss LSM 780 共軛焦顯微鏡（40×水鏡、512×512、2 fps）記錄八種氣味（EP、IA、OA、PA、BA、ANS、PYR、EtOH；cVA 另測）刺激下 MB 葉的 ΔF/F，以 Wilcoxon signed-rank 等檢定比較。</p>
+      <h3>重要性與定位</h3>
+<p>這篇論文在「隨機 vs 結構化」這場長年爭論中提出調和性的答案：PN→KC 連接<b>既非純隨機、也非純結構，而是「L 型混合」</b>——食物相關 PN 發散、費洛蒙相關 PN 收斂於 γ KC；γ KC 為通才、α/β KC 為專才。它同時用降抽樣分析說明過去「看似隨機」的結論，很可能源自抽樣數不足（Caron et al. 規模），為這場爭議提供方法學上的解釋。</p>
+
+<p>在果蠅連結體研究脈絡中，本研究承接並深化了 <a href="../papers/community-2019.html">Reddy/Zheng 等的「社群結構」工作（community-2019）</a>：後者主要指出食物相關 PN 形成收斂於 α′/β′、α/β 的核心社群，本研究則以保留 bouton 連接容量的更嚴謹虛無模型，揭示出更完整的混合圖像，並說明資料集差異（hemibrain vs FAFB 的 claw 數、神經元數）如何改變結論。其網路分析取向——以洗牌虛無模型、PCA、階層式分群解剖連接偏好——延續了 <a href="../papers/shih-2015-information-flow.html">Shih 等以圖論／資訊流分析果蠅腦網路（shih-2015-information-flow）</a>的精神，把單神經元層級網路的拓樸特性連到功能意義。</p>
+
+<p>本研究使用突觸級 hemibrain 連結體，是 <a href="../papers/chiang-2011-flycircuit.html">Chiang 等建立 FlyCircuit 單神經元影像資料庫（chiang-2011-flycircuit）</a>所開啟之「以全腦線路圖回答迴路問題」研究路線的延伸；不同處在於從單細胞影像層級進到突觸解析度，並補上 FlyCircuit 工具鏈較少著墨的「結構→功能→行為」因果驗證（鈣離子影像＋模擬）。在視覺化與線路分析工具（如 <a href="../papers/kaleido-2018.html">Kaleido，kaleido-2018</a>）所支撐的方法生態中，本研究示範了如何把連結體的空間排列（Peters 法則）量化、並轉譯成可被活體實驗檢證的功能預測。</p>
+
+<p>由施奇廷（Ting-Kuo Lee 團隊物理取向）、江安世（Ann-Shyn Chiang）等多位 BSC（腦空間體中心）成員共同完成，是 FlyCircuit／清華腦科學社群「連結體 × 計算 × 行為」整合研究的代表性成果，對理解昆蟲腦如何以有限神經元兼顧氣味敏銳度與辨別容量具重要意義。</p>
+    </section>
+
+    <section class="block">
+      <h2>相關論文</h2>
+      <div class="related-grid">
+      <a href="chiang-2011-flycircuit.html"><span class="ry">2011 · Current Biology</span><br><span class="rt">果蠅全腦連結網路的單細胞解析度三維重建</span></a>
+      <a href="shih-2015-information-flow.html"><span class="ry">2015 · Current Biology</span><br><span class="rt">以連結體學分析果蠅腦中的資訊流</span></a>
+      <a href="kaleido-2018.html"><span class="ry">2018 · Neuroinformatics</span><br><span class="rt">Kaleido：以自動配色法視覺化大規模腦部單神經元影像資料</span></a>
+      <a href="community-2019.html"><span class="ry">2019 · Neuroinformatics</span><br><span class="rt">果蠅腦神經元層級連結體中多樣的社群結構</span></a>
+      </div>
+    </section>
+  </article>
+</div>
+<div class="foot">
+  本頁由 LLM 依原始 PDF 整理；中文重點為摘要性質，引用前請以原文為準。｜id: <code>cheng-2025-mushroom-body</code>
+</div>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>從影像到連結體：分割、重建與視覺化方法｜FlyCircuit 知識庫</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script type="application/json" id="meta">
+{
+  "id": "topic-imaging",
+  "type": "topic",
+  "title": "從影像到連結體：分割、重建與視覺化方法",
+  "keywords": [
+    "影像分割",
+    "深度學習",
+    "神經元追蹤",
+    "視覺化",
+    "影像配準",
+    "神經氈",
+    "連結體重建",
+    "突觸級連結體",
+    "電子顯微鏡"
+  ],
+  "related": [
+    "neuroretriever-2021",
+    "lynsu-2024",
+    "kaleido-2018",
+    "chiang-2011-flycircuit",
+    "januszewski-2018-ffn",
+    "sheridan-2023-lsd",
+    "tavakoli-2025-liconn",
+    "moreaux-2020-neurophotonics"
+  ],
+  "tldr": "原始顯微影像要先「分割」出單一神經元或神經氈、重建形態、再「視覺化」，才能變成可分析的連結體；這條工具鏈是建立連結體的速率限制步驟，本知識庫有三篇論文專門在改良它。"
+}
+</script>
+</head>
+<body>
+<div class="topbar"><div class="inner">
+  <div class="brand">🧠 FlyCircuit 連結體論文知識庫 <small>· BSC Knowledge Base</small></div>
+  <nav>
+    <a href="../index.html">首頁</a>
+    <a href="../graph.html">論文網路</a>
+    <a href="../keywords.html">關鍵字網路</a>
+    <a href="../log.html">時間軸</a>
+  </nav>
+</div></div>
+<div class="wrap">
+  <article>
+    <header class="paper-header">
+      <span class="badge scale" style="background:#7c3aed">概念條目</span>
+      <h1>從影像到連結體：分割、重建與視覺化方法</h1>
+      <div class="badges" style="margin-top:14px"><a class="badge" href="../keywords.html?kw=影像分割">影像分割</a><a class="badge" href="../keywords.html?kw=深度學習">深度學習</a><a class="badge" href="../keywords.html?kw=神經元追蹤">神經元追蹤</a><a class="badge" href="../keywords.html?kw=視覺化">視覺化</a><a class="badge" href="../keywords.html?kw=影像配準">影像配準</a><a class="badge" href="../keywords.html?kw=神經氈">神經氈</a><a class="badge" href="../keywords.html?kw=連結體重建">連結體重建</a><a class="badge" href="../keywords.html?kw=突觸級連結體">突觸級連結體</a><a class="badge" href="../keywords.html?kw=電子顯微鏡">電子顯微鏡</a></div>
+    </header>
+    <div class="callout"><span class="label">一句話</span>原始顯微影像要先「分割」出單一神經元或神經氈、重建形態、再「視覺化」，才能變成可分析的連結體；這條工具鏈是建立連結體的速率限制步驟，本知識庫有三篇論文專門在改良它。</div>
+    
+    <section class="block"><h2>從一張張影像，到一個連結體</h2>
+    <p>顯微鏡拍到的是充滿雜訊的原始螢光影像。要變成連結體，中間要經過一條<b>影像處理流程</b>：把單一神經元或神經氈<b>分割</b>出來 → 重建其三維形態 → 配準到標準腦 → 最後<b>視覺化</b>讓人檢視。這條流程長期是高通量連結體重建的<b>速率限制步驟</b>，因此本知識庫有三篇論文專門在加速它。</p></section>
+
+    <section class="block"><h2>神經元分割：NeuroRetriever（2021）</h2>
+    <p><a href="../papers/neuroretriever-2021.html">NeuroRetriever：用於連結體組裝的自動化神經元分割演算法（2021）</a> 提出自動化、無偏誤的單神經元分割。它用「分支穩健性分數」產生高動態範圍（HDR）閾值遮罩，搭配 FAST 追蹤演算法，能像人眼一樣依局部邊界判斷、同時去雜訊又保留弱訊號細部。套用到 FlyCircuit 的 22,037 張原始影像，自動擷取出 28,125 個單神經元，把原本仰賴人工的瓶頸自動化。</p></section>
+
+    <section class="block"><h2>神經氈分割：LYNSU（2024）</h2>
+    <p><a href="../papers/lynsu-2024.html">LYNSU：果蠅腦螢光影像的自動化 3D 神經氈分割方法（2024）</a> 用<b>深度學習</b>分割神經氈：先用 YOLOv7 快速定位（準確率 99.4%），再用 3D U-Net 逐 voxel 分割。每個神經氈只需約 7 秒（人工需約 4 小時），精度媲美人工標註，並能在個體原始影像上直接分析、免除配準誤差。</p></section>
+
+    <section class="block"><h2>視覺化：Kaleido（2018）</h2>
+    <p>分割重建之後，還要讓人「看得到」。<a href="../papers/kaleido-2018.html">Kaleido：以自動配色法視覺化大規模腦部單神經元影像資料（2018）</a> 解決了「上萬個神經元無法同時視覺化」的記憶體瓶頸：用 Monte Carlo 最佳化能量函數，自動為相鄰神經元配上對比鮮明的顏色，讓密集處（如蕈狀體 calyx）也能清楚辨識，並可依生物意義（出生日期、神經傳導物質）配色。</p></section>
+    
+    <section class="block"><h2>跨物種的通用重建方法：FFN、LSD、LICONN（2018–2025）</h2>
+    <p>同樣的「分割 → 重建」挑戰不只發生在果蠅。<a href="../papers/januszewski-2018-ffn.html">Flood-Filling Networks（FFN，2018）</a>與 <a href="../papers/sheridan-2023-lsd.html">Local Shape Descriptors（LSD，2023）</a>是電子顯微鏡（EM）連結體的代表性深度學習分割法，把神經元從奈米級、突觸解析度的影像中自動切出；<a href="../papers/tavakoli-2025-liconn.html">LICONN（2025）</a>則改用一般光學顯微鏡搭配擴展顯微術，首度在哺乳類（小鼠）腦組織達到突觸級的連結體重建。這些方法與果蠅的 NeuroRetriever、LYNSU 屬同一家族，差別在影像模態（EM vs 光學）與物種尺度。此外，<a href="../papers/moreaux-2020-neurophotonics.html">Integrated Neurophotonics（2020）</a>從另一個角度切入：在「接線圖」之外，設想如何在腦的深部、即時地讀取神經迴路的<b>活性</b>。</p></section>
+
+    <section class="block">
+      <h2>相關論文</h2>
+      <div class="related-grid">
+      <a href="../papers/neuroretriever-2021.html"><span class="ry">2021 · 論文</span><br><span class="rt">NeuroRetriever：用於連結體組裝的自動化神經元分割演算法</span></a>
+      <a href="../papers/lynsu-2024.html"><span class="ry">2024 · 論文</span><br><span class="rt">LYNSU：果蠅腦螢光影像的自動化 3D 神經氈分割方法</span></a>
+      <a href="../papers/kaleido-2018.html"><span class="ry">2018 · 論文</span><br><span class="rt">Kaleido：以自動配色法視覺化大規模腦部單神經元影像資料</span></a>
+      <a href="../papers/chiang-2011-flycircuit.html"><span class="ry">2011 · 論文</span><br><span class="rt">果蠅全腦連結網路的單細胞解析度三維重建</span></a>
+      <a href="../papers/januszewski-2018-ffn.html"><span class="ry">2018 · 論文</span><br><span class="rt">以漫淹式填充網路高精度自動重建神經元</span></a>
+      <a href="../papers/sheridan-2023-lsd.html"><span class="ry">2023 · 論文</span><br><span class="rt">用於神經元分割的局部形狀描述子</span></a>
+      <a href="../papers/tavakoli-2025-liconn.html"><span class="ry">2025 · 論文</span><br><span class="rt">以光學顯微鏡為基礎的哺乳類腦組織連結體重建（LICONN）</span></a>
+      <a href="../papers/moreaux-2020-neurophotonics.html"><span class="ry">2020 · 論文</span><br><span class="rt">整合神經光子學：邁向深部、即時、密集的腦迴路活性讀取</span></a>
+      </div>
+    </section>
+  </article>
+</div>
+<div class="foot">概念條目由 LLM 綜整本知識庫論文撰寫；點關鍵字可在「關鍵字網路」看到所有相關頁面。｜id: <code>topic-imaging</code></div>
+</body>
+</html>

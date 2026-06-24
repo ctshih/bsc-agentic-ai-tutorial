@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>以連結體學分析果蠅腦中的資訊流｜FlyCircuit 知識庫</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script type="application/json" id="meta">
+{
+  "id": "shih-2015-information-flow",
+  "title": "Connectomics-Based Analysis of Information Flow in the Drosophila Brain",
+  "title_zh": "以連結體學分析果蠅腦中的資訊流",
+  "authors": [
+    "Chi-Tin Shih",
+    "Olaf Sporns",
+    "Shou-Li Yuan",
+    "Ta-Shun Su",
+    "Yen-Jen Lin",
+    "Chao-Chun Chuang",
+    "et al."
+  ],
+  "year": 2015,
+  "venue": "Current Biology",
+  "doi": "10.1016/j.cub.2015.03.021",
+  "bib": {
+    "journal": "Current Biology",
+    "volume": "25",
+    "issue": "10",
+    "pages": "1249-1258",
+    "published": "2015 年 5 月",
+    "institutions": [
+      "Tunghai University",
+      "Indiana University",
+      "National Tsing Hua University",
+      "National Center for High-Performance Computing",
+      "University of California, San Diego",
+      "Kaohsiung Medical University",
+      "Academia Sinica"
+    ]
+  },
+  "species": "Drosophila (adult female)",
+  "scale": "mesoscale",
+  "technique": [
+    "network analysis",
+    "graph theory",
+    "complex network theory",
+    "connectomics",
+    "modularity analysis",
+    "rich-club analysis"
+  ],
+  "region": [
+    "whole brain",
+    "49 local processing units (LPUs)"
+  ],
+  "dataset": "FlyCircuit 1.1",
+  "tags": [
+    "connectome",
+    "information flow",
+    "rich club",
+    "small-world",
+    "modularity",
+    "果蠅腦網路"
+  ],
+  "related": [
+    "chiang-2011-flycircuit",
+    "community-2019",
+    "cheng-2025-mushroom-body"
+  ],
+  "tldr": "用 FlyCircuit 1.1 的 12,995 個投射神經元重建果蠅腦的中尺度有向加權連結體，揭示其階層模組、小世界與富俱樂部結構，並推測行為時的資訊流路徑。",
+  "abstract_zh": "本研究以 FlyCircuit 1.1 中 12,995 張神經元投射影像，重建出第一份中尺度的果蠅腦連結體，節點為各個局部處理單元（LPU），邊則為神經元終端連結的有向加權連結。網路呈現階層結構與小世界特性，可分為對應感覺模態（嗅覺、聽覺/機械感覺、左右視覺）與前運動中樞的五個功能模組，並存在涵蓋所有感覺中樞的富俱樂部（rich club）。分析也辨識出主要的模組內與模組間迴路，並推論其整體組織架構與哺乳類腦有基本相似性。",
+  "key_findings": [
+    "由 12,995 個投射神經元建構的 LPU 有向加權網路具階層結構與小世界特性，並可分為對應四個感覺模態與一個前運動中樞的五個功能模組。",
+    "網路存在多層巢狀的富俱樂部，核心成員（DMP、VMP、VLP-D、SDFP、FB）位於腦中央深處，被推測構成腦的運動/感覺運動整合中樞。",
+    "模組內迴路普遍強於模組間迴路、短迴路強於長迴路；強迴路結構可使訊號在腦中持續，與早期記憶形成等再激盪歷程相關。",
+    "以注入嗅覺訊號的模擬顯示 SDFP、sdfp、FB 因強迴路而反應持久，而缺乏迴路的 LH 訊號則快速衰減。",
+    "利用 ACh（興奮）與 GABA（抑制）驅動株可預測神經傳遞物身分，發現前運動模組（PB→FB、FB→IDFP）有最強的模組內抑制，三大感覺模態的興奮/抑制比例各異。",
+    "果蠅腦的模組化、互連樞紐與富俱樂部等組織特徵，與哺乳類（如囓齒類新皮質 ACA/PTL/RSP）腦網路有基本相似性。"
+  ],
+  "methods": "以 FlyCircuit 1.1 影像資料，用 SPIN（skeleton-based polarity identification）方法判定每個神經元的軸突/樹突極性，假設訊息由樹突往軸突傳遞，建構 49 個 LPU 之間的有向加權連結矩陣（邊權為連接兩 LPU 的神經元終端數）。再以複雜網路理論（多以 Brain Connectivity Toolbox）計算強度、極性、各類中心性、模組度、富俱樂部與迴路結構，並以連通矩陣模擬訊號傳播。",
+  "significance": "這是第一份基於 FlyCircuit 單細胞解析度資料、以連結性（而非僅形態）為準的果蠅全腦中尺度連結體量化分析，把 Chiang 等人 2011 的影像資料庫推進為可做圖論分析的有向網路。它建立了果蠅腦資訊流與感覺運動整合架構的框架，並提供跨物種腦組織比較的基礎，是 FlyCircuit 連結體後續網路與社群結構研究的核心參考。",
+  "keywords": [
+    "連結體",
+    "果蠅腦",
+    "LPU",
+    "FlyCircuit",
+    "網路分析",
+    "資訊流",
+    "富俱樂部",
+    "小世界"
+  ],
+  "node_label": "Info Flow/2015"
+}
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
+</head>
+<body>
+<div class="topbar"><div class="inner">
+  <div class="brand">🧠 FlyCircuit 連結體論文知識庫 <small>· BSC Knowledge Base</small></div>
+  <nav>
+    <a href="../index.html">首頁</a>
+    <a href="../graph.html">論文網路</a>
+    <a href="../keywords.html">關鍵字網路</a>
+    <a href="../log.html">時間軸</a>
+  </nav>
+</div></div>
+<div class="wrap">
+  <article>
+    <header class="paper-header">
+      <h1>Connectomics-Based Analysis of Information Flow in the Drosophila Brain</h1>
+      <p class="title-zh">以連結體學分析果蠅腦中的資訊流</p>
+      <p class="authors">Chi-Tin Shih、Olaf Sporns、Shou-Li Yuan、Ta-Shun Su、Yen-Jen Lin、Chao-Chun Chuang、et al.</p>
+      <div class="badges">
+        <span class="badge scale" style="background:#2563eb">中尺度</span><span class="badge muted">2015</span><span class="badge muted">Current Biology</span><span class="badge">Drosophila (adult female)</span><span class="badge">FlyCircuit 1.1</span><span class="badge muted">network analysis</span><span class="badge muted">graph theory</span><span class="badge muted">complex network theory</span><span class="badge muted">connectomics</span><span class="badge muted">modularity analysis</span><span class="badge muted">rich-club analysis</span>
+      </div>
+      <p class="meta-line">Current Biology (2015) · DOI: <a href="https://doi.org/10.1016/j.cub.2015.03.021" target="_blank" rel="noopener">10.1016/j.cub.2015.03.021</a></p>
+    </header>
+
+    <div class="callout">
+      <span class="label">一句話總結</span>
+      用 FlyCircuit 1.1 的 12,995 個投射神經元重建果蠅腦的中尺度有向加權連結體，揭示其階層模組、小世界與富俱樂部結構，並推測行為時的資訊流路徑。
+    </div>
+
+    <section class="block bib-block">
+      <h2>論文基本資料</h2>
+      <dl class="bib">
+        <div><dt>期刊</dt><dd>Current Biology</dd></div>
+        <div><dt>卷期</dt><dd>第 25 卷第 10 期</dd></div>
+        <div><dt>頁碼</dt><dd>1249–1258 頁</dd></div>
+        <div><dt>發表</dt><dd>2015 年 5 月</dd></div>
+        <div><dt>機構</dt><dd>Tunghai University；Indiana University；National Tsing Hua University；National Center for High-Performance Computing；University of California, San Diego；Kaohsiung Medical University；Academia Sinica</dd></div>
+      </dl>
+    </section>
+
+    <section class="block">
+      <h2>中文摘要</h2>
+      <p>本研究以 FlyCircuit 1.1 中 12,995 張神經元投射影像，重建出第一份中尺度的果蠅腦連結體，節點為各個局部處理單元（LPU），邊則為神經元終端連結的有向加權連結。網路呈現階層結構與小世界特性，可分為對應感覺模態（嗅覺、聽覺/機械感覺、左右視覺）與前運動中樞的五個功能模組，並存在涵蓋所有感覺中樞的富俱樂部（rich club）。分析也辨識出主要的模組內與模組間迴路，並推論其整體組織架構與哺乳類腦有基本相似性。</p>
+    </section>
+
+    <section class="block popsci-block">
+      <h2>科普版介紹<span class="aud aud-pop">給對科學有興趣的高中生</span></h2>
+<p>大腦是怎麼把「看到、聽到、聞到」的訊息，變成「往哪裡飛、要不要逃跑」的決定？要回答這個問題，光知道腦裡有哪些神經元還不夠，更關鍵的是搞清楚這些神經元彼此怎麼接線、訊號往哪個方向流。科學家把整個腦的「接線圖」叫做連結體（connectome），它就像一張把所有道路與交流道都標出來的交通網路圖。人腦太大，這張圖近乎難以企及；但果蠅（Drosophila）的腦只有大約十幾萬個神經元，是少數有機會被整張描繪出來的模式生物。</p><p>在這篇研究之前，台灣的研究團隊已經建立了 FlyCircuit 資料庫，蒐集了上萬張單一神經元的三維影像。可是「有一堆神經元的照片」和「知道訊息怎麼在腦中流動」是兩回事——照片本身不會告訴你哪條線是輸入、哪條線是輸出。這篇論文要解決的，正是把這堆靜態影像，變成一張會標明方向、還能比較粗細強弱的腦網路，再用它推測果蠅在行為時的資訊流路徑。</p><p>他們的做法很巧妙。首先，把全腦切成 49 個「局部處理單元」（LPU），可以想成把一座城市分成 49 個有自己內部街道的行政區；每個 LPU 就是網路圖上的一個節點。接著最難的一步：判斷每個神經元的「極性」，也就是哪一端是樹突（接收訊息的天線），哪一端是軸突（送出訊息的喇叭）。團隊用一套叫做 SPIN 的方法，靠神經元的形態特徵自動辨識極性，成功判定了一萬兩千多個神經元。有了方向，就能畫出「有向加權網路」——有向，是因為每條連線都標了訊息流的箭頭方向；加權，是因為連線還記錄了強弱（由連接兩區的神經末梢數量決定）。一條從 A 區指向 B 區、又很粗的箭頭，代表 A 大量把訊息送往 B。</p><p>畫好這張圖後，他們用「複雜網路理論」當放大鏡來分析它。幾個關鍵概念值得認識：第一是「模組」（module），就是內部彼此密集相連、對外比較稀疏的一群節點，像是同一個社團的成員。第二是「富俱樂部」（rich club），指網路裡那些最重要、連線最多的節點，彼此之間又特別緊密地互相串連，宛如城市裡的核心樞紐互相直接拉專線。第三是「迴路」（loop），訊號可以繞圈回到原點的環狀路徑，這讓訊號能在腦中多停留一會兒，而不是一閃即逝。</p><p>分析出來的結果很漂亮。整個果蠅腦網路呈現階層式的模組結構，剛好可以分成五大模組：嗅覺、聽覺／機械感覺、左眼視覺、右眼視覺，以及位於中央、負責整合與下決定的「前運動中樞」。換句話說，網路自己「長」出了對應各種感官的分區，而且這些分區純粹是用連線關係算出來的，並非事先按解剖學硬塞進去，卻又和已知腦區高度吻合，相當有說服力。研究還發現不同感官「左右分家」的程度不一樣：視覺的左右兩眼輸入完全被分到不同模組，嗅覺只分成左右子模組，而聽覺的左右兩側則交織得最緊密，暗示聽覺核心要比較來自不同方向的聲音。更有趣的是，研究找到一個橫跨各感覺中樞的富俱樂部，成員包括 DMP、VMP、VLP-D、SDFP 和 FB 等位在腦中央深處的區域，團隊推測它們共同組成腦的「運動中樞」，是感覺訊息匯流、做出決策、再送出動作命令的核心。其中 DMP 與 VLP-D 還被負責逃跑反射的「巨大纖維」神經元大量連接，看起來正是把決定轉成逃跑指令的主要出口。</p><p>他們還發現一個規律：模組內部的迴路通常比跨模組的迴路強，短迴路又比長迴路強。為了驗證迴路真的會讓訊號「留下來」，團隊做了一個訊號傳播模擬：把一個嗅覺訊號注入嗅覺第一站（觸角葉 AL），讓它依照連線矩陣在網路裡擴散。結果發現位在強迴路上的 SDFP、FB 等區域反應持久，訊號在輸入停止後還能維持一陣子；而缺乏迴路的側角（LH）訊號則很快衰減。這正呼應了「迴路可能與短期記憶的訊號回盪有關」的猜想。</p><p>研究者更進一步，利用 FlyCircuit 神經元帶有的基因標記，推測每個神經元用的是興奮性的乙醯膽鹼（ACh）還是抑制性的 GABA，於是這張圖不只有方向與強弱，還分得出「踩油門」與「踩煞車」。他們發現前運動模組裡有最強的內部抑制（例如 PB 抑制 FB），可能用來壓低雜訊、避免像癲癇那樣失控的興奮；而嗅覺、聽覺、視覺三大感官，興奮與抑制的比例各不相同。</p><p>不過作者也很誠實地提醒：強的連線雖然重要（維持那麼多突觸要花很多能量，不會白白存在），卻不代表弱的連線就沒用。像大家熟知、和學習記憶關係密切的蕈狀體（MB）與橢球體（EB），在這套「以連線強度為主」的分析裡反而沒有特別突出，這說明光看連線粗細還不足以斷定一個腦區的重要性，未來還需要結合神經活動的量測，才能拼出更完整的圖像。</p><p>為什麼這一切重要？因為這是第一份以「連線關係」而非僅憑外形畫出的果蠅全腦中尺度連結體，把過去的影像資料庫升級成可以做數學分析的腦網路。更令人驚訝的是，果蠅腦展現的模組化、互連樞紐、富俱樂部這些組織特徵，竟然和哺乳類大腦有基本相似性——研究者甚至指出，果蠅這套「感覺匯流到一群互連結構、再大量輸出到運動區」的安排，和老鼠新皮質的前扣帶（ACA）、後頂葉（PTL）、壓後皮質（RSP）等決策相關區域有異曲同工之妙。相隔億萬年演化的兩種腦，似乎都被同一套「先把各種感官訊息整合、再做決策、最後輸出動作」的必要邏輯推著走。一隻小小的果蠅，因此成了我們理解大腦如何運作的一扇珍貴窗口。</p>
+    </section>
+
+    <section class="block academic-block">
+      <h2>學術版介紹<span class="aud aud-aca">給研究生以上的專業讀者</span></h2>
+      <h3>關鍵發現</h3>
+<ul><li>以 FlyCircuit 1.1 中 12,995 個雌蠅投射神經元，建構出第一份中尺度的果蠅腦有向加權連結體；節點為 49 個局部處理單元（LPU，含 43 個 LPU 與 6 個互連單元/hub），邊權由連接兩 LPU 的神經末梢幾何平均數決定。</li><li>49 個 LPU 之間理論上有 \(2{,}352\)（\(49\times 48\)）條有向連線，其中 402 條不存在；網路具階層式模組結構與小世界特性（小世界程度受限於僅 49 節點、且 80% 可能路徑至少含一條纖維）。</li><li>最大化模組度可把網路分成五個功能模組：嗅覺（含 AL、MB、LH）、聽覺/機械感覺（含 CVLP、AMMC）、左視覺與右視覺（含 MED），以及由中央複合體（FB、EB、PB、IDFP、NOD）構成的「前運動」中樞；嗅覺與聽覺模組還有次模組結構。</li><li>網路存在多層巢狀的富俱樂部（rich club）；最內三層成員為兩半腦的 DMP、VMP、VLP-D、SDFP 與中央的 FB，多位於腦中央深處，被推測共同構成腦的（感覺）運動整合中樞。</li><li>節點強度最高者為 DMP、VMP、VLP-D、FB、CVLP、SDFP；PB 是最強的「送出者」（極性 \(-0.87\)），FB→IDFP 是全網最強的連線；強度與中介中心性高度相關（Pearson \(r=0.817\)），但 LOB、LH 等少數區的中介排名明顯高於其強度排名。</li><li>LPU 間連線約 15% 為單向（邊極性 \(&gt;0.9\)），其餘多為雙向；相較之下線蟲 C. elegans 為 53%、獼猴為 20%。</li><li>模組內迴路普遍強於模組間迴路、短迴路強於長迴路；最強的跨三模組三迴路為 dmp↔sdfp↔FB↔dmp，最強的跨四模組四迴路為 DMP→vlp-d→sdfp→FB→DMP（迴路極性 \(3.95\)）。</li><li>嗅覺訊號傳播模擬（\(t=1\)–\(3\) 注入 AL，傳播至 \(t=30\)，衰減參數 \(0.2\)）顯示 SDFP、sdfp、FB 因強迴路而反應最持久，輸入停止後仍維持 1–3 個時間步；MB/mb 次之，而缺乏迴路的 LH 與 al 則快速衰減。</li><li>以 3,377 個推定膽鹼性（ACh，興奮）與 3,632 個推定 GABA 性（抑制）神經元建構興奮/抑制網路；最強的模組內抑制出現在前運動模組（PB 抑制 FB 與 IDFP、FB 抑制 IDFP），三大感覺模態的興奮/抑制比例各異。</li><li>富俱樂部成員 DMP 與 VLP-D 被巨大纖維（giant fiber，逃跑反射）神經元的樹突大量支配，推測為送出運動命令的主要閘道；另有 RC→SOG 作為由感覺輸入到運動輸出的平行通道。</li><li>果蠅腦的模組化、互連樞紐與富俱樂部等組織特徵，與哺乳類腦（如囓齒類新皮質的 ACA/PTL/RSP 區、以及中央複合體與基底神經節的對應）有基本相似性。</li></ul>
+      <h3>方法</h3>
+<p><strong>資料來源（FlyCircuit 1.1）。</strong>更新版的 FlyCircuit 資料庫共影像化並分類了 23,579 個單一神經元（雌 18,179、雄 5,400）。雌蠅神經元再分為 3,355 個局部神經元（local neuron）與 14,824 個投射神經元（projection neuron）。本研究只取「能在 LPU 之間傳遞訊息」的投射神經元，並基於「訊息主要由樹突傳向軸突」的假設來建立有向網路。每個神經元先以改良自 Lee 等人的演算法，從胞體（soma）出發追蹤其骨架線（skeleton）。</p><p><strong>極性判定（SPIN）。</strong>用 skeleton-based polarity identification for neurons（SPIN）方法判定每個結構域的軸突/樹突極性：SPIN 先用一小組已知極性的訓練神經元找出最能預測極性的形態特徵與其線性組合，建立分類器，再對未知神經元逐一分區判定。本研究採用以 PB 訓練神經元訓練的分類器（跨不同測試集準確率約 84%–92%）。SPIN 成功為 14,824 個投射神經元中的 12,995 個（88%）判定極性；其餘 1,787 個極性未定的投射神經元，以及只支配單一 LPU、不貢獻 LPU 間連結的 3,355 個局部神經元，皆排除在連結分析之外。補充材料 Fig. S10 顯示極性預測的不確定性不會改變主要結論。</p><p><strong>節點定義（LPU）。</strong>沿用先前 Chiang 等人 2011 的劃分法，把全腦分成 43 個局部處理單元與 6 個互連單元（hub：NOD、OG、OPTU 等），共 49 個節點（\(N_U=49\)）。LPU 定義為「擁有自身局部中間神經元（LN）、纖維限於該區，並透過成束神經徑與其他單元收送訊息」；互連單元則缺乏自身 LN、僅原樣轉傳訊息。</p><p><strong>有向加權連結矩陣的建構。</strong>對第 \(i\) 個神經元，若其樹突位於 LPU \(D_i\)（末梢數 \(d_i\)）、軸突位於 LPU \(X_i\)（末梢數 \(x_i\)），則該神經元貢獻的連結權重為兩者末梢數的幾何平均 \(\sqrt{d_i \cdot x_i}\)，方向由 \(D_i\) 指向 \(X_i\)；其他元素為 0，形成一個 \(N_U \times N_U\)（\(49\times 49\)）的矩陣 \(A^{(i)}\)。整體連結體矩陣為所有 \(N_n=12{,}995\) 個神經元的加總 \(A=\sum_i A^{(i)}\)。一對 LPU 之間某方向的邊權，即所有該方向神經元貢獻的加總（見 Fig. S2）。</p><p><strong>複雜網路指標。</strong>多數計算以 Brain Connectivity Toolbox（Rubinov & Sporns, 2010）完成，涵蓋：節點強度（出/入/總強度）、度（degree，強度的二元版）、節點極性 \(p=(s_{in}-s_{out})/s_{total}\)（分辨送出者/接收者/平衡者）、邊極性（衡量連線單向程度）、最短路徑長度與全域效率（以連線強度倒數為距離）、中介中心性（betweenness）與邊中介、脆弱度（vulnerability，刪節點造成的全域效率下降）、動態重要性（dynamical importance，刪節點對鄰接矩陣最大特徵值的影響）、page rank（阻尼因子 \(d=0.85\)）、接近中心性（closeness）與（有向加權）群聚係數。將度、脆弱度、page rank、接近度、動態重要性、強度、中介共七種中心性各取前 12 名（前四分位）各記 1 分，總分定義為節點的「全域中心性」，高者即為網路樞紐（hub）。</p><p><strong>小世界、模組度、富俱樂部、迴路。</strong>小世界指數以保留各節點總強度的方式隨機化網路 1,000 次計算，並對連結矩陣逐步移除最弱路徑（cut ratio）做門檻化以檢視小世界程度。模組度 \(Q\)（Newman 法）以最大化 \(Q\) 決定模組歸屬；再用各節點的模組內強度 \(z\)-score 與參與係數 \(P\)（Guimerà & Amaral）辨識各模組的中心節點與模組間連接者。富俱樂部以對照適當零模型（保留強度的隨機化網路，Colizza 等人法）偵測，得到多層巢狀的 RC 殼層（\(\mathrm{RC}_1\) 為最內層、\(\mathrm{RC}_2\) 為 \(p\) 值最低者）。迴路強度定義為環路上所有連線強度的最小值，迴路極性則衡量正反方向強度差異。</p><p><strong>訊號傳播模擬。</strong>以 49 維向量 \(x(t)\) 表示各 LPU 在時間 \(t\) 的狀態。將嗅覺輸入注入 AL（\(a\) 在 AL 為 1、其餘為 0），輸出由 DMP/dmp 送往身體；以正規化轉移矩陣 \(S\)（\(S_{ij}=A_{ij}/s^{out}_i\)）更新</p>\[ x(t+1)=S\,x(t)+\alpha(t)\,a-b(t) \]<p>輸入在 \(t\le 5\) 時開啟（\(\alpha=1\)）、\(t&gt;5\) 關閉（\(\alpha=0\)），衰減參數設為 \(0.2\)，模擬至 \(t=30\)，觀察各 LPU 的訊號持續性（Fig. 3E）。</p><p><strong>神經傳遞物推定（ACh/GABA 網路）。</strong>由於 FlyCircuit 神經元以神經傳遞物合成酶或囊泡轉運蛋白的 Gal4 驅動株標記，可合理推測其傳遞物身分。本研究聚焦兩大傳遞物——乙醯膽鹼（ACh，視為興奮）與 GABA（抑制），分別取 3,377 個推定膽鹼性（Cha-GAL4）與 3,632 個推定 GABA 性（Gad1-GAL4）神經元，定義每條連線的淨強度 \(s^{net}_{ij}=s^{e}_{ij}-s^{i}_{ij}\)（興奮強度減抑制強度），分別檢視模組內與模組間的興奮/抑制平衡。</p>
+      <h3>重要性與定位</h3>
+<p>這是第一份以「連結性」（而非僅憑神經元形態）為準、基於 FlyCircuit 單細胞解析度影像建構的果蠅全腦<strong>中尺度連結體</strong>量化分析。它把 Chiang 等人 2011（chiang-2011-flycircuit）所建立、收錄上萬張單神經元影像的資料庫，實質推進為一張可做圖論運算的有向加權腦網路——從「有照片」邁向「知道訊息往哪流」。</p><p>方法上的貢獻在於：用 SPIN 自動判定一萬多個神經元的極性，使網路得以「有向化」；以幾何平均末梢數設定邊權，使其「加權化」；再用一整套複雜網路指標（中心性、模組度、富俱樂部、迴路、訊號傳播模擬、ACh/GABA 興奮抑制）系統性刻畫全腦的資訊流與感覺運動整合架構，並提出果蠅行為時可能的資訊流路徑（Fig. 4）。值得一提的是，分區是用連線關係算出來、而非按解剖學預設，卻與已知腦區高度吻合，凸顯以連結性本身為依據的分析力道。</p><p>在跨物種層面，本研究指出果蠅腦的模組化、互連樞紐與富俱樂部組織，與哺乳類腦（囓齒類新皮質 ACA/PTL/RSP，以及中央複合體對應基底神經節）有基本相似性，支持「感覺整合→決策→運動輸出」是跨門演化共通的必要邏輯。</p><p>在 FlyCircuit 連結體脈絡中，本文是承先啟後的核心節點：上承 chiang-2011-flycircuit 的影像資料庫，下啟後續對神經元層級連結體與社群結構的研究（如 community-2019）。它所建立的有向加權網路與 LPU 框架，成為日後果蠅腦網路與社群結構分析的重要參照基礎。</p>
+    </section>
+
+    <section class="block">
+      <h2>相關論文</h2>
+      <div class="related-grid">
+      <a href="chiang-2011-flycircuit.html"><span class="ry">2011 · Current Biology</span><br><span class="rt">果蠅全腦連結網路的單細胞解析度三維重建</span></a>
+      <a href="community-2019.html"><span class="ry">2019 · Neuroinformatics</span><br><span class="rt">果蠅腦神經元層級連結體中多樣的社群結構</span></a>
+      <a href="cheng-2025-mushroom-body.html"><span class="ry">2025 · Science Advances</span><br><span class="rt">果蠅蕈狀體中的混合神經網路驅動嗅覺偏好</span></a>
+      </div>
+    </section>
+  </article>
+</div>
+<div class="foot">
+  本頁由 LLM 依原始 PDF 整理；中文重點為摘要性質，引用前請以原文為準。｜id: <code>shih-2015-information-flow</code>
+</div>
+</body>
+</html>

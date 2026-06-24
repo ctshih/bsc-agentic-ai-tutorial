@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>以漫淹式填充網路高精度自動重建神經元｜FlyCircuit 知識庫</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script type="application/json" id="meta">
+{
+  "id": "januszewski-2018-ffn",
+  "title": "High-Precision Automated Reconstruction of Neurons with Flood-Filling Networks",
+  "title_zh": "以漫淹式填充網路高精度自動重建神經元",
+  "authors": [
+    "Michał Januszewski",
+    "Jörgen Kornfeld",
+    "Peter H. Li",
+    "Art Pope",
+    "Tim Blakely",
+    "Larry Lindsey",
+    "et al."
+  ],
+  "year": 2018,
+  "venue": "Nature Methods",
+  "doi": "10.1038/s41592-018-0049-4",
+  "species": "N/A",
+  "scale": "method/tool",
+  "technique": [
+    "flood-filling network",
+    "3D 卷積神經網路 (CNN)",
+    "遞迴神經網路",
+    "序列切面掃描式電子顯微鏡 (SBEM)",
+    "影像分割",
+    "深度學習",
+    "集成 (ensemble)",
+    "TensorFlow"
+  ],
+  "region": "N/A",
+  "dataset": "Zebra finch SBEM (J0126)",
+  "tags": [
+    "connectome",
+    "EM segmentation",
+    "flood-filling network",
+    "FFN",
+    "expected run length",
+    "zebra finch",
+    "Google",
+    "neurite reconstruction"
+  ],
+  "keywords": [
+    "影像分割",
+    "深度學習",
+    "連結體",
+    "電子顯微鏡",
+    "突觸級連結體",
+    "連結體重建"
+  ],
+  "node_label": "Seg/FFN/2018",
+  "related": [
+    "neuroretriever-2021",
+    "lynsu-2024",
+    "sheridan-2023-lsd",
+    "tavakoli-2025-liconn"
+  ],
+  "tldr": "提出「漫淹式填充網路（FFN）」——以遞迴式 3D CNN 一次分割一個神經元，把電子顯微鏡連結體重建的自動分割準確度提升約一個數量級。",
+  "bib": {
+    "journal": "Nature Methods",
+    "volume": "15",
+    "issue": "8",
+    "pages": "605-610",
+    "published": "2018 年 7 月",
+    "institutions": [
+      "Google Research",
+      "Max Planck Institute of Neurobiology"
+    ]
+  },
+  "abstract_zh": "從體積電子顯微鏡（EM）資料重建神經迴路，必須完整追蹤每個細胞及其所有神經突。既有自動方法若無昂貴的人工校對，錯誤率仍高到無法得到可靠的迴路圖。本研究提出一種自動分割方法：與多數先前工作相同採用卷積神經網路，但額外加入一條遞迴路徑，可迭代地優化與延伸所重建的單一神經突形狀；作者稱此技術為「漫淹式填充網路（flood-filling networks, FFN）」。將其應用於一隻公斑胸草雀腦、以序列切面掃描式電子顯微鏡取得的資料集，達到平均無誤神經突路徑長度 1.1 mm，比先前在同一資料上發表的方法好一個數量級；在 97 mm 路徑長度的神經突測試集中僅觀察到 4 個合併錯誤。",
+  "key_findings": [
+    "最終重建（FFN-c）在斑胸草雀 EM 資料上達到期望無誤路徑長度（ERL）1.1 mm，比同資料上先前最佳方法（baseline 112 µm）提升約一個數量級。",
+    "在 97 mm 路徑長度的測試集中僅留下 4 個合併錯誤（merger）。",
+    "過分割共識（多種子＋多解析度集成）使分裂約增 2 倍、合併減少 82 倍；FFN 凝聚再使總分裂率降 44%、run length 增 1149%。",
+    "自動偵測樹突棘的召回率（95%）高於人類標註者（91%），精確度同樣近 100%。",
+    "在 5×5×5 µm 小子體積上的準確度無法預測完整體積表現，必須以接近神經實際路徑長度的尺度評估。",
+    "代價是計算量：整套 FFN 流程約為基準 CNN 的 74×，平均每 voxel 被處理 59 次。"
+  ],
+  "methods": "核心為遞迴式 3D 卷積網路 FFN，將傳統「邊界預測＋分群」兩階段合併為單一模型、一次分割一個物件。網路有影像與 POM（預測物件圖）兩個輸入通道，直接 FoV 為 33×33×17 voxel，靠迭代更新 POM 與 FoV 移動（步長 8/8/4、移動門檻 0.9）由種子向外「漫淹」填充；19 層卷積、8 個 full pre-activation 殘差模組、472,353 個權重。以僅 0.02% 人工密集標註體積為地真、逐 voxel 交叉熵損失，於 32 顆 NVIDIA Tesla K40 GPU 訓練 7 天。大規模流程含彈性對位、組織型別分類器（六類 3D CNN）、不規則性偵測、細胞本體分割、過分割共識（多種子＋多解析度集成，減合併 82×）與 FFN 自身的凝聚（用 Jaccard 一致性合併斷裂段）。以 KNOSSOS 人工骨架為地真、用期望無誤路徑長度（ERL）為主指標，與 baseline（CNN+分水嶺+GALA）、SegEM 等比較。",
+  "significance": "本論文是連結體重建領域的奠基性方法學工作。它以遞迴、一次一物件、邊填邊修正的設計，把電子顯微鏡分割的準確度（ERL）提升約一個數量級，並把最難校對的合併錯誤壓到極低，替「以 AI 自動重建整張腦接線圖」掃除關鍵障礙；所提 ERL 指標亦成為後續分割方法的通用評估標準，是理解 NeuroRetriever、LYNSU、LSD、LICONN 等後續果蠅與連結體分割工作的起點。"
+}
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
+</head>
+<body>
+<div class="topbar"><div class="inner">
+  <div class="brand">🧠 FlyCircuit 連結體論文知識庫 <small>· BSC Knowledge Base</small></div>
+  <nav>
+    <a href="../index.html">首頁</a>
+    <a href="../graph.html">論文網路</a>
+    <a href="../keywords.html">關鍵字網路</a>
+    <a href="../log.html">時間軸</a>
+  </nav>
+</div></div>
+<div class="wrap">
+  <article>
+    <header class="paper-header">
+      <h1>High-Precision Automated Reconstruction of Neurons with Flood-Filling Networks</h1>
+      <p class="title-zh">以漫淹式填充網路高精度自動重建神經元</p>
+      <p class="authors">Michał Januszewski、Jörgen Kornfeld、Peter H. Li、Art Pope、Tim Blakely、Larry Lindsey、et al.</p>
+      <div class="badges">
+        <span class="badge scale" style="background:#ea580c">方法/工具</span><span class="badge muted">2018</span><span class="badge muted">Nature Methods</span><span class="badge">Zebra finch SBEM (J0126)</span><span class="badge muted">flood-filling network</span><span class="badge muted">3D 卷積神經網路 (CNN)</span><span class="badge muted">遞迴神經網路</span><span class="badge muted">序列切面掃描式電子顯微鏡 (SBEM)</span><span class="badge muted">影像分割</span><span class="badge muted">深度學習</span><span class="badge muted">集成 (ensemble)</span><span class="badge muted">TensorFlow</span>
+      </div>
+      <p class="meta-line">Nature Methods (2018) · DOI: <a href="https://doi.org/10.1038/s41592-018-0049-4" target="_blank" rel="noopener">10.1038/s41592-018-0049-4</a></p>
+    </header>
+
+    <div class="callout">
+      <span class="label">一句話總結</span>
+      提出「漫淹式填充網路（FFN）」——以遞迴式 3D CNN 一次分割一個神經元，把電子顯微鏡連結體重建的自動分割準確度提升約一個數量級。
+    </div>
+
+    <section class="block bib-block">
+      <h2>論文基本資料</h2>
+      <dl class="bib">
+        <div><dt>期刊</dt><dd>Nature Methods</dd></div>
+        <div><dt>卷期</dt><dd>第 15 卷第 8 期</dd></div>
+        <div><dt>頁碼</dt><dd>605–610 頁</dd></div>
+        <div><dt>發表</dt><dd>2018 年 7 月</dd></div>
+        <div><dt>機構</dt><dd>Google Research；Max Planck Institute of Neurobiology</dd></div>
+      </dl>
+    </section>
+
+    <section class="block">
+      <h2>中文摘要</h2>
+      <p>從體積電子顯微鏡（EM）資料重建神經迴路，必須完整追蹤每個細胞及其所有神經突。既有自動方法若無昂貴的人工校對，錯誤率仍高到無法得到可靠的迴路圖。本研究提出一種自動分割方法：與多數先前工作相同採用卷積神經網路，但額外加入一條遞迴路徑，可迭代地優化與延伸所重建的單一神經突形狀；作者稱此技術為「漫淹式填充網路（flood-filling networks, FFN）」。將其應用於一隻公斑胸草雀腦、以序列切面掃描式電子顯微鏡取得的資料集，達到平均無誤神經突路徑長度 1.1 mm，比先前在同一資料上發表的方法好一個數量級；在 97 mm 路徑長度的神經突測試集中僅觀察到 4 個合併錯誤。</p>
+    </section>
+
+    <section class="block popsci-block">
+      <h2>科普版介紹<span class="aud aud-pop">給對科學有興趣的高中生</span></h2>
+<p>想像你有一塊比沙子還小的腦組織，裡面塞滿了上萬條神經纖維，像一團糾結到極點的耳機線。科學家想知道「哪條線連到哪條線」，因為腦的運作祕密就藏在這張接線圖裡——這張圖有個專有名詞，叫做「連結體（connectome）」。問題是：要看清楚這些線，得用一種叫做「電子顯微鏡」的儀器。</p>
+<p>一般的光學顯微鏡看細胞已經很厲害了，但神經纖維最細的地方直徑不到 0.2 微米（人的頭髮大約 70 微米寬），光學顯微鏡根本分不清楚。電子顯微鏡改用「電子束」而不是光來照樣本，解析度高得多，可以看到單一突觸的細節。為了得到立體的影像，研究者把組織像火腿一樣一片一片地削開（這台論文用的儀器叫「序列切面掃描式電子顯微鏡」，serial block-face EM），每削掉薄薄一層就拍一張照，最後把幾千張照片疊起來，就得到一個 3D 的影像方塊。這篇論文處理的方塊來自一隻公斑胸草雀（zebra finch，一種會唱歌的鳴禽）的腦，大小約 96×98×114 微米，卻包含一百多億個立體像素（voxel，就是 3D 版的像素），整份資料高達 663 GB。</p>
+<p>為什麼要這麼大費周章？因為大腦的計算，本質上來自神經元彼此之間特定的連線方式。同樣數量的神經元，連法不同，行為就完全不同——就像同樣一堆電子零件，接線圖不同，做出來可能是收音機、也可能是電腦。要真正理解一段神經迴路怎麼運作，理想上得知道「每一個神經元各自連到誰、在哪裡形成突觸」，這正是連結體想回答的問題。而電子顯微鏡是目前唯一能同時看到「整條神經纖維走向」與「單一突觸」的方法，因此成為連結體研究的主力工具，但也帶來了海量、雜亂、難以自動判讀的影像。</p>
+<p>有了影像，接下來要做的事叫「分割（segmentation）」：把每一條神經纖維從背景中描出來、塗上一個顏色，讓電腦知道「這一整條都是同一個神經元」。聽起來像小朋友的著色本，但難度天差地遠。神經纖維又細又長、彎來繞去、彼此緊貼，影像還常有切片時的刮痕、對位沒對準的錯位、對比度太低看不清邊界等等毛病。只要在某一處把兩條線錯接在一起（這種錯誤叫「合併錯誤 merger」），整條重建出來的「神經元」就被污染了；只要在某處斷開（叫「分裂錯誤 split」），一條神經元就被拆成好幾段。過去的自動方法錯誤率太高，必須靠大量人力「校對（proofreading）」一個一個訂正。論文估計，光要重建一個邊長 100 微米的小方塊，人工就要超過十萬小時——這幾乎讓大規模連結體研究變得不可能。</p>
+<p>這篇 2018 年發表在《Nature Methods》的論文，提出一個叫「漫淹式填充網路（Flood-Filling Network，FFN）」的新方法，把自動分割的準確度一口氣提高了一個數量級。它的核心點子，其實很像玩小畫家裡的「油漆桶（flood fill）」工具：你點一下某個區域，顏色就會自動「淹」滿整片相連的區域，遇到邊界才停。FFN 做的事概念上類似——先在一條神經纖維中央（遠離邊界的安全位置）丟下一個「種子點」，然後讓一個人工智慧模型從種子開始，一步一步往外判斷「這個位置還算不算同一條神經」，把整條纖維「淹滿」、描出來，遇到細胞邊界就收手。</p>
+<p>真正聰明的地方在於：FFN 不是看一眼就一次決定整張圖（那叫「單次分類」，很容易出錯），而是「邊填邊看、反覆修正」。它用的是一種會記住自己先前判斷的「遞迴（recurrent）」神經網路：每填一步，就把目前「這些格子屬於這條神經」的判斷（論文稱為「預測物件圖 POM」）回饋給自己當作下一步的參考。這樣一來，已經很確定的「簡單區域」就能幫忙判斷旁邊那些模糊難分的「困難區域」——就像拼圖時，先把確定的邊角拼好，中間難拼的部分自然有了線索。而且它的「視野」其實很小（一次只看 33×33×17 個格子），卻能靠這種一步接一步的接力，把資訊傳遞到遠超出視野的地方，最後描出一整條很長的神經。</p>
+<p>另一個關鍵設計是「一次只處理一個物件」：傳統方法常試圖一口氣把整張圖的所有東西都切開，FFN 則專心把一條神經填完、固定下來，再換下一顆種子去填下一條。為了讓結果更可靠，作者還用了幾招「集成（ensemble）」技巧：同一塊資料用不同種子順序、甚至不同解析度各跑一遍，只保留每次都一致的合併判斷——這招把致命的「合併錯誤」減少了 82 倍。最後再用 FFN 自己去判斷「兩段斷掉的神經該不該接回去」（稱為 agglomeration，凝聚），把過度切斷的部分接回來。</p>
+<p>成果有多好？衡量分割品質的主要指標叫「期望無誤路徑長度（expected run length, ERL）」，意思是「平均能正確追蹤多長的一段神經，才會碰到第一個錯誤」。FFN 達到 1.1 公釐（mm），比過去在同一份資料上發表的最佳方法（約 0.112 mm）整整好上一個數量級。更難得的是，在 97 mm 的測試資料裡，整套流程只剩下 4 個合併錯誤——而合併正是人工校對時最費力、最難抓的錯誤。甚至在找出樹突棘（神經元上的小突起）這件事上，自動結果的「召回率」還比人類標註者更高（95% 對 91%）。</p>
+<p>代價是計算量很大：FFN 整套流程所需的運算量大約是傳統方法的 74 倍，平均每個格子被網路處理了 59 次。但作者認為這很值得——因為它省下的，是天文數字般的人力校對時間。這篇論文後來成為連結體領域的奠基性工具，被果蠅、斑馬魚、哺乳類等各種腦組織的重建工作廣泛採用，可以說替「用 AI 自動畫出整張大腦接線圖」這個夢想，鋪下了關鍵的一塊基石。</p>
+    </section>
+
+    <section class="block academic-block">
+      <h2>學術版介紹<span class="aud aud-aca">給研究生以上的專業讀者</span></h2>
+      <h3>關鍵發現</h3>
+<ul>
+<li><strong>準確度躍升一個數量級。</strong>最終重建（FFN-c）在斑胸草雀腦資料上達到期望無誤路徑長度（ERL）<strong>1.1 mm</strong>，相較於同一份資料上先前已發表方法（baseline，CNN+親和圖分水嶺+GALA 凝聚）的最佳值 <strong>112 µm</strong>，提升約一個數量級；該資料集與這組地真骨架可達的 ERL 上限為 2.1 mm。</li>
+<li><strong>合併錯誤極少。</strong>在 <strong>97 mm</strong> 路徑長度的測試集（50 條神經、中位數 2 mm、34% 為軸突）中，整套流程僅留下 <strong>4 個合併錯誤（merger）</strong>，且都不發生在地真骨架之間，皆由啟發式程序偵測出來。</li>
+<li><strong>集成大幅壓低合併。</strong>「過分割共識（oversegmentation-consensus）」結合正/反向種子順序與多解析度推論，使分裂（split）數僅增加約 2 倍，卻把合併數減少 <strong>82 倍</strong>。</li>
+<li><strong>凝聚補回斷裂。</strong>FFN 凝聚（agglomeration）將總分裂率降低 <strong>44%</strong>，並使 run length 增加 <strong>1149%</strong>。</li>
+<li><strong>樹突棘辨識勝過人類。</strong>自動重建偵測樹突棘的召回率（95%）高於人類標註者（91%），精確度同樣接近 100%（自動 99.7%）。但軸突／樹突整體路徑召回率仍不及人類（自動 68%、48%；人類 89%、85%）。</li>
+<li><strong>小子體積基準會誤導。</strong>在 5×5×5 µm 小子體積上的準確度無法預測在 5000 倍大的完整體積上的表現——例如 CNN+GALA 基準含合併的地真神經比例從 7.3% 暴增到 46.3%，凸顯需以接近神經實際路徑長度的尺度評估。</li>
+<li><strong>資料與訓練規模。</strong>影像方塊 96×98×114 µm（10624×10880×5700 voxel，9×9×20 nm 解析度，共 663 GB）；僅 <strong>0.02%</strong>（148M voxel、分布於 33–35 個子體積）經人工密集標註作為 FFN 訓練地真；組織分類器另以 26.7M voxel（0.016%）的六類標註訓練。</li>
+<li><strong>計算成本。</strong>整套 FFN 流程約為基準 CNN 的 <strong>74×</strong>（14.4×2.38×2.16）；平均每個 voxel 在一次分割中被 FFN 處理 59 次。</li>
+</ul>
+      <h3>方法</h3>
+<p>核心是<strong>漫淹式填充網路（Flood-Filling Network, FFN）</strong>——把傳統「邊界偵測 + 另一套分群演算法（分水嶺／連通元件／圖切）」兩階段流程，合併成單一遞迴式 3D 卷積網路，直接<strong>一次分割一個物件</strong>。</p>
+
+<h4>網路輸入／輸出與遞迴機制</h4>
+<p>FFN 有<strong>兩個輸入通道</strong>：(1) 3D 電子顯微鏡影像資料（正規化為零均值、單位標準差）；(2)「預測物件圖（predicted object map, POM）」的目前狀態，以 logit 形式表示，其值（經 sigmoid 後落在 0–1）代表每個 voxel 屬於「目前正在分割的這個物件」的機率。網路輸出是更新後的 POM（logit 形式）。每次迭代執行一次卷積網路的前向傳遞，更新目前視野（field of view, FoV）內所有 voxel 的 POM；新的 POM 又回饋成下一次迭代的輸入，形成遞迴路徑。直接 FoV 很小，僅 <strong>33×33×17 voxel（297×297×340 nm）</strong>，但靠迭代與 FoV 移動，可整合遠超出直接 FoV 的資訊，並把「單次分類」轉化為「以鄰近先前預測為條件的分類」這個較簡單的問題。</p>
+
+<h4>遞迴填充（FoV 移動）程序</h4>
+<p>開始分割新物件時，把 FoV 中心對準種子，種子位置 POM 設為 0.95、其餘設 0.05（刻意偏離 1 與 0 以避免過擬合）。維護一個待訪位置佇列 Q：每步從 Q 取出一個位置、移動 FoV 並標記已訪（已訪位置以 XY 縮 8 倍、Z 縮 4 倍的低解析度儲存，決定最小步長）；推論後更新 FoV 內 POM，接著在以 (Δx, Δy, Δz)=(8, 8, 4) 為半徑的方塊六個面上找最大 POM 值，若達到移動門檻 <strong>0.9</strong> 就把該面位置加入 Q。Q 清空時若 POM≥0.6 的 voxel 數 ≥1000 就生成一個固定 segment，否則重置不生成。固定後丟棄與其重疊的所有種子，再從剩餘種子重複，直到種子用盡。種子由 3D Sobel 濾波結果與 Gaussian（σ=49/6）比較得二值圖、取其歐氏距離轉換的局部峰值產生（刻意置於遠離細胞邊界處，避免相鄰物件誤合併）；距既有 segment ≤3 voxel 的種子會被丟棄。</p>
+
+<h4>3D CNN 架構</h4>
+<p>FFN 為一疊 <strong>SAME 模式 3D 卷積</strong>、含 skip connection、ReLU 非線性、<strong>3×3×3 kernel</strong>，除最後一層外每層 <strong>32 個 feature map</strong>。共 <strong>19 層卷積、472,353 個可訓練權重</strong>（比許多同期工作少很多，例如比 Beier 等 2017 少約 74 倍）。結構為：輸入模組（卷積→ReLU→卷積）＋<strong>8 個殘差模組</strong>（採「full pre-activation residual module」：ReLU→卷積→ReLU→卷積）＋最後 1×1×1 卷積整合所有 feature map 輸出單一通道。輸入輸出空間尺寸相同（33×33×17）。</p>
+
+<h4>訓練資料、標註與損失</h4>
+<p>訓練地真為整份體積中僅 <strong>0.02%</strong>、由人工密集分割的子體積（148M voxel，分布於 33 個區域）。從這些區域抽出所有 <strong>49×49×25 voxel</strong> 子體積作初始訓練樣本（此尺寸允許 FoV 各方向移動一個 8-voxel 步）；地真二值化為「與中心 voxel 同物件」設 0.95、其餘 0.05 的軟標籤。為平衡前景比例，依「活躍遮罩 voxel 比例 fa」分成 17 類（門檻 t=0.0, 0.01, …, 0.9, 1），訓練時每類等機率抽樣。損失為<strong>逐 voxel 交叉熵（logistic loss）</strong>：</p>
+<p>\[ L = -\sum_i \big[\, g_i \log p_i + (1-g_i)\log(1-p_i) \,\big] \]</p>
+<p>其中 \(p_i\) 為預測 voxel 值、\(g_i\) 為平滑後的地真標籤。以 TensorFlow 實作，採非同步隨機梯度下降、學習率 0.001，於 <strong>32 顆 NVIDIA Tesla K40 GPU</strong> 分散式訓練、batch 為 4 個樣本，訓練 <strong>7 天</strong>。模型選擇：每小時存一個 checkpoint，事後在一個密集骨架化子體積（560×560×250 voxel、221 條骨架片段）上推論，於合併數最少（此例為零合併）的 checkpoint 中選 ERL 最高者。</p>
+
+<h4>大規模三階段流程與輔助模組</h4>
+<p>(1) <strong>對位</strong>：用彈性對位（elastic alignment）精準配準各切面，較純平移對位減少不規則性偵測造成的分割。(2) <strong>細胞本體分割</strong>：在組織分類器標為 cell body 的區域、以人工放入全部 454 顆 soma 的種子跑 FFN（細胞本體平均直徑 9 µm，與 neuropil 平均 0.19 µm 尺度差異極大，須分開處理）。(3) <strong>neuropil 分割與凝聚</strong>：限制在 neuropil voxel，產生五個分割並以過分割共識調和，再以 FFN 凝聚合併神經突。</p>
+<p>另有兩個輔助 CNN／程序：<strong>不規則性偵測</strong>用相鄰切面正規化互相關估計局部位移向量，任一分量超過 4 即標為不規則並切分（多為分裂，後續凝聚多可補回）；<strong>組織型別分類器</strong>是一個 3D CNN（三個卷積-池化模組：3×3×3 卷積/64 feature map + 2×2×2 max pooling，續接 3×3×3/16 卷積、512 節點全連接、六類 softmax），以 65×65×65 patch 分類 blood vessel／cell body／myelin／neuropil／out-of-bounds，用以禁止 FFN 把物件延伸到 neuropil 之外。</p>
+
+<h4>集成：過分割共識與多解析度</h4>
+<p>利用 FFN 對種子位置與順序的敏感性：比較正向與反向（種子順序顛倒）分割，接受所有分裂為真（即過分割共識），只保留兩次都出現的合併。並在原始與降採樣（in-plane 2× 或 4×、軸向 2×）資料上各跑一遍——降採樣使物理 FoV 擴大到 594×594×340 nm 或 1188×1188×680 nm，常使全解析度的雙向合併消失或轉為單向。整體使分裂約增 2×、合併減 82×。</p>
+
+<h4>FFN 凝聚（agglomeration）</h4>
+<p>不另訓分類器，而是<strong>用 FFN 模型本身</strong>判斷兩段是否同一神經突：在兩 segment 最接近處取約 1 µm³（決策點為兩物件最短連線中點，101×101×51 voxel 子體積）子體積，移除 A、B 後分別從 A、B 內離邊界最遠的種子各跑一次 FFN，比較產生的 POM。依多項準則合併：兩次重建都覆蓋雙方原物件至少 60%（fAA, fAB, fBA, fBB ≥ 0.6）、推論中被「刪除」voxel 比例小（dA/NA&lt;0.02 或 dB/NB&lt;0.02）、且兩次結果於 voxel 空間互相一致（Jaccard 交集／聯集 JAB ≥ 0.8）。共跑三輪（全部決策點、僅受不規則性影響者、以及較大 201×201×101 子體積補強）；再以 segment 為節點、JAB 為邊權建圖取連通元件，並用最短路徑剪邊解決「細胞本體-細胞本體」合併。</p>
+
+<h4>評估指標與比較對象</h4>
+<p>以 KNOSSOS 人工骨架化神經（調校集 13.5 mm／12 條；測試集 97 mm／50 條）為地真，把每條骨架邊分類為 correct／omitted／split／merged，並輔以「離骨架 &gt;2.2 µm」啟發式抓出未被骨架化物件造成的合併。主指標<strong>期望無誤路徑長度（ERL）</strong>定義為「自隨機骨架節點出發、平均能追蹤的無誤段長度」（以各 segment 內節點數加權）：單一遺漏或分裂即終止累計，含合併的 segment 完全不貢獻長度；相較舊有 TEFPL、IED 等簡單平均，ERL 對誤差的空間分布更敏感。比較對象包括 baseline（CNN 長程親和圖 + 分水嶺 + GALA 隨機森林凝聚）、CNN、CNN+GALA、SegEM（CNN 邊界 + 分水嶺），以及消融版 FFN-a（單次）、FFN-b（加多種子/多解析度共識）、FFN-c（再加凝聚的完整流程）。</p>
+      <h3>重要性與定位</h3>
+<p>這篇論文是<strong>連結體（connectome）重建</strong>領域的奠基性方法學工作。連結體研究的瓶頸長年不在「拍不到影像」，而在「自動分割不夠準」：傳統「CNN 預測邊界 + 分水嶺/圖切分群」的兩階段流程錯誤率偏高，必須投入天文數字的人工校對（論文估計 100³ µm³ 體積需逾十萬人時）。FFN 用遞迴式、一次一物件、邊填邊修正的設計，把同一資料上的準確度（ERL）提升約一個數量級，並把最難校對的合併錯誤壓到極低，等於替「以 AI 自動畫出整張腦接線圖」掃除了關鍵障礙；它提出的 ERL 指標也成為後續分割方法的通用評估標準。</p>
+<p>在本知識庫的脈絡中，FFN 是後續多項果蠅與大規模分割工作的方法源頭與比較基準：</p>
+<ul>
+<li><a href="../papers/neuroretriever-2021.html">NeuroRetriever（2021）</a>——針對 FlyCircuit 共軛焦光學影像的單神經元自動分割。FFN 處理的是突觸級電子顯微鏡體積、目標是密集連結體；NeuroRetriever 處理的是光學單細胞影像，兩者代表「分割」在不同成像尺度上的對應問題，FFN 是這條深度學習分割路線的重要先驅。</li>
+<li><a href="../papers/lynsu-2024.html">LYNSU（2024）</a>——果蠅腦的自動定位與分割框架，延續以深度學習做大規模神經影像分割的方向，FFN 是此一研究脈絡公認的關鍵奠基方法之一。</li>
+<li><strong>sheridan-2023-lsd</strong>（Local Shape Descriptors，尚未收錄）——直接針對 FFN 計算成本高（約基準的 74×）的痛點，提出以「局部形狀描述子」輔助親和圖式分割，在大幅降低運算量下逼近 FFN 的準確度，是 FFN 之後連結體分割方法的重要演進與直接對照。</li>
+<li><strong>tavakoli-2025-liconn</strong>（LICONN，尚未收錄）——以光學成像達成連結體級重建的新路線；其分割同樣建立在 FFN 一脈相承的深度學習自動重建框架之上，可視為把 FFN 式重建理念推廣到電子顯微鏡以外成像模態的後續發展。</li>
+</ul>
+<p>整體而言，FFN 確立了「以遞迴神經網路直接生成 segment、再以模型自身做共識與凝聚」的範式，是理解上述後續果蠅與連結體分割工作時不可略過的起點。</p>
+    </section>
+
+    <section class="block">
+      <h2>相關論文</h2>
+      <div class="related-grid">
+      <a href="neuroretriever-2021.html"><span class="ry">2021 · Frontiers in Systems Neuroscience</span><br><span class="rt">NeuroRetriever：用於連結體組裝的自動化神經元分割演算法</span></a>
+      <a href="lynsu-2024.html"><span class="ry">2024 · Frontiers in Neuroinformatics</span><br><span class="rt">LYNSU：果蠅腦螢光影像的自動化 3D 神經氈分割方法</span></a>
+      <a href="sheridan-2023-lsd.html"><span class="ry">2023 · Nature Methods</span><br><span class="rt">用於神經元分割的局部形狀描述子</span></a>
+      <a href="tavakoli-2025-liconn.html"><span class="ry">2025 · Nature</span><br><span class="rt">以光學顯微鏡為基礎的哺乳類腦組織連結體重建（LICONN）</span></a>
+      </div>
+    </section>
+  </article>
+</div>
+<div class="foot">
+  本頁由 LLM 依原始 PDF 整理；中文重點為摘要性質，引用前請以原文為準。｜id: <code>januszewski-2018-ffn</code>
+</div>
+</body>
+</html>

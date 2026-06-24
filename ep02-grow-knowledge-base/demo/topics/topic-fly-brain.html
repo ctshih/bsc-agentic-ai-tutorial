@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>果蠅作為模式生物與大腦構造｜FlyCircuit 知識庫</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script type="application/json" id="meta">
+{
+  "id": "topic-fly-brain",
+  "type": "topic",
+  "title": "果蠅作為模式生物與大腦構造",
+  "keywords": [
+    "果蠅腦",
+    "神經氈",
+    "LPU",
+    "單神經元",
+    "蕈狀體"
+  ],
+  "related": [
+    "chiang-2011-flycircuit",
+    "shih-2015-information-flow",
+    "community-2019",
+    "cheng-2025-mushroom-body"
+  ],
+  "tldr": "果蠅腦只有約十萬個神經元、又有強大的遺傳工具，是建立完整連結體最實際的模式生物；牠的腦由一塊塊「神經氈」組成，可進一步歸納成數十個「局部處理單元（LPU）」。"
+}
+</script>
+</head>
+<body>
+<div class="topbar"><div class="inner">
+  <div class="brand">🧠 FlyCircuit 連結體論文知識庫 <small>· BSC Knowledge Base</small></div>
+  <nav>
+    <a href="../index.html">首頁</a>
+    <a href="../graph.html">論文網路</a>
+    <a href="../keywords.html">關鍵字網路</a>
+    <a href="../log.html">時間軸</a>
+  </nav>
+</div></div>
+<div class="wrap">
+  <article>
+    <header class="paper-header">
+      <span class="badge scale" style="background:#7c3aed">概念條目</span>
+      <h1>果蠅作為模式生物與大腦構造</h1>
+      <div class="badges" style="margin-top:14px"><a class="badge" href="../keywords.html?kw=果蠅腦">果蠅腦</a><a class="badge" href="../keywords.html?kw=神經氈">神經氈</a><a class="badge" href="../keywords.html?kw=LPU">LPU</a><a class="badge" href="../keywords.html?kw=單神經元">單神經元</a><a class="badge" href="../keywords.html?kw=蕈狀體">蕈狀體</a></div>
+    </header>
+    <div class="callout"><span class="label">一句話</span>果蠅腦只有約十萬個神經元、又有強大的遺傳工具，是建立完整連結體最實際的模式生物；牠的腦由一塊塊「神經氈」組成，可進一步歸納成數十個「局部處理單元（LPU）」。</div>
+    
+    <section class="block"><h2>為什麼選果蠅？</h2>
+    <p>果蠅（<i>Drosophila</i>）的腦只有約 <b>十萬個</b>神經元（人腦約八百億），小到有機會建出近乎完整的連結體，卻又複雜到能展現學習、記憶、求偶、導航等豐富行為。加上數十年累積的<b>遺傳工具</b>（可精準標記、操控特定神經元），讓研究者能在單一神經元層級觀察與實驗。這正是 <a href="../papers/chiang-2011-flycircuit.html">果蠅全腦連結網路的單細胞解析度三維重建（2011）</a> 能蒐集上萬個單神經元影像、建出 FlyCircuit 的前提。</p></section>
+
+    <section class="block"><h2>神經氈（neuropil）</h2>
+    <p>果蠅腦不是一團均勻的組織，而是由許多<b>神經氈</b>構成——神經纖維密集交織、進行訊號處理的區域，例如負責嗅覺的觸角葉（AL）、與學習記憶相關的蕈狀體（MB）、以及導航相關的中央複合體（FB/EB/PB）。辨識並分割這些神經氈，是分析的重要前處理；<a href="../papers/lynsu-2024.html">LYNSU：果蠅腦螢光影像的自動化 3D 神經氈分割方法（2024）</a> 就用深度學習自動分割神經氈。</p></section>
+
+    <section class="block"><h2>局部處理單元（LPU）</h2>
+    <p>把神經氈進一步歸納，<a href="../papers/chiang-2011-flycircuit.html">果蠅全腦連結網路的單細胞解析度三維重建（2011）</a> 將果蠅全腦整理成約 <b>41 個局部處理單元（LPU）</b>：每個 LPU 內部有局部中間神經元（LN），LPU 之間則由投射神經元（PN）連接。LPU 提供了一個「中尺度」的座標系——<a href="../papers/shih-2015-information-flow.html">以連結體學分析果蠅腦中的資訊流（2015）</a> 正是以 LPU 為節點，建構果蠅腦的中尺度網路。</p></section>
+
+    <section class="block"><h2>從個體到標準腦</h2>
+    <p>每隻果蠅的腦略有差異，因此研究者會把各個單神經元影像<b>配準（registration）</b>到同一個「標準模型腦」上，才能比較與整合。值得注意的是，<a href="../papers/lynsu-2024.html">LYNSU：果蠅腦螢光影像的自動化 3D 神經氈分割方法（2024）</a> 指出：若能在<b>個體原始影像</b>上直接分析，就能避免 warping 到標準腦所引入的空間誤差。</p></section>
+    
+    <section class="block">
+      <h2>相關論文</h2>
+      <div class="related-grid">
+      <a href="../papers/chiang-2011-flycircuit.html"><span class="ry">2011 · 論文</span><br><span class="rt">果蠅全腦連結網路的單細胞解析度三維重建</span></a>
+      <a href="../papers/shih-2015-information-flow.html"><span class="ry">2015 · 論文</span><br><span class="rt">以連結體學分析果蠅腦中的資訊流</span></a>
+      <a href="../papers/community-2019.html"><span class="ry">2019 · 論文</span><br><span class="rt">果蠅腦神經元層級連結體中多樣的社群結構</span></a>
+      <a href="../papers/cheng-2025-mushroom-body.html"><span class="ry">2025 · 論文</span><br><span class="rt">果蠅蕈狀體中的混合神經網路驅動嗅覺偏好</span></a>
+      </div>
+    </section>
+  </article>
+</div>
+<div class="foot">概念條目由 LLM 綜整本知識庫論文撰寫；點關鍵字可在「關鍵字網路」看到所有相關頁面。｜id: <code>topic-fly-brain</code></div>
+</body>
+</html>

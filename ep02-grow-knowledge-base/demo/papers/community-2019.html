@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>果蠅腦神經元層級連結體中多樣的社群結構｜FlyCircuit 知識庫</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script type="application/json" id="meta">
+{
+  "id": "community-2019",
+  "title": "Diverse Community Structures in the Neuronal-Level Connectome of the Drosophila Brain",
+  "title_zh": "果蠅腦神經元層級連結體中多樣的社群結構",
+  "authors": [
+    "Chi-Tin Shih",
+    "Yen-Jen Lin",
+    "Cheng-Te Wang",
+    "Ting-Yuan Wang",
+    "Chih-Chen Chen",
+    "Ta-Shun Su",
+    "et al."
+  ],
+  "year": 2019,
+  "venue": "Neuroinformatics",
+  "doi": "10.1007/s12021-019-09443-w",
+  "bib": {
+    "journal": "Neuroinformatics",
+    "volume": "18",
+    "issue": "2",
+    "pages": "268-282",
+    "published": "2019 年 12 月（線上）",
+    "institutions": [
+      "Tunghai University",
+      "National Center for High-Performance Computing",
+      "National Tsing Hua University",
+      "Kaohsiung Medical University",
+      "China Medical University",
+      "National Health Research Institutes",
+      "University of California, San Diego"
+    ]
+  },
+  "species": "Drosophila (adult female)",
+  "scale": "single-cell",
+  "technique": [
+    "community detection",
+    "modularity analysis",
+    "centrality analysis",
+    "rich club analysis",
+    "small-world analysis",
+    "loop detection"
+  ],
+  "region": [
+    "whole brain"
+  ],
+  "dataset": "FlyCircuit v1.2",
+  "tags": [
+    "connectome",
+    "community structure",
+    "centrality",
+    "rich club",
+    "small-world",
+    "Drosophila"
+  ],
+  "related": [
+    "chiang-2011-flycircuit",
+    "shih-2015-information-flow",
+    "cheng-2025-mushroom-body"
+  ],
+  "tldr": "以 FlyCircuit v1.2 建構果蠅全腦神經元對神經元網路，發現八個與功能模組對應的社群，各社群在中心性、小世界性與環路結構上展現不同特性。",
+  "abstract_zh": "本研究利用 FlyCircuit v1.2 資料庫中 28,573 張單神經元螢光影像，推估神經元極性與連結，建構出果蠅全腦神經元對神經元網路。透過模組度與中心性分析，辨識出八個社群（左右嗅覺、嗅覺核心、聽覺、運動、前運動、左右視覺），且不同功能的社群主導不同類型的中心性，顯示網路結構與功能間的關聯。網路整體呈現小世界特性，並具有富俱樂部（rich club）結構，其最核心成員多投射至中央複合體，暗示其在資訊整合上的角色。",
+  "key_findings": [
+    "果蠅全腦神經元網路（19,902 個節點）可被劃分為八個社群：右嗅覺、左嗅覺、前運動、嗅覺核心、運動、左視覺、右視覺與聽覺，且與先前 LPU 中尺度網路的功能模組高度一致。",
+    "不同功能的社群主導不同類型的中心性：前運動社群主導 degree、嗅覺社群主導 strength、視覺社群有最高 betweenness；前運動與運動社群的整體中心性分數最高。",
+    "依 hub/connector 分布可將八社群分為三群：嗅覺社群僅含高度在地化的 provincial hub（R5），視覺社群含較多兼具樞紐與閘道角色的 connector hub（R6），中央腦與聽覺社群介於兩者之間。",
+    "除左右嗅覺與運動社群外，整體網路具小世界特性（SWI>1）；degree 分布呈指數衰減、strength 分布呈冪律長尾。",
+    "網路存在富俱樂部（rich club）結構，最核心的 RC 成員多投射至中央複合體（central complex），顯示其在資訊整合中的關鍵地位。",
+    "辨識出大量長度小於七個神經元的環路（loops），暗示果蠅腦資訊處理的獨特特性。"
+  ],
+  "methods": "以 FlyCircuit v1.2 的 28,573 張單神經元影像（取用 22,834 隻雌蟲神經元），用 SPIN 演算法判定神經元極性，並以標準腦空間中軸突與樹突分支距離小於約一個 voxel（~1 μm）為準則推估連結，建構加權有向網路。以蛋白橋（PB）資料集驗證（真陽性率 0.40、假陽性率 0.02）。再用 MATLAB 的 Brain Connectivity Toolbox 計算各種中心性，並以 Newman 模組度演算法做社群偵測、進行小世界、富俱樂部與環路分析。",
+  "significance": "這是首個基於 FlyCircuit 單神經元影像、不依賴 LPU 先驗知識而建構的果蠅全腦神經元層級連結體，並證實微觀網路的社群結構與先前中尺度 LPU 網路的功能模組一致。研究揭示不同功能社群具有不同的網路結構特徵，並凸顯中央複合體在全腦資訊整合中的樞紐角色，為 FlyCircuit 連結體的跨尺度分析奠定基礎。",
+  "keywords": [
+    "連結體",
+    "連結體尺度",
+    "果蠅腦",
+    "單神經元",
+    "FlyCircuit",
+    "網路分析",
+    "社群結構",
+    "富俱樂部",
+    "小世界",
+    "中心性"
+  ],
+  "node_label": "Community/2019"
+}
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
+</head>
+<body>
+<div class="topbar"><div class="inner">
+  <div class="brand">🧠 FlyCircuit 連結體論文知識庫 <small>· BSC Knowledge Base</small></div>
+  <nav>
+    <a href="../index.html">首頁</a>
+    <a href="../graph.html">論文網路</a>
+    <a href="../keywords.html">關鍵字網路</a>
+    <a href="../log.html">時間軸</a>
+  </nav>
+</div></div>
+<div class="wrap">
+  <article>
+    <header class="paper-header">
+      <h1>Diverse Community Structures in the Neuronal-Level Connectome of the Drosophila Brain</h1>
+      <p class="title-zh">果蠅腦神經元層級連結體中多樣的社群結構</p>
+      <p class="authors">Chi-Tin Shih、Yen-Jen Lin、Cheng-Te Wang、Ting-Yuan Wang、Chih-Chen Chen、Ta-Shun Su、et al.</p>
+      <div class="badges">
+        <span class="badge scale" style="background:#0d9488">單細胞</span><span class="badge muted">2019</span><span class="badge muted">Neuroinformatics</span><span class="badge">Drosophila (adult female)</span><span class="badge">FlyCircuit v1.2</span><span class="badge muted">community detection</span><span class="badge muted">modularity analysis</span><span class="badge muted">centrality analysis</span><span class="badge muted">rich club analysis</span><span class="badge muted">small-world analysis</span><span class="badge muted">loop detection</span>
+      </div>
+      <p class="meta-line">Neuroinformatics (2019) · DOI: <a href="https://doi.org/10.1007/s12021-019-09443-w" target="_blank" rel="noopener">10.1007/s12021-019-09443-w</a></p>
+    </header>
+
+    <div class="callout">
+      <span class="label">一句話總結</span>
+      以 FlyCircuit v1.2 建構果蠅全腦神經元對神經元網路，發現八個與功能模組對應的社群，各社群在中心性、小世界性與環路結構上展現不同特性。
+    </div>
+
+    <section class="block bib-block">
+      <h2>論文基本資料</h2>
+      <dl class="bib">
+        <div><dt>期刊</dt><dd>Neuroinformatics</dd></div>
+        <div><dt>卷期</dt><dd>第 18 卷第 2 期</dd></div>
+        <div><dt>頁碼</dt><dd>268–282 頁</dd></div>
+        <div><dt>發表</dt><dd>2019 年 12 月（線上）</dd></div>
+        <div><dt>機構</dt><dd>Tunghai University；National Center for High-Performance Computing；National Tsing Hua University；Kaohsiung Medical University；China Medical University；National Health Research Institutes；University of California, San Diego</dd></div>
+      </dl>
+    </section>
+
+    <section class="block">
+      <h2>中文摘要</h2>
+      <p>本研究利用 FlyCircuit v1.2 資料庫中 28,573 張單神經元螢光影像，推估神經元極性與連結，建構出果蠅全腦神經元對神經元網路。透過模組度與中心性分析，辨識出八個社群（左右嗅覺、嗅覺核心、聽覺、運動、前運動、左右視覺），且不同功能的社群主導不同類型的中心性，顯示網路結構與功能間的關聯。網路整體呈現小世界特性，並具有富俱樂部（rich club）結構，其最核心成員多投射至中央複合體，暗示其在資訊整合上的角色。</p>
+    </section>
+
+    <section class="block popsci-block">
+      <h2>科普版介紹<span class="aud aud-pop">給對科學有興趣的高中生</span></h2>
+<p>我們的大腦每天都在做一件看似神奇的事：辨認氣味、看見影像、聽到聲音、再做出反應，這些功能各自交給不同的腦區去處理。可是大腦並不是把神經元隨便堆在一起，而是把它們組織成一個個「分工合作的群體」。一個很自然的好奇是：如果我們能把腦裡所有神經元彼此的連線通通畫出來，會不會看見這些功能群體自己浮現出來？它們又長得像不像？這正是這篇論文想要回答的問題。</p>
+
+<p>科學家選擇果蠅（Drosophila melanogaster）當研究對象，是有道理的。人腦有約八百六十億個神經元、上千兆條連結，目前根本不可能逐一描繪；果蠅腦只有約十三萬五千個神經元，麻雀雖小卻五臟俱全——牠會學習、會記憶、會躲避危險，行為相當複雜，而且科學家有強大的遺傳工具可以精準操控牠。台灣的研究團隊多年來建立了一個叫 FlyCircuit 的資料庫，這份研究使用的是最新的 v1.2 版，裡面收錄了 28,573 張單一神經元的螢光顯微影像，等於替成千上萬個神經元拍了清楚的「個人照」，其中有 22,834 個來自雌蟲的神經元被拿來組裝這次的網路。</p>
+
+<p>不過光有照片還不夠。要畫出網路，必須先知道兩件事：每個神經元的「極性」（哪一端是接收訊息的樹突、哪一端是送出訊息的軸突），以及哪些神經元彼此相連。研究團隊用一套叫 SPIN 的演算法，從神經元的形態判斷極性；接著把所有神經元放進同一個「標準腦」座標裡，當某個神經元的軸突分支和另一個神經元的樹突分支靠得夠近（小於約一微米，差不多一個影像體素的距離），就認定它們之間有一條連線。這樣一來，他們就組裝出一張有方向、有強弱的果蠅全腦神經元對神經元網路，最後納入分析的核心部分有 19,902 個神經元，彼此構成一個誰都到得了誰的「強連通」網路。</p>
+
+<p>有了這張巨大的網路圖，接下來要做的事叫「社群偵測」（community detection）。可以把它想像成分析一個社群網站：如果某一群人彼此頻繁互動、卻很少跟外人來往，那他們大概就屬於同一個圈子。研究團隊用一個叫「模組度」（modularity）的數學指標，找出讓「圈內連線密、圈外連線疏」這個特性最明顯的分群方式。值得注意的是，他們完全沒有事先告訴電腦哪個神經元屬於哪個腦區，而是純粹讓連線結構自己說話。這一點很關鍵，因為這代表後面浮現的群體不是人為先入為主畫出來的，而是網路本身的客觀性質。</p>
+
+<p>結果非常漂亮：整張網路自動浮現出八個社群——右嗅覺、左嗅覺、嗅覺核心、聽覺、運動、前運動、左視覺、右視覺。更令人驚訝的是，這八個由「微觀」神經元網路得到的社群，竟然和團隊先前用「中尺度」腦區網路（LPU 對 LPU）找到的功能模組高度吻合。換句話說，不管你是從一根根神經元看起，還是從一塊塊腦區看起，大腦的功能分工都會以相似的樣貌冒出來，這是很有力的交叉驗證。他們進一步檢查每個社群的神經元主要伸入哪些腦區，發現分工確實對應到嗅覺、視覺、聽覺、運動等已知的感覺與運動系統。</p>
+
+<p>但這篇論文最有意思的地方，是它發現「每個社群的內部長相其實很不一樣」。研究團隊計算了好幾種「中心性」——簡單說就是衡量一個神經元在網路裡有多重要的指標。他們發現：前運動社群的神經元連結對象最多（degree 最高）；嗅覺社群的連線最強（strength 最高）；視覺社群則出現許多扮演「橋樑」角色、訊息流必經之地的神經元（betweenness 最高）；運動社群的神經元則離其他神經元都很近（closeness 最高）。整體算下來，前運動與運動社群的中心性分數最高，像是整個網路的指揮中樞。</p>
+
+<p>他們還用兩個指標把神經元分成「樞紐」（hub，圈內的核心）和「連接者」（connector，連到別圈的橋樑）。有趣的是，嗅覺社群裡核心和橋樑由不同神經元擔任，而視覺社群則有很多神經元同時身兼兩職。此外，整張網路大致具有「小世界」特性——任兩個神經元之間平均只要幾步就能到達，但這個性質並非每個社群都有，兩個嗅覺社群和運動社群就是例外。團隊也找到一種叫「富俱樂部」（rich club）的結構：少數最核心的神經元彼此緊密相連，而這些頂尖成員大多投射到「中央複合體」，暗示這個區域是全腦資訊整合的關鍵；其中多數還是可能分泌多巴胺的神經元。最後，他們在網路裡找到大量長度小於七個神經元的「環路」，這種會讓訊號繞圈循環的結構，可能和記憶維持、節律性同步活動有關。</p>
+
+<p>為什麼這些發現重要？因為它告訴我們：大腦的「功能地圖」其實藏在連線方式裡，而不只是藏在解剖構造裡。同樣是處理不同感官的群體，網路結構卻各有特色，反映出不同的運算需求。這份神經元層級的連結體，不僅讓我們更細緻地理解果蠅腦如何分工與整合，也為將來預測單一神經元的功能、設計新實驗鋪好了一條路——論文中甚至示範了如何結合中心性，把二氧化碳迴避迴路的候選神經元從四十九個縮小到六個，大幅節省了實驗的時間與資源。</p>
+    </section>
+
+    <section class="block academic-block">
+      <h2>學術版介紹<span class="aud aud-aca">給研究生以上的專業讀者</span></h2>
+      <h3>關鍵發現</h3>
+<ul>
+<li>以 FlyCircuit v1.2 資料庫的單神經元影像（22,834 隻雌蟲神經元）建構果蠅全腦神經元對神經元加權有向網路，捨棄只單向連結的節點後，分析以 19,902 個構成強連通的神經元為核心。</li>
+<li>單用 Newman 模組度演算法（不使用任何 LPU 先驗資訊），網路自動分成八個社群：社群 1~8 分別對應右嗅覺、左嗅覺、前運動、嗅覺核心、運動、左視覺、右視覺、聽覺；各社群神經元主要伸入對應功能模組的 LPU（共 49 個 LPU），且樹突／軸突分布左右對稱。</li>
+<li>八社群的神經元數差異大（左視覺 3965、右視覺 4028、前運動 3637、嗅覺核心 2991、聽覺 1588、運動 1262、右嗅覺 1247、左嗅覺 1184），其社群結構與先前 LPU 中尺度網路（Shih et al. 2015）的功能模組高度一致，是跨尺度的交叉驗證。</li>
+<li>不同功能社群主導不同類型的中心性：前運動社群主導 degree、嗅覺社群主導 strength、左視覺社群有最高 betweenness（\(&gt;10^{-2}\)）、運動社群有最高 closeness、嗅覺社群主導 dynamical importance；PageRank 與 vulnerability 則在各社群分布相近。整體 global centrality 以前運動與運動社群分數最高。</li>
+<li>依 Guimerà–Amaral 的 \(Z\)（社群內強度）與 \(P\)（參與係數）分布，把八社群分成三群：嗅覺社群只含高度在地化的 provincial hub（\(R_5\)，\(P\approx 0.1\)，核心與閘道由不同神經元擔任）；視覺社群含較多兼具核心與閘道的 connector hub（\(R_6\)）；其餘三個中央腦社群（嗅覺核心、前運動、運動）與聽覺社群介於兩者之間。</li>
+<li>神經元的 degree 分布在 \(\text{degree}&lt;2000\) 時呈指數衰減、strength 分布呈冪律長尾；strength–degree 散布圖出現兩個分支，上支主要是社群 1、2 的嗅覺神經元（強度隨度數快速增長，造成長尾）。</li>
+<li>全腦網路具小世界特性（\(\mathrm{SWI}=3.13\)），但並非每個社群皆然：左、右嗅覺與運動社群 \(\mathrm{SWI}&lt;1\)（不是小世界）——兩嗅覺社群因路徑長度過大、運動社群因群聚係數太小；這三個非小世界社群共同點是神經元數最少、社群內連結密度最高（左嗅覺 14.5%、運動 14.5%、右嗅覺 12.8%）。</li>
+<li>網路含富俱樂部（rich club）結構：最內層 RC（\(\mathrm{RC}_i\)）有 5 個成員、最低 \(p\) 值的 \(\mathrm{RC}_p\) 有 6 個成員，全部位於前運動社群；這 11 個成員中有 10 個由 TH-GAL4 驅動，是可能的多巴胺神經元；多數投射至中央複合體（central complex），顯示其在資訊整合的核心地位。</li>
+<li>網路存在大量長度小於七個神經元的不可約環路（irreducible loops），數量遠多於 1000 個隨機化網路；長度 \(\ge 7\) 的環路則幾乎不存在。短環（\(\ell=3\)）多位於嗅覺社群（觸角葉），較長環（\(\ell=4,5,6\)）由運動社群主導。</li>
+<li>連結估計以蛋白橋（PB）神經元資料集（442 個 FlyCircuit 神經元）驗證：真陽性率 0.40、假陽性率 0.02——抓到的真連結不到一半，但偽陽性極低。論文並示範用此網路把 CO₂ 迴避迴路的候選下游神經元從 49 個篩到 6 個。</li>
+</ul>
+      <h3>方法</h3>
+<p><strong>資料來源。</strong>網路以 FlyCircuit 資料庫最新的 v1.2 版為基礎，該版收錄 28,573 張單神經元螢光影像（前一版 v1.1 為 23,579 張；先前的 LPU 中尺度分析 Shih et al. 2015 用的是 v1.1）。其中 22,834 隻來自雌蟲的神經元被用來組裝本研究的網路。每個神經元的骨架（skeleton）以兩種演算法組合追蹤，並轉換、對位到同一個標準腦空間。</p>
+<p><strong>網路建構。</strong>FlyCircuit 只提供影像與骨架，要建網路還需補上兩項資訊：(1) 神經元極性（軸突／樹突），用 SPIN（skeleton-based polarity identification for neurons）演算法依形態判定；(2) 神經元間的連結，用距離準則推估——當一個神經元的軸突分支片段與另一個神經元的樹突分支片段在標準腦空間中距離小於一個體素（約 1.0 μm）即視為相連，連結權重以符合距離與極性準則的片段對數目計。由此建出以鄰接矩陣 A 表示的加權有向網路。並非所有節點都有雙向連結，只做軸突或只做樹突連結的節點被捨棄，最後保留 19,902 個構成強連通（每個節點都能到達並被到達其他所有節點）的神經元做分析。連結估計以先前發表的蛋白橋（protocerebral bridge, PB）神經元支配資料集驗證，其中 442 個神經元在 FlyCircuit 內，得到真陽性率 0.40、假陽性率 0.02。</p>
+<p><strong>網路度量。</strong>所有度量在 MATLAB 的 Brain Connectivity Toolbox（BCT, Rubinov &amp; Sporns 2010）上計算，包含多種中心性：degree（連結數，分進、出、總）、strength（連結權重總和）、betweenness（以 1/A 定義距離、用 Brandes 演算法計最短路徑）、vulnerability（移除節點造成的全域效率下降）、dynamical importance（移除節點對鄰接矩陣最大特徵值的相對改變）、closeness（最短路徑平均反距離，分進、出）、PageRank（阻尼因子 \(d=0.85\)）。</p>
+<p><strong>社群與樞紐分析。</strong>社群偵測用 Newman（2006）的模組度 Q 最大化法，把網路分割成模組度最高的社群結構（完全不使用 LPU 先驗資訊）；事後再以各社群神經元支配的 49 個 LPU 推斷其功能。樞紐／連接者分析採 Guimerà &amp; Amaral（2005）的社群內強度 \(Z\) 與參與係數 \(P\)，依門檻把節點分成 R1~R7 七型（hub 為 \(Z\ge 2.5\)、connector 為 \(P&gt;0.62\)，含 provincial hub \(R_5\)、connector hub \(R_6\)、kinless hub \(R_7\) 等）。</p>
+<p><strong>小世界、富俱樂部與環路。</strong>小世界指數 \(\mathrm{SWI}=\)（正規化群聚係數）／（正規化平均最短路徑），對 1000 個隨機化網路取系集平均做正規化，\(\mathrm{SWI}&gt;1\) 視為小世界，並對全腦與各社群（移除社群間連結）分別計算。富俱樂部分析沿用 Harriger et al.（2012）方法，找出 \(\mathrm{RC}_i\)（最內層）與 \(\mathrm{RC}_p\)（最低 \(p\) 值）成員。環路分析定義有向加權網路中的環，以環上最弱連結為環強度 \(S_L\)；為克服長環搜尋的計算量，先移除弱於門檻的連結把網路切成子網，再從各節點生長自避鏈找回到起點的環，並檢查捷徑以判定是否為「不可約」環。統計不可約環時，把腦網路的環數與保留進、出度及出強度分布的 1000 個隨機化網路相比。</p>
+      <h3>重要性與定位</h3>
+<p>這是首個直接以 FlyCircuit 單神經元影像、<strong>不依賴 LPU 先驗知識</strong>而建構的果蠅全腦「神經元對神經元」微觀連結體（約兩萬個神經元層級）。它最關鍵的貢獻，是證實只用連線結構做社群偵測，就能自動浮現出八個社群，而且與先前以腦區（LPU）為單位的中尺度網路（Shih et al. 2015）所發現的功能模組高度一致——這是一次有力的跨尺度交叉驗證，顯示大腦的功能分工同時寫在微觀與中尺度的連線結構裡。</p>
+<p>相對於 chiang-2011（Chiang et al. 2011 在 Current Biology 發表的 FlyCircuit 單細胞解析度三維重建，提供原始影像與骨架資料）與 shih-2015（Shih et al. 2015 建立 LPU 中尺度網路、辨識超級 LPU 功能模組與資訊流模型），本研究把分析尺度由「腦區之間」推進到「神經元之間」，並進一步揭示先前看不到的內部多樣性：各功能社群在中心性類型、樞紐／連接者組成、小世界性與環路結構上各有特色，說明微觀網路承載的功能組織資訊，比單純的解剖構造（神經氈／LPU）更豐富——多數神經元其實是連接多個 LPU 的投射神經元。研究也凸顯中央複合體（位於前運動社群、由可能的多巴胺神經元組成的富俱樂部核心）在全腦資訊整合與感覺—運動整合中的樞紐角色。</p>
+<p>在 FlyCircuit 連結體脈絡中，這篇論文把資料庫從「影像／骨架」與「LPU 網路」推進到可做跨尺度比較的神經元層級網路，並示範其應用價值（如把 CO₂ 迴避迴路候選神經元由 49 個縮小到 6 個），為後續結合神經元類型、神經傳導物質與計算模型（如同團隊 Huang et al. 2019 的全腦計算模型）的研究奠定基礎。作者也誠實指出限制：連結估計真陽性率僅約 40%，網路屬部分重建，未來需以更好的統計與影像對位方法改進。</p>
+    </section>
+
+    <section class="block">
+      <h2>相關論文</h2>
+      <div class="related-grid">
+      <a href="chiang-2011-flycircuit.html"><span class="ry">2011 · Current Biology</span><br><span class="rt">果蠅全腦連結網路的單細胞解析度三維重建</span></a>
+      <a href="shih-2015-information-flow.html"><span class="ry">2015 · Current Biology</span><br><span class="rt">以連結體學分析果蠅腦中的資訊流</span></a>
+      <a href="cheng-2025-mushroom-body.html"><span class="ry">2025 · Science Advances</span><br><span class="rt">果蠅蕈狀體中的混合神經網路驅動嗅覺偏好</span></a>
+      </div>
+    </section>
+  </article>
+</div>
+<div class="foot">
+  本頁由 LLM 依原始 PDF 整理；中文重點為摘要性質，引用前請以原文為準。｜id: <code>community-2019</code>
+</div>
+</body>
+</html>

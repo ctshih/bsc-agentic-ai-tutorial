@@ -1,0 +1,504 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>用 Agentic AI 反覆迭代、把知識庫「養大養好」｜Claude Code 進階教學 EP02</title>
+<style>
+  :root{
+    --ink:#1b2733; --soft:#5a6b7b; --faint:#8b98a5;
+    --bg:#ffffff; --panel:#f7f8fa; --border:#e4e8ee;
+    --accent:#2563eb; --accent-soft:#eff4ff;
+    --maxw:920px; --radius:12px;
+    --green:#16a34a; --blue:#2563eb; --purple:#9333ea; --amber:#d97706; --red:#dc2626;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,"Segoe UI","Noto Sans TC","Microsoft JhengHei","PingFang TC",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.85; font-size:16.5px; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 22px 120px}
+  header.hero{ max-width:var(--maxw); margin:0 auto; padding:54px 22px 26px; }
+  .eyebrow{color:var(--accent); font-weight:700; font-size:13px; letter-spacing:.08em; text-transform:uppercase; margin:0 0 10px}
+  h1{font-size:33px; line-height:1.3; margin:0 0 12px; letter-spacing:-.01em}
+  .subtitle{font-size:18px; color:var(--soft); margin:0 0 26px}
+  .meta-card{ background:var(--panel); border:1px solid var(--border); border-radius:var(--radius); padding:18px 22px; font-size:15px; }
+  .meta-card p{margin:6px 0}
+  .meta-card b{color:var(--ink)}
+  h2{font-size:25px; margin:64px 0 8px; padding-top:16px; border-top:2px solid var(--border); line-height:1.35}
+  h2 .pt{color:var(--accent); font-size:15px; display:block; font-weight:700; letter-spacing:.05em; margin-bottom:2px}
+  h3{font-size:19px; margin:38px 0 10px}
+  h4{font-size:16px; margin:24px 0 6px; color:var(--ink)}
+  p{margin:12px 0}
+  a{color:var(--accent); text-decoration:none}
+  a:hover{text-decoration:underline}
+  code{background:var(--panel); border:1px solid var(--border); border-radius:5px; padding:1px 6px; font-family:"Cascadia Code",Consolas,Menlo,monospace; font-size:.86em}
+  pre{background:#0f1622; color:#e6edf3; border-radius:10px; padding:16px 18px; overflow:auto; font-size:13.5px; line-height:1.6}
+  pre code{background:none; border:none; color:inherit; padding:0}
+  ul,ol{padding-left:22px}
+  li{margin:7px 0}
+  blockquote{margin:16px 0; padding:10px 18px; border-left:4px solid var(--accent); background:var(--accent-soft); border-radius:0 8px 8px 0; color:var(--ink)}
+
+  nav.toc{background:var(--panel); border:1px solid var(--border); border-radius:var(--radius); padding:20px 26px; margin:30px 0}
+  nav.toc h2{border:none; margin:0 0 10px; padding:0; font-size:18px}
+  nav.toc ol{margin:6px 0 0; columns:2; column-gap:34px}
+  nav.toc a{color:var(--ink)}
+  nav.toc blockquote a{color:var(--accent); text-decoration:underline; font-weight:500}
+  @media(max-width:620px){nav.toc ol{columns:1}}
+
+  .msg{padding:11px 16px; margin:14px 0; border-radius:5px; font-size:15.5px}
+  .msg .who{font-weight:700; margin-right:4px}
+  .msg.g{background:rgba(34,197,94,.10); border-left:4px solid var(--green)}
+  .msg.b{background:rgba(59,130,246,.10); border-left:4px solid var(--blue)}
+  .msg.p{background:rgba(168,85,247,.12); border-left:4px solid var(--purple)}
+  .msg.y{background:rgba(245,158,11,.13); border-left:4px solid var(--amber)}
+  .msg.r{background:rgba(239,68,68,.10); border-left:4px solid var(--red)}
+  .msg ol,.msg ul{margin:8px 0 2px}
+  .ai{margin:10px 0 22px; padding-left:6px}
+  .ai .tag{display:inline-block; font-size:12px; font-weight:700; color:var(--accent); background:var(--accent-soft); border-radius:5px; padding:1px 8px; margin-right:6px}
+  .ai .tag.q{color:#7c3aed; background:#f3e8ff}
+
+  figure{margin:22px 0; padding:0}
+  figure img{width:100%; display:block; border:1px solid var(--border); border-radius:10px; box-shadow:0 6px 24px rgba(16,24,40,.08)}
+  figcaption{font-size:13.5px; color:var(--soft); margin-top:9px; text-align:center}
+  figcaption b{color:var(--ink)}
+  .cmp{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:22px 0}
+  .cmp figure{margin:0}
+  .cmp .tagline{font-size:13px; font-weight:700; margin:0 0 6px}
+  .cmp .before{color:var(--red)} .cmp .after{color:var(--green)}
+  @media(max-width:620px){.cmp{grid-template-columns:1fr}}
+
+  table{border-collapse:collapse; width:100%; margin:18px 0; font-size:14.5px}
+  th,td{border:1px solid var(--border); padding:9px 12px; text-align:left; vertical-align:top}
+  th{background:var(--panel); font-weight:700}
+  td code{font-size:.9em}
+
+  .callout{background:#fffbeb; border:1px solid #fde68a; border-left:4px solid var(--amber); border-radius:0 8px 8px 0; padding:12px 16px; margin:18px 0; font-size:15px}
+  .note{background:var(--accent-soft); border:1px solid #c7dbff; border-radius:8px; padding:12px 16px; margin:18px 0; font-size:15px}
+  .foot{max-width:var(--maxw); margin:0 auto; padding:30px 22px; color:var(--faint); font-size:13px; border-top:1px solid var(--border)}
+  .lesson{background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:4px 20px 14px; margin:16px 0}
+  .lesson h4{color:var(--accent)}
+  .seg{scroll-margin-top:16px}
+  .num{display:inline-block; min-width:30px; height:30px; line-height:30px; text-align:center; background:var(--accent); color:#fff; border-radius:8px; font-weight:700; font-size:15px; margin-right:8px}
+  .recap{display:flex; gap:14px; align-items:flex-start; background:var(--accent-soft); border:1px solid #c7dbff; border-radius:var(--radius); padding:16px 20px; margin:22px 0}
+  .recap .ico{font-size:22px; flex:none}
+  .video-box{margin:28px 0 6px}
+  .video-box .vlabel{font-size:14px; color:var(--accent); font-weight:700; letter-spacing:.04em; margin:0 0 10px}
+  .video-wrap{position:relative; width:100%; aspect-ratio:16/9; border-radius:var(--radius); overflow:hidden; box-shadow:0 8px 30px rgba(16,24,40,.14); background:#000}
+  .video-wrap iframe{position:absolute; inset:0; width:100%; height:100%; border:0}
+  .video-box .vcap{font-size:13.5px; color:var(--soft); margin:10px 0 0}
+  .demo-box{display:flex; align-items:center; gap:14px; margin:18px 0 6px; padding:16px 22px;
+    background:var(--accent-soft); border:1px solid #c7dbff; border-radius:var(--radius);
+    text-decoration:none; color:var(--ink); transition:border-color .15s, box-shadow .15s}
+  .demo-box:hover{border-color:var(--accent); box-shadow:0 6px 20px rgba(37,99,235,.12)}
+  .demo-ico{font-size:24px; flex:none}
+  .demo-txt{font-size:15.5px}
+  .demo-txt b{color:var(--accent)}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <p class="eyebrow"><a href="../index.html" style="color:var(--accent);text-decoration:none">← BSC with Agentic AI Tutorial</a> · EP02</p>
+  <h1>用 Agentic AI 反覆迭代<br>把知識庫「養大養好」</h1>
+  <p class="subtitle">EP01 做出了雛形；EP02 要把它養大——加深度、擴範圍、修缺陷。一次真實的「迭代」協作完整重演。</p>
+  <div class="meta-card">
+    <p><b>這份文件是什麼：</b>接續 <a href="../ep01-knowledge-base/index.html">EP01</a>。EP01 從零做出知識庫<b>雛形</b>；這一集把它<b>反覆迭代、長大</b>——你會看到使用者每一句指令（逐字呈現）如何把一個粗胚，一步步打磨成有概念條目、關鍵字網路、深度內容、又能跨物種收錄的成熟知識庫。</p>
+    <p><b>適合誰讀：</b>看過 EP01、想學「<b>怎麼跟 AI 一起把作品越改越好</b>」的人。沒看過 EP01 也能讀，但建議先看（這裡會延續它的觀念與成果）。<b>一樣不需要會寫程式。</b></p>
+    <p><b>成果（一句話）：</b>把 EP01 的 6 篇論文雛形，養成 <b>11 篇論文 ＋ 8 篇概念條目 ＋ 31 個分類上色的關鍵字</b>的知識庫：每篇論文多了基本資料、科普版、學術版與 LaTeX 方程式；首頁從「論文清單」變「概念地圖」；範圍從果蠅擴到一般連結體方法學——全部由 AI 動手，人只負責出題、決策、糾錯。</p>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="recap">
+    <span class="ico">↩️</span>
+    <div><b>先讀過 EP01 嗎？</b>這一集是「第二輪」。EP01 教的是<b>從零建立</b>（看懂參考設計 → 派分身讀論文 → 生成知識庫 → 寫規則書）。EP02 教的是<b>迭代</b>：對已經做好的東西不滿意、要它更好——這其實才是真實研究工作的常態。沒看過 EP01 也沒關係，往下讀即可；想補課就點 <a href="../ep01-knowledge-base/index.html">EP01 建立知識庫雛形</a>。</div>
+  </div>
+
+  <div class="video-box">
+    <p class="vlabel">📺 影片版</p>
+    <div class="video-wrap">
+      <iframe src="https://www.youtube.com/embed/XshZm8-rK5o" title="BSC with Agentic AI Tutorial EP02 進一步把知識庫磨成你想要的樣子" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+    <p class="vcap">不想讀字？可以先看影片導覽，再回來細讀；兩者內容一致。</p>
+  </div>
+
+  <a class="demo-box" href="demo/index.html" target="_blank" rel="noopener">
+    <span class="demo-ico">🔗</span>
+    <span class="demo-txt"><b>看 EP02 養大後的知識庫：</b>這一集做出來的版本（11 篇論文、8 篇概念條目、彩色關鍵字網路）已上線，點此直接逛逛 →</span>
+  </a>
+
+  <nav class="toc">
+    <h2>目錄</h2>
+    <blockquote>想直接看怎麼實做，可以從 <a href="#part1">Part 1 — 完整對話時序</a> 開始。</blockquote>
+    <ol>
+      <li><a href="#colors">對話框顏色說明</a></li>
+      <li><a href="#glossary">名詞速查表</a></li>
+      <li><a href="#mindset">迭代心法（EP02 的 5 個重點）</a></li>
+      <li><a href="#part1">Part 1 — 完整對話時序</a></li>
+      <li><a href="#part2">Part 2 — 最佳實踐清單</a></li>
+      <li><a href="#part3">Part 3 — 本次成果（養大後的知識庫）</a></li>
+      <li><a href="#part4">Part 4 — 10 個核心教訓</a></li>
+      <li><a href="#closing">結語：給初學者的下一步</a></li>
+    </ol>
+  </nav>
+
+  <!-- ============ 顏色說明 ============ -->
+  <h2 id="colors">對話框顏色說明</h2>
+  <p>後面 <a href="#part1">Part 1</a> 會<b>逐句、完整重現使用者的每一句指令</b>（截圖只是輔助，讓你更有臨場感；真正要看清楚的是文字框裡的內容）。AI 的回應與動作則用灰底「AI 做了什麼」<b>摘要</b>。所有使用者發言用五種顏色標示「這句話在做什麼」：</p>
+  <div class="msg g"><span class="who">🟢 使用者：</span>請求動作 — 叫 AI 去做一件事。</div>
+  <div class="msg b"><span class="who">🔵 使用者：</span>問問題 — 詢問現況、原理、估算。</div>
+  <div class="msg p"><span class="who">🟣 使用者：</span>關鍵決策 — 在 AI 攤開的選項中做選擇。</div>
+  <div class="msg y"><span class="who">🟡 使用者：</span>中斷 / 澄清 — 補充條件、修正誤會。</div>
+  <div class="msg r"><span class="who">🔴 使用者：</span>設計回饋 / 糾錯 — 指出方案或產出的根本問題。</div>
+  <p class="note">EP02 的精神就藏在這裡：<b>迭代 = 大量的 🔴 與 🟡</b>。一個作品會變好，靠的不是第一次就做對，而是你願意一次次說「這裡不夠好、那裡改一下、這個其實錯了」。</p>
+
+  <!-- ============ 名詞速查表 ============ -->
+  <h2 id="glossary">名詞速查表</h2>
+  <p>看到不懂的詞先回來查。（EP01 講過的基礎詞——知識庫、真實來源、metadata、Subagent、CLAUDE.md——這裡不重覆，需要的話回 <a href="../ep01-knowledge-base/index.html#glossary">EP01 名詞速查表</a>。）</p>
+
+  <h3>A. 這一集新出現的知識庫概念</h3>
+  <table>
+    <tr><th>名詞</th><th>白話解釋</th></tr>
+    <tr><td><b>概念條目 (topic)</b></td><td>綜整多篇論文寫成的一篇 wiki 文章（例如〈連結體是什麼〉）。它是知識庫的「主幹」，讓人先懂全貌、再深入個別論文。</td></tr>
+    <tr><td><b>關鍵字網路</b></td><td>把所有頁面的關鍵字畫成一張網。點一個關鍵字，等於搜尋出所有提到它的文章與論文。</td></tr>
+    <tr><td><b>force-directed layout（力導向佈局）</b></td><td>用「物理力」自動排節點位置的演算法：節點互相排斥、有關聯的互相吸引，跑幾百次後相關的就自己聚成一團。關鍵字網路就是這樣排的。</td></tr>
+    <tr><td><b>論文基本資料 (bib)</b></td><td>期刊／卷期／頁碼／發表年月／機構等正式書目資訊。</td></tr>
+    <tr><td><b>科普版 / 學術版</b></td><td>同一篇論文寫兩種版本：科普版給高中生（白話、比喻），學術版給研究人員（方法寫得很細）。</td></tr>
+    <tr><td><b>LaTeX / MathJax</b></td><td>LaTeX 是排數學式的標準語法；MathJax 是讓網頁把 LaTeX 渲染成漂亮數學符號的工具。</td></tr>
+    <tr><td><b>lint（程式碼／內容健檢）</b></td><td>用小程式自動掃過產出，揪出格式問題（這裡用來抓不成對的括號、被當成標籤的裸 <code>&lt; &gt;</code>）。</td></tr>
+  </table>
+
+  <h3>B. 這一集用到的 Agentic AI 能力</h3>
+  <table>
+    <tr><th>名詞</th><th>白話解釋</th></tr>
+    <tr><td><b>memory（記憶）</b></td><td>AI 可以把你的偏好寫進長期記憶檔，之後每次工作自動讀取。本集把「BSC 成員名單」「嚴禁簡體中文」都記了下來。</td></tr>
+    <tr><td><b>AskUserQuestion（決策選單）</b></td><td>遇到該由你決定的岔路，AI 跳出選項讓你點，而不是替你猜。本集用在「5 篇新論文怎麼收」「主題地圖怎麼擴」。</td></tr>
+    <tr><td><b>WebSearch（網路搜尋）</b></td><td>AI 上網查資料的能力。本集用它查 LICONN 論文的正式出版卷期頁碼。</td></tr>
+    <tr><td><b>CSS specificity（樣式優先序）</b></td><td>網頁樣式打架時誰贏的規則。本集 AI 自己踩到這個坑——它寫的段落間距「被另一條更強的舊規則蓋掉」，所以一直沒生效。</td></tr>
+  </table>
+
+  <!-- ============ 心法 ============ -->
+  <h2 id="mindset">迭代心法（EP02 的 5 個重點）</h2>
+  <p>EP01 講「怎麼開始」；EP02 講「怎麼把已經做好的東西越改越好」。先記住這 5 件事：</p>
+  <ol>
+    <li><b>不滿意就直說，而且要具體。</b>「首頁只是論文清單、缺少概念層」比「首頁不好看」有用一百倍——越具體，AI 越改得準。</li>
+    <li><b>「擴寫」不等於「重做」。</b>要 AI 寫深度內容時，明確要求它<b>回原始資料重讀</b>，否則它會用既有文字膨脹，看起來變長、其實沒變紮實。</li>
+    <li><b>AI 會出錯，你要檢查它的產出。</b>這一集 AI 自己踩了三個坑（樣式被蓋掉、裸符號被當標籤、混進簡體字），全靠「驗證」和「使用者糾錯」才抓到。<b>別把「它說完成了」當成「真的對了」。</b></li>
+    <li><b>規則書要跟著長大。</b>知識庫變複雜，就把新的維護流程寫回 <code>CLAUDE.md</code>，未來每次自動遵守——這樣它才不會越改越亂。</li>
+    <li><b>範圍與方向，停下來讓你決策。</b>要不要擴大收錄範圍、主題地圖要不要擴建——這些是「你的事」，AI 該攤開選項問你，而不是自作主張。</li>
+  </ol>
+
+  <!-- ============ PART 1 ============ -->
+  <h2 id="part1"><span class="pt">PART 1</span>完整對話時序</h2>
+  <p>以下按時間順序，<b>逐句重現使用者的指令</b>（彩色框，逐字）＋ <b>AI 做了什麼</b>（灰框，摘要）。穿插的截圖讓你看到當時的真實畫面與「改版前後」對照。照著做，你就能自己完成同樣的迭代。</p>
+
+  <h3 class="seg" id="s1"><span class="num">1</span>不滿意：首頁只是論文清單</h3>
+  <p>EP01 做出的知識庫，首頁長這樣——其實就是把論文一篇篇列出來、配上篩選器。使用者覺得不夠：</p>
+  <figure>
+    <img src="images/EP02-Old-top-page.png" alt="EP01 舊首頁：論文清單加篩選器">
+    <figcaption><b>改版前（EP01）：</b>首頁就是「論文目錄」＋ 篩選器，缺少「把知識消化成概念」的那一層。</figcaption>
+  </figure>
+  <div class="msg r"><span class="who">🔴 使用者：</span>我對 EP01 做出來的成果不太滿意：<b>1.</b> 首頁目前其實是把論文逐篇列出。<b>2.</b> 連結網路是論文之間的連結，節點的名稱有的是「作者＋年份」、有的是「主題＋年份」（不統一）。請做以下修改：<b>1.</b> 你綜整目前所有的論文後，從裡面抽出重要的概念，各寫一篇類似 wiki 的介紹文章，文章裡面會連結到各論文條目，同時列出每篇文章的「關鍵字」。<b>2.</b> 除了論文間連結之外，要增加前項「關鍵字」的連結網路，點關鍵字相當於搜尋功能。</div>
+  <figure>
+    <img src="images/dialog-2-1.png" alt="實際對話：AI 回應 EP02 改版方向">
+    <figcaption><b>實際對話截圖：</b>這就是 Claude Code 的畫面。使用者點出兩個不滿，AI 回應理解並提出改版方向。</figcaption>
+  </figure>
+  <div class="ai"><span class="tag">AI 做了什麼</span>沒有急著動手，而是先把這次改版<b>當成資訊架構的大改</b>：把「首頁 = 論文清單」升級成「首頁 = 概念地圖」。它提出一份計畫——新增 5 篇「概念條目」（綜整 6 篇論文抽出核心概念，各寫一篇），並新增一張「關鍵字網路」。動手前先把計畫攤開讓使用者確認。全程只動本機 <code>Knowledge/</code>，EP01 的線上版完全不碰。</div>
+
+  <h3 class="seg" id="s2"><span class="num">2</span>確認計畫、定下節點命名</h3>
+  <p>AI 把計畫攤開（5 篇概念條目清單、論文網路節點要怎麼命名），請使用者拍板：</p>
+  <figure>
+    <img src="images/dialog-2-2.png" alt="實際對話：EP02 改版計畫與概念條目清單">
+    <figcaption><b>實際對話截圖：</b>AI 的「改版計畫」——列出 5 篇概念條目分別綜整哪些論文，請使用者確認。</figcaption>
+  </figure>
+  <div class="ai"><span class="tag q">AI 問你</span>動手前想跟你確認：<b>①</b> 上面 5 篇概念條目夠不夠、要不要增刪（例如要不要獨立一篇「連結體研究的開放工具鏈」）？<b>②</b> 論文網路節點用「第一作者＋年份」可以嗎？（工具型論文如 Kaleido 會變成 <code>Wang 2018</code>，你也可以選擇保留工具名。）</div>
+  <div class="msg p"><span class="who">🟣 使用者：</span><b>1.</b> 可以。<b>2.</b> 主題（2 個字以內）＋年份。</div>
+  <figure>
+    <img src="images/dialog-2-3.png" alt="實際對話：確認 5 篇概念條目與節點命名規則">
+    <figcaption><b>實際對話截圖：</b>使用者拍板——5 篇照走、論文網路節點統一用「主題（≤2 字）＋年份」。</figcaption>
+  </figure>
+  <div class="ai"><span class="tag">AI 做了什麼</span>派 Subagent 綜整論文、寫出 5 篇概念條目，並把全部論文節點改成統一的「主題＋年份」短標（建庫 2011／資流 2015／視覺 2018…）。同時打造關鍵字網路：收集所有頁面的關鍵字、算出共現關係、用力導向佈局排成一張可點選的網。改完跑 <code>build.py</code> 重生導覽頁。</div>
+
+  <h3 class="seg" id="s3"><span class="num">3</span>一次給四個微調</h3>
+  <div class="msg g"><span class="who">🟢 使用者：</span>主題地圖 · 概念條目目前是「磚塊式」，做一個切換按鈕可以切換磚塊式跟條列式（default 是條列式，我的習慣）。<br><br>論文列表另外做一個頁面，首頁上放一個連結就好，因為論文會越來越多。<br><br>論文網路部分，我說的「兩字以內＋年份」（節點名稱）要用英文。<br><br>論文網路的節點圓圈，如果作者裡面有 BSC 成員，就用加框 highlight 出來，目前 BSC 成員有我（Chi-Tin Shih）以及江安世老師（Ann-Shyn Chiang），這個名單以後還會增加，你要記住。</div>
+  <figure>
+    <img src="images/dialog-2-4.png" alt="實際對話：四個微調指令">
+    <figcaption><b>實際對話截圖：</b>使用者一次給四個修改，AI 逐項收下並把「BSC 成員名單」記進記憶。</figcaption>
+  </figure>
+  <div class="ai"><span class="tag">AI 做了什麼</span>四項逐一處理：① 首頁加「條列／磚塊」切換鈕，預設條列、並用瀏覽器記住你的選擇；② 把論文清單獨立成 <code>papers.html</code>，首頁只留一個入口；③ 節點短標改英文；④ 在 <code>build.py</code> 建一份 <code>BSC_MEMBERS</code> 名單，作者含名單內成員的論文節點就加上橘色外框。並把「BSC 成員名單會持續增加」這件事<b>寫進長期記憶</b>。AI 也誠實指出：目前 6 篇全是你們團隊的，所以會全部加框——等收錄外部論文，加框才看得出差異。</div>
+  <p>其中第 ① 項——概念條目的「條列／磚塊」切換——長這樣：</p>
+  <figure>
+    <img src="images/ep02-topic-list.png" alt="主題地圖條列式檢視">
+    <figcaption><b>條列式（預設）：</b>8 篇概念條目排成精簡的一行行，一眼掃完——這是使用者指定的預設。</figcaption>
+  </figure>
+  <figure>
+    <img src="images/ep02-topic-grid.png" alt="主題地圖磚塊式檢視">
+    <figcaption><b>磚塊式：</b>同一批概念條目改用卡片呈現（還帶出關鍵字標籤）。按右上角的切換鈕就能換，瀏覽器會記住你的選擇。</figcaption>
+  </figure>
+
+  <h3 class="seg" id="s4"><span class="num">4</span>時間軸反過來</h3>
+  <div class="msg g"><span class="who">🟢 使用者：</span>時間軸要反過來，新的在上面。</div>
+  <figure>
+    <img src="images/dialog-2-5.png" alt="實際對話：時間軸反過來">
+    <figcaption><b>實際對話截圖：</b>短短一句話，AI 就完成排序反轉並驗證。</figcaption>
+  </figure>
+  <div class="ai"><span class="tag">AI 做了什麼</span>改 <code>build.py</code> 裡時間軸的排序邏輯（日期新→舊；同一天則後加入的在上），重建後驗證、並在頁面加註「最新的在最上面」。一個小需求，兩行程式。</div>
+  <figure>
+    <img src="images/EP02-timeline.png" alt="時間軸舊排序（舊的在上）">
+    <figcaption><b style="color:var(--red)">改版前：</b>舊的在上——2026-06-22 的紀錄排在最頂端。</figcaption>
+  </figure>
+  <figure>
+    <img src="images/EP02-timeline-new.png" alt="時間軸新排序（新的在上）">
+    <figcaption><b style="color:var(--green)">改版後：</b>新的在上——最新的紀錄排到最上面。</figcaption>
+  </figure>
+
+  <h3 class="seg" id="s5"><span class="num">5</span>再微調：節點短標改三段式</h3>
+  <div class="msg y"><span class="who">🟡 使用者：</span>前面 node_label：用「主題/工具名/年份」（可縮寫），例如 <code>Vis/Kaleido/2018</code>。</div>
+  <div class="ai"><span class="tag">AI 做了什麼</span>把 6 篇論文的節點短標改成三段式：有命名工具的放中段（<code>Vis/Kaleido/2018</code>、<code>Seg/NeuroRetriever/2021</code>），純分析論文則用兩段（<code>Info Flow/2015</code>）。同步更新規則書與圖上文字。<b>觀念：</b>命名規則這種小地方，定清楚一次，之後每篇都照辦。</div>
+
+  <h3 class="seg" id="s6"><span class="num">6</span>內容擴充：基本資料＋科普版＋學術版（重點：重讀原文）</h3>
+  <div class="msg g"><span class="who">🟢 使用者：</span>好，再來處理內容的部分，所有的單篇論文頁面做以下擴充：
+    <ol>
+      <li>在「一句話總結」與「摘要」中間，加入「論文基本資料」：期刊、卷數、期數、頁數（編號）、發表年月、機構（用一列一直寫下去，不要一個機構一列，會太長）。</li>
+      <li>「中文摘要」後面加上「科普文」，閱讀對象是對科學有興趣的高中生，1500-2000 字。</li>
+      <li>科普文後面是「學術版介紹文」，閱讀對象是研究生以上到教授級研究人員等專業人士，內容用現有的「關鍵發現」、「方法」、「重要性與定位」為基礎擴寫，方法要寫詳細一點。</li>
+      <li><b>注意！！！</b>再寫前面三項時，要回頭把論文重新仔細讀一次，而不是用你的生成能力以現有的文字隨便擴寫。</li>
+    </ol>
+  </div>
+  <figure>
+    <img src="images/dialog-2-6.png" alt="實際對話：論文內容擴充，強調要重讀 PDF">
+    <figcaption><b>實際對話截圖：</b>第 4 點（三個驚嘆號）是這段的靈魂——<b>要 AI 回原文重讀，不要拿既有文字膨脹</b>。</figcaption>
+  </figure>
+  <div class="ai"><span class="tag">AI 做了什麼</span>這是大工程。AI 照專案慣例<b>派 6 個 Subagent 平行精讀</b>（一篇 PDF 一個分身），各自從原始論文抽出正式書目、寫出 1500–2000 字科普版與更詳盡的學術版，回傳結構化結果；主程式再統一注入 6 個論文頁，並把機構收斂成「一列、去重」。<b>為什麼第 4 點重要：</b>如果只叫 AI「擴寫」，它會用頁面上已有的中文去膨脹，字數變多但沒有新資訊；明確要求「回原文重讀」，它才會挖出原本沒寫的方法細節與正確數字。</div>
+
+  <h3 class="seg" id="s7"><span class="num">7</span>段落間距 → AI 抓到自己的 bug</h3>
+  <div class="msg r"><span class="who">🔴 使用者：</span>段落之間的距離要加大一點（或加空行），以利閱讀。</div>
+  <figure>
+    <img src="images/dialog-2-7.png" alt="實際對話：發現 CSS specificity 問題">
+    <figcaption><b>實際對話截圖：</b>AI 老實說出「我先前那條規則被舊規則蓋掉了」——這就是「驗證」的價值：沒驗證，就會以為改好了。</figcaption>
+  </figure>
+  <div class="ai"><span class="tag">AI 做了什麼</span>第一次它調大了段落間距，但<b>驗證時發現根本沒生效</b>。追下去抓到真正的原因：它寫的樣式規則「優先序」太低，被一條更強的舊規則 <code>section.block p { margin: 0 }</code> 蓋掉了——所以這些段落其實<b>一直都是零間距</b>（這正是使用者看到的）。AI 提高規則優先序才真正修好。</div>
+  <figure>
+    <img src="images/EP02-Article-Dense.png" alt="段落沒有間距（擠成一團）">
+    <figcaption><b style="color:var(--red)">改版前：</b>科普版段落擠成一團、沒有行距。</figcaption>
+  </figure>
+  <figure>
+    <img src="images/EP02-Article-Spaced.png" alt="段落有間距（有空行）">
+    <figcaption><b style="color:var(--green)">改版後：</b>段落之間有明顯空行，好讀許多。</figcaption>
+  </figure>
+  <div class="note"><b>教學點：</b>AI 跟人一樣會犯錯。它說「改好了」不代表真的好了——所以每一步都要<b>實際打開來看</b>（這集 AI 用瀏覽器自動量了段落間距，才發現是 0）。</div>
+
+  <h3 class="seg" id="s8"><span class="num">8</span>方程式改用 LaTeX 渲染</h3>
+  <p>論文方法裡有數學式，原本是純文字硬排，很難看。使用者貼了一張截圖說：</p>
+  <div class="msg r"><span class="who">🔴 使用者：</span>（附上方程式截圖）方程式請用 Latex-like 渲染比較好看。</div>
+  <div class="ai"><span class="tag">AI 做了什麼</span>在論文頁載入 MathJax（一個把 LaTeX 語法渲染成數學符號的工具），再派 Subagent 把每頁的數學式改寫成 LaTeX。驗證時又揪出一個<b>隱藏 bug</b>：有些不等式被寫成裸的 <code>&lt;</code>、<code>&gt;</code>，瀏覽器會把「<code>&lt; 0.001</code>」誤當成一個 HTML 標籤、把後面內容吃掉——AI 把全部裸符號逸出成安全寫法才正常。<b>連 EP01 就寫好的舊頁面也一起修到了。</b></div>
+  <figure>
+    <img src="images/EP02-Equation-Old.png" alt="方程式純文字硬排">
+    <figcaption><b style="color:var(--red)">改版前：</b>方程式是純文字＋下標硬排，擠成一行、很難看。</figcaption>
+  </figure>
+  <figure>
+    <img src="images/EP02-Equation-New.png" alt="方程式 LaTeX 渲染">
+    <figcaption><b style="color:var(--green)">改版後：</b>用 MathJax 把 LaTeX 渲染成漂亮的數學符號（求和、分數、下標）。</figcaption>
+  </figure>
+
+  <h3 class="seg" id="s9"><span class="num">9</span>順手健檢：標點與符號</h3>
+  <div class="msg g"><span class="who">🟢 使用者：</span>你講的那些瑕疵再檢查一下並修正。</div>
+  <div class="ai"><span class="tag">AI 做了什麼</span>寫一支小程式（lint）掃過全部論文頁，用「堆疊法」找出沒成對的全形括號「」（），以及前一段提到的裸 <code>&lt; &gt;</code>。一處一處定位、修正，最後全部平衡。<b>觀念：</b>能用程式自動檢查的瑕疵，就不要靠肉眼一頁頁看。</div>
+
+  <h3 class="seg" id="s10"><span class="num">10</span>關鍵字頁加「約 300 字說明」</h3>
+  <div class="msg g"><span class="who">🟢 使用者：</span>接下來，在「關鍵字」頁面（點了關鍵字網路裡面的節點會出現在下方的）裡，新增約 300 字對這個關鍵字的說明。</div>
+  <figure>
+    <img src="images/dialog-2-8.png" alt="實際對話：關鍵字頁加 300 字說明">
+    <figcaption><b>實際對話截圖：</b>點關鍵字後，除了「出現在哪些頁面」，再加一段約 300 字的說明。</figcaption>
+  </figure>
+  <div class="ai"><span class="tag">AI 做了什麼</span>派 3 個 Subagent 依主題分組，各寫該組關鍵字的約 300 字說明（並讀對應論文確保準確），合併成一個 <code>keyword_notes.json</code>，由 <code>build.py</code> 嵌進關鍵字頁。點任一關鍵字，下方先顯示這張說明卡、再列出相關頁面。</div>
+  <figure>
+    <img src="images/EP02-Keyword-Old.png" alt="關鍵字頁改版前">
+    <figcaption><b style="color:var(--red)">改版前：</b>點關鍵字只列出「出現在哪些頁面」。</figcaption>
+  </figure>
+  <figure>
+    <img src="images/EP02-Keyword-New.png" alt="關鍵字頁改版後">
+    <figcaption><b style="color:var(--green)">改版後：</b>頁面清單上方多了一張約 300 字的關鍵字說明卡。</figcaption>
+  </figure>
+
+  <h3 class="seg" id="s11"><span class="num">11</span>問流程：丟一篇新 PDF，你會做什麼？</h3>
+  <div class="msg b"><span class="who">🔵 使用者：</span>架構跟內容的模式差不多了，接下來是更新：如果我把新的論文 PDF 丟進 paper 目錄裡，你會做哪些處理？列出來。</div>
+  <figure>
+    <img src="images/dialog-2-9.png" alt="實際對話：詢問收錄新論文的流程">
+    <figcaption><b>實際對話截圖：</b>使用者沒有馬上叫它做，而是先問「你會怎麼做」——確認流程對不對，再放行。</figcaption>
+  </figure>
+  <div class="ai"><span class="tag">AI 做了什麼</span>把收錄一篇新論文的完整流程列出來：精讀 PDF（派分身）→ 抽 metadata 與基本資料 → 寫科普版／學術版 → 生成論文頁 → 雙向串好「相關論文」連結 → 補新關鍵字說明 → 視情況更新概念條目 → 跑 <code>build.py</code> → 驗證 → 回報。<b>觀念：</b>「先問流程、看過再放行」，比直接叫它做更安全——尤其當你要把一件事變成「之後每次都這樣做」的標準流程時。</div>
+
+  <h3 class="seg" id="s12"><span class="num">12</span>把流程寫進規則書</h3>
+  <div class="ai"><span class="tag q">AI 問你</span>（接上一段）AI 列完收錄流程後問你：要不要把這套流程正式寫進規則書 <code>CLAUDE.md</code> 的 §4，讓未來每一次收錄新論文都自動照這套做？</div>
+  <div class="msg g"><span class="who">🟢 使用者：</span>要。</div>
+  <figure>
+    <img src="images/dialog-2-10.png" alt="實際對話：更新 CLAUDE.md 收錄流程">
+    <figcaption><b>實際對話截圖：</b>一個字「要」，AI 就把剛剛列的流程寫回規則書。</figcaption>
+  </figure>
+  <div class="ai"><span class="tag">AI 做了什麼</span>把 <code>CLAUDE.md</code>（規則書）裡的「收錄流程」從舊的 7 步，改寫成完整的 13 步標準作業程序（精讀 → 產頁 → 串接 → 收尾驗證）。<b>這就是「規則書跟著長大」</b>：把剛剛確認過的好流程固定下來，未來任何一次工作階段都自動照這套做，不會走樣。</div>
+
+  <h3 class="seg" id="s13"><span class="num">13</span>擴充團隊名單</h3>
+  <div class="msg g"><span class="who">🟢 使用者：</span>增加團隊成員：Ting-Kuo Lee（李定國教授）、Chung-Chuan Lo（羅中泉教授）、Ching-Che Charng（強敬哲博士）、Kuan-Lin Feng（馮冠霖博士）。</div>
+  <div class="ai"><span class="tag">AI 做了什麼</span>把 4 位加進 <code>build.py</code> 的 <code>BSC_MEMBERS</code> 名單（也更新記憶），重建後驗證。AI 提醒：目前圖上沒有視覺變化（6 篇本來就因你或江老師而全加框），這 4 位是<b>為之後收錄的論文鋪路</b>——這個鋪路，下一步就用上了。</div>
+
+  <h3 class="seg" id="s14"><span class="num">14</span>收錄 5 篇新論文 → 關鍵決策：要不要擴大範圍</h3>
+  <div class="msg g"><span class="who">🟢 使用者：</span>我有丟新的論文到 Papers 裡，請更新知識庫。</div>
+  <div class="ai"><span class="tag">AI 做了什麼</span>先盤點：發現 5 篇新 PDF。逐一讀首頁辨識身分後，AI <b>停下來</b>——因為其中 1 篇是你們團隊的果蠅論文（完全符合現有範圍），另外 4 篇卻是通用／哺乳類的連結體方法論文（EM 分割、光學顯微鏡連結體、活性記錄）。收了它們，等於把知識庫從「果蠅／FlyCircuit」<b>擴大</b>成「一般連結體方法學」。這是方向問題，AI 跳出決策選單讓使用者定。</div>
+  <figure>
+    <img src="images/dialog-2-11.png" alt="決策選單：5 篇新論文怎麼收錄">
+    <figcaption><b>真實截圖：</b>AI 的決策選單——5 篇要全收（擴大範圍）、只收果蠅那篇、還是折衷？這是「該你決定」的岔路。</figcaption>
+  </figure>
+  <div class="ai"><span class="tag q">AI 問你</span>這 5 篇要怎麼收？（果蠅蕈狀體那篇無論如何都收。）選項：<b>全部 5 篇、把知識庫範圍擴大</b>／只收果蠅那篇＋3 篇重建方法／只收果蠅那篇。</div>
+  <div class="msg p"><span class="who">🟣 使用者：</span>（在選單中點選）全部 5 篇，擴大範圍。</div>
+  <div class="ai"><span class="tag">AI 做了什麼</span>派 5 個 Subagent 各精讀一篇，產出完整論文頁（含基本資料、科普版、學術版、LaTeX）；雙向補好「相關論文」連結（新論文 ↔ 既有 6 篇）；新增 12 個關鍵字並各補說明；更新 §1 主題範圍。<b>這時 BSC 加框終於有意義了：</b>7 篇團隊論文有橘框、4 篇外部方法沒框，一眼分得出來——第 13 步的鋪路在這裡兌現。</div>
+
+  <h3 class="seg" id="s15"><span class="num">15</span>查證：補上 LICONN 的正式出版資料</h3>
+  <div class="msg g"><span class="who">🔴 使用者：</span>LICONN 已經發表了，你查一下出版資料補上去。</div>
+  <div class="ai"><span class="tag">AI 做了什麼</span>用 WebSearch 上網查到 LICONN 的正式書目（<i>Nature</i> 第 642 卷、398–410 頁、2025 年 6 月），把論文頁裡原本「線上優先發表」的暫定資料換成正式卷期頁。<b>觀念：</b>AI 不只會處理你給的檔案，需要時還能上網查證、補齊資訊。</div>
+
+  <h3 class="seg" id="s16"><span class="num">16</span>主題地圖該不該擴建？</h3>
+  <div class="msg b"><span class="who">🔵 使用者：</span>增加這些文章之後，首頁的主題地圖是不是該擴建了？該增加哪些？還是你覺得還不用。</div>
+  <div class="ai"><span class="tag">AI 做了什麼</span>給出判斷與理由：該擴——因為首頁那 5 個概念條目全是「果蠅中心」，反映不出新拓寬的廣度；那 4 篇外部方法目前沒有首頁概念入口。AI 建議 3 篇新概念條目（A 成像模態、B 結構→功能、C 跨物種），各附該收哪些論文，跳出選單讓使用者選。</div>
+  <figure>
+    <img src="images/dialog-2-12.png" alt="實際對話：建議擴建主題地圖">
+    <figcaption><b>實際對話截圖：</b>使用者問「該不該擴」，AI 不含糊，直接給判斷＋具體建議。</figcaption>
+  </figure>
+  <figure>
+    <img src="images/dialog-2-13.png" alt="實際對話：AI 提議的 A/B/C 三篇新概念條目">
+    <figcaption><b>實際對話截圖：</b>AI 提的 A／B／C 三篇，各自綜整哪些論文都講清楚。</figcaption>
+  </figure>
+  <div class="ai"><span class="tag q">AI 問你</span>主題地圖要怎麼擴？選項：加 A＋B 兩篇（推薦）／只加 A／<b>A＋B＋C 三篇都做</b>／先不用、維持現狀。（A＝成像模態、B＝結構→功能、C＝跨物種。）</div>
+  <div class="msg p"><span class="who">🟣 使用者：</span>（在選單中點選）A＋B＋C（三篇都做）。</div>
+  <figure>
+    <img src="images/dialog2-14.png" alt="決策選單：主題地圖怎麼擴建">
+    <figcaption><b>真實截圖：</b>主題地圖擴建的決策選單，使用者選了「A＋B＋C」。</figcaption>
+  </figure>
+  <div class="ai"><span class="tag">AI 做了什麼</span>派 3 個 Subagent 各寫一篇新概念條目（讀錨定論文＋對齊既有風格），用模板組成頁面、串好關鍵字與相關論文。主題地圖從 5 篇長到 8 篇，首頁終於能反映「果蠅核心 ＋ 一般方法學」的全貌。</div>
+
+  <h3 class="seg" id="s17"><span class="num">17</span>關鍵字變多了 → 分類上色</h3>
+  <div class="msg g"><span class="who">🟢 使用者：</span>現在關鍵字變得滿多的，我覺得可以把關鍵字分類一下，在關鍵字網路上把節點以不同顏色標記（注意顏色不要太淺免得不清楚）。</div>
+  <div class="ai"><span class="tag">AI 做了什麼</span>把 31 個關鍵字分成 5 類（連結體與資料庫／腦結構與生物／成像與分割方法／網路分析／神經活性與功能），各配一個飽和、不過淺的顏色，在 <code>build.py</code> 設一份分類表，節點依分類上色、底部加圖例。還順手做了「未分類偵測」——以後若有關鍵字忘了歸類，會自動提醒。點選關鍵字時保留它的分類色、改用深色外框標示選取。</div>
+  <figure>
+    <img src="images/ep02-keywords.png" alt="最終的彩色關鍵字網路">
+    <figcaption><b>真實截圖：</b>分類上色後的關鍵字網路（含底部圖例）。相關的關鍵字本來就會聚成一團，上色後更一目了然。</figcaption>
+  </figure>
+
+  <h3 class="seg" id="s18"><span class="num">18</span>問原理（順帶糾錯）</h3>
+  <div class="msg b"><span class="who">🔵 使用者：</span>你畫網路圖時，是怎麼放每個節點的位置的？有經過計算嗎？（例如 force-directed layout）<span style="color:var(--red)">，還有，嚴禁簡體中文。</span></div>
+  <div class="ai"><span class="tag">AI 做了什麼</span>據實回答：<b>兩張網路圖用的方法不同</b>——論文網路是固定的「圓形排列」（沒有用力導向，純粹等分在圓周上）；關鍵字網路才是真正的 <b>force-directed</b>（節點互相排斥、有關聯的互相吸引，跑 320 次迭代＋模擬退火降溫，相關的就自己聚成團）。兩者都是<b>決定性</b>的（不用亂數，所以每次重建長得一樣）。<br><br>至於「嚴禁簡體中文」——AI 坦承前一則回覆的散文確實混進了簡體字，立刻把規則<b>寫進長期記憶</b>，並掃過所有知識庫檔案確認產出本身是乾淨的。</div>
+  <div class="note"><b>教學點：</b>這段有兩個價值。一是 <b>AI 可以解釋自己的作法</b>——你隨時能問「這怎麼算的」。二是 <b>AI 會犯錯、而且要被糾正</b>：使用者一句「嚴禁簡體中文」，AI 不只當下改，還把它記起來，以後自動遵守。<b>把偏好寫進記憶，你就不用每次重講。</b></div>
+
+  <!-- ============ PART 2 ============ -->
+  <h2 id="part2"><span class="pt">PART 2</span>最佳實踐清單</h2>
+  <p>把上面的迭代過程濃縮成一張可快速掃描的表。想看實例就點「對應段落」跳回去。</p>
+  <table>
+    <tr><th>實踐</th><th>對應段落</th><th>為什麼重要</th></tr>
+    <tr><td>不滿意要講得「具體」</td><td><a href="#s1">①</a></td><td>「首頁缺概念層」比「不好看」可執行一百倍。</td></tr>
+    <tr><td>大改版先攤開計畫再動手</td><td><a href="#s1">①</a>、<a href="#s2">②</a></td><td>資訊架構動之前，先讓你看過、確認。</td></tr>
+    <tr><td>把偏好／名單寫進記憶</td><td><a href="#s3">③</a>、<a href="#s18">⑱</a></td><td>BSC 名單、嚴禁簡體——說一次，以後自動遵守。</td></tr>
+    <tr><td>要「重讀」，不要「擴寫」</td><td><a href="#s6">⑥</a></td><td>回原文才挖得出新內容，否則只是把舊字膨脹。</td></tr>
+    <tr><td>每一步都實際打開來驗證</td><td><a href="#s7">⑦</a>、<a href="#s8">⑧</a></td><td>「說完成」≠「真的對」——間距是 0、符號被吃掉都這樣抓到。</td></tr>
+    <tr><td>能自動檢查的就用程式 lint</td><td><a href="#s9">⑨</a></td><td>括號成對、裸符號，靠程式掃比肉眼可靠。</td></tr>
+    <tr><td>先問流程、看過再放行</td><td><a href="#s11">⑪</a>、<a href="#s12">⑫</a></td><td>要變成「以後都這樣做」的事，先確認流程再固定進規則書。</td></tr>
+    <tr><td>方向／範圍的事，停下來讓你決策</td><td><a href="#s14">⑭</a>、<a href="#s16">⑯</a></td><td>擴不擴大範圍、要不要擴主題地圖，是你的事。</td></tr>
+    <tr><td>研究／精讀派 Subagent 平行做</td><td><a href="#s6">⑥</a>、<a href="#s14">⑭</a>、<a href="#s16">⑯</a></td><td>一篇一個分身，主線乾淨又加速。</td></tr>
+    <tr><td>善用工具：截圖、搜尋、查證</td><td><a href="#s8">⑧</a>、<a href="#s15">⑮</a></td><td>headless 截圖驗證、WebSearch 補出版資料。</td></tr>
+  </table>
+
+  <!-- ============ PART 3 ============ -->
+  <h2 id="part3"><span class="pt">PART 3</span>本次成果（養大後的知識庫）</h2>
+  <p>經過上面 18 段迭代，EP01 的雛形被養成這樣：</p>
+
+  <h3>首頁：從「論文清單」變「概念地圖」</h3>
+  <figure>
+    <img src="images/ep02-home.png" alt="EP02 概念導向首頁，8 篇概念條目">
+    <figcaption><b>真實截圖：</b>新首頁。上方是 8 篇「概念條目」（可切換條列／磚塊），論文清單獨立成另一頁，只留一個入口。</figcaption>
+  </figure>
+
+  <h3>論文網路：11 篇、BSC 成員加框</h3>
+  <figure>
+    <img src="images/ep02-graph.png" alt="EP02 論文網路，11 個節點，BSC 加框">
+    <figcaption><b>真實截圖：</b>論文網路長到 11 篇。<b>7 篇團隊論文有橘色外框、4 篇外部方法沒有</b>——加框終於凸顯出差異。</figcaption>
+  </figure>
+
+  <h3>關鍵字網路：31 個關鍵字、分類上色</h3>
+  <figure>
+    <img src="images/ep02-keywords.png" alt="EP02 彩色關鍵字網路">
+    <figcaption><b>真實截圖：</b>關鍵字網路（力導向佈局），31 個關鍵字分 5 類上色、點任一個就列出所有相關頁面＋約 300 字說明。</figcaption>
+  </figure>
+
+  <h3>單篇論文：基本資料＋科普版＋學術版</h3>
+  <figure>
+    <img src="images/ep02-paper.png" alt="EP02 論文頁，含基本資料與科普版">
+    <figcaption><b>真實截圖：</b>每篇論文頁多了「論文基本資料」（機構一列）、給高中生的「科普版」、給研究人員的「學術版」，數學式以 LaTeX 漂亮渲染。</figcaption>
+  </figure>
+
+  <h3>數字總結：雛形 → 成熟</h3>
+  <table>
+    <tr><th>項目</th><th>EP01（雛形）</th><th>EP02（養大後）</th></tr>
+    <tr><td>論文</td><td>6 篇（純果蠅）</td><td><b>11 篇</b>（果蠅 ＋ 通用／哺乳類方法）</td></tr>
+    <tr><td>概念條目</td><td>0</td><td><b>8 篇</b> wiki 文章</td></tr>
+    <tr><td>關鍵字</td><td>0</td><td><b>31 個</b>，分 5 類上色，各附約 300 字說明</td></tr>
+    <tr><td>單篇論文深度</td><td>摘要＋關鍵發現</td><td>＋ 基本資料、科普版（1500–2000 字）、學術版、LaTeX 方程式</td></tr>
+    <tr><td>首頁</td><td>論文清單＋篩選器</td><td>概念地圖（條列／磚塊可切換）</td></tr>
+    <tr><td>主題範圍</td><td>果蠅 / FlyCircuit</td><td>擴大為「一般連結體方法學」</td></tr>
+    <tr><td>人寫的程式碼</td><td colspan="2" style="text-align:center"><b>0 行</b>——全部由 AI 產出，人只負責出題、決策、糾錯</td></tr>
+  </table>
+
+  <!-- ============ PART 4 ============ -->
+  <h2 id="part4"><span class="pt">PART 4</span>10 個核心教訓</h2>
+  <p>把這次迭代的精髓濃縮成 10 條帶走——每條都對應你剛讀到的某個段落。</p>
+
+  <div class="lesson"><h4>① 迭代才是常態：不滿意就具體說</h4>
+  真實研究幾乎不會「一次到位」。EP02 全是「這裡再改一下」。關鍵是<b>講得具體</b>：「首頁只是論文清單、缺少概念層」，AI 才知道往哪改（<a href="#s1">①</a>）。</div>
+
+  <div class="lesson"><h4>② 要「重讀」，不要「擴寫」</h4>
+  叫 AI 寫深度內容時，最重要的一句是「<b>回頭把原文重新讀一次</b>」。否則它會用頁面既有文字膨脹，字數變多卻沒有新資訊（<a href="#s6">⑥</a>，那三個驚嘆號）。</div>
+
+  <div class="lesson"><h4>③ AI 會犯錯，每一步都要驗證</h4>
+  這集 AI 自己踩了三個坑：段落間距其實一直是 0（樣式被舊規則蓋掉）、不等式的裸符號被瀏覽器當標籤吃掉、回覆混進簡體字。<b>全靠驗證和糾錯才抓到。</b>「它說完成」永遠不等於「真的對」（<a href="#s7">⑦</a><a href="#s8">⑧</a><a href="#s18">⑱</a>）。</div>
+
+  <div class="lesson"><h4>④ 能自動檢查的，就寫程式 lint</h4>
+  括號有沒有成對、有沒有裸符號——這種瑣事用一支小程式掃，比一頁頁肉眼看可靠太多（<a href="#s9">⑨</a>）。</div>
+
+  <div class="lesson"><h4>⑤ 規則書要跟著長大</h4>
+  知識庫變複雜，就把新的維護流程寫回 <code>CLAUDE.md</code>。本集把「收錄新論文」從 7 步擴成 13 步 SOP，未來每次自動遵守，越改越不會亂（<a href="#s11">⑪</a><a href="#s12">⑫</a>）。</div>
+
+  <div class="lesson"><h4>⑥ 把偏好與名單寫進記憶</h4>
+  BSC 成員名單、「嚴禁簡體中文」——說一次，AI 寫進長期記憶，以後每次工作自動遵守，你不必重講（<a href="#s3">③</a><a href="#s18">⑱</a>）。</div>
+
+  <div class="lesson"><h4>⑦ 方向與範圍，是「你的事」</h4>
+  要不要把知識庫從果蠅擴大到一般方法學、主題地圖要不要擴建——這些 AI 不該自己決定。它攤開選項、講清楚代價，跳出決策選單讓你點（<a href="#s14">⑭</a><a href="#s16">⑯</a>）。</div>
+
+  <div class="lesson"><h4>⑧ 鋪路會在後面兌現</h4>
+  第 13 步先把 4 位團隊成員加進名單時，圖上「沒有任何變化」；但第 14 步收了 4 篇外部論文後，BSC 加框立刻分出了團隊與外部。<b>有些設定是為了未來。</b></div>
+
+  <div class="lesson"><h4>⑨ 研究／精讀，交給 Subagent 平行做</h4>
+  6 篇重讀、5 篇新收、3 篇概念條目——全都是「一篇 PDF 一個分身」平行進行。主線對話保持乾淨，速度又快（<a href="#s6">⑥</a><a href="#s14">⑭</a><a href="#s16">⑯</a>）。</div>
+
+  <div class="lesson"><h4>⑩ 善用 AI 的各種工具</h4>
+  自動截圖驗證版面、上網（WebSearch）查 LICONN 出版資料、寫 lint 揪錯——遇到「重複或查證」的工作，先想有沒有工具可用，不要硬幹（<a href="#s8">⑧</a><a href="#s15">⑮</a>）。</div>
+
+  <!-- ============ 結語 ============ -->
+  <h2 id="closing">結語：給初學者的下一步</h2>
+  <p>如果這份文件你只想記住三句話：</p>
+  <ol>
+    <li><b>迭代不可恥，是常態。</b>第一版做出來只是起點；願意一次次說「這裡再改」，作品才會變好。</li>
+    <li><b>「重讀」勝過「擴寫」，「驗證」勝過「相信」。</b>要深度就叫它回原文；要正確就每步打開來看——AI 會錯，你是把關的人。</li>
+    <li><b>方向你決定，後勤交給它。</b>該你拍板的（範圍、取捨）AI 會停下來問；瑣碎的後勤（讀、寫、串連、截圖、查證）它全包。</li>
+  </ol>
+  <p>想動手試試看？如果你已經有一個用 AI 做出來的東西（任何文件、整理、小工具），就挑一個你「看了不太滿意」的點，打開 Claude Code，<b>具體</b>說出哪裡不夠好、想變成什麼樣子——然後照這份文件的節奏：在岔路上做決策、要求它重讀而非擴寫、每一步都打開來驗證。你會發現，把東西「養大養好」，比從零做出來更需要你的判斷力，而這正是你的價值所在。</p>
+
+</div>
+
+<div class="foot">
+  本教學由 Claude Code 依一次真實協作自動產生（使用 <code>claude-code-research-tutorial</code> Skill）。使用者指令為逐字呈現；AI 動作為摘要。文中截圖皆為真實畫面：成果頁面以 headless 瀏覽器自動截取，操作畫面為實際對話截圖。｜BSC with Agentic AI Tutorial · EP02
+</div>
+
+</body>
+</html>

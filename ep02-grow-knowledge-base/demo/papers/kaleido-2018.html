@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kaleido：以自動配色法視覺化大規模腦部單神經元影像資料｜FlyCircuit 知識庫</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script type="application/json" id="meta">
+{
+  "id": "kaleido-2018",
+  "title": "Kaleido: Visualizing Big Brain Data with Automatic Color Assignment for Single-Neuron Images",
+  "title_zh": "Kaleido：以自動配色法視覺化大規模腦部單神經元影像資料",
+  "authors": [
+    "Ting-Yuan Wang",
+    "Nan-Yow Chen",
+    "Guan-Wei He",
+    "Guo-Tzau Wang",
+    "Chi-Tin Shih",
+    "Ann-Shyn Chiang"
+  ],
+  "year": 2018,
+  "venue": "Neuroinformatics",
+  "doi": "10.1007/s12021-018-9363-3",
+  "bib": {
+    "journal": "Neuroinformatics",
+    "volume": "16",
+    "issue": "2",
+    "pages": "207-215",
+    "published": "2018 年 4 月",
+    "institutions": [
+      "National Tsing Hua University",
+      "National Center for High-Performance Computing",
+      "National Chiao Tung University",
+      "Tunghai University",
+      "University of California, San Diego",
+      "Kaohsiung Medical University",
+      "Academia Sinica"
+    ]
+  },
+  "species": "Drosophila",
+  "scale": "method/tool",
+  "technique": [
+    "3D visualization",
+    "automatic color assignment",
+    "Monte Carlo optimization",
+    "volume rendering",
+    "energy function minimization"
+  ],
+  "region": [
+    "whole brain",
+    "mushroom body (Kenyon cells)",
+    "olfactory module"
+  ],
+  "dataset": "FlyCircuit",
+  "tags": [
+    "visualization",
+    "connectomics",
+    "color assignment",
+    "FlyCircuit",
+    "big brain data",
+    "single-neuron"
+  ],
+  "related": [
+    "chiang-2011-flycircuit",
+    "shih-2015-information-flow",
+    "cheng-2025-mushroom-body"
+  ],
+  "tldr": "Kaleido 是一套能自動為上萬個果蠅單神經元影像配色、讓相鄰神經元顏色對比鮮明的大規模 3D 視覺化工具。",
+  "abstract_zh": "連結體分析常需同時呈現數以萬計、可彼此區辨的單神經元影像，對記憶體與運算時間是極大挑戰。本研究提出名為 Kaleido 的演算法，僅用傳統所需的一小部分記憶體即可視覺化至少一萬個果蠅腦神經元，且不增加運算時間；新增神經元時記憶體只略為上升。Kaleido 以 Monte Carlo 方法最佳化能量函數，使相鄰神經元顏色對比最大化而易於辨識，也能依生物意義（基因表現、神經傳導物質、發育史）配色，並保留每個神經元的可回溯身分。研究以 FlyCircuit 資料庫的一萬個果蠅神經元示範其效能。",
+  "key_findings": [
+    "提出將多個神經元合併為單一 RGBA 3D 影像的策略，檔案大小僅由標準腦解析度決定，使視覺化幾乎即時且與神經元數量無關，大幅降低記憶體需求。",
+    "以 Monte Carlo 最佳化的能量函數（結合物理空間距離與色相空間差異）配色，能讓隨機配色下會誤判為相同顏色的相鄰神經元（如 calyx 處密集的 Kenyon cells）變得清楚可辨。",
+    "成功同時視覺化 FlyCircuit 資料庫的 10,000 個果蠅腦神經元。",
+    "支援依生物標註配色（出生日期 birthdate、推定神經傳導物質、發育階段），可揭示隱藏於影像中的時空生物學模式。",
+    "運算時間在 N≤2000 時呈線性（受檔案載入主導），N 更大時為 O(N²)（受 Monte Carlo 主導）；記憶體與儲存呈次線性成長。",
+    "整合為 FlyCircuit 的線上外掛，提供網頁介面、批次運算、orthoslice 檢視器與 NeuronID 回溯查詢，並可輸出 3D TIFF 或 Avizo mesh 檔。"
+  ],
+  "methods": "先將各單神經元影像對位至標準腦並以 100 個隨機體素估算神經元兩兩距離矩陣，再隨機指派色相角作為初始組態。接著用 Monte Carlo 演算法最小化能量函數（相鄰且色相相近的神經元成本高），交換色相角直到收斂，得到對比最佳的配色。最後以 HSV 模型（色相由配色決定、飽和度設為 1、明度為正規化訊號強度、原始強度作為 α 不透明度）轉成 RGBA，合併為單一 Avizo mesh 或 3D TIFF。整套以 C++ 實作並包成 Bootstrap 網頁介面。",
+  "significance": "Kaleido 直接解決了 FlyCircuit 等大型果蠅連結體資料庫「上萬神經元無法同時視覺化」的瓶頸，讓研究者能在合理的記憶體下人工檢視大規模連結體資料。它與 Chiang 2011（提供影像資料來源）及 Shih 2015（提供所視覺化的嗅覺社群與資訊流分析）緊密銜接，是 FlyCircuit 生態系中支援連結體探索與生物意義解讀的關鍵視覺化工具。",
+  "keywords": [
+    "果蠅腦",
+    "單神經元",
+    "FlyCircuit",
+    "視覺化"
+  ],
+  "node_label": "Vis/Kaleido/2018"
+}
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script" async></script>
+</head>
+<body>
+<div class="topbar"><div class="inner">
+  <div class="brand">🧠 FlyCircuit 連結體論文知識庫 <small>· BSC Knowledge Base</small></div>
+  <nav>
+    <a href="../index.html">首頁</a>
+    <a href="../graph.html">論文網路</a>
+    <a href="../keywords.html">關鍵字網路</a>
+    <a href="../log.html">時間軸</a>
+  </nav>
+</div></div>
+<div class="wrap">
+  <article>
+    <header class="paper-header">
+      <h1>Kaleido: Visualizing Big Brain Data with Automatic Color Assignment for Single-Neuron Images</h1>
+      <p class="title-zh">Kaleido：以自動配色法視覺化大規模腦部單神經元影像資料</p>
+      <p class="authors">Ting-Yuan Wang、Nan-Yow Chen、Guan-Wei He、Guo-Tzau Wang、Chi-Tin Shih、Ann-Shyn Chiang</p>
+      <div class="badges">
+        <span class="badge scale" style="background:#ea580c">方法/工具</span><span class="badge muted">2018</span><span class="badge muted">Neuroinformatics</span><span class="badge">Drosophila</span><span class="badge">FlyCircuit</span><span class="badge muted">3D visualization</span><span class="badge muted">automatic color assignment</span><span class="badge muted">Monte Carlo optimization</span><span class="badge muted">volume rendering</span><span class="badge muted">energy function minimization</span>
+      </div>
+      <p class="meta-line">Neuroinformatics (2018) · DOI: <a href="https://doi.org/10.1007/s12021-018-9363-3" target="_blank" rel="noopener">10.1007/s12021-018-9363-3</a></p>
+    </header>
+
+    <div class="callout">
+      <span class="label">一句話總結</span>
+      Kaleido 是一套能自動為上萬個果蠅單神經元影像配色、讓相鄰神經元顏色對比鮮明的大規模 3D 視覺化工具。
+    </div>
+
+    <section class="block bib-block">
+      <h2>論文基本資料</h2>
+      <dl class="bib">
+        <div><dt>期刊</dt><dd>Neuroinformatics</dd></div>
+        <div><dt>卷期</dt><dd>第 16 卷第 2 期</dd></div>
+        <div><dt>頁碼</dt><dd>207–215 頁</dd></div>
+        <div><dt>發表</dt><dd>2018 年 4 月</dd></div>
+        <div><dt>機構</dt><dd>National Tsing Hua University；National Center for High-Performance Computing；National Chiao Tung University；Tunghai University；University of California, San Diego；Kaohsiung Medical University；Academia Sinica</dd></div>
+      </dl>
+    </section>
+
+    <section class="block">
+      <h2>中文摘要</h2>
+      <p>連結體分析常需同時呈現數以萬計、可彼此區辨的單神經元影像，對記憶體與運算時間是極大挑戰。本研究提出名為 Kaleido 的演算法，僅用傳統所需的一小部分記憶體即可視覺化至少一萬個果蠅腦神經元，且不增加運算時間；新增神經元時記憶體只略為上升。Kaleido 以 Monte Carlo 方法最佳化能量函數，使相鄰神經元顏色對比最大化而易於辨識，也能依生物意義（基因表現、神經傳導物質、發育史）配色，並保留每個神經元的可回溯身分。研究以 FlyCircuit 資料庫的一萬個果蠅神經元示範其效能。</p>
+    </section>
+
+    <section class="block popsci-block">
+      <h2>科普版介紹<span class="aud aud-pop">給對科學有興趣的高中生</span></h2>
+<p>想像你站在一座巨大的城市上空，腳下有十幾萬條道路彼此交織。如果你想搞懂這座城市的交通是怎麼運作的，光看一條街是不夠的，你必須一次把所有道路都看進眼裡，才能找出車流的規律。大腦也是這樣一座城市：一隻果蠅的腦袋裡就塞了大約十三萬個神經元，每個神經元都像一條蜿蜒的道路，互相纏繞、互相傳遞訊號。要理解「連結體（connectome）」——也就是整個大腦的接線圖——科學家必須同時看見成千上萬個神經元，而且要能一眼分辨出哪一條是哪一條。這正是這篇論文想解決的難題。</p><p>困難在哪裡？第一個是記憶體。在 FlyCircuit 這個果蠅腦影像資料庫裡，單一個神經元的 3D 影像檔大約是 100 MB 上下。如果要把果蠅腦約十三萬個神經元全部載入，光是把檔案讀進電腦就需要 10 TB（兆位元組）等級的記憶體，更別說還要拿來計算和繪圖。一般的視覺化軟體（像 Avizo）一旦神經元數量一多就會卡住——論文提到 Avizo 9.2 在同一個物件裡甚至無法替超過 5 筆資料做體積渲染。第二個困難是配色。要讓上萬個擠在一起的神經元彼此可分辨，傳統做法是人工一個一個指定顏色，這既費時又幾乎不可能完成。</p><p>這篇論文提出的工具叫做 Kaleido（萬花筒），它的巧思可以拆成兩步。第一步是「自動配色」。Kaleido 借用了物理學裡常用的蒙地卡羅（Monte Carlo）方法。你可以把它想成一場聰明的洗牌遊戲：研究者先給每個神經元在「色相環」上隨機分配一個顏色角度，接著定義一個叫做「能量函數」的分數，用來懲罰那些「明明位置很近、顏色卻很像」的鄰居——這種組合最容易讓人看花眼，所以能量最高。蒙地卡羅演算法會不斷挑出能量最高的那對神經元，隨機跟別人交換顏色，如果交換後總能量下降就接受，偶爾也允許暫時變糟以跳出死胡同（這由一個類似「溫度」的參數控制）。一輪輪交換下來，能量逐漸降到最低，相鄰的神經元就會自動穿上對比鮮明的衣服。</p><p>有趣的是，這種隨機上色後的影像，看起來很像生物學裡著名的「brainbow（腦虹）」——那是用不同顏色螢光蛋白以隨機比例表現，讓每個神經元呈現不同色彩的技術。差別在於，brainbow 的顏色是生物隨機決定、無法控制；而 Kaleido 是用演算法主動「優化」這份隨機，把容易撞色的鄰居一一拆開。為了算「誰跟誰是鄰居」，Kaleido 並不會比對每個體素，而是在每個神經元裡隨機抽 100 個體素來估算兩兩之間的距離，大幅省下計算量。</p><p>第二步是「合而為一」。一般軟體把每個神經元當成獨立物件，數量一多就爆掉。Kaleido 反其道而行：它先把每個神經元對位到同一個「標準腦」座標系——對位時若某個體素被一個以上的神經元佔據，就只保留訊號最強的那一個——再把所有神經元疊合成「單一張」3D 影像。顏色用 HSV 模型決定（色相由前面配色的結果決定、飽和度固定為 1、明暗則對應每個體素的訊號強度），最後轉成 RGBA 格式——其中 A 是透明度，剛好可以用原始亮度來控制，讓較弱的訊號變得半透明、適合做疊合渲染。最終輸出可以是 AmiraMesh（Avizo Mesh）或 OME-TIFF／3D TIFF 檔。這一招的關鍵效果是：合併後的檔案大小「只由標準腦的解析度決定」，跟你放進去多少個神經元幾乎無關。換句話說，不管是 100 個還是 10000 個神經元，最後產生的影像檔大小都差不多，記憶體需求因此被壓到很低。</p><p>結果有多好？研究團隊真的用 Kaleido 一次把 FlyCircuit 資料庫裡的 10000 個果蠅腦神經元組成一張影像，並做出可旋轉的 3D 體積渲染。他們特別檢視蘑菇體（mushroom body）的 Kenyon 細胞——這些細胞的細胞本體擠在 calyx 尖端，超過一半的體素都集中在很小的區域。在隨機配色下，乍看好像沒問題，但仔細一看就會發現有些緊鄰的細胞被分到幾乎一樣的顏色，根本分不出來；換成 Kaleido 配色後，每個神經元都清楚可辨。更厲害的是，Kaleido 還能「換一種方式上色」：依神經元的出生日期（birthdate）、推定的神經傳導物質、或發育階段來著色，於是隱藏在影像裡的時空生物學規律就浮現出來了。而且每個畫素都還記得自己屬於哪個神經元，使用者只要在切片檢視器上點一下，就能查出對應的 NeuronID，回到 FlyCircuit 找出那條神經元。</p><p>為什麼這很重要？因為大腦研究正快速走向「大數據」時代。隨著電子顯微鏡、X 光顯微斷層掃描、超解析顯微術等技術成熟，未來能累積到數百萬個神經元的影像。Kaleido 證明了：只要換個聰明的資料組織方式，我們就能用一台普通電腦、合理的記憶體，去人工檢視原本「看不下去」的龐大連結體資料。它已被整合進 FlyCircuit 資料庫，成為一個線上工具，任何研究者輸入神經元清單就能產生對比鮮明的 3D 影像。當真正完整的大腦接線圖到來時，這把「萬花筒」會是讓我們親眼看見大腦全貌的重要鑰匙。</p>
+    </section>
+
+    <section class="block academic-block">
+      <h2>學術版介紹<span class="aud aud-aca">給研究生以上的專業讀者</span></h2>
+      <h3>關鍵發現</h3>
+<ul>
+<li>提出 Kaleido 演算法，能僅用傳統所需的一小部分記憶體，同時視覺化至少 10,000 個果蠅腦單神經元，且不增加運算時間；新增神經元時記憶體僅以「次線性（sublinear）」方式緩慢上升。</li>
+<li>核心策略是把多個神經元對位到標準腦後合併為「單一張」RGBA 3D 影像，檔案大小僅由標準腦解析度決定、與神經元數量幾乎無關，使視覺化幾乎即時且不隨神經元數量暴增。</li>
+<li>說明問題規模：FlyCircuit 中單一神經元影像檔約 \(10^2\) MB（約 100 MB）；若要載入果蠅腦約 130,000（\(\sim 1.3\times 10^5\)）個神經元，光載檔就需 10 TB 等級記憶體。商用軟體有侷限（如 Avizo 9.2 在單一物件中無法對超過 5 筆資料做體積渲染）。</li>
+<li>以蒙地卡羅（Monte Carlo）法最佳化能量函數配色：能量函數對「物理空間距離近（\(d_{ij}\) 小）卻色相相近（\(\Delta_{ij}\) 小）」的神經元對給予高成本，最佳化後相鄰神經元自動獲得對比鮮明的色相。</li>
+<li>實證有效性：在蘑菇體 Kenyon cells 的 calyx 尖端（&gt;50% 體素集中於此），隨機配色會使緊鄰胞體被指派到相近顏色而無法分辨，Kaleido 配色則使所有神經元清楚可辨。Fig. 4 顯示經 Kaleido 最佳化後，神經元對與體素對的高能量（相近色）案例大幅減少。</li>
+<li>支援四種配色模式：color by distance（蒙地卡羅自動配色）、color by file（由文字檔讀入色相角，可依生物標註上色）、random color、greyscale only。以 Shih 等人 2015 辨識的右側嗅覺社群示範依出生日期、推定神經傳導物質、發育階段（早期 0–2 天、中期 3–5 天、晚期 6–9 天，胚胎第 0 天到晚蛹第 9 天）上色，顯現隱藏的時空生物學規律。</li>
+<li>複雜度：執行時間在 \(N\le 2000\) 時呈線性（由檔案 I/O 主導），N 更大時為 \(O(N^2)\)（由蒙地卡羅主導，蒙地卡羅步數設為 \(10N\)，每次換色更新 \(2(N-2)\) 對）；記憶體與儲存呈次線性成長，已驗證至 \(10^4\) 神經元等級。</li>
+<li>整合為 FlyCircuit 線上外掛：提供網頁介面（輸入 NeuronID 清單）、背景批次運算（可關閉瀏覽器後再查狀態）、orthoslice 切片檢視器與點選查 NeuronID 的回溯功能；輸出格式為 AmiraMesh ASCII（Avizo Mesh）或 OME-TIFF/3D TIFF。可自訂輸出解析度（x:512–4096、y:256–2048、z:64–512），預設建議 2048×1024×128。</li>
+</ul>
+      <h3>方法</h3>
+<p>Kaleido 以 C++ 實作，並以 Bootstrap（v3.3.7）框架包成可從 FlyCircuit 首頁進入的網頁介面。完整流程依論文 Methods 的演算法步驟如下。</p>
+<p><strong>1. 影像對位（warp 到標準腦）</strong>：先把每個單神經元影像轉入同一個「標準腦」座標系。由於有解析度上限與無可避免的扭曲（warping）誤差，部分體素會被一個以上的神經元佔據；此時只記錄該體素上訊號強度最高的神經元，以解決重疊。</p>
+<p><strong>2. 距離矩陣估算</strong>：對每個 warp 後的神經元，從其影像中「隨機抽取 100 個體素」。對第一個神經元被選的每個體素，找出第二個神經元被選體素中最近的一個，兩者距離即「最短體素到神經元距離」；兩神經元的距離 \(d_{ij}\) 定義為這些最短距離的平均。對全部 \(\binom{N}{2}\) 對神經元如此計算，得到 \(N\times N\) 的距離矩陣 D。以隨機取樣 100 個體素估距，大幅降低計算量。</p>
+<p><strong>3. 選擇配色模式</strong>：提供四種——「color by distance」（用步驟 4、5 的蒙地卡羅自動產生色相角表）、「color by file」（由文字檔讀入每個神經元的色相角，Preucil 1953）、「random color」、「greyscale only」。僅在第一種模式時才執行最佳化。</p>
+<p><strong>4. 色相組態與能量函數</strong>：對 N 個神經元，色相角在色相環上均勻分布，\(\theta(i)=360^\circ \times i/N\)（\(i=1,\dots,N\)）。一個色相向量 \(H=(h_1,\dots,h_N)\) 是 1…N 的一個排列，代表一種配色組態（共有 \(N!\) 種），第 i 個神經元的色相角為 \(\theta(h_i)\)。能量函數定義為</p>
+<p style="text-align:center;">\[ E(H)=\sum_{i=2}^{N}\sum_{j=1}^{i-1}\frac{1}{d_{ij}}\,\min\!\bigl(\Delta_{ij},\,360^\circ-\Delta_{ij}\bigr) \]</p>
+<p>其中 \(\Delta_{ij}=|\theta(h_i)-\theta(h_j)|\)。</p>
+<p>當鄰近（\(d_{ij}\) 小）的神經元被指派相近色相（\(\Delta_{ij}\) 小）時，會使其難以分辨，故付出較高能量成本；使能量最小化的色相向量即為理想配色。</p>
+<p><strong>5. 蒙地卡羅最佳化（Binder &amp; Heermann 2010）</strong>：以隨機組態 H 為初始，計算能量並找出能量最高的神經元對；隨機選兩個神經元，分別與「最高能量對」的兩個神經元交換色相角，得到新組態 \(H'\) 並算其能量。以接受機率 \(P=\min(1,\,e^{-\beta \Delta E})\)（\(\Delta E\) 為新舊能量差、\(\beta\) 為對應「人造溫度」倒數的可調參數）決定是否接受：產生 0–1 亂數 R，若 \(R\le P\) 則接受新組態，否則維持原組態。重複交換直到達到最大步數，取整個過程中能量最低的組態為最終配色。蒙地卡羅步數設為 \(10N\)，每次換色會改變 \(2(N-2)\) 對神經元的能量，故 CPU 時間約 \(O(N^2)\)。</p>
+<p><strong>6. HSV→RGBA 對應</strong>：在 HSV 色彩模型中，同一神經元所佔體素的色相由步驟 5 決定；飽和度（saturation）對所有體素固定為 1；明度（value）為各體素正規化後的訊號強度（0–1）。將 HSV 轉成 8-bit RGB，分別輸出為三個 Avizo Mesh 檔；α（不透明度）值則取自步驟 1 保留原始強度的影像檔。</p>
+<p><strong>7. 合併輸出</strong>：以 Avizo 腳本把 R、G、B、α 四個檔合併為「單一個」RGBA 格式的 Avizo Mesh 檔；另也可輸出 OME-TIFF / 3D TIFF。此種單一合併 RGBA 物件特別利於直接體積渲染中的 alpha blending 並維持位置一致性。</p>
+<p><strong>複雜度與資源分析</strong>：執行時間在 \(N\le 2000\) 時呈線性（由載入單神經元影像的 I/O 主導），N 更大時彎升為 \(O(N^2)\)（由蒙地卡羅主導）。記憶體需求主要來自固定大小的標準腦合併影像空間，距離與能量矩陣為 \(N^2\) 規模，整體記憶體與儲存呈次線性成長，已驗證至 \(10^4\) 神經元；若需更大規模，瓶頸仍會落在更高解析度的標準腦空間，而非距離/能量矩陣。</p>
+<p><strong>網頁介面與回溯</strong>：使用者於網頁輸入 FlyCircuit NeuronID 清單、選配色模式後按「Run!」送出，工作以背景批次在 FlyCircuit 伺服器執行，可關閉瀏覽器後再查狀態。結果頁提供切片（orthoslice）檢視器（可縮放、平移），點選切片上任一非空畫素即可顯示對應 NeuronID（NOI, neuron of interest），並提供下載 3D TIFF 或 Avizo Mesh 檔的連結，據此可回到 FlyCircuit 載入該神經元作為獨立可控物件。輸出解析度可自訂（x:512–4096、y:256–2048、z:64–512），預設建議 2048×1024×128 以最佳呈現 FlyCircuit 資料。介面已在 Chrome、Firefox、Internet Explorer、Safari 等瀏覽器測試。</p>
+      <h3>重要性與定位</h3>
+<p>Kaleido 直接命中 FlyCircuit 這類大型果蠅連結體資料庫的核心瓶頸：上萬個單神經元無法在合理記憶體與時間內同時視覺化、又彼此可分辨。它的兩項關鍵貢獻——（一）以蒙地卡羅最佳化能量函數做「自動且最大化對比」的配色，免去人工逐一上色；（二）把眾多神經元合併為單一張 RGBA 3D 影像，讓檔案大小只取決於標準腦解析度而與神經元數量幾乎脫鉤——共同把記憶體需求從「TB 等級」壓回一般電腦可負擔的範圍，並使視覺化幾乎即時。</p>
+<p>在 FlyCircuit／連結體研究脈絡中，Kaleido 是承上啟下的視覺化工具。它所視覺化的果蠅全腦單神經元影像，正來自 Chiang 等人 2011 年以單細胞解析度重建的果蠅全腦連結網路（FlyCircuit 資料的源頭）；而論文用來示範「依生物意義配色」的右側嗅覺社群，以及 Kenyon cells 等案例，則直接取自 Shih 等人 2015 年以連結體學分析果蠅腦資訊流所辨識出的社群結構與神經元標註（出生日期、推定神經傳導物質、發育史）。換言之，Kaleido 把前兩篇所建立的「資料」與「分析結果」轉化為人眼可直接檢視、可回溯到每個 NeuronID 的 3D 影像，補上了大規模連結體研究中「人工目視檢查」這一環。</p>
+<p>論文也指出其前瞻定位：雖以果蠅與螢光共軛焦影像示範，演算法可輕易延伸到其他物種與其他取像工具（電子顯微鏡序列切片、X 光顯微斷層、超解析顯微術）。隨著這些技術讓單神經元影像以數量級增長、終將累積到數百萬神經元，Kaleido 作為「資源節省、資訊豐富」的視覺化工具，可望在未來真正完整的大腦接線圖到來時，持續扮演讓研究者親眼檢視大規模連結體的關鍵角色。</p>
+    </section>
+
+    <section class="block">
+      <h2>相關論文</h2>
+      <div class="related-grid">
+      <a href="chiang-2011-flycircuit.html"><span class="ry">2011 · Current Biology</span><br><span class="rt">果蠅全腦連結網路的單細胞解析度三維重建</span></a>
+      <a href="shih-2015-information-flow.html"><span class="ry">2015 · Current Biology</span><br><span class="rt">以連結體學分析果蠅腦中的資訊流</span></a>
+      <a href="cheng-2025-mushroom-body.html"><span class="ry">2025 · Science Advances</span><br><span class="rt">果蠅蕈狀體中的混合神經網路驅動嗅覺偏好</span></a>
+      </div>
+    </section>
+  </article>
+</div>
+<div class="foot">
+  本頁由 LLM 依原始 PDF 整理；中文重點為摘要性質，引用前請以原文為準。｜id: <code>kaleido-2018</code>
+</div>
+</body>
+</html>
