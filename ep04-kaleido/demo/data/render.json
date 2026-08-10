@@ -1,0 +1,195 @@
+{
+  "dims": [
+    891,
+    484,
+    238
+  ],
+  "voxels": 28823759,
+  "images": {
+    "mip_kaleido_xy.png": {
+      "px": [
+        891,
+        484
+      ],
+      "kb": 665.3
+    },
+    "mip_kaleido_xz.png": {
+      "px": [
+        891,
+        238
+      ],
+      "kb": 278.5
+    },
+    "mip_kaleido_zy.png": {
+      "px": [
+        238,
+        484
+      ],
+      "kb": 139.4
+    },
+    "mip_random_xy.png": {
+      "px": [
+        891,
+        484
+      ],
+      "kb": 653.4
+    },
+    "mip_random_xz.png": {
+      "px": [
+        891,
+        238
+      ],
+      "kb": 276.9
+    },
+    "mip_random_zy.png": {
+      "px": [
+        238,
+        484
+      ],
+      "kb": 139.6
+    },
+    "mip_nt_xy.png": {
+      "px": [
+        891,
+        484
+      ],
+      "kb": 604.3
+    },
+    "mip_nt_xz.png": {
+      "px": [
+        891,
+        238
+      ],
+      "kb": 236.1
+    },
+    "mip_nt_zy.png": {
+      "px": [
+        238,
+        484
+      ],
+      "kb": 113.8
+    },
+    "mip_misread_xy.png": {
+      "px": [
+        891,
+        484
+      ],
+      "kb": 620.7
+    },
+    "mip_misread_xz.png": {
+      "px": [
+        891,
+        238
+      ],
+      "kb": 262.4
+    },
+    "mip_misread_zy.png": {
+      "px": [
+        238,
+        484
+      ],
+      "kb": 134.7
+    },
+    "zoom_kaleido.png": {
+      "px": [
+        600,
+        600
+      ],
+      "kb": 580.6
+    },
+    "zoom_random.png": {
+      "px": [
+        600,
+        600
+      ],
+      "kb": 574.3
+    },
+    "zoom_misread.png": {
+      "px": [
+        600,
+        600
+      ],
+      "kb": 511.5
+    },
+    "spin_kaleido.webp": {
+      "px": [
+        700,
+        374
+      ],
+      "frames": 36,
+      "kb": 2499.0
+    }
+  },
+  "clashes": [
+    {
+      "pair": [
+        "TH-F-000051",
+        "TH-F-100079"
+      ],
+      "dist": 12.0,
+      "hue_gap_random": 28.8,
+      "hue_gap_kaleido": 54.0,
+      "xy": [
+        171.0,
+        146.0
+      ]
+    },
+    {
+      "pair": [
+        "TH-F-100061",
+        "TH-F-300048"
+      ],
+      "dist": 20.6,
+      "hue_gap_random": 7.2,
+      "hue_gap_kaleido": 151.2,
+      "xy": [
+        77.5,
+        152.0
+      ]
+    },
+    {
+      "pair": [
+        "TH-F-100097",
+        "TH-F-100103"
+      ],
+      "dist": 9.2,
+      "hue_gap_random": 14.4,
+      "hue_gap_kaleido": 126.0,
+      "xy": [
+        20.5,
+        52.0
+      ]
+    },
+    {
+      "pair": [
+        "TH-M-700001",
+        "VGlut-F-000232"
+      ],
+      "dist": 27.1,
+      "hue_gap_random": 28.8,
+      "hue_gap_kaleido": 172.8,
+      "xy": [
+        54.0,
+        93.5
+      ]
+    }
+  ],
+  "zoom": {
+    "box": [
+      340,
+      210,
+      50,
+      539,
+      409,
+      89
+    ],
+    "n_somas": 31,
+    "threshold": 0.35,
+    "zoom": 3,
+    "size": [
+      200,
+      200
+    ],
+    "slab": 40
+  }
+}

@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>隨堂測驗｜EP04 放手讓 AI 復刻一篇論文</title>
+<style>
+  :root{
+    --ink:#1b2733; --soft:#5a6b7b; --faint:#8b98a5;
+    --bg:#f7f8fa; --surface:#ffffff; --border:#e4e8ee;
+    --accent:#2563eb; --accent-soft:#eff4ff;
+    --green:#16a34a; --green-soft:#e9f7ef; --red:#dc2626; --red-soft:#fdecec;
+    --radius:12px; --maxw:820px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);line-height:1.7;font-size:16.5px;
+    font-family:-apple-system,"Segoe UI","Noto Sans TC","Microsoft JhengHei","PingFang TC",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px 90px}
+  header.hero{max-width:var(--maxw);margin:0 auto;padding:46px 22px 8px}
+  .topbar{height:12px;background:var(--accent);position:fixed;top:0;left:0;right:0;z-index:10}
+  .eyebrow{color:var(--accent);font-weight:700;font-size:13px;letter-spacing:.08em;margin:0 0 8px}
+  h1{font-size:30px;margin:0 0 8px;line-height:1.3}
+  .sub{color:var(--soft);margin:0 0 4px}
+  .meta{color:var(--faint);font-size:13.5px}
+  a.back{color:var(--accent);text-decoration:none;font-size:14px}
+  a.back:hover{text-decoration:underline}
+  #result{display:none;margin:22px 0 8px;background:var(--surface);border:1px solid var(--border);
+    border-radius:var(--radius);padding:24px 26px;text-align:center;box-shadow:0 6px 24px rgba(16,24,40,.08)}
+  #result.show{display:block}
+  #result .score{font-size:46px;font-weight:800;color:var(--accent);line-height:1.1}
+  #result .score small{font-size:24px;color:var(--faint);font-weight:600}
+  #result .rmsg{font-size:18px;margin:6px 0 16px}
+  #result button{font:inherit;font-size:15px;padding:9px 22px;border-radius:10px;border:1px solid var(--accent);
+    background:var(--accent);color:#fff;cursor:pointer}
+  #result button:hover{background:#1d50c9}
+  .progress{position:sticky;top:12px;z-index:5;background:color-mix(in srgb,var(--bg) 85%,transparent);
+    backdrop-filter:blur(6px);padding:10px 0;font-size:14px;color:var(--soft)}
+  .progress b{color:var(--accent)}
+  .qcard{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+    padding:20px 22px;margin:16px 0;box-shadow:0 1px 3px rgba(16,24,40,.05);transition:box-shadow .2s}
+  .qcard.flash{box-shadow:0 0 0 3px rgba(220,38,38,.35)}
+  .qhead{display:flex;gap:12px;align-items:flex-start;margin-bottom:14px}
+  .qnum{flex:none;width:30px;height:30px;border-radius:8px;background:var(--accent);color:#fff;
+    font-weight:700;text-align:center;line-height:30px;font-size:15px}
+  .qtext{font-size:17px;font-weight:500;padding-top:2px}
+  .opts{display:grid;gap:9px;padding-left:42px}
+  .opt{display:flex;gap:11px;align-items:flex-start;padding:11px 14px;border:1px solid var(--border);
+    border-radius:10px;cursor:pointer;transition:border-color .15s,background .15s}
+  .opt:hover{border-color:var(--accent);background:var(--accent-soft)}
+  .opt input{position:absolute;opacity:0;width:0;height:0}
+  .opt .mark{flex:none;width:20px;height:20px;border:2px solid #c3ccd6;border-radius:50%;margin-top:2px;
+    position:relative;transition:border-color .15s}
+  .opt input:checked ~ .mark{border-color:var(--accent)}
+  .opt input:checked ~ .mark::after{content:"";position:absolute;inset:3px;border-radius:50%;background:var(--accent)}
+  .opt .otext{font-size:15.5px}
+  .opt.correct{border-color:var(--green);background:var(--green-soft)}
+  .opt.correct .mark{border-color:var(--green)}
+  .opt.correct .mark::after{content:"";position:absolute;inset:3px;border-radius:50%;background:var(--green)}
+  .opt.wrong{border-color:var(--red);background:var(--red-soft)}
+  .opt.wrong .mark{border-color:var(--red)}
+  .opt.wrong .mark::after{content:"";position:absolute;inset:3px;border-radius:50%;background:var(--red)}
+  .graded .opt{cursor:default}
+  .graded .opt:hover{background:inherit;border-color:var(--border)}
+  .graded .opt.correct:hover{border-color:var(--green)}
+  .graded .opt.wrong:hover{border-color:var(--red)}
+  .explain{margin:12px 0 0 42px;padding:11px 14px;background:var(--accent-soft);border-left:3px solid var(--accent);
+    border-radius:0 8px 8px 0;font-size:14.5px;color:var(--ink)}
+  .actions{margin:26px 0 0;text-align:center}
+  .name-input{display:block;margin:0 auto 14px;width:300px;max-width:90%;font:inherit;font-size:15px;padding:11px 16px;border:1px solid var(--border);border-radius:10px;background:var(--surface);color:var(--ink)}
+  .name-input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(37,99,235,.15)}
+  #submit{font:inherit;font-size:17px;font-weight:600;padding:13px 40px;border-radius:12px;border:none;
+    background:var(--accent);color:#fff;cursor:pointer;box-shadow:0 4px 14px rgba(37,99,235,.3)}
+  #submit:hover{background:#1d50c9}
+  .foot{max-width:var(--maxw);margin:0 auto;padding:24px 22px;color:var(--faint);font-size:12.5px;border-top:1px solid var(--border)}
+  @media(max-width:560px){.opts,.explain{padding-left:0;margin-left:0}}
+</style>
+</head>
+<body>
+<div class="topbar"></div>
+
+<header class="hero">
+  <p class="eyebrow">隨堂測驗 · EP04 · 10 題單選</p>
+  <h1>這一集的重點，你掌握了多少？</h1>
+  <p class="sub">這份測驗對應教學文件〈EP04 放手讓 AI 復刻一篇論文〉。</p>
+  <p class="meta">答完點「交卷看分數」當場計分並顯示解析。純前端、不會送出任何資料。　<a class="back" href="index.html">← 回教學文件</a></p>
+</header>
+
+<div class="wrap">
+  <div id="result"></div>
+  <div class="progress">已作答 <b id="answered">0</b> / 10 題</div>
+  <div id="quiz-list"></div>
+  <div class="actions">
+    <input id="name" class="name-input" type="text" placeholder="姓名（選填，老師統計用）" maxlength="20" autocomplete="off">
+    <button id="submit">交卷看分數</button>
+  </div>
+</div>
+
+<div class="foot">BSC with Agentic AI Tutorial · EP04 隨堂測驗（純前端 HTML，可離線使用）</div>
+
+<script>
+// 部署「Google 試算表記分」用：把 Apps Script 網址貼進引號內。
+// 留空＝只在本機計分、不送出任何資料（一樣可正常使用）。
+const SCRIPT_URL = '';
+
+// 出題規則（詳見 skill 的 references/quiz-design.md）：
+//   1. 十題、每題四個選項，answer 是正解的索引（0–3）。
+//   2. 正解位置要打散，不要集中在某一格。
+//   3. 誘答項要跟正解一樣具體、一樣長——「最長的就是答案」等於送分。
+//   4. 出「讀者看得到」的內容，不要考製作過程的內部除錯細節。
+//   5. explain 寫「為什麼」，不只是複述答案。
+const QUIZ = [
+  {q:"這一集發現「能量公式和論文正文互相矛盾」時，AI 採取的正確做法是什麼？",
+   options:[
+     "挑一個看起來比較合理的版本改掉，先讓整套程式跑得出結果再說",
+     "回頭查原始 PDF，並把那一頁渲染成圖片用眼睛確認",
+     "同時實作兩種版本，把兩張圖都放進報告裡讓讀者自己選一個",
+     "先寄信問論文的通訊作者，等對方回覆之後再決定怎麼寫"],
+   answer:1, explain:"矛盾出現時，兩個版本都不能信。回一手來源才能定案——而且純文字抽取會把數學式的排版壓平，看不出分數線的範圍，所以最後是把那一頁渲染成 300 dpi 圖片用眼睛確認的。"},
+
+  {q:"最後查出來，抄錯公式的是誰？",
+   options:[
+     "原始論文印錯了，期刊後來發過一則勘誤但沒有被收錄進資料庫",
+     "PDF 的文字抽取工具解碼失敗，把分數的上下兩層順序顛倒了",
+     "EP01／EP02 建的知識庫，把分數壓平、min 搬到了分子",
+     "程式裡的括號打錯了位置，導致運算的優先順序跟公式寫的不一樣"],
+   answer:2, explain:"原始論文完全自洽：分數線涵蓋整個分母。是我們自己用 AI 整理的知識庫在轉錄時把分數壓平了。這也是整集最重要的一課：AI 整理過的資料是二手的。"},
+
+  {q:"用「抄錯的公式」跑出來的圖，為什麼失敗？",
+   options:[
+     "顏色全部偏暗，細的神經突起在畫面上幾乎看不見",
+     "顏色形成漂亮的空間漸層，但每條神經元都跟鄰居同色",
+     "顏色隨機跳動，同一條神經元的不同段落被塗成不同顏色",
+     "顏色只剩下紅綠兩種，色相環上其他角度完全沒被用到"],
+   answer:1, explain:"min 項搬到分子後，「相鄰又同色」變成能量最低的組態，最小化它就是在鼓勵鄰居同色。結果是左視葉全藍、右視葉全洋紅的漸層——當位置編碼很漂亮，當個體辨識完全失效。"},
+
+  {q:"第一次比較得到「隨機 113.4°、Kaleido 88.2°」，為什麼這個結論不成立？",
+   options:[
+     "因為兩次量測所用的指標定義不一樣，一個算平均、一個算中位數",
+     "因為隨機配色那次沒有把最亮的體素排除掉，數值被雜訊墊高了",
+     "因為 Kaleido 那一次的程式有 bug，色相角在寫入時被覆蓋掉了",
+     "因為隨機配色的中位數本來就在 61°～119° 間跳，兩個都是雜訊"],
+   answer:3, explain:"把隨機配色跑 200 次，中位數是 92.2° ± 11.7°。113.4° 只是抽到分布上緣、88.2° 落在平均附近——拿單次對單次比較，量到的是抽樣波動，不是效果。"},
+
+  {q:"論文把蒙地卡羅步數設為 10N，為什麼搬到這一集會出問題？",
+   options:[
+     "論文 N=10,000、10N 是十萬步；這裡 N=100 只有一千步",
+     "因為論文用的是 C++，Python 每一步的計算精度不足以支撐同樣的步數",
+     "因為論文裡的 N 指的是體素的數量，這一集誤解成了神經元的數量",
+     "因為步數必須是 2 的次方，10N 在這個規模下無法整除，被截斷了"],
+   answer:0, explain:"同一條公式，在不同規模下代表的實際工作量差 100 倍。復刻論文時要問的不是「參數抄對了嗎」，而是「這個參數在我的規模下代表什麼」。改成退火加長到 2000N 之後能量才真的降下去。"},
+
+  {q:"在最後的比較表裡，「用抄錯的公式」那一列的能量降幅是 30.7%，全場最高。這說明了什麼？",
+   options:[
+     "抄錯的公式其實收斂得更快，只是配色的美感比較差而已",
+     "能量降幅越大代表最佳化越徹底，那一列的實作品質最好",
+     "能量是自己定義的，定義錯了，優化得越好離目標越遠",
+     "能量降幅和配色品質無關，兩者在數學上是完全獨立的量"],
+   answer:2, explain:"最佳化只會忠實地朝你定義的目標前進。目標定錯時，指標漂亮反而是危險訊號。這一列是全場能量降最多的，也是錯得最離譜的。"},
+
+  {q:"驗證「合併後檔案大小與神經元數量無關」時，為什麼標準腦網格必須固定？",
+   options:[
+     "因為網格大小改變之後，之前算好的距離矩陣就必須整個重算一次",
+     "因為不同大小的網格會用到不同的壓縮演算法，檔案大小無法比較",
+     "因為固定網格才能讓四次測試共用同一份記憶體，量測才會準確",
+     "因為若讓網格跟著 N 縮小，這個結論會自動成立，是設計出來的"],
+   answer:3, explain:"論文的主張正是「大小由標準腦解析度決定」。若網格跟著當前的 N 縮放，四個數字當然會不一樣、或當然會一樣——那都不是量出來的。防止「自己餵自己答案」是驗證設計的基本功。"},
+
+  {q:"擁擠區域的放大對照圖做了三次才成功，第二次失敗的原因是什麼？",
+   options:[
+     "XY 投影穿透了整個腦深度，所有深度的細突起疊成彩色雜訊",
+     "選到的區域裡只有三條神經元，數量太少看不出配色的差別",
+     "放大倍率設得太高，影像被內插模糊到分不出個別的神經元",
+     "白圈的位置算錯了，標記落在畫面外面所以看不到比較的重點"],
+   answer:0, explain:"第二次挑的是「不同神經元最多」的窗格，結果落在神經纖維網裡。解法是限制 z 方向的薄片（只取 40 體素厚），對應論文看的 calyx 尖端那一薄層，細胞本體才一顆一顆現形。"},
+
+  {q:"論文推導的時間複雜度是 O(N²)，這一集實測到 N^1.11。AI 怎麼處理這個不一致？",
+   options:[
+     "把這項從報告裡拿掉，因為沒複現的結果不適合寫進成品",
+     "調整計時的方式直到量出接近 N² 的曲線，再寫進報告裡",
+     "寫進報告並說明：N 只到 100，固定開銷還壓過實質計算",
+     "改用論文的原始參數重跑一次，得到 N² 之後才寫進報告"],
+   answer:2, explain:"復刻報告的價值有一半來自「哪裡沒複現」。寫出來並附上原因（N 太小，漸近行為還沒開始，要驗證得把 N 拉到上千），讀者才知道這份復刻的界線在哪。"},
+
+  {q:"這一集示範的「放手讓 AI 自己做」，改變了人的角色。改變成什麼？",
+   options:[
+     "從檢查每一步對不對，變成檢查事實來源、對照組、失敗紀錄這些結構性的事",
+     "從自己寫程式，變成只要在最後看一眼產出的圖表順不順眼就可以了",
+     "從提出問題，變成提供更多運算資源讓 AI 能夠嘗試更多種參數組合",
+     "從決定研究方向，變成把方向也交給 AI 判斷、人只負責最後的驗收"],
+   answer:0, explain:"逐句指揮時你檢查的是「每一步對不對」；放手之後錯誤會連續傳播，所以要改成檢查結構性的東西——事實來源是不是一手的、對照組公不公平、失敗的中間版本有沒有被藏起來、沒複現的有沒有講。這一集三個坑全部落在這幾項裡。"},
+];
+
+const list = document.getElementById('quiz-list');
+QUIZ.forEach((item, qi) => {
+  const card = document.createElement('div');
+  card.className = 'qcard'; card.id = 'q' + qi;
+  const opts = item.options.map((opt, oi) =>
+    `<label class="opt"><input type="radio" name="q${qi}" value="${oi}"><span class="mark"></span><span class="otext">${opt}</span></label>`
+  ).join('');
+  card.innerHTML =
+    `<div class="qhead"><span class="qnum">${qi+1}</span><span class="qtext">${item.q}</span></div>` +
+    `<div class="opts">${opts}</div><div class="explain" hidden></div>`;
+  list.appendChild(card);
+});
+
+const answeredEl = document.getElementById('answered');
+document.addEventListener('change', e => {
+  if (e.target.matches('input[type=radio]')) {
+    const n = new Set([...document.querySelectorAll('input[type=radio]:checked')].map(i=>i.name)).size;
+    answeredEl.textContent = n;
+  }
+});
+
+document.getElementById('submit').addEventListener('click', grade);
+
+function grade(){
+  const unanswered = [];
+  QUIZ.forEach((_, qi) => { if (!document.querySelector(`input[name="q${qi}"]:checked`)) unanswered.push(qi); });
+  if (unanswered.length){
+    alert(`還有 ${unanswered.length} 題沒作答喔！`);
+    const first = document.getElementById('q' + unanswered[0]);
+    first.scrollIntoView({behavior:'smooth', block:'center'});
+    first.classList.add('flash'); setTimeout(()=>first.classList.remove('flash'), 1500);
+    return;
+  }
+  let score = 0;
+  const marks = [];
+  QUIZ.forEach((item, qi) => {
+    const chosen = +document.querySelector(`input[name="q${qi}"]:checked`).value;
+    const card = document.getElementById('q' + qi);
+    card.classList.add('graded');
+    card.querySelectorAll('.opt').forEach((lab, oi) => {
+      lab.querySelector('input').disabled = true;
+      if (oi === item.answer) lab.classList.add('correct');
+      if (oi === chosen && chosen !== item.answer) lab.classList.add('wrong');
+    });
+    const ex = card.querySelector('.explain');
+    ex.innerHTML = (chosen === item.answer ? '✅ <b>答對！</b> ' : '❌ <b>答錯。</b> ') + item.explain;
+    ex.hidden = false;
+    const ok = chosen === item.answer;
+    marks.push(ok ? 1 : 0);
+    if (ok) score++;
+  });
+  showResult(score);
+  document.getElementById('submit').style.display = 'none';
+  logResult(score, marks);
+}
+
+function logResult(score, marks){
+  if (!SCRIPT_URL) return;
+  try {
+    fetch(SCRIPT_URL, {
+      method: 'POST', mode: 'no-cors',
+      body: JSON.stringify({
+        name: (document.getElementById('name').value || '').trim(),
+        score: score, total: QUIZ.length, marks: marks, ts: new Date().toISOString()
+      })
+    });
+  } catch (e) { /* 靜默失敗，不影響本機計分 */ }
+}
+
+function showResult(score){
+  let msg;
+  if (score === QUIZ.length) msg = '滿分！🎉 完全掌握了。';
+  else if (score >= 8) msg = '很好，觀念很清楚！';
+  else if (score >= 6) msg = '不錯，再複習幾個重點就更穩了。';
+  else if (score >= 4) msg = '及格邊緣，建議重看一遍教學。';
+  else msg = '別灰心，回去再看一次教學吧！';
+  const r = document.getElementById('result');
+  r.innerHTML =
+    `<div class="score">${score} <small>/ ${QUIZ.length}</small></div>` +
+    `<div class="rmsg">${msg}</div>` +
+    `<button id="retry">重新作答</button>`;
+  r.classList.add('show');
+  document.getElementById('retry').addEventListener('click', () => location.reload());
+  r.scrollIntoView({behavior:'smooth', block:'center'});
+}
+</script>
+</body>
+</html>

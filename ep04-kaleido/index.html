@@ -1,0 +1,555 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EP04 放手讓 AI 復刻一篇論文｜Claude Code × Agentic AI 教學</title>
+<style>
+  :root{
+    --ink:#1b2733; --soft:#5a6b7b; --faint:#8b98a5;
+    --bg:#ffffff; --panel:#f7f8fa; --border:#e4e8ee;
+    --accent:#2563eb; --accent-soft:#eff4ff;
+    --maxw:920px; --radius:12px;
+    --green:#16a34a; --blue:#2563eb; --purple:#9333ea; --amber:#d97706; --red:#dc2626;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,"Segoe UI","Noto Sans TC","Microsoft JhengHei","PingFang TC",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.85; font-size:16.5px; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 22px 120px}
+  header.hero{ max-width:var(--maxw); margin:0 auto; padding:54px 22px 26px; }
+  .eyebrow{color:var(--accent); font-weight:700; font-size:13px; letter-spacing:.08em; text-transform:uppercase; margin:0 0 10px}
+  h1{font-size:33px; line-height:1.3; margin:0 0 12px; letter-spacing:-.01em}
+  .subtitle{font-size:18px; color:var(--soft); margin:0 0 26px}
+  .meta-card{ background:var(--panel); border:1px solid var(--border); border-radius:var(--radius); padding:18px 22px; font-size:15px; }
+  .meta-card p{margin:6px 0}
+  .meta-card b{color:var(--ink)}
+  h2{font-size:25px; margin:64px 0 8px; padding-top:16px; border-top:2px solid var(--border); line-height:1.35}
+  h2 .pt{color:var(--accent); font-size:15px; display:block; font-weight:700; letter-spacing:.05em; margin-bottom:2px}
+  h3{font-size:19px; margin:38px 0 10px}
+  h4{font-size:16px; margin:24px 0 6px; color:var(--ink)}
+  p{margin:12px 0}
+  a{color:var(--accent); text-decoration:none}
+  a:hover{text-decoration:underline}
+  code{background:var(--panel); border:1px solid var(--border); border-radius:5px; padding:1px 6px; font-family:"Cascadia Code",Consolas,Menlo,monospace; font-size:.86em}
+  pre{background:#0f1622; color:#e6edf3; border-radius:10px; padding:16px 18px; overflow:auto; font-size:13.5px; line-height:1.6}
+  pre code{background:none; border:none; color:inherit; padding:0}
+  ul,ol{padding-left:22px}
+  li{margin:7px 0}
+  blockquote{margin:16px 0; padding:10px 18px; border-left:4px solid var(--accent); background:var(--accent-soft); border-radius:0 8px 8px 0; color:var(--ink)}
+
+  nav.toc{background:var(--panel); border:1px solid var(--border); border-radius:var(--radius); padding:20px 26px; margin:30px 0}
+  nav.toc h2{border:none; margin:0 0 10px; padding:0; font-size:18px}
+  nav.toc ol{margin:6px 0 0; columns:2; column-gap:34px}
+  nav.toc a{color:var(--ink)}
+  nav.toc blockquote a{color:var(--accent); text-decoration:underline; font-weight:500}
+  @media(max-width:620px){nav.toc ol{columns:1}}
+
+  .msg{padding:11px 16px; margin:14px 0; border-radius:5px; font-size:15.5px}
+  .msg .who{font-weight:700; margin-right:4px}
+  .msg.g{background:rgba(34,197,94,.10); border-left:4px solid var(--green)}
+  .msg.b{background:rgba(59,130,246,.10); border-left:4px solid var(--blue)}
+  .msg.p{background:rgba(168,85,247,.12); border-left:4px solid var(--purple)}
+  .msg.y{background:rgba(245,158,11,.13); border-left:4px solid var(--amber)}
+  .msg.r{background:rgba(239,68,68,.10); border-left:4px solid var(--red)}
+  .msg ol,.msg ul{margin:8px 0 2px}
+  .ai{margin:10px 0 22px; padding-left:6px}
+  .ai .tag{display:inline-block; font-size:12px; font-weight:700; color:var(--accent); background:var(--accent-soft); border-radius:5px; padding:1px 8px; margin-right:6px}
+  .ai .tag.q{color:#7c3aed; background:#f3e8ff}
+  .ai .tag.bug{color:#b91c1c; background:#fee2e2}
+  .ai .tag.ok{color:#15803d; background:#dcfce7}
+
+  figure{margin:22px 0; padding:0}
+  figure img,figure video{width:100%; display:block; border:1px solid var(--border); border-radius:10px; box-shadow:0 6px 24px rgba(16,24,40,.08); background:#000}
+  figure img.flat{background:#fff}
+  figcaption{font-size:13.5px; color:var(--soft); margin-top:9px; text-align:center}
+  figcaption b{color:var(--ink)}
+  .cmp{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:22px 0}
+  .cmp figure{margin:0}
+  .cmp .tagline{font-size:13px; font-weight:700; margin:0 0 6px}
+  .cmp .before{color:var(--red)} .cmp .after{color:var(--green)}
+  @media(max-width:620px){.cmp{grid-template-columns:1fr}}
+
+  table{border-collapse:collapse; width:100%; margin:18px 0; font-size:14.5px}
+  th,td{border:1px solid var(--border); padding:9px 12px; text-align:left; vertical-align:top}
+  th{background:var(--panel); font-weight:700}
+  td code{font-size:.9em}
+  td.num,th.num{text-align:right; white-space:nowrap}
+
+  .callout{background:#fffbeb; border:1px solid #fde68a; border-left:4px solid var(--amber); border-radius:0 8px 8px 0; padding:12px 16px; margin:18px 0; font-size:15px}
+  .note{background:var(--accent-soft); border:1px solid #c7dbff; border-radius:8px; padding:12px 16px; margin:18px 0; font-size:15px}
+  .foot{max-width:var(--maxw); margin:0 auto; padding:30px 22px; color:var(--faint); font-size:13px; border-top:1px solid var(--border)}
+  .lesson{background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:4px 20px 14px; margin:16px 0}
+  .lesson h4{color:var(--accent)}
+  .seg{scroll-margin-top:16px}
+  /* 只給段落編號徽章用。不能寫成 .num——表格的 td.num/th.num 會被一起套上藍底圓角 */
+  span.num{display:inline-block; min-width:30px; height:30px; line-height:30px; text-align:center; background:var(--accent); color:#fff; border-radius:8px; font-weight:700; font-size:15px; margin-right:8px}
+  .recap{display:flex; gap:14px; align-items:flex-start; background:var(--accent-soft); border:1px solid #c7dbff; border-radius:var(--radius); padding:16px 20px; margin:22px 0}
+  .recap .ico{font-size:22px; flex:none}
+  .video-box{margin:28px 0 6px}
+  .video-box .vlabel{font-size:14px; color:var(--accent); font-weight:700; letter-spacing:.04em; margin:0 0 10px}
+  .video-wrap{position:relative; width:100%; aspect-ratio:16/9; border-radius:var(--radius); overflow:hidden; box-shadow:0 8px 30px rgba(16,24,40,.14); background:#000}
+  .video-wrap iframe{position:absolute; inset:0; width:100%; height:100%; border:0}
+  .video-box .vcap{font-size:13.5px; color:var(--soft); margin:10px 0 0}
+  .demo-box{display:flex; align-items:center; gap:14px; margin:18px 0 6px; padding:16px 22px;
+    background:var(--accent-soft); border:1px solid #c7dbff; border-radius:var(--radius);
+    text-decoration:none; color:var(--ink); transition:border-color .15s, box-shadow .15s}
+  .demo-box:hover{border-color:var(--accent); box-shadow:0 6px 20px rgba(37,99,235,.12)}
+  .demo-ico{font-size:24px; flex:none}
+  .demo-txt{font-size:15.5px}
+  .demo-txt b{color:var(--accent)}
+  .demo-box.data{background:#f0fdf4; border-color:#bbf7d0}
+  .demo-box.data:hover{border-color:var(--green); box-shadow:0 6px 20px rgba(22,163,74,.14)}
+  .demo-box.data .demo-txt b{color:#15803d}
+  .demo-box .demo-txt code{font-size:.88em}
+  .sec-label{font-size:13px; font-weight:700; color:var(--accent); letter-spacing:.05em; margin:30px 0 2px}
+  .quiz-cta{margin:34px 0 6px; background:var(--accent-soft); border:1px solid #c7dbff; border-radius:var(--radius); padding:24px 26px; text-align:center}
+  .quiz-cta h3{margin:0 0 6px; font-size:19px}
+  .quiz-cta p{margin:0 0 16px; color:var(--soft); font-size:15px}
+  .quiz-cta a{display:inline-block; background:var(--accent); color:#fff; text-decoration:none; font-weight:600; font-size:16px; padding:12px 30px; border-radius:10px; box-shadow:0 4px 14px rgba(37,99,235,.3)}
+  .quiz-cta a:hover{background:#1d50c9}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <p class="eyebrow"><a href="../index.html" style="color:var(--accent);text-decoration:none">← BSC with Agentic AI Tutorial</a> · EP04</p>
+  <h1>放手讓 AI 復刻一篇論文<br>——以及放手之後，你該檢查什麼</h1>
+  <p class="subtitle">前三集都是「人問一句、AI 做一段」。這一集使用者只說了三句話，其餘全由 AI 自己跑完：讀論文、寫演算法、debug、產圖、寫教材。重點不在它做完了，而在它<b>差點做錯三次</b>。</p>
+  <div class="meta-card">
+    <p><b>這份文件是什麼：</b>一次「高自主度」協作的完整重演。任務是把 2018 年發表在 <i>Neuroinformatics</i> 的 Kaleido 演算法<b>從論文重新實作出來</b>，跑在 100 個果蠅單神經元影像上。你會看到 AI 如何自己讀論文、自己發現公式有問題、自己回去查一手來源、以及<b>兩次得出錯誤結論又自己推翻</b>。</p>
+    <p><b>適合誰讀：</b>想把「AI 幫我寫程式」升級成「AI 幫我做研究」的人。<b>不需要會寫程式</b>，但這一集會認真談統計與驗證——因為當你放手，驗證就是你唯一剩下的把關手段。</p>
+    <p><b>成果（一句話）：</b>交出<b>一個可以自己跑的 GitHub repo</b>（<a href="https://github.com/ctshih/Kaleido-Claude" target="_blank" rel="noopener">ctshih/Kaleido-Claude</a>，含 100 個神經元影像）<b>與一份結果報告</b>——從論文重新實作出 Kaleido 的全部核心，把「最近鄰色相差」從隨機配色的 <b>92.2° ± 11.7°</b> 推到 <b>115.2° ± 3.5°</b>，複現論文「合併後檔案大小與神經元數量無關」的主張（四種 N 都是 <b>410.5 MB</b>），並<b>修正了我們自己知識庫裡一條抄錯的公式</b>。</p>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="recap">
+    <span class="ico">🧭</span>
+    <div><b>這一集把前三集接起來了。</b><a href="../ep01-knowledge-base/index.html">EP01</a> 建了論文知識庫、<a href="../ep02-grow-knowledge-base/index.html">EP02</a> 把它養大、<a href="../ep03-neuron-3d/index.html">EP03</a> 學會打開 <code>.am</code> 神經元影像檔。EP04 同時用上這三樣：<b>從知識庫裡挑一篇論文，用 EP03 學會的讀檔能力，把論文變成能跑的程式</b>。沒看過前三集也能讀——但你會在第 ⑥ 段看到，EP01 建的知識庫在這裡出了一個很有教育意義的錯。</div>
+  </div>
+
+  <div class="video-box">
+    <p class="vlabel">📺 影片版</p>
+    <div class="video-wrap">
+      <iframe src="https://www.youtube.com/embed/waOi64fTUoI" title="BSC with Agentic AI Tutorial EP04 放手讓 AI 復刻一篇論文" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+    <p class="vcap">不想讀字？可以先看影片導覽，再回來細讀；兩者內容一致。</p>
+  </div>
+
+  <p class="sec-label">這一集做出來的兩個成品</p>
+
+  <a class="demo-box data" href="https://github.com/ctshih/Kaleido-Claude" target="_blank" rel="noopener">
+    <span class="demo-ico">📦</span>
+    <span class="demo-txt"><b>① 一個可以自己跑的 GitHub repo：<code>ctshih/Kaleido-Claude</code></b><br>
+    Kaleido 演算法的完整實作（六支 Python）＋ 100 個 FlyCircuit 神經元影像。<code>git clone</code> 之後三行指令就能在自己機器上重現全部結果 →</span>
+  </a>
+
+  <a class="demo-box" href="demo/index.html" target="_blank" rel="noopener">
+    <span class="demo-ico">📊</span>
+    <span class="demo-txt"><b>② 一份結果報告</b><br>
+    100 個神經元的自動配色、與隨機配色的逐對比較、能量收斂曲線、規模量測。<b>頁面裡沒有一個數字是手寫的</b>，全部從實驗產生的 JSON 讀出來 →</span>
+  </a>
+
+  <nav class="toc">
+    <h2>目錄</h2>
+    <blockquote>想直接看怎麼實做，可以從 <a href="#part1">Part 1 — 完整工作時序</a> 開始。</blockquote>
+    <ol>
+      <li><a href="#colors">對話框顏色說明</a></li>
+      <li><a href="#glossary">名詞速查表</a></li>
+      <li><a href="#hue">先講清楚：顏色為什麼是「角度」</a></li>
+      <li><a href="#mindset">放手之前，先建立 5 個檢查點</a></li>
+      <li><a href="#part1">Part 1 — 完整工作時序</a></li>
+      <li><a href="#part2">Part 2 — 最佳實踐清單</a></li>
+      <li><a href="#part3">Part 3 — 本次成果</a></li>
+      <li><a href="#part4">Part 4 — 10 個核心教訓</a></li>
+      <li><a href="#closing">結語：給初學者的下一步</a></li>
+    </ol>
+  </nav>
+
+  <!-- ============ 顏色說明 ============ -->
+  <h2 id="colors">對話框顏色說明</h2>
+  <p>後面 <a href="#part1">Part 1</a> 會完整重現使用者說過的每一句話。AI 的動作則用灰底「AI 做了什麼」摘要。五種顏色標示「這句話在做什麼」：</p>
+  <div class="msg g"><span class="who">🟢 使用者：</span>請求動作 — 叫 AI 去做一件事。</div>
+  <div class="msg b"><span class="who">🔵 使用者：</span>問問題 — 詢問現況、原理、估算。</div>
+  <div class="msg p"><span class="who">🟣 使用者：</span>關鍵決策 — 在 AI 攤開的選項中做選擇。</div>
+  <div class="msg y"><span class="who">🟡 使用者：</span>中斷 / 澄清 — 補充條件、修正誤會。</div>
+  <div class="msg r"><span class="who">🔴 使用者：</span>設計回饋 / 糾錯 — 指出方案或產出的根本問題。</div>
+  <p class="note">EP04 的顏色分布是整個系列裡最極端的：<b>總共只有三句話</b>，一句 🔵、一句 🔵、一句 🟢。整份文件其餘的內容全部是 AI 自己的判斷與自我糾錯。<b>這正是這一集要示範的東西：當你不再逐句指揮，品質從哪裡來？</b></p>
+
+  <!-- ============ 名詞速查表 ============ -->
+  <h2 id="glossary">名詞速查表</h2>
+  <p>看到不懂的詞先回來查。分成三張表：論文與演算法、這批資料、Agentic AI 能力。</p>
+
+  <h3>A. 論文與演算法</h3>
+  <table>
+    <tr><th style="width:26%">名詞</th><th>白話解釋</th></tr>
+    <tr><td><b>Kaleido</b></td><td>2018 年發表的果蠅腦視覺化演算法。核心是「自動配色」：讓擠在一起的神經元自動拿到對比鮮明的顏色，人眼才分得出誰是誰。</td></tr>
+    <tr><td><b>色相（hue）</b></td><td>顏色的「種類」，用 0–360 度的<b>環</b>表示：0° 紅、120° 綠、240° 藍。Kaleido 只調色相，飽和度固定、亮度交給訊號強度。<a href="#hue">↓ 有一節專門講這個</a></td></tr>
+    <tr><td><b>HSV 色彩模型</b></td><td>把顏色拆成色相（Hue）、飽和度（Saturation）、明度（Value）三個維度的表示法。<a href="#hue">↓ 詳見下一節</a></td></tr>
+    <tr><td><b>能量函數</b></td><td>把「這個配色有多糟」寫成一個數字。糟的組態分數高，演算法的工作就是把這個數字壓低。名字借自物理，跟熱量無關。</td></tr>
+    <tr><td><b>蒙地卡羅（Monte Carlo）</b></td><td>用亂數試誤找最佳解的方法。隨機換兩個顏色，變好就接受，變糟也偶爾接受（免得卡在半山腰），重複幾十萬次。</td></tr>
+    <tr><td><b>退火（annealing）</b></td><td>蒙地卡羅的調度策略：一開始「溫度」高、容易接受變糟的提案以便到處探索；後期降溫、只往好的方向走。名字來自金屬冶煉。</td></tr>
+    <tr><td><b>最近鄰色相差</b></td><td>本集用來評分的指標：每條神經元跟它<b>空間上最近的鄰居</b>之間差幾度顏色。越大越好認，理想是 180°（對比色）。</td></tr>
+  </table>
+
+  <h3>B. 這批資料</h3>
+  <table>
+    <tr><th style="width:26%">名詞</th><th>白話解釋</th></tr>
+    <tr><td><b>FlyCircuit</b></td><td>台灣清華大學建立的果蠅腦資料庫，收錄約 16,000 個單神經元的三維影像。這一集用其中 100 個。</td></tr>
+    <tr><td><b>標準腦（standard brain）</b></td><td>一顆當作「共同座標系」的參考腦。每條神經元都先變形對位到它上面，不同個體的神經元才能疊在一起比較。</td></tr>
+    <tr><td><b>體素（voxel）</b></td><td>3D 版的像素。這批資料每個體素邊長 1 單位，整顆腦約 891×484×238 個體素。</td></tr>
+    <tr><td><b>細胞本體（soma）</b></td><td>神經元「肚子」的部分，訊號最強、在影像上是一顆實心圓球。論文的關鍵比較圖就是看一堆細胞本體擠在一起時分不分得出來。</td></tr>
+    <tr><td><b>MIP（最大強度投影）</b></td><td>把 3D 影像壓成一張 2D 圖的方法：沿著一個方向看過去，每條視線上只留最亮的那一點。神經元很細，切片會切空，投影才看得懂。</td></tr>
+    <tr><td><b>driver line</b></td><td>用來標記特定神經元的基因品系。檔名開頭的 <code>TH</code>、<code>Trh</code>、<code>VGlut</code> 就是，各自對應不同的神經傳導物質。</td></tr>
+  </table>
+
+  <h3>C. 這一集用到的 Agentic AI 能力</h3>
+  <table>
+    <tr><th style="width:26%">名詞</th><th>白話解釋</th></tr>
+    <tr><td><b>Skill</b></td><td>預先寫好的工作流程說明書。這一集用了兩個：一個管「怎麼做一整集教材」、一個管「教學文件怎麼寫」。AI 讀了就照著做，不用每次重講。</td></tr>
+    <tr><td><b>知識庫（自建）</b></td><td>EP01／EP02 用 AI 整理出來的論文摘要網站。這一集示範了它的<b>風險</b>：AI 整理的東西會有錯，拿它當事實來源要小心。</td></tr>
+    <tr><td><b>一手來源查證</b></td><td>當二手摘要和常識打架時，回去看原始 PDF。這一集 AI 甚至把 PDF 那一頁<b>渲染成圖片用眼睛看</b>，因為純文字抽取會把數學式的排版壓平。</td></tr>
+    <tr><td><b>多種子重跑</b></td><td>同一個隨機演算法換不同亂數種子跑很多次，看結果的分布而不是單一次的數值。這一集靠它推翻了兩個錯誤結論。</td></tr>
+    <tr><td><b>暫存區（scratchpad）</b></td><td>AI 放臨時檔案的地方，跟你的專案分開。這一集的三支診斷腳本都丟在那裡，不會污染成品。</td></tr>
+  </table>
+
+  <!-- ============ HSV 色相環 ============ -->
+  <h2 id="hue">先講清楚：顏色為什麼是「角度」</h2>
+  <p>這一集從頭到尾都在講「色相差幾度」。在往下讀之前，先花一分鐘把這件事講清楚，後面所有數字才有意義。</p>
+
+  <p>Kaleido 用的是 <b>HSV 色彩模型</b>，它把一個顏色拆成三個獨立的維度：</p>
+  <table>
+    <tr><th style="width:22%">維度</th><th>是什麼</th><th>Kaleido 怎麼用</th></tr>
+    <tr><td><b>色相 Hue</b></td><td>顏色的「種類」——紅、黃、綠、藍。它是一個<b>環</b>，用 0°～360° 的角度表示。</td><td><b>唯一會被演算法調整的維度。</b>配色＝把色環上的角度分配給神經元。</td></tr>
+    <tr><td><b>飽和度 Saturation</b></td><td>顏色有多「濃」。0 是灰階，1 是最鮮豔。</td><td>固定為 1（論文明訂）。</td></tr>
+    <tr><td><b>明度 Value</b></td><td>顏色有多「亮」。</td><td>交給每個體素的訊號強度——亮的地方就是螢光訊號強的地方。</td></tr>
+  </table>
+
+  <figure>
+    <img class="flat" src="images/hue-wheel.png" alt="HSV 色相環與真實範例">
+    <figcaption><b>左：</b>色相環。0° 紅、120° 綠、240° 藍，繞一圈 360° 回到原點。
+    <b>中、右：</b>真實的例子——同一對神經元（TH-F-100061 與 TH-F-300048）在兩種配色下的色相角。</figcaption>
+  </figure>
+
+  <p>兩件事從這張圖就能看懂：</p>
+  <ul>
+    <li><b>為什麼公式裡有 <code>min(Δ, 360−Δ)</code>。</b>因為色相是一個<b>環</b>：10° 和 350° 看起來只差 20°，不是 340°。繞哪一邊近就算哪一邊——所以兩個顏色的差距<b>最多只有 180°</b>，那就是對比色。</li>
+    <li><b>為什麼 180° 是滿分、0° 是災難。</b>圖中間那對神經元在隨機配色下只差 7.2°，兩顆都是洋紅色，人眼根本分不出是兩條；Kaleido 重新配色後差 151.2°，一綠一紅，一眼就分開了。</li>
+  </ul>
+
+  <div class="note">後面出現的<b>「最近鄰色相差中位數」</b>就是這個角度：每條神經元跟它空間上最近的鄰居，兩者色相角相差幾度。<b>越接近 180° 越好認</b>，隨機配色的期望值大約是 90°。</div>
+
+  <!-- ============ 心法 ============ -->
+  <h2 id="mindset">放手之前，先建立 5 個檢查點</h2>
+  <p>「你自己做完」聽起來很爽，但它把一件事從你身上拿走了：<b>逐步確認</b>。前三集你每問一句就檢查一次，錯了馬上抓到。放手之後，錯誤可以連續傳播好幾個小時。這一集實際踩過的坑，全部集中在五個地方：</p>
+  <ol>
+    <li><b>事實來源是不是一手的？</b>AI 很容易拿自己整理過的摘要當真理。本集的第一個坑就是這樣來的。</li>
+    <li><b>「結果變好了」是不是雜訊？</b>隨機演算法單跑一次的波動，常常比真正的效果還大。本集在這裡連續判斷錯兩次。</li>
+    <li><b>論文的參數，適用你的規模嗎？</b>論文在 10,000 個神經元上調的參數，搬到 100 個上未必成立。</li>
+    <li><b>沒複現的部分有沒有說？</b>只報成功的部分，等於沒有驗證。</li>
+    <li><b>它有沒有動到不該動的東西？</b>本集 AI 修改了 EP01 建的知識庫——這是對的，但必須講出來。</li>
+  </ol>
+
+  <!-- ============ PART 1 ============ -->
+  <h2 id="part1"><span class="pt">PART 1</span>完整工作時序</h2>
+  <p>使用者的三句話分別出現在第 ①②③ 段。從第 ④ 段起，全部是 AI 自己的動作。</p>
+
+  <h3 class="seg" id="s1"><span class="num">1</span>第一句：一個單純的問題</h3>
+  <div class="msg b"><span class="who">🔵 使用者：</span>看一下我們建的知識庫（<code>...\Knowledge</code>），什麼是 Kaleido?</div>
+  <div class="ai"><span class="tag">AI 做了什麼</span>沒有從自己的記憶回答，而是先去<b>翻使用者指定的知識庫</b>：列目錄、全文搜尋 <code>kaleido</code>、找到 <code>papers/kaleido-2018.html</code>，把 HTML 去標籤後讀出內容，才回答。整理出論文的兩個核心設計（蒙地卡羅自動配色、合併成單一 RGBA 影像）與關鍵數字。</div>
+  <figure>
+    <img class="flat" src="images/dialog-4-1.jpg" alt="第一句提問與回覆">
+    <figcaption>整集唯一一張對話截圖。<b>注意 AI 沒有直接背答案</b>——它先去讀了指定的資料夾。這個習慣在第 ⑥ 段會變得很重要。</figcaption>
+  </figure>
+
+  <h3 class="seg" id="s2"><span class="num">2</span>第二句：不給任務，要它自己判斷任務</h3>
+  <div class="msg b"><span class="who">🔵 使用者：</span>先看一下這個目錄的內容，判斷任務為何</div>
+  <div class="ai"><span class="tag">AI 做了什麼</span>掃描工作目錄，從<b>檔案的修改時間</b>推理：<code>FCdata/neurons100/</code> 是 22:51 剛建的（EP03 只用 20 個）、<code>Kaleido/截圖/1.jpg</code> 是 22:57 建的、而且內容就是剛剛那段對話的截圖——這跟前幾集「對話截圖＝教材素材」的慣例一致。於是推論：<b>要開 EP04，用 100 個神經元復刻 Kaleido</b>。並主動指出一個需要確認的邊界（產出到哪裡為止）。</div>
+  <div class="callout"><b>這一段最值得學的：</b>使用者沒有說任務是什麼，但<b>檔案系統本身就是脈絡</b>。修改時間、命名慣例、前幾集留下的目錄結構，合起來就足以推出意圖。要讓 AI 有這個能力，前提是你的專案<b>有一致的慣例</b>——這是 EP01～EP03 一路累積下來的紅利。</div>
+
+  <h3 class="seg" id="s3"><span class="num">3</span>第三句：放手</h3>
+  <div class="msg g"><span class="who">🟢 使用者：</span>你判斷沒錯，這次就是要開 EP04 復刻 Kaleido，跑在 100 個神經元上。這次我想試試看從頭到尾你自己做整個教材。你別管 EP03 的東西，EP04 做完也別先 commit</div>
+  <div class="ai"><span class="tag">AI 做了什麼</span>先載入<b>教材產線的 Skill</b>（規定了「教學文件 → 截圖 → 影片 → 測驗 → 上架」的順序與各步驟的踩雷清單），然後排出計畫。關鍵判斷：<b>第 0 步不是寫教材，是真的把論文復刻出來</b>——沒有真實的案例，就沒有教材可寫。</div>
+
+  <h3 class="seg" id="s4"><span class="num">4</span>開工前：盤點環境與資料</h3>
+  <div class="ai"><span class="tag">AI 做了什麼</span>在寫任何演算法之前，先確認三件事：<b>（1）機器</b>——24 核、136 GB RAM（可用 94 GB）、ffmpeg 與 edge-tts 都在。<b>（2）資料</b>——100 個 <code>.am</code> 檔各自是標準腦座標下的一塊子體積，體素間距都是 1.0，聯集範圍 891×484×238，非零體素約 2,880 萬個。<b>（3）分布</b>——8 種 driver line（TH 33 個、Trh 24 個、VGlut 18 個…），剛好夠示範論文的「依生物意義配色」模式。</div>
+  <div class="note"><b>為什麼先量資料？</b>因為它決定了寫法。2,880 萬個非零體素、但整個網格有 1 億格——資料是<b>稀疏的（2.8%）</b>。這個數字直接讓後面第 ⑭ 段選擇了「點雲潑濺」而不是「稠密陣列」，省下數百 MB 記憶體。</div>
+
+  <h3 class="seg" id="s5"><span class="num">5</span>不重寫輪子：直接用 EP03 的讀檔器</h3>
+  <div class="ai"><span class="tag">AI 做了什麼</span>EP03 已經寫過 <code>amread.py</code>（會解 AmiraMesh 檔頭、用 zlib 解壓 HxZip 資料段）。這一集直接複製過來用，一行沒改。省下的不只是時間，還有<b>再踩一次同樣的坑</b>的風險。</div>
+
+  <h3 class="seg" id="s6"><span class="num">6</span>坑一：論文的公式和論文的正文打架</h3>
+  <div class="ai"><span class="tag bug">卡住了</span>照知識庫抄錄的公式 <code>E = Σ (1/d)·min(Δ, 360−Δ)</code> 寫程式時，發現<b>它跟旁邊那句話矛盾</b>。正文說「靠得近又同色要付出<b>高</b>能量成本」，但照公式算，同色時 <code>min(Δ,…)</code> 趨近 0，整項反而<b>最便宜</b>。最小化它會把鄰居塗成同一種顏色——正好和 Kaleido 的目的相反。</div>
+  <div class="ai"><span class="tag">AI 做了什麼</span>沒有自己「修好」公式繼續跑，而是<b>停下來回查一手來源</b>：在硬碟上找到原始 PDF，抽出 Methods 全文。但純文字抽取的結果是曖昧的——它把數學式壓成了兩行，看不出分數線的範圍。於是<b>把那一頁渲染成 300 dpi 的圖片，裁出公式，用眼睛看</b>。</div>
+  <figure>
+    <img class="flat" src="images/formula-compare.png" alt="正確公式與抄錯公式的比較">
+    <figcaption>真相：原始論文的<b>分數線涵蓋整個分母</b>。論文本身完全自洽，<b>抄錯的是我們自己的知識庫</b>——EP01／EP02 建庫時把分數壓平了，把分母的 min 項搬到了分子。</figcaption>
+  </figure>
+  <div class="callout"><b>這個坑為什麼是整集最重要的一段：</b>AI 建的知識庫看起來很專業——有摘要、有公式、有 LaTeX 排版——但它是<b>二手的</b>。當二手資料和常識打架，正確反應是回一手來源，不是「順手把公式修成合理的樣子」。如果 AI 當時自作聰明改了公式，程式會跑得很順、圖也會很漂亮，而且<b>沒有人會發現錯在哪</b>。</div>
+  <div class="ai"><span class="tag ok">順手修好</span>回頭把 <code>Knowledge/papers/kaleido-2018.html</code> 的公式改正，並<b>加上一段訂正說明</b>而不是默默改掉——讓之後讀到的人知道這裡曾經錯過、錯成什麼樣。</div>
+
+  <h3 class="seg" id="s7"><span class="num">7</span>把抄錯的版本留下來當反例</h3>
+  <div class="ai"><span class="tag">AI 做了什麼</span>沒有刪掉錯誤的公式，而是把它保留成程式裡的 <code>misread_energy()</code>，專門用來產生反例圖。後來這張圖成了整份教材最有說服力的一張。</div>
+  <figure>
+    <img src="images/mip_misread_xy.png" alt="用抄錯的公式最佳化的結果">
+    <figcaption>用<b>抄錯的公式</b>跑出來的 100 個神經元：顏色變成漂亮的空間漸層，左視葉全藍、右視葉全洋紅。每條神經元都跟鄰居同色，最近鄰色相差中位數只有 <b>14.4°</b>。當作「位置編碼」很好看，當作「分辨個體」完全失效——而這正是 Kaleido 要解決的問題。</figcaption>
+  </figure>
+
+  <h3 class="seg" id="s8"><span class="num">8</span>第一次跑完：結果比隨機還差</h3>
+  <div class="ai"><span class="tag bug">結果不對</span>照論文的設定跑完（固定溫度、步數 <code>10N</code>），量出來的最近鄰色相差中位數是：隨機配色 <b>113.4°</b> → Kaleido <b>88.2°</b>。<b>最佳化讓結果變差了。</b>能量只降 8.4%，而且 <code>10N</code> 和 <code>100N</code> 步跑出來的最佳值一模一樣。</div>
+  <div class="ai"><span class="tag">AI 做了什麼</span>沒有調參數硬試，先<b>寫診斷腳本</b>（丟在暫存區，不污染專案）量三件事：能量由哪些神經元對主導、隨機配色的基準到底在哪、不同溫度與步數的表現。</div>
+
+  <h3 class="seg" id="s9"><span class="num">9</span>坑二：拿來比較的「隨機」本身就在亂跳</h3>
+  <div class="ai"><span class="tag ok">診斷結果</span>把隨機配色跑 <b>200 次</b>，得到的中位數是 <b>89.9° ± 10.4°</b>，範圍 61°～119°。<br>也就是說：第 ⑧ 段那個「隨機 113.4°」只是<b>抽到了分布的上緣</b>，「Kaleido 88.2°」則落在平均值。<b>兩個數字都是雜訊，整個比較毫無意義。</b></div>
+  <div class="callout"><b>這是本集最容易被忽略、也最普遍的錯誤：</b>拿「跑一次的 A」比「跑一次的 B」。當演算法帶隨機性時，單次結果的波動可能比真實效果還大。正確做法是<b>先量出基準的分布</b>（標準差多大？），再判斷差異有沒有意義。這件事 AI 一開始也沒做——它是在結果反常之後才補上的。</div>
+
+  <h3 class="seg" id="s10"><span class="num">10</span>診斷：能量根本不是由最近鄰主導</h3>
+  <div class="ai"><span class="tag ok">診斷結果</span>把能量拆開看：<b>能量最高的那一對只佔總能量的 1.2%</b>，要加到前 1000 對才佔 72.6%。也就是說，這個能量函數是一片「瀰漫的背景」，不是由幾對擠在一起的神經元主導。在 100 個散佈全腦的神經元上，最近鄰距離中位數 19 體素、而兩兩距離中位數 130 體素——<b>大部分神經元其實根本不擠</b>。</div>
+
+  <h3 class="seg" id="s11"><span class="num">11</span>坑三：論文的步數，在這個規模下遠遠不夠</h3>
+  <div class="ai"><span class="tag ok">找到真因</span>論文把蒙地卡羅步數設為 <code>10N</code>。論文的示範是 10,000 個神經元 → 100,000 步。但這一集 N=100 → <b>只有 1,000 步</b>，而且是固定溫度（接受率 38%，等於在原地隨機遊走）。改成<b>降溫退火</b>、加長到 <code>2000N</code>（200,000 步，實際只花 5.3 秒）之後，能量才真的壓得下去。</div>
+  <figure>
+    <img class="flat" src="images/chart_energy.png" alt="能量下降曲線">
+    <figcaption>橘線是論文設定，在 1,000 步處戛然而止、能量還在 1.35；藍線是退火版，一路降到 1.283。<b>論文的參數沒有錯，錯的是把它直接搬到差 100 倍的規模上。</b></figcaption>
+  </figure>
+
+  <h3 class="seg" id="s12"><span class="num">12</span>重做比較：這次用 8 個種子</h3>
+  <div class="ai"><span class="tag ok">結論站得住了</span>改用「跑 8 個亂數種子看分布」之後：</div>
+  <table>
+    <tr><th>配色方式</th><th class="num">最近鄰色相差中位數</th><th class="num">能量降幅</th></tr>
+    <tr><td>隨機配色（200 次抽樣）</td><td class="num">92.2° ± 11.7°</td><td class="num">—</td></tr>
+    <tr><td>論文設定：固定溫度、10N 步（8 種子）</td><td class="num">101.5° ± 10.2°</td><td class="num">9.5%</td></tr>
+    <tr><td><b>退火、2000N 步（8 種子）</b></td><td class="num"><b>115.2° ± 3.5°</b></td><td class="num">13.8%</td></tr>
+    <tr><td>用抄錯的公式（3 種子）</td><td class="num">15.6° ± 1.7°</td><td class="num">30.7%</td></tr>
+  </table>
+  <div class="note"><b>看的不只是中位數，還有標準差。</b>最佳化不只把中位數從 92° 推到 115°，還把變異從 ±11.7° 收斂到 ±3.5°——<b>結果變得可預測</b>，這比平均值進步更重要。順帶一提，最後一列「抄錯的公式」能量降幅 30.7% 是全場最高的：<b>能量降得最多的那個，是錯得最離譜的那個。</b>優化指標漂亮不等於做對事。</div>
+
+  <h3 class="seg" id="s13"><span class="num">13</span>連「隨機配色」的代表都要挑得公平</h3>
+  <div class="ai"><span class="tag">AI 做了什麼</span>畫圖時發現一個殘留問題：圖上的「隨機配色」用的是隨手抽的那一次，剛好是 113.4°（分布上緣），害 Kaleido 的 117.0° 看起來毫無進步。改成從 200 次抽樣裡挑<b>中位數最接近平均值</b>的那一次當代表（91.8°）。<b>對照組挑得公平，比自己的結果好看更重要。</b></div>
+  <figure>
+    <img class="flat" src="images/chart_gap.png" alt="最近鄰色相差分布">
+    <figcaption>三種配色的分布。紫色（抄錯的公式）全部擠在 30° 以下；灰色（隨機）平坦地散在 0～180°；綠色（Kaleido）整體右移，而且<b>幾乎沒有神經元落在 30° 以下的撞色區</b>。</figcaption>
+  </figure>
+
+  <h3 class="seg" id="s14"><span class="num">14</span>畫圖：一行陣列指派，同時完成兩件事</h3>
+  <div class="ai"><span class="tag">AI 做了什麼</span>要把 2,880 萬個體素畫成圖，又要遵守論文「同一格只留訊號最強的神經元」的規則。做法是：<b>把所有體素依強度由小到大排序後，依序寫進畫布</b>——後寫入的自然覆蓋先寫入的，所以留下的一定是最亮的那個。一行 <code>buf[idx] = value</code> 就同時完成了「取最大值投影」和「論文的重疊規則」，不需要 1 億格的稠密陣列。</div>
+  <figure>
+    <img src="images/mip_kaleido_xy.png" alt="Kaleido 配色的 100 個神經元">
+    <figcaption>100 個神經元合併成單一張影像。這張圖對應論文的 Fig. 2a——論文用的是 10,000 個神經元，這裡是 100 個。</figcaption>
+  </figure>
+
+  <h3 class="seg" id="s15"><span class="num">15</span>對照圖做了三次才對</h3>
+  <div class="ai"><span class="tag bug">第一次</span>用「距離 50 體素內的 31 個神經元」框出範圍 → 框出 590×423 的一大片，兩張圖看起來差不多，看不出重點。</div>
+  <div class="ai"><span class="tag bug">第二次</span>改成自動找「不同神經元最多」的小窗格 → 落在神經纖維網裡，84 條神經元的細突起在體素尺度交纏，兩張圖都是彩色雜訊。</div>
+  <div class="ai"><span class="tag ok">第三次</span>想通問題在<b>投影深度</b>：XY 投影穿透了整個 238 體素的腦深度，把所有深度的東西疊在一起。論文看的 calyx 尖端是<b>薄薄一層</b>。於是改成：先定位每條神經元的細胞本體（取最亮的那一小撮體素），找出細胞本體最密集的 <b>200×200×40 薄片</b>，只畫這一層、而且只畫夠亮的體素。細胞本體終於一顆一顆現形。</div>
+  <div class="ai"><span class="tag ok">再加一步</span>論文 Fig. 2c 用箭頭標出「不巧撞色」的相鄰細胞本體。這裡把它<b>自動化</b>：程式掃出薄片內「距離 &lt; 30 體素、且隨機配色下色相差 &lt; 30°」的所有配對，在兩張圖的同一位置畫白圈。</div>
+  <div class="cmp">
+    <figure><p class="tagline before">隨機配色</p><img src="images/zoom_random.png" alt="隨機配色的細胞本體"></figure>
+    <figure><p class="tagline after">Kaleido 配色</p><img src="images/zoom_kaleido.png" alt="Kaleido 配色的細胞本體"></figure>
+  </div>
+  <table>
+    <tr><th>白圈裡的那一對</th><th class="num">相距（體素）</th><th class="num">隨機配色</th><th class="num">Kaleido</th></tr>
+    <tr><td>TH-F-000051 / TH-F-100079</td><td class="num">12.0</td><td class="num">28.8°</td><td class="num"><b>54.0°</b></td></tr>
+    <tr><td>TH-F-100061 / TH-F-300048</td><td class="num">20.6</td><td class="num">7.2°</td><td class="num"><b>151.2°</b></td></tr>
+    <tr><td>TH-F-100097 / TH-F-100103</td><td class="num">9.2</td><td class="num">14.4°</td><td class="num"><b>126.0°</b></td></tr>
+    <tr><td>TH-M-700001 / VGlut-F-000232</td><td class="num">27.1</td><td class="num">28.8°</td><td class="num"><b>172.8°</b></td></tr>
+  </table>
+  <div class="callout"><b>三次才對，而且每次失敗都學到不同的東西：</b>第一次學到「範圍太大看不出差異」、第二次學到「投影會把深度疊爛」、第三次才對症下藥。<b>失敗的中間版本沒有被藏起來</b>——它們是判斷「這張圖到底在比什麼」的關鍵推理過程。</div>
+
+  <h3 class="seg" id="s16"><span class="num">16</span>驗證論文的第二個主張</h3>
+  <div class="ai"><span class="tag">AI 做了什麼</span>論文說合併後的檔案大小「只由標準腦解析度決定」，與神經元數量無關。這是可以直接測的：在 N = 10, 25, 50, 100 上各跑一次完整流程，<b>標準腦網格固定不變</b>（用全部 100 個神經元的聯集範圍，不隨 N 縮小——否則就是自己餵自己想要的答案）。</div>
+  <table>
+    <tr><th class="num">N</th><th class="num">原始 .am 檔</th><th class="num">各自展開成稠密體積</th><th class="num">合併後單一 RGBA</th></tr>
+    <tr><td class="num">10</td><td class="num">6.9 MB</td><td class="num">444 MB</td><td class="num"><b>410.5 MB</b></td></tr>
+    <tr><td class="num">25</td><td class="num">17.4 MB</td><td class="num">1,466 MB</td><td class="num"><b>410.5 MB</b></td></tr>
+    <tr><td class="num">50</td><td class="num">34.5 MB</td><td class="num">2,310 MB</td><td class="num"><b>410.5 MB</b></td></tr>
+    <tr><td class="num">100</td><td class="num">68.2 MB</td><td class="num">4,886 MB</td><td class="num"><b>410.5 MB</b></td></tr>
+  </table>
+  <p>外推到 FlyCircuit 全腦約 130,000 個神經元：各自展開需要 <b>6.44 TB</b>（論文寫的是「10 TB 等級」，同一個量級），合併後仍然是 <b>410.5 MB</b>。</p>
+  <figure>
+    <img class="flat" src="images/chart_scaling.png" alt="大小與時間對 N 的關係">
+    <figcaption>左：各自展開隨 N 線性成長，合併後是一條水平線。右：這個規模下時間仍由檔案 I/O 主導，蒙地卡羅只佔千分之一。</figcaption>
+  </figure>
+
+  <h3 class="seg" id="s17"><span class="num">17</span>誠實記錄沒有複現的那一項</h3>
+  <div class="ai"><span class="tag">AI 做了什麼</span>論文推導蒙地卡羅的時間複雜度是 <b>O(N²)</b>。實測到的卻是 <b>N<sup>1.11</sup></b>。AI 沒有把這條刪掉或含糊帶過，而是查明原因寫進成品頁：<b>N 只到 100，每一步的固定開銷（numpy 呼叫成本）還壓過 O(N) 的實質計算，漸近行為根本還沒開始</b>。要驗證 O(N²) 得把 N 拉到上千。</div>
+  <div class="note"><b>復刻報告的價值有一半來自「哪裡沒複現」。</b>只列成功的項目，讀者無法判斷你到底測了多少。把沒對上的地方連同原因寫出來，別人才知道界線在哪。</div>
+
+  <h3 class="seg" id="s18"><span class="num">18</span>把論文沒寫死的決定逐條標出來</h3>
+  <div class="ai"><span class="tag">AI 做了什麼</span>復刻論文一定會遇到「論文沒講清楚」的地方。這一集有四處，全部在程式碼裡標成 <code>【實作決定】</code>，並在成品頁列成一節：<b>（1）</b>距離定義是不對稱的，論文沒說用哪一邊 → 取兩個方向的平均。<b>（2）</b>溫度參數 β 論文沒給值 → 先試探測出典型能量變化再定尺度。<b>（3）</b>各檔動態範圍不一致（有的最大值 255、有的 4095）→ 用各自的 99.5 百分位當白點。<b>（4）</b>論文的複雜度分析假設增量更新 → 照字面每步重算全矩陣會變成 O(N³)，計時就失真。</div>
+
+  <h3 class="seg" id="s19"><span class="num">19</span>組成成品頁</h3>
+  <div class="ai"><span class="tag">AI 做了什麼</span>把 <code>data/*.json</code> 的所有數字組成一頁 <code>index.html</code>，敘事順序刻意跟著讀者的疑問走：先看成果 → 這跟隨機上色差在哪 → 演算法怎麼運作 → 論文的第二個主張 → 復刻筆記。<b>頁面裡沒有一個數字是手寫的</b>，全部從 JSON 讀出來——重跑一次實驗，頁面自動更新。</div>
+  <figure>
+    <img class="flat" src="images/result-page-top.png" alt="成品頁">
+    <figcaption>成品頁的開頭。<a href="demo/index.html" target="_blank" rel="noopener">點此逛完整版 →</a></figcaption>
+  </figure>
+
+  <!-- ============ PART 2 ============ -->
+  <h2 id="part2"><span class="pt">PART 2</span>最佳實踐清單</h2>
+  <table>
+    <tr><th style="width:30%">實踐</th><th style="width:12%">對應段落</th><th>為什麼重要</th></tr>
+    <tr><td><b>讓 AI 從檔案系統推理任務</b></td><td><a href="#s2">②</a></td><td>一致的目錄慣例＝可被推理的脈絡。前幾集累積的規矩，在這裡變成不用解釋就能接手的能力。</td></tr>
+    <tr><td><b>先復刻，再寫教材</b></td><td><a href="#s3">③</a></td><td>教材的素材是真實發生的事。沒有先把東西做出來，寫出來的就只是想像的流程。</td></tr>
+    <tr><td><b>動手前盤點環境與資料</b></td><td><a href="#s4">④</a></td><td>「非零體素只佔 2.8%」這個數字直接決定了後面用點雲而非稠密陣列，省下數百 MB。</td></tr>
+    <tr><td><b>複用前幾集的產出</b></td><td><a href="#s5">⑤</a></td><td>EP03 的 <code>amread.py</code> 一行沒改就能用。重寫等於重踩一次坑。</td></tr>
+    <tr><td><b>二手資料與常識打架時，回一手來源</b></td><td><a href="#s6">⑥</a></td><td>本集最重要的一條。AI 自建的知識庫是二手的，會有錯。</td></tr>
+    <tr><td><b>用眼睛看，當文字抽取不可靠時</b></td><td><a href="#s6">⑥</a></td><td>PDF 抽文字會把數學式的排版壓平。渲染成圖片看，才能確認分數線的範圍。</td></tr>
+    <tr><td><b>錯誤版本保留成反例</b></td><td><a href="#s7">⑦</a></td><td>抄錯的公式跑出來的圖，後來成了最有說服力的教材。</td></tr>
+    <tr><td><b>結果反常時先診斷，不要調參數</b></td><td><a href="#s8">⑧</a></td><td>盲調參數會把運氣當成解法。先量清楚「誰主導了這個數字」。</td></tr>
+    <tr><td><b>先量出基準的分布</b></td><td><a href="#s9">⑨</a></td><td>不知道隨機基準的標準差，就無法判斷差異是不是雜訊。</td></tr>
+    <tr><td><b>多種子重跑，看分布不看單值</b></td><td><a href="#s12">⑫</a></td><td>標準差從 ±11.7° 收斂到 ±3.5°，比中位數的進步更有說服力。</td></tr>
+    <tr><td><b>對照組要挑得公平</b></td><td><a href="#s13">⑬</a></td><td>拿分布上緣的隨機結果當對照，等於偷偷讓自己的方法難看；反過來也一樣不誠實。</td></tr>
+    <tr><td><b>論文參數不能跨規模直接套</b></td><td><a href="#s11">⑪</a></td><td>10N 步在 N=10,000 是十萬步、在 N=100 是一千步。同一個公式，差 100 倍。</td></tr>
+    <tr><td><b>不要藏失敗的中間版本</b></td><td><a href="#s15">⑮</a></td><td>對照圖做了三次，每次失敗都排除了一種可能。這是推理過程，不是丟臉的事。</td></tr>
+    <tr><td><b>驗證要防「自己餵自己答案」</b></td><td><a href="#s16">⑯</a></td><td>標準腦網格若跟著 N 縮小，「大小與 N 無關」這個結論就是設計出來的。</td></tr>
+    <tr><td><b>寫下沒複現的部分</b></td><td><a href="#s17">⑰</a></td><td>只報成功等於沒有驗證。O(N²) 沒複現，連同原因一起寫。</td></tr>
+    <tr><td><b>標出所有「論文沒寫、我自己決定」</b></td><td><a href="#s18">⑱</a></td><td>復刻的可信度取決於這份清單有多完整。</td></tr>
+    <tr><td><b>成品頁的數字全部從資料生成</b></td><td><a href="#s19">⑲</a></td><td>手寫的數字會過期。重跑實驗，頁面自動更新。</td></tr>
+    <tr><td><b>動到別人的東西要講</b></td><td><a href="#s6">⑥</a></td><td>修改了 EP01 建的知識庫是對的，但必須主動報告，不能默默改。</td></tr>
+  </table>
+
+  <!-- ============ PART 3 ============ -->
+  <h2 id="part3"><span class="pt">PART 3</span>本次成果</h2>
+
+  <p>這一集交出兩個東西，順序有意義：<b>先是一個別人可以自己跑的 repo，再是一份報告。</b>
+  一份漂亮的報告只能讓人「相信」結果；一個跑得起來的 repo 才能讓人「檢查」結果——
+  而這一集從頭到尾在講的，就是可檢查性。</p>
+
+  <h3>成品一：<code>ctshih/Kaleido-Claude</code></h3>
+  <a class="demo-box data" href="https://github.com/ctshih/Kaleido-Claude" target="_blank" rel="noopener">
+    <span class="demo-ico">📦</span>
+    <span class="demo-txt"><b>github.com/ctshih/Kaleido-Claude</b><br>
+    六支 Python ＋ 100 個 FlyCircuit 神經元影像（<code>data/neurons100.zip</code>，首次執行自動解開）。
+    只需要 numpy、pillow、matplotlib，沒有 GPU 需求 →</span>
+  </a>
+  <table>
+    <tr><th style="width:26%">檔案</th><th>做什麼</th></tr>
+    <tr><td><code>amread.py</code></td><td>讀 AmiraMesh <code>.am</code> 體積影像（<b>直接沿用 EP03</b>，一行沒改）</td></tr>
+    <tr><td><code>kaleido.py</code></td><td>演算法本體：對位、距離矩陣、能量函數、蒙地卡羅、評估指標</td></tr>
+    <tr><td><code>render.py</code></td><td>點雲潑濺畫圖：四種配色 × 三視圖、擁擠區薄片放大、旋轉動畫</td></tr>
+    <tr><td><code>scaling.py</code></td><td>規模量測：N = 10/25/50/100 的大小與時間</td></tr>
+    <tr><td><code>charts.py</code></td><td>三張圖表（跟渲染分開，改圖不必重跑兩分鐘）</td></tr>
+    <tr><td><code>hue_wheel_fig.py</code></td><td>產生 <a href="#hue">上面那張色相環圖</a>——角度從實驗資料讀出，不是手畫的</td></tr>
+    <tr><td><code>build_page.py</code></td><td>把 <code>out/*.json</code> 組成成品二的那份報告</td></tr>
+  </table>
+  <p>README 裡除了用法，還完整交代了<b>那條容易抄錯的公式</b>、<b>論文沒寫死而必須自己補的五個決定</b>，
+  以及<b>沒有複現的 O(N²)</b> 與原因。</p>
+
+  <h3>成品二：結果報告</h3>
+  <a class="demo-box" href="demo/index.html" target="_blank" rel="noopener">
+    <span class="demo-ico">📊</span>
+    <span class="demo-txt"><b>100 個果蠅神經元的 Kaleido 自動配色｜結果報告</b><br>
+    成果圖與旋轉動畫、與隨機配色的逐對比較、能量收斂曲線、規模量測、復刻筆記 →</span>
+  </a>
+  <p><b>頁面裡沒有一個數字是手寫的</b>，全部由 <code>build_page.py</code> 從實驗產生的 JSON 讀出來——
+  重跑一次實驗，整頁自動更新。這也是為什麼它可以當成品二：它不是「寫給你看的」，
+  是「算出來的」。</p>
+
+  <h3>數字總結</h3>
+  <table>
+    <tr><th>項目</th><th class="num">數字</th></tr>
+    <tr><td>神經元</td><td class="num">100 個</td></tr>
+    <tr><td>非零體素</td><td class="num">28,823,759 個</td></tr>
+    <tr><td>標準腦網格</td><td class="num">891 × 484 × 238</td></tr>
+    <tr><td>最近鄰色相差中位數（隨機 → Kaleido）</td><td class="num">92.2° ± 11.7° → 115.2° ± 3.5°</td></tr>
+    <tr><td>蒙地卡羅步數（論文 → 本集）</td><td class="num">1,000 → 200,000</td></tr>
+    <tr><td>蒙地卡羅耗時</td><td class="num">5.3 秒</td></tr>
+    <tr><td>合併後單一 RGBA（四種 N 皆同）</td><td class="num">410.5 MB</td></tr>
+    <tr><td>產出圖片</td><td class="num">16 張（含 1 段旋轉動畫）</td></tr>
+    <tr><td>修正的知識庫錯誤</td><td class="num">1 條公式</td></tr>
+  </table>
+
+  <h3>再看兩張圖</h3>
+  <figure>
+    <img src="images/spin_kaleido.webp" alt="繞 Y 軸旋轉的合併影像">
+    <figcaption>100 個神經元合併成單一張 RGBA 影像後繞 Y 軸旋轉。正交投影下，「旋轉點雲再投影」與「旋轉體積再做 MIP」在數學上等價，但快兩個數量級。</figcaption>
+  </figure>
+  <figure>
+    <img src="images/mip_nt_xy.png" alt="依神經傳導物質配色">
+    <figcaption>論文的另一種模式 <code>color by file</code>：同一批神經元改依 driver line（標記的神經傳導物質）分組上色。這時顏色不再為了「好分辨」，而是為了「看出生物規律」。</figcaption>
+  </figure>
+
+  <!-- ============ PART 4 ============ -->
+  <h2 id="part4"><span class="pt">PART 4</span>10 個核心教訓</h2>
+
+  <div class="lesson"><h4>1. AI 整理的資料是二手的</h4>
+  <p>知識庫排版精美、有 LaTeX 公式，看起來比原始 PDF 好讀太多——但它把分數壓平了，意義正好相反。<b>越好讀的二手資料，越容易讓人忘記查證。</b></p></div>
+
+  <div class="lesson"><h4>2. 公式和正文打架時，兩個都不要信</h4>
+  <p>正確反應不是「挑一個合理的用」，而是回一手來源。如果當時自作聰明改了公式，程式會跑得很順、圖也會很漂亮，沒有人會發現錯在哪。</p></div>
+
+  <div class="lesson"><h4>3. 文字抽取靠不住時，就用眼睛看</h4>
+  <p>PDF 抽出來的文字把 <code>1 / (d × min(...))</code> 拆成了兩行，分數線的範圍完全看不出來。把那一頁渲染成 300 dpi 圖片、裁出公式，一眼就確定了。</p></div>
+
+  <div class="lesson"><h4>4. 先量基準的分布，再談有沒有進步</h4>
+  <p>隨機配色的中位數本身就在 61°～119° 之間跳。不知道這件事，就會把「113 vs 88」當成「最佳化讓結果變差」——而它其實只是兩次抽樣。</p></div>
+
+  <div class="lesson"><h4>5. 隨機演算法要跑多個種子</h4>
+  <p>8 個種子跑出 115.2° ± 3.5°，才是可以寫進報告的數字。單跑一次得到的任何數字，都只是分布裡的一個點。</p></div>
+
+  <div class="lesson"><h4>6. 論文的參數綁著論文的規模</h4>
+  <p><code>10N</code> 步在論文的 10,000 個神經元上是十萬步，在這裡是一千步。<b>同一條公式，實際工作量差 100 倍。</b>復刻時要問的不是「參數抄對了嗎」，而是「這個參數在我的規模下代表什麼」。</p></div>
+
+  <div class="lesson"><h4>7. 優化指標漂亮 ≠ 做對事情</h4>
+  <p>抄錯公式的那個版本，能量降幅 30.7%，是全場最高的——而它是錯得最離譜的一個。<b>能量是你自己定義的，定義錯了，優化得越好離目標越遠。</b></p></div>
+
+  <div class="lesson"><h4>8. 驗證要防止「自己餵自己答案」</h4>
+  <p>要證明「合併後大小與 N 無關」，標準腦網格就必須固定。如果讓網格跟著當前的 N 縮放，這個結論會自動成立——那是設計出來的，不是量出來的。</p></div>
+
+  <div class="lesson"><h4>9. 沒複現的部分要寫出來</h4>
+  <p>O(N²) 沒有複現，因為 N 太小。寫出來，讀者才知道這份復刻的界線在哪；藏起來，整份報告的可信度都要打折。</p></div>
+
+  <div class="lesson"><h4>10. 放手不等於不檢查，而是改變檢查的方式</h4>
+  <p>逐句指揮時，你檢查的是「每一步對不對」。放手之後，你要檢查的是<b>結構性的東西</b>：事實來源是不是一手的、對照組公不公平、失敗的中間版本有沒有被藏起來、沒複現的有沒有講。這一集三個坑全部落在這四項裡。</p></div>
+
+  <!-- ============ 結語 ============ -->
+  <h2 id="closing">結語：給初學者的下一步</h2>
+  <p>這一集想傳達的不是「AI 已經可以自己做研究了」。它更像一個提醒：<b>當 AI 連續自己跑一個多小時，它會做出幾十個你沒看到的判斷</b>——其中三個在這一集差點釀成錯誤的結論，而且每一個單獨看都很合理：知識庫是自己建的、比較是照著做的、參數是論文給的。</p>
+  <p>能救回來的原因只有一個：<b>每一步都留下了可以回頭檢查的痕跡</b>。公式有原始 PDF 可查、比較有 200 次基準抽樣可比、參數有能量曲線可看。所以放手的前提不是信任 AI，而是<b>要求它把判斷的依據攤開</b>。</p>
+
+  <h3>想自己跑一遍</h3>
+  <p>整套程式與 100 個神經元的範例影像都放在 GitHub 上，<b>不必自己準備資料</b>：</p>
+
+  <a class="demo-box data" href="https://github.com/ctshih/Kaleido-Claude" target="_blank" rel="noopener">
+    <span class="demo-ico">📦</span>
+    <span class="demo-txt"><b>ctshih/Kaleido-Claude</b>　六支 Python 程式 ＋ 100 個 FlyCircuit 單神經元影像（<code>data/neurons100.zip</code>，約 61 MB）。只需要 numpy、pillow、matplotlib，沒有 GPU 需求 →</span>
+  </a>
+
+  <pre><code>git clone https://github.com/ctshih/Kaleido-Claude.git
+cd Kaleido-Claude
+pip install -r requirements.txt
+
+python kaleido.py     # 演算法：距離矩陣 + 蒙地卡羅配色
+python render.py      # 畫圖：四種配色 × 三視圖、放大對照、旋轉動畫
+python scaling.py     # 規模量測：N = 10/25/50/100
+python charts.py      # 三張圖表
+python build_page.py  # 組成 out/index.html</code></pre>
+
+  <p>全部跑完約五分鐘，結果都在 <code>out/</code>；打開 <code>out/index.html</code> 就是這一集的成果報告——<b>你自己機器上重新算出來的那一份</b>。</p>
+
+  <p class="callout"><b>三個提醒：</b>第一次執行 <code>kaleido.py</code> 會自動把 <code>neurons100.zip</code> 解開（100 個檔、約 65 MB），這一步加上讀檔約兩分鐘，是正常的。<code>scaling.py</code> 會實際寫出 410 MB 的合併檔再刪掉（<b>不真的寫檔就不算量測</b>），確認硬碟有空間。最後，蒙地卡羅每次跑的亂數不同，你算出來的數字會和這裡差一點點——<b>那正是第 <a href="#s9">⑨</a> 段在講的事</b>，所以程式預設就跑 8 個種子給你看分布。</p>
+
+  <p>這一集當下產出的版本（不會再更動）也留了一份快照在 <a href="demo/index.html" target="_blank" rel="noopener">demo 資料夾</a>。</p>
+
+  <div class="quiz-cta">
+    <h3>讀完了？來檢驗一下 ✏️</h3>
+    <p>10 題單選，考的是這一集的判斷方式，不是記憶細節。</p>
+    <a href="quiz.html">開始隨堂測驗 →</a>
+  </div>
+
+</div>
+
+<div class="foot">
+  BSC with Agentic AI Tutorial · EP04　｜
+  演算法依 Kaleido（Wang et al., <i>Neuroinformatics</i> 16(2):207–215, 2018, DOI 10.1007/s12021-018-9363-3）重新實作，非原作者程式碼。
+  資料為 FlyCircuit（Chiang et al., 2011）的 100 個果蠅單神經元 warp 影像。
+</div>
+
+</body>
+</html>

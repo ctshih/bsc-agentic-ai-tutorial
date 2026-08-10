@@ -1,0 +1,2824 @@
+{
+  "origin": [
+    -448,
+    -335,
+    -138
+  ],
+  "dims": [
+    891,
+    484,
+    238
+  ],
+  "drivers": [
+    "5-HT1B",
+    "Cha",
+    "Gad1",
+    "TH",
+    "Tdc2",
+    "Trh",
+    "VGlut",
+    "fru"
+  ],
+  "neurons": [
+    {
+      "idx": 0,
+      "id": "5-HT1B-F-100000",
+      "driver": "5-HT1B",
+      "sex": "F",
+      "cell": "100000",
+      "nt_zh": "血清素受體",
+      "nt_en": "5-HT receptor",
+      "voxels": 294802,
+      "src_dims": [
+        542,
+        269,
+        252
+      ],
+      "src_bytes": 639224,
+      "centroid": [
+        -3.0,
+        -102.1,
+        -49.5
+      ],
+      "hue_kaleido": 288.0,
+      "hue_random": 266.4,
+      "hue_nt": 0.0,
+      "hue_paper10N": 360.0,
+      "hue_misread": 104.4,
+      "gap_kaleido": 100.8,
+      "gap_random": 169.2
+    },
+    {
+      "idx": 1,
+      "id": "Cha-F-100309",
+      "driver": "Cha",
+      "sex": "F",
+      "cell": "100309",
+      "nt_zh": "乙醯膽鹼",
+      "nt_en": "Acetylcholine",
+      "voxels": 250336,
+      "src_dims": [
+        487,
+        369,
+        189
+      ],
+      "src_bytes": 698910,
+      "centroid": [
+        276.1,
+        -156.6,
+        -30.0
+      ],
+      "hue_kaleido": 61.2,
+      "hue_random": 147.6,
+      "hue_nt": 45.0,
+      "hue_paper10N": 79.2,
+      "hue_misread": 291.6,
+      "gap_kaleido": 176.4,
+      "gap_random": 118.8
+    },
+    {
+      "idx": 2,
+      "id": "fru-F-000169",
+      "driver": "fru",
+      "sex": "F",
+      "cell": "000169",
+      "nt_zh": "fruitless（性別二型迴路）",
+      "nt_en": "fruitless",
+      "voxels": 312613,
+      "src_dims": [
+        287,
+        342,
+        182
+      ],
+      "src_bytes": 753419,
+      "centroid": [
+        137.8,
+        -91.7,
+        -3.1
+      ],
+      "hue_kaleido": 334.8,
+      "hue_random": 259.2,
+      "hue_nt": 315.0,
+      "hue_paper10N": 75.6,
+      "hue_misread": 331.2,
+      "gap_kaleido": 68.4,
+      "gap_random": 158.4
+    },
+    {
+      "idx": 3,
+      "id": "fru-F-300032",
+      "driver": "fru",
+      "sex": "F",
+      "cell": "300032",
+      "nt_zh": "fruitless（性別二型迴路）",
+      "nt_en": "fruitless",
+      "voxels": 272382,
+      "src_dims": [
+        312,
+        244,
+        205
+      ],
+      "src_bytes": 646475,
+      "centroid": [
+        164.8,
+        -59.6,
+        -8.1
+      ],
+      "hue_kaleido": 72.0,
+      "hue_random": 162.0,
+      "hue_nt": 315.0,
+      "hue_paper10N": 187.2,
+      "hue_misread": 10.8,
+      "gap_kaleido": 140.4,
+      "gap_random": 14.4
+    },
+    {
+      "idx": 4,
+      "id": "fru-F-800094",
+      "driver": "fru",
+      "sex": "F",
+      "cell": "800094",
+      "nt_zh": "fruitless（性別二型迴路）",
+      "nt_en": "fruitless",
+      "voxels": 232454,
+      "src_dims": [
+        413,
+        304,
+        191
+      ],
+      "src_bytes": 620148,
+      "centroid": [
+        112.7,
+        -82.0,
+        -43.7
+      ],
+      "hue_kaleido": 18.0,
+      "hue_random": 223.2,
+      "hue_nt": 315.0,
+      "hue_paper10N": 198.0,
+      "hue_misread": 57.6,
+      "gap_kaleido": 75.6,
+      "gap_random": 68.4
+    },
+    {
+      "idx": 5,
+      "id": "fru-F-900054",
+      "driver": "fru",
+      "sex": "F",
+      "cell": "900054",
+      "nt_zh": "fruitless（性別二型迴路）",
+      "nt_en": "fruitless",
+      "voxels": 357176,
+      "src_dims": [
+        153,
+        347,
+        161
+      ],
+      "src_bytes": 760962,
+      "centroid": [
+        54.9,
+        -157.0,
+        -36.2
+      ],
+      "hue_kaleido": 280.8,
+      "hue_random": 172.8,
+      "hue_nt": 315.0,
+      "hue_paper10N": 21.6,
+      "hue_misread": 68.4,
+      "gap_kaleido": 158.4,
+      "gap_random": 21.6
+    },
+    {
+      "idx": 6,
+      "id": "fru-M-300135",
+      "driver": "fru",
+      "sex": "M",
+      "cell": "300135",
+      "nt_zh": "fruitless（性別二型迴路）",
+      "nt_en": "fruitless",
+      "voxels": 265113,
+      "src_dims": [
+        292,
+        294,
+        213
+      ],
+      "src_bytes": 683692,
+      "centroid": [
+        191.0,
+        -118.1,
+        -58.8
+      ],
+      "hue_kaleido": 140.4,
+      "hue_random": 295.2,
+      "hue_nt": 315.0,
+      "hue_paper10N": 25.2,
+      "hue_misread": 320.4,
+      "gap_kaleido": 122.4,
+      "gap_random": 72.0
+    },
+    {
+      "idx": 7,
+      "id": "fru-M-300457",
+      "driver": "fru",
+      "sex": "M",
+      "cell": "300457",
+      "nt_zh": "fruitless（性別二型迴路）",
+      "nt_en": "fruitless",
+      "voxels": 239188,
+      "src_dims": [
+        400,
+        336,
+        207
+      ],
+      "src_bytes": 650402,
+      "centroid": [
+        121.0,
+        -72.3,
+        -49.2
+      ],
+      "hue_kaleido": 302.4,
+      "hue_random": 291.6,
+      "hue_nt": 315.0,
+      "hue_paper10N": 306.0,
+      "hue_misread": 32.4,
+      "gap_kaleido": 75.6,
+      "gap_random": 68.4
+    },
+    {
+      "idx": 8,
+      "id": "fru-M-700279",
+      "driver": "fru",
+      "sex": "M",
+      "cell": "700279",
+      "nt_zh": "fruitless（性別二型迴路）",
+      "nt_en": "fruitless",
+      "voxels": 286285,
+      "src_dims": [
+        289,
+        296,
+        213
+      ],
+      "src_bytes": 711333,
+      "centroid": [
+        -188.9,
+        -121.7,
+        -50.4
+      ],
+      "hue_kaleido": 162.0,
+      "hue_random": 115.2,
+      "hue_nt": 315.0,
+      "hue_paper10N": 129.6,
+      "hue_misread": 212.4,
+      "gap_kaleido": 104.4,
+      "gap_random": 14.4
+    },
+    {
+      "idx": 9,
+      "id": "fru-M-800107",
+      "driver": "fru",
+      "sex": "M",
+      "cell": "800107",
+      "nt_zh": "fruitless（性別二型迴路）",
+      "nt_en": "fruitless",
+      "voxels": 296087,
+      "src_dims": [
+        281,
+        352,
+        214
+      ],
+      "src_bytes": 743925,
+      "centroid": [
+        125.2,
+        -121.9,
+        -13.7
+      ],
+      "hue_kaleido": 43.2,
+      "hue_random": 57.6,
+      "hue_nt": 315.0,
+      "hue_paper10N": 298.8,
+      "hue_misread": 327.6,
+      "gap_kaleido": 158.4,
+      "gap_random": 90.0
+    },
+    {
+      "idx": 10,
+      "id": "Gad1-F-100409",
+      "driver": "Gad1",
+      "sex": "F",
+      "cell": "100409",
+      "nt_zh": "GABA",
+      "nt_en": "GABA",
+      "voxels": 299306,
+      "src_dims": [
+        128,
+        168,
+        77
+      ],
+      "src_bytes": 621843,
+      "centroid": [
+        -70.1,
+        -67.6,
+        49.0
+      ],
+      "hue_kaleido": 270.0,
+      "hue_random": 356.4,
+      "hue_nt": 90.0,
+      "hue_paper10N": 352.8,
+      "hue_misread": 122.4,
+      "gap_kaleido": 68.4,
+      "gap_random": 158.4
+    },
+    {
+      "idx": 11,
+      "id": "Gad1-F-800106",
+      "driver": "Gad1",
+      "sex": "F",
+      "cell": "800106",
+      "nt_zh": "GABA",
+      "nt_en": "GABA",
+      "voxels": 331142,
+      "src_dims": [
+        560,
+        297,
+        201
+      ],
+      "src_bytes": 704390,
+      "centroid": [
+        76.4,
+        7.4,
+        -23.3
+      ],
+      "hue_kaleido": 223.2,
+      "hue_random": 129.6,
+      "hue_nt": 90.0,
+      "hue_paper10N": 223.2,
+      "hue_misread": 90.0,
+      "gap_kaleido": 158.4,
+      "gap_random": 111.6
+    },
+    {
+      "idx": 12,
+      "id": "Tdc2-F-000000",
+      "driver": "Tdc2",
+      "sex": "F",
+      "cell": "000000",
+      "nt_zh": "章魚胺",
+      "nt_en": "Octopamine",
+      "voxels": 245900,
+      "src_dims": [
+        386,
+        345,
+        182
+      ],
+      "src_bytes": 678136,
+      "centroid": [
+        5.4,
+        -141.8,
+        -28.1
+      ],
+      "hue_kaleido": 122.4,
+      "hue_random": 352.8,
+      "hue_nt": 180.0,
+      "hue_paper10N": 28.8,
+      "hue_misread": 97.2,
+      "gap_kaleido": 32.4,
+      "gap_random": 104.4
+    },
+    {
+      "idx": 13,
+      "id": "Tdc2-F-000007",
+      "driver": "Tdc2",
+      "sex": "F",
+      "cell": "000007",
+      "nt_zh": "章魚胺",
+      "nt_en": "Octopamine",
+      "voxels": 264812,
+      "src_dims": [
+        589,
+        427,
+        267
+      ],
+      "src_bytes": 675709,
+      "centroid": [
+        -1.3,
+        -48.0,
+        -11.0
+      ],
+      "hue_kaleido": 154.8,
+      "hue_random": 288.0,
+      "hue_nt": 180.0,
+      "hue_paper10N": 277.2,
+      "hue_misread": 115.2,
+      "gap_kaleido": 68.4,
+      "gap_random": 158.4
+    },
+    {
+      "idx": 14,
+      "id": "Tdc2-F-000033",
+      "driver": "Tdc2",
+      "sex": "F",
+      "cell": "000033",
+      "nt_zh": "章魚胺",
+      "nt_en": "Octopamine",
+      "voxels": 262074,
+      "src_dims": [
+        505,
+        304,
+        213
+      ],
+      "src_bytes": 744378,
+      "centroid": [
+        160.4,
+        -112.3,
+        -49.9
+      ],
+      "hue_kaleido": 226.8,
+      "hue_random": 316.8,
+      "hue_nt": 180.0,
+      "hue_paper10N": 86.4,
+      "hue_misread": 309.6,
+      "gap_kaleido": 115.2,
+      "gap_random": 43.2
+    },
+    {
+      "idx": 15,
+      "id": "Tdc2-F-100020",
+      "driver": "Tdc2",
+      "sex": "F",
+      "cell": "100020",
+      "nt_zh": "章魚胺",
+      "nt_en": "Octopamine",
+      "voxels": 263499,
+      "src_dims": [
+        428,
+        363,
+        227
+      ],
+      "src_bytes": 618381,
+      "centroid": [
+        6.1,
+        -148.7,
+        -33.7
+      ],
+      "hue_kaleido": 90.0,
+      "hue_random": 248.4,
+      "hue_nt": 180.0,
+      "hue_paper10N": 284.4,
+      "hue_misread": 86.4,
+      "gap_kaleido": 32.4,
+      "gap_random": 104.4
+    },
+    {
+      "idx": 16,
+      "id": "Tdc2-F-100052",
+      "driver": "Tdc2",
+      "sex": "F",
+      "cell": "100052",
+      "nt_zh": "章魚胺",
+      "nt_en": "Octopamine",
+      "voxels": 247915,
+      "src_dims": [
+        419,
+        358,
+        288
+      ],
+      "src_bytes": 748722,
+      "centroid": [
+        -232.2,
+        -128.2,
+        -48.8
+      ],
+      "hue_kaleido": 248.4,
+      "hue_random": 64.8,
+      "hue_nt": 180.0,
+      "hue_paper10N": 14.4,
+      "hue_misread": 219.6,
+      "gap_kaleido": 126.0,
+      "gap_random": 32.4
+    },
+    {
+      "idx": 17,
+      "id": "Tdc2-F-100060",
+      "driver": "Tdc2",
+      "sex": "F",
+      "cell": "100060",
+      "nt_zh": "章魚胺",
+      "nt_en": "Octopamine",
+      "voxels": 252129,
+      "src_dims": [
+        474,
+        322,
+        254
+      ],
+      "src_bytes": 737561,
+      "centroid": [
+        -159.5,
+        -123.2,
+        -51.1
+      ],
+      "hue_kaleido": 345.6,
+      "hue_random": 3.6,
+      "hue_nt": 180.0,
+      "hue_paper10N": 205.2,
+      "hue_misread": 180.0,
+      "gap_kaleido": 162.0,
+      "gap_random": 176.4
+    },
+    {
+      "idx": 18,
+      "id": "Tdc2-F-100064",
+      "driver": "Tdc2",
+      "sex": "F",
+      "cell": "100064",
+      "nt_zh": "章魚胺",
+      "nt_en": "Octopamine",
+      "voxels": 235396,
+      "src_dims": [
+        511,
+        340,
+        268
+      ],
+      "src_bytes": 713350,
+      "centroid": [
+        136.9,
+        -118.8,
+        -54.8
+      ],
+      "hue_kaleido": 104.4,
+      "hue_random": 39.6,
+      "hue_nt": 180.0,
+      "hue_paper10N": 169.2,
+      "hue_misread": 313.2,
+      "gap_kaleido": 122.4,
+      "gap_random": 126.0
+    },
+    {
+      "idx": 19,
+      "id": "Tdc2-F-100066",
+      "driver": "Tdc2",
+      "sex": "F",
+      "cell": "100066",
+      "nt_zh": "章魚胺",
+      "nt_en": "Octopamine",
+      "voxels": 249761,
+      "src_dims": [
+        486,
+        284,
+        203
+      ],
+      "src_bytes": 696409,
+      "centroid": [
+        -125.2,
+        -117.9,
+        -57.2
+      ],
+      "hue_kaleido": 183.6,
+      "hue_random": 187.2,
+      "hue_nt": 180.0,
+      "hue_paper10N": 165.6,
+      "hue_misread": 194.4,
+      "gap_kaleido": 162.0,
+      "gap_random": 176.4
+    },
+    {
+      "idx": 20,
+      "id": "Tdc2-F-200021",
+      "driver": "Tdc2",
+      "sex": "F",
+      "cell": "200021",
+      "nt_zh": "章魚胺",
+      "nt_en": "Octopamine",
+      "voxels": 251080,
+      "src_dims": [
+        500,
+        346,
+        264
+      ],
+      "src_bytes": 717377,
+      "centroid": [
+        -203.4,
+        -123.1,
+        -40.4
+      ],
+      "hue_kaleido": 75.6,
+      "hue_random": 104.4,
+      "hue_nt": 180.0,
+      "hue_paper10N": 118.8,
+      "hue_misread": 230.4,
+      "gap_kaleido": 108.0,
+      "gap_random": 82.8
+    },
+    {
+      "idx": 21,
+      "id": "Tdc2-F-200023",
+      "driver": "Tdc2",
+      "sex": "F",
+      "cell": "200023",
+      "nt_zh": "章魚胺",
+      "nt_en": "Octopamine",
+      "voxels": 249797,
+      "src_dims": [
+        414,
+        311,
+        229
+      ],
+      "src_bytes": 691823,
+      "centroid": [
+        -239.8,
+        -132.0,
+        -48.7
+      ],
+      "hue_kaleido": 14.4,
+      "hue_random": 32.4,
+      "hue_nt": 180.0,
+      "hue_paper10N": 255.6,
+      "hue_misread": 205.2,
+      "gap_kaleido": 126.0,
+      "gap_random": 32.4
+    },
+    {
+      "idx": 22,
+      "id": "Tdc2-F-200045",
+      "driver": "Tdc2",
+      "sex": "F",
+      "cell": "200045",
+      "nt_zh": "章魚胺",
+      "nt_en": "Octopamine",
+      "voxels": 312379,
+      "src_dims": [
+        422,
+        306,
+        163
+      ],
+      "src_bytes": 653396,
+      "centroid": [
+        -2.2,
+        -135.7,
+        -31.8
+      ],
+      "hue_kaleido": 28.8,
+      "hue_random": 97.2,
+      "hue_nt": 180.0,
+      "hue_paper10N": 234.0,
+      "hue_misread": 100.8,
+      "gap_kaleido": 61.2,
+      "gap_random": 151.2
+    },
+    {
+      "idx": 23,
+      "id": "Tdc2-F-200066",
+      "driver": "Tdc2",
+      "sex": "F",
+      "cell": "200066",
+      "nt_zh": "章魚胺",
+      "nt_en": "Octopamine",
+      "voxels": 280870,
+      "src_dims": [
+        500,
+        302,
+        228
+      ],
+      "src_bytes": 779897,
+      "centroid": [
+        132.3,
+        -115.1,
+        -55.1
+      ],
+      "hue_kaleido": 342.0,
+      "hue_random": 273.6,
+      "hue_nt": 180.0,
+      "hue_paper10N": 291.6,
+      "hue_misread": 316.8,
+      "gap_kaleido": 122.4,
+      "gap_random": 126.0
+    },
+    {
+      "idx": 24,
+      "id": "Tdc2-F-300037",
+      "driver": "Tdc2",
+      "sex": "F",
+      "cell": "300037",
+      "nt_zh": "章魚胺",
+      "nt_en": "Octopamine",
+      "voxels": 239949,
+      "src_dims": [
+        430,
+        313,
+        217
+      ],
+      "src_bytes": 707434,
+      "centroid": [
+        228.1,
+        -120.2,
+        -49.5
+      ],
+      "hue_kaleido": 180.0,
+      "hue_random": 306.0,
+      "hue_nt": 180.0,
+      "hue_paper10N": 43.2,
+      "hue_misread": 298.8,
+      "gap_kaleido": 46.8,
+      "gap_random": 10.8
+    },
+    {
+      "idx": 25,
+      "id": "TH-F-000012",
+      "driver": "TH",
+      "sex": "F",
+      "cell": "000012",
+      "nt_zh": "多巴胺",
+      "nt_en": "Dopamine",
+      "voxels": 277088,
+      "src_dims": [
+        269,
+        280,
+        198
+      ],
+      "src_bytes": 665511,
+      "centroid": [
+        -159.6,
+        55.3,
+        -43.6
+      ],
+      "hue_kaleido": 21.6,
+      "hue_random": 334.8,
+      "hue_nt": 135.0,
+      "hue_paper10N": 93.6,
+      "hue_misread": 133.2,
+      "gap_kaleido": 169.2,
+      "gap_random": 46.8
+    },
+    {
+      "idx": 26,
+      "id": "TH-F-000040",
+      "driver": "TH",
+      "sex": "F",
+      "cell": "000040",
+      "nt_zh": "多巴胺",
+      "nt_en": "Dopamine",
+      "voxels": 283812,
+      "src_dims": [
+        300,
+        227,
+        203
+      ],
+      "src_bytes": 657087,
+      "centroid": [
+        133.2,
+        -60.5,
+        -3.3
+      ],
+      "hue_kaleido": 147.6,
+      "hue_random": 216.0,
+      "hue_nt": 135.0,
+      "hue_paper10N": 90.0,
+      "hue_misread": 338.4,
+      "gap_kaleido": 86.4,
+      "gap_random": 36.0
+    },
+    {
+      "idx": 27,
+      "id": "TH-F-000051",
+      "driver": "TH",
+      "sex": "F",
+      "cell": "000051",
+      "nt_zh": "多巴胺",
+      "nt_en": "Dopamine",
+      "voxels": 346384,
+      "src_dims": [
+        301,
+        250,
+        180
+      ],
+      "src_bytes": 765282,
+      "centroid": [
+        142.6,
+        -70.0,
+        -0.9
+      ],
+      "hue_kaleido": 10.8,
+      "hue_random": 82.8,
+      "hue_nt": 135.0,
+      "hue_paper10N": 320.4,
+      "hue_misread": 345.6,
+      "gap_kaleido": 97.2,
+      "gap_random": 93.6
+    },
+    {
+      "idx": 28,
+      "id": "TH-F-000086",
+      "driver": "TH",
+      "sex": "F",
+      "cell": "000086",
+      "nt_zh": "多巴胺",
+      "nt_en": "Dopamine",
+      "voxels": 296501,
+      "src_dims": [
+        232,
+        343,
+        237
+      ],
+      "src_bytes": 686735,
+      "centroid": [
+        -106.6,
+        -66.4,
+        -26.9
+      ],
+      "hue_kaleido": 57.6,
+      "hue_random": 345.6,
+      "hue_nt": 135.0,
+      "hue_paper10N": 140.4,
+      "hue_misread": 140.4,
+      "gap_kaleido": 64.8,
+      "gap_random": 25.2
+    },
+    {
+      "idx": 29,
+      "id": "TH-F-000098",
+      "driver": "TH",
+      "sex": "F",
+      "cell": "000098",
+      "nt_zh": "多巴胺",
+      "nt_en": "Dopamine",
+      "voxels": 256595,
+      "src_dims": [
+        311,
+        307,
+        204
+      ],
+      "src_bytes": 638769,
+      "centroid": [
+        108.1,
+        -58.9,
+        -20.9
+      ],
+      "hue_kaleido": 327.6,
+      "hue_random": 234.0,
+      "hue_nt": 135.0,
+      "hue_paper10N": 158.4,
+      "hue_misread": 39.6,
+      "gap_kaleido": 64.8,
+      "gap_random": 50.4
+    },
+    {
+      "idx": 30,
+      "id": "TH-F-000100",
+      "driver": "TH",
+      "sex": "F",
+      "cell": "000100",
+      "nt_zh": "多巴胺",
+      "nt_en": "Dopamine",
+      "voxels": 285534,
+      "src_dims": [
+        278,
+        275,
+        218
+      ],
+      "src_bytes": 684032,
+      "centroid": [
+        157.7,
+        -62.0,
+        -8.6
+      ],
+      "hue_kaleido": 187.2,
+      "hue_random": 280.8,
+      "hue_nt": 135.0,
+      "hue_paper10N": 115.2,
+      "hue_misread": 21.6,
+      "gap_kaleido": 115.2,
+      "gap_random": 118.8
+    },
+    {
+      "idx": 31,
+      "id": "TH-F-000102",
+      "driver": "TH",
+      "sex": "F",
+      "cell": "000102",
+      "nt_zh": "多巴胺",
+      "nt_en": "Dopamine",
+      "voxels": 253109,
+      "src_dims": [
+        241,
+        386,
+        275
+      ],
+      "src_bytes": 628460,
+      "centroid": [
+        95.7,
+        -77.7,
+        -17.1
+      ],
+      "hue_kaleido": 262.8,
+      "hue_random": 284.4,
+      "hue_nt": 135.0,
+      "hue_paper10N": 100.8,
+      "hue_misread": 50.4,
+      "gap_kaleido": 64.8,
+      "gap_random": 50.4
+    },
+    {
+      "idx": 32,
+      "id": "TH-F-100005",
+      "driver": "TH",
+      "sex": "F",
+      "cell": "100005",
+      "nt_zh": "多巴胺",
+      "nt_en": "Dopamine",
+      "voxels": 339305,
+      "src_dims": [
+        277,
+        244,
+        192
+      ],
+      "src_bytes": 676098,
+      "centroid": [
+        -132.9,
+        -60.9,
+        -17.6
+      ],
+      "hue_kaleido": 208.8,
+      "hue_random": 237.6,
+      "hue_nt": 135.0,
+      "hue_paper10N": 302.4,
+      "hue_misread": 172.8,
+      "gap_kaleido": 32.4,
+      "gap_random": 97.2
+    },
+    {
+      "idx": 33,
+      "id": "TH-F-100044",
+      "driver": "TH",
+      "sex": "F",
+      "cell": "100044",
+      "nt_zh": "多巴胺",
+      "nt_en": "Dopamine",
+      "voxels": 313798,
+      "src_dims": [
+        337,
+        300,
+        170
+      ],
+      "src_bytes": 641352,
+      "centroid": [
+        58.4,
+        -180.7,
+        -19.4
+      ],
+      "hue_kaleido": 79.2,
+      "hue_random": 151.2,
+      "hue_nt": 135.0,
+      "hue_paper10N": 136.8,
+      "hue_misread": 64.8,
+      "gap_kaleido": 158.4,
+      "gap_random": 21.6
+    },
+    {
+      "idx": 34,
+      "id": "TH-F-100051",
+      "driver": "TH",
+      "sex": "F",
+      "cell": "100051",
+      "nt_zh": "多巴胺",
+      "nt_en": "Dopamine",
+      "voxels": 425776,
+      "src_dims": [
+        305,
+        257,
+        205
+      ],
+      "src_bytes": 775758,
+      "centroid": [
+        143.7,
+        -61.7,
+        -4.0
+      ],
+      "hue_kaleido": 234.0,
+      "hue_random": 252.0,
+      "hue_nt": 135.0,
+      "hue_paper10N": 280.8,
+      "hue_misread": 25.2,
+      "gap_kaleido": 136.8,
+      "gap_random": 169.2
+    },
+    {
+      "idx": 35,
+      "id": "TH-F-100061",
+      "driver": "TH",
+      "sex": "F",
+      "cell": "100061",
+      "nt_zh": "多巴胺",
+      "nt_en": "Dopamine",
+      "voxels": 294770,
+      "src_dims": [
+        262,
+        314,
+        186
+      ],
+      "src_bytes": 669504,
+      "centroid": [
+        -99.5,
+        -63.7,
+        -23.7
+      ],
+      "hue_kaleido": 144.0,
+      "hue_random": 313.2,
+      "hue_nt": 135.0,
+      "hue_paper10N": 64.8,
+      "hue_misread": 144.0,
+      "gap_kaleido": 151.2,
+      "gap_random": 7.2
+    },
+    {
+      "idx": 36,
+      "id": "TH-F-100079",
+      "driver": "TH",
+      "sex": "F",
+      "cell": "100079",
+      "nt_zh": "多巴胺",
+      "nt_en": "Dopamine",
+      "voxels": 347364,
+      "src_dims": [
+        285,
+        211,
+        183
+      ],
+      "src_bytes": 742768,
+      "centroid": [
+        129.7,
+        -52.5,
+        -19.1
+      ],
+      "hue_kaleido": 316.8,
+      "hue_random": 54.0,
+      "hue_nt": 135.0,
+      "hue_paper10N": 248.4,
+      "hue_misread": 28.8,
+      "gap_kaleido": 140.4,
+      "gap_random": 126.0
+    },
+    {
+      "idx": 37,
+      "id": "TH-F-100097",
+      "driver": "TH",
+      "sex": "F",
+      "cell": "100097",
+      "nt_zh": "多巴胺",
+      "nt_en": "Dopamine",
+      "voxels": 260932,
+      "src_dims": [
+        244,
+        362,
+        271
+      ],
+      "src_bytes": 644943,
+      "centroid": [
+        -109.3,
+        -72.1,
+        -26.8
+      ],
+      "hue_kaleido": 111.6,
+      "hue_random": 122.4,
+      "hue_nt": 135.0,
+      "hue_paper10N": 226.8,
+      "hue_misread": 158.4,
+      "gap_kaleido": 118.8,
+      "gap_random": 162.0
+    },
+    {
+      "idx": 38,
+      "id": "TH-F-100103",
+      "driver": "TH",
+      "sex": "F",
+      "cell": "100103",
+      "nt_zh": "多巴胺",
+      "nt_en": "Dopamine",
+      "voxels": 266846,
+      "src_dims": [
+        234,
+        339,
+        270
+      ],
+      "src_bytes": 662665,
+      "centroid": [
+        -105.6,
+        -71.0,
+        -31.6
+      ],
+      "hue_kaleido": 237.6,
+      "hue_random": 136.8,
+      "hue_nt": 135.0,
+      "hue_paper10N": 324.0,
+      "hue_misread": 154.8,
+      "gap_kaleido": 126.0,
+      "gap_random": 14.4
+    },
+    {
+      "idx": 39,
+      "id": "TH-F-100105",
+      "driver": "TH",
+      "sex": "F",
+      "cell": "100105",
+      "nt_zh": "多巴胺",
+      "nt_en": "Dopamine",
+      "voxels": 327020,
+      "src_dims": [
+        296,
+        250,
+        162
+      ],
+      "src_bytes": 728898,
+      "centroid": [
+        -134.4,
+        -45.8,
+        -45.3
+      ],
+      "hue_kaleido": 190.8,
+      "hue_random": 21.6,
+      "hue_nt": 135.0,
+      "hue_paper10N": 345.6,
+      "hue_misread": 151.2,
+      "gap_kaleido": 79.2,
+      "gap_random": 100.8
+    },
+    {
+      "idx": 40,
+      "id": "TH-F-100106",
+      "driver": "TH",
+      "sex": "F",
+      "cell": "100106",
+      "nt_zh": "多巴胺",
+      "nt_en": "Dopamine",
+      "voxels": 283026,
+      "src_dims": [
+        290,
+        228,
+        192
+      ],
+      "src_bytes": 651564,
+      "centroid": [
+        -162.3,
+        -56.4,
+        -6.7
+      ],
+      "hue_kaleido": 68.4,
+      "hue_random": 126.0,
+      "hue_nt": 135.0,
+      "hue_paper10N": 57.6,
+      "hue_misread": 165.6,
+      "gap_kaleido": 108.0,
+      "gap_random": 14.4
+    },
+    {
+      "idx": 41,
+      "id": "TH-F-100108",
+      "driver": "TH",
+      "sex": "F",
+      "cell": "100108",
+      "nt_zh": "多巴胺",
+      "nt_en": "Dopamine",
+      "voxels": 256971,
+      "src_dims": [
+        308,
+        359,
+        227
+      ],
+      "src_bytes": 640027,
+      "centroid": [
+        106.2,
+        -68.6,
+        -34.7
+      ],
+      "hue_kaleido": 356.4,
+      "hue_random": 133.2,
+      "hue_nt": 135.0,
+      "hue_paper10N": 241.2,
+      "hue_misread": 46.8,
+      "gap_kaleido": 118.8,
+      "gap_random": 61.2
+    },
+    {
+      "idx": 42,
+      "id": "TH-F-200029",
+      "driver": "TH",
+      "sex": "F",
+      "cell": "200029",
+      "nt_zh": "多巴胺",
+      "nt_en": "Dopamine",
+      "voxels": 403827,
+      "src_dims": [
+        321,
+        284,
+        174
+      ],
+      "src_bytes": 719376,
+      "centroid": [
+        144.2,
+        -64.1,
+        -3.9
+      ],
+      "hue_kaleido": 273.6,
+      "hue_random": 349.2,
+      "hue_nt": 135.0,
+      "hue_paper10N": 208.8,
+      "hue_misread": 14.4,
+      "gap_kaleido": 97.2,
+      "gap_random": 93.6
+    },
+    {
+      "idx": 43,
+      "id": "TH-F-200035",
+      "driver": "TH",
+      "sex": "F",
+      "cell": "200035",
+      "nt_zh": "多巴胺",
+      "nt_en": "Dopamine",
+      "voxels": 332122,
+      "src_dims": [
+        276,
+        340,
+        194
+      ],
+      "src_bytes": 637864,
+      "centroid": [
+        102.1,
+        -57.6,
+        -41.1
+      ],
+      "hue_kaleido": 172.8,
+      "hue_random": 118.8,
+      "hue_nt": 135.0,
+      "hue_paper10N": 349.2,
+      "hue_misread": 61.2,
+      "gap_kaleido": 176.4,
+      "gap_random": 14.4
+    },
+    {
+      "idx": 44,
+      "id": "TH-F-200114",
+      "driver": "TH",
+      "sex": "F",
+      "cell": "200114",
+      "nt_zh": "多巴胺",
+      "nt_en": "Dopamine",
+      "voxels": 329574,
+      "src_dims": [
+        274,
+        249,
+        204
+      ],
+      "src_bytes": 772662,
+      "centroid": [
+        -145.6,
+        -70.7,
+        2.0
+      ],
+      "hue_kaleido": 230.4,
+      "hue_random": 36.0,
+      "hue_nt": 135.0,
+      "hue_paper10N": 176.4,
+      "hue_misread": 176.4,
+      "gap_kaleido": 54.0,
+      "gap_random": 104.4
+    },
+    {
+      "idx": 45,
+      "id": "TH-F-200125",
+      "driver": "TH",
+      "sex": "F",
+      "cell": "200125",
+      "nt_zh": "多巴胺",
+      "nt_en": "Dopamine",
+      "voxels": 264919,
+      "src_dims": [
+        304,
+        276,
+        226
+      ],
+      "src_bytes": 637386,
+      "centroid": [
+        143.2,
+        -64.4,
+        -4.0
+      ],
+      "hue_kaleido": 295.2,
+      "hue_random": 165.6,
+      "hue_nt": 135.0,
+      "hue_paper10N": 230.4,
+      "hue_misread": 3.6,
+      "gap_kaleido": 129.6,
+      "gap_random": 151.2
+    },
+    {
+      "idx": 46,
+      "id": "TH-F-300004",
+      "driver": "TH",
+      "sex": "F",
+      "cell": "300004",
+      "nt_zh": "多巴胺",
+      "nt_en": "Dopamine",
+      "voxels": 354082,
+      "src_dims": [
+        260,
+        306,
+        179
+      ],
+      "src_bytes": 678629,
+      "centroid": [
+        -104.4,
+        -68.1,
+        -34.7
+      ],
+      "hue_kaleido": 277.2,
+      "hue_random": 90.0,
+      "hue_nt": 135.0,
+      "hue_paper10N": 111.6,
+      "hue_misread": 147.6,
+      "gap_kaleido": 133.2,
+      "gap_random": 136.8
+    },
+    {
+      "idx": 47,
+      "id": "TH-F-300012",
+      "driver": "TH",
+      "sex": "F",
+      "cell": "300012",
+      "nt_zh": "多巴胺",
+      "nt_en": "Dopamine",
+      "voxels": 388761,
+      "src_dims": [
+        309,
+        262,
+        196
+      ],
+      "src_bytes": 700018,
+      "centroid": [
+        139.6,
+        -67.7,
+        -8.0
+      ],
+      "hue_kaleido": 129.6,
+      "hue_random": 158.4,
+      "hue_nt": 135.0,
+      "hue_paper10N": 270.0,
+      "hue_misread": 7.2,
+      "gap_kaleido": 57.6,
+      "gap_random": 3.6
+    },
+    {
+      "idx": 48,
+      "id": "TH-F-300048",
+      "driver": "TH",
+      "sex": "F",
+      "cell": "300048",
+      "nt_zh": "多巴胺",
+      "nt_en": "Dopamine",
+      "voxels": 332460,
+      "src_dims": [
+        242,
+        370,
+        207
+      ],
+      "src_bytes": 616284,
+      "centroid": [
+        -98.9,
+        -81.1,
+        -18.0
+      ],
+      "hue_kaleido": 352.8,
+      "hue_random": 320.4,
+      "hue_nt": 135.0,
+      "hue_paper10N": 273.6,
+      "hue_misread": 162.0,
+      "gap_kaleido": 64.8,
+      "gap_random": 25.2
+    },
+    {
+      "idx": 49,
+      "id": "TH-M-000013",
+      "driver": "TH",
+      "sex": "M",
+      "cell": "000013",
+      "nt_zh": "多巴胺",
+      "nt_en": "Dopamine",
+      "voxels": 330368,
+      "src_dims": [
+        275,
+        275,
+        209
+      ],
+      "src_bytes": 752782,
+      "centroid": [
+        149.8,
+        52.2,
+        -38.2
+      ],
+      "hue_kaleido": 82.8,
+      "hue_random": 194.4,
+      "hue_nt": 135.0,
+      "hue_paper10N": 288.0,
+      "hue_misread": 72.0,
+      "gap_kaleido": 172.8,
+      "gap_random": 126.0
+    },
+    {
+      "idx": 50,
+      "id": "TH-M-000059",
+      "driver": "TH",
+      "sex": "M",
+      "cell": "000059",
+      "nt_zh": "多巴胺",
+      "nt_en": "Dopamine",
+      "voxels": 303853,
+      "src_dims": [
+        261,
+        270,
+        221
+      ],
+      "src_bytes": 688105,
+      "centroid": [
+        101.9,
+        -73.2,
+        -32.1
+      ],
+      "hue_kaleido": 115.2,
+      "hue_random": 72.0,
+      "hue_nt": 135.0,
+      "hue_paper10N": 46.8,
+      "hue_misread": 43.2,
+      "gap_kaleido": 118.8,
+      "gap_random": 61.2
+    },
+    {
+      "idx": 51,
+      "id": "TH-M-000060",
+      "driver": "TH",
+      "sex": "M",
+      "cell": "000060",
+      "nt_zh": "多巴胺",
+      "nt_en": "Dopamine",
+      "voxels": 265517,
+      "src_dims": [
+        256,
+        260,
+        234
+      ],
+      "src_bytes": 660014,
+      "centroid": [
+        -136.9,
+        -68.1,
+        -4.0
+      ],
+      "hue_kaleido": 46.8,
+      "hue_random": 230.4,
+      "hue_nt": 135.0,
+      "hue_paper10N": 244.8,
+      "hue_misread": 169.2,
+      "gap_kaleido": 129.6,
+      "gap_random": 90.0
+    },
+    {
+      "idx": 52,
+      "id": "TH-M-000061",
+      "driver": "TH",
+      "sex": "M",
+      "cell": "000061",
+      "nt_zh": "多巴胺",
+      "nt_en": "Dopamine",
+      "voxels": 294535,
+      "src_dims": [
+        294,
+        254,
+        209
+      ],
+      "src_bytes": 716219,
+      "centroid": [
+        -140.3,
+        -66.7,
+        -8.4
+      ],
+      "hue_kaleido": 313.2,
+      "hue_random": 190.8,
+      "hue_nt": 135.0,
+      "hue_paper10N": 32.4,
+      "hue_misread": 198.0,
+      "gap_kaleido": 136.8,
+      "gap_random": 50.4
+    },
+    {
+      "idx": 53,
+      "id": "TH-M-100077",
+      "driver": "TH",
+      "sex": "M",
+      "cell": "100077",
+      "nt_zh": "多巴胺",
+      "nt_en": "Dopamine",
+      "voxels": 300487,
+      "src_dims": [
+        282,
+        218,
+        191
+      ],
+      "src_bytes": 671880,
+      "centroid": [
+        128.4,
+        -65.7,
+        -25.4
+      ],
+      "hue_kaleido": 97.2,
+      "hue_random": 180.0,
+      "hue_nt": 135.0,
+      "hue_paper10N": 18.0,
+      "hue_misread": 18.0,
+      "gap_kaleido": 140.4,
+      "gap_random": 126.0
+    },
+    {
+      "idx": 54,
+      "id": "TH-M-300001",
+      "driver": "TH",
+      "sex": "M",
+      "cell": "300001",
+      "nt_zh": "多巴胺",
+      "nt_en": "Dopamine",
+      "voxels": 340766,
+      "src_dims": [
+        281,
+        332,
+        201
+      ],
+      "src_bytes": 706627,
+      "centroid": [
+        -120.0,
+        -114.0,
+        -14.5
+      ],
+      "hue_kaleido": 298.8,
+      "hue_random": 360.0,
+      "hue_nt": 135.0,
+      "hue_paper10N": 338.4,
+      "hue_misread": 129.6,
+      "gap_kaleido": 108.0,
+      "gap_random": 129.6
+    },
+    {
+      "idx": 55,
+      "id": "TH-M-300055",
+      "driver": "TH",
+      "sex": "M",
+      "cell": "300055",
+      "nt_zh": "多巴胺",
+      "nt_en": "Dopamine",
+      "voxels": 324157,
+      "src_dims": [
+        298,
+        234,
+        201
+      ],
+      "src_bytes": 664088,
+      "centroid": [
+        33.4,
+        25.5,
+        29.5
+      ],
+      "hue_kaleido": 136.8,
+      "hue_random": 212.4,
+      "hue_nt": 135.0,
+      "hue_paper10N": 7.2,
+      "hue_misread": 111.6,
+      "gap_kaleido": 111.6,
+      "gap_random": 133.2
+    },
+    {
+      "idx": 56,
+      "id": "TH-M-500005",
+      "driver": "TH",
+      "sex": "M",
+      "cell": "500005",
+      "nt_zh": "多巴胺",
+      "nt_en": "Dopamine",
+      "voxels": 330993,
+      "src_dims": [
+        289,
+        255,
+        231
+      ],
+      "src_bytes": 742781,
+      "centroid": [
+        134.5,
+        -67.8,
+        -14.5
+      ],
+      "hue_kaleido": 165.6,
+      "hue_random": 14.4,
+      "hue_nt": 135.0,
+      "hue_paper10N": 36.0,
+      "hue_misread": 342.0,
+      "gap_kaleido": 129.6,
+      "gap_random": 151.2
+    },
+    {
+      "idx": 57,
+      "id": "TH-M-700001",
+      "driver": "TH",
+      "sex": "M",
+      "cell": "700001",
+      "nt_zh": "多巴胺",
+      "nt_en": "Dopamine",
+      "voxels": 369652,
+      "src_dims": [
+        292,
+        267,
+        216
+      ],
+      "src_bytes": 719809,
+      "centroid": [
+        -123.2,
+        -62.7,
+        -10.7
+      ],
+      "hue_kaleido": 176.4,
+      "hue_random": 140.4,
+      "hue_nt": 135.0,
+      "hue_paper10N": 82.8,
+      "hue_misread": 183.6,
+      "gap_kaleido": 129.6,
+      "gap_random": 90.0
+    },
+    {
+      "idx": 58,
+      "id": "Trh-F-000009",
+      "driver": "Trh",
+      "sex": "F",
+      "cell": "000009",
+      "nt_zh": "血清素",
+      "nt_en": "Serotonin",
+      "voxels": 254071,
+      "src_dims": [
+        335,
+        345,
+        267
+      ],
+      "src_bytes": 641859,
+      "centroid": [
+        62.7,
+        -50.7,
+        32.4
+      ],
+      "hue_kaleido": 64.8,
+      "hue_random": 18.0,
+      "hue_nt": 225.0,
+      "hue_paper10N": 54.0,
+      "hue_misread": 79.2,
+      "gap_kaleido": 158.4,
+      "gap_random": 111.6
+    },
+    {
+      "idx": 59,
+      "id": "Trh-F-000016",
+      "driver": "Trh",
+      "sex": "F",
+      "cell": "000016",
+      "nt_zh": "血清素",
+      "nt_en": "Serotonin",
+      "voxels": 224772,
+      "src_dims": [
+        867,
+        362,
+        275
+      ],
+      "src_bytes": 667232,
+      "centroid": [
+        86.1,
+        -132.2,
+        -33.0
+      ],
+      "hue_kaleido": 198.0,
+      "hue_random": 255.6,
+      "hue_nt": 225.0,
+      "hue_paper10N": 219.6,
+      "hue_misread": 226.8,
+      "gap_kaleido": 126.0,
+      "gap_random": 162.0
+    },
+    {
+      "idx": 60,
+      "id": "Trh-F-000025",
+      "driver": "Trh",
+      "sex": "F",
+      "cell": "000025",
+      "nt_zh": "血清素",
+      "nt_en": "Serotonin",
+      "voxels": 286275,
+      "src_dims": [
+        821,
+        298,
+        155
+      ],
+      "src_bytes": 689084,
+      "centroid": [
+        -123.7,
+        -135.1,
+        -37.1
+      ],
+      "hue_kaleido": 259.2,
+      "hue_random": 25.2,
+      "hue_nt": 225.0,
+      "hue_paper10N": 309.6,
+      "hue_misread": 248.4,
+      "gap_kaleido": 108.0,
+      "gap_random": 180.0
+    },
+    {
+      "idx": 61,
+      "id": "Trh-F-000047",
+      "driver": "Trh",
+      "sex": "F",
+      "cell": "000047",
+      "nt_zh": "血清素",
+      "nt_en": "Serotonin",
+      "voxels": 259633,
+      "src_dims": [
+        286,
+        364,
+        240
+      ],
+      "src_bytes": 671522,
+      "centroid": [
+        -338.8,
+        -147.2,
+        -13.9
+      ],
+      "hue_kaleido": 39.6,
+      "hue_random": 86.4,
+      "hue_nt": 225.0,
+      "hue_paper10N": 183.6,
+      "hue_misread": 208.8,
+      "gap_kaleido": 86.4,
+      "gap_random": 140.4
+    },
+    {
+      "idx": 62,
+      "id": "Trh-F-000056",
+      "driver": "Trh",
+      "sex": "F",
+      "cell": "000056",
+      "nt_zh": "血清素",
+      "nt_en": "Serotonin",
+      "voxels": 237597,
+      "src_dims": [
+        269,
+        356,
+        261
+      ],
+      "src_bytes": 642277,
+      "centroid": [
+        333.4,
+        -147.5,
+        -25.4
+      ],
+      "hue_kaleido": 118.8,
+      "hue_random": 7.2,
+      "hue_nt": 225.0,
+      "hue_paper10N": 10.8,
+      "hue_misread": 280.8,
+      "gap_kaleido": 158.4,
+      "gap_random": 57.6
+    },
+    {
+      "idx": 63,
+      "id": "Trh-F-000092",
+      "driver": "Trh",
+      "sex": "F",
+      "cell": "000092",
+      "nt_zh": "血清素",
+      "nt_en": "Serotonin",
+      "voxels": 238737,
+      "src_dims": [
+        267,
+        370,
+        258
+      ],
+      "src_bytes": 634086,
+      "centroid": [
+        318.4,
+        -149.9,
+        -19.5
+      ],
+      "hue_kaleido": 320.4,
+      "hue_random": 309.6,
+      "hue_nt": 225.0,
+      "hue_paper10N": 342.0,
+      "hue_misread": 273.6,
+      "gap_kaleido": 158.4,
+      "gap_random": 57.6
+    },
+    {
+      "idx": 64,
+      "id": "Trh-F-100000",
+      "driver": "Trh",
+      "sex": "F",
+      "cell": "100000",
+      "nt_zh": "血清素",
+      "nt_en": "Serotonin",
+      "voxels": 276569,
+      "src_dims": [
+        224,
+        334,
+        248
+      ],
+      "src_bytes": 701133,
+      "centroid": [
+        353.7,
+        -114.0,
+        -32.6
+      ],
+      "hue_kaleido": 205.2,
+      "hue_random": 302.4,
+      "hue_nt": 225.0,
+      "hue_paper10N": 180.0,
+      "hue_misread": 306.0,
+      "gap_kaleido": 86.4,
+      "gap_random": 64.8
+    },
+    {
+      "idx": 65,
+      "id": "Trh-F-100012",
+      "driver": "Trh",
+      "sex": "F",
+      "cell": "100012",
+      "nt_zh": "血清素",
+      "nt_en": "Serotonin",
+      "voxels": 266936,
+      "src_dims": [
+        256,
+        362,
+        203
+      ],
+      "src_bytes": 636319,
+      "centroid": [
+        -353.4,
+        -114.6,
+        -25.0
+      ],
+      "hue_kaleido": 126.0,
+      "hue_random": 226.8,
+      "hue_nt": 225.0,
+      "hue_paper10N": 356.4,
+      "hue_misread": 252.0,
+      "gap_kaleido": 86.4,
+      "gap_random": 140.4
+    },
+    {
+      "idx": 66,
+      "id": "Trh-F-100068",
+      "driver": "Trh",
+      "sex": "F",
+      "cell": "100068",
+      "nt_zh": "血清素",
+      "nt_en": "Serotonin",
+      "voxels": 257406,
+      "src_dims": [
+        301,
+        262,
+        192
+      ],
+      "src_bytes": 626331,
+      "centroid": [
+        158.2,
+        -67.1,
+        0.1
+      ],
+      "hue_kaleido": 349.2,
+      "hue_random": 208.8,
+      "hue_nt": 225.0,
+      "hue_paper10N": 3.6,
+      "hue_misread": 352.8,
+      "gap_kaleido": 46.8,
+      "gap_random": 36.0
+    },
+    {
+      "idx": 67,
+      "id": "Trh-F-100085",
+      "driver": "Trh",
+      "sex": "F",
+      "cell": "100085",
+      "nt_zh": "血清素",
+      "nt_en": "Serotonin",
+      "voxels": 367634,
+      "src_dims": [
+        143,
+        174,
+        79
+      ],
+      "src_bytes": 736516,
+      "centroid": [
+        -73.3,
+        -65.0,
+        47.2
+      ],
+      "hue_kaleido": 100.8,
+      "hue_random": 298.8,
+      "hue_nt": 225.0,
+      "hue_paper10N": 237.6,
+      "hue_misread": 126.0,
+      "gap_kaleido": 122.4,
+      "gap_random": 100.8
+    },
+    {
+      "idx": 68,
+      "id": "Trh-F-200003",
+      "driver": "Trh",
+      "sex": "F",
+      "cell": "200003",
+      "nt_zh": "血清素",
+      "nt_en": "Serotonin",
+      "voxels": 362997,
+      "src_dims": [
+        290,
+        206,
+        183
+      ],
+      "src_bytes": 728089,
+      "centroid": [
+        67.6,
+        36.9,
+        18.9
+      ],
+      "hue_kaleido": 25.2,
+      "hue_random": 79.2,
+      "hue_nt": 225.0,
+      "hue_paper10N": 39.6,
+      "hue_misread": 93.6,
+      "gap_kaleido": 79.2,
+      "gap_random": 176.4
+    },
+    {
+      "idx": 69,
+      "id": "Trh-F-200023",
+      "driver": "Trh",
+      "sex": "F",
+      "cell": "200023",
+      "nt_zh": "血清素",
+      "nt_en": "Serotonin",
+      "voxels": 344853,
+      "src_dims": [
+        355,
+        208,
+        154
+      ],
+      "src_bytes": 711165,
+      "centroid": [
+        83.6,
+        103.0,
+        -24.6
+      ],
+      "hue_kaleido": 255.6,
+      "hue_random": 68.4,
+      "hue_nt": 225.0,
+      "hue_paper10N": 252.0,
+      "hue_misread": 118.8,
+      "gap_kaleido": 172.8,
+      "gap_random": 126.0
+    },
+    {
+      "idx": 70,
+      "id": "Trh-M-000001",
+      "driver": "Trh",
+      "sex": "M",
+      "cell": "000001",
+      "nt_zh": "血清素",
+      "nt_en": "Serotonin",
+      "voxels": 317105,
+      "src_dims": [
+        279,
+        267,
+        208
+      ],
+      "src_bytes": 711041,
+      "centroid": [
+        155.5,
+        -66.8,
+        -11.9
+      ],
+      "hue_kaleido": 252.0,
+      "hue_random": 201.6,
+      "hue_nt": 225.0,
+      "hue_paper10N": 61.2,
+      "hue_misread": 349.2,
+      "gap_kaleido": 180.0,
+      "gap_random": 39.6
+    },
+    {
+      "idx": 71,
+      "id": "Trh-M-000019",
+      "driver": "Trh",
+      "sex": "M",
+      "cell": "000019",
+      "nt_zh": "血清素",
+      "nt_en": "Serotonin",
+      "voxels": 242517,
+      "src_dims": [
+        245,
+        345,
+        197
+      ],
+      "src_bytes": 630984,
+      "centroid": [
+        311.9,
+        -135.6,
+        -35.9
+      ],
+      "hue_kaleido": 158.4,
+      "hue_random": 183.6,
+      "hue_nt": 225.0,
+      "hue_paper10N": 327.6,
+      "hue_misread": 270.0,
+      "gap_kaleido": 126.0,
+      "gap_random": 28.8
+    },
+    {
+      "idx": 72,
+      "id": "Trh-M-000097",
+      "driver": "Trh",
+      "sex": "M",
+      "cell": "000097",
+      "nt_zh": "血清素",
+      "nt_en": "Serotonin",
+      "voxels": 253718,
+      "src_dims": [
+        220,
+        364,
+        252
+      ],
+      "src_bytes": 630946,
+      "centroid": [
+        -315.2,
+        -103.1,
+        -39.9
+      ],
+      "hue_kaleido": 169.2,
+      "hue_random": 108.0,
+      "hue_nt": 225.0,
+      "hue_paper10N": 262.8,
+      "hue_misread": 255.6,
+      "gap_kaleido": 75.6,
+      "gap_random": 3.6
+    },
+    {
+      "idx": 73,
+      "id": "Trh-M-000134",
+      "driver": "Trh",
+      "sex": "M",
+      "cell": "000134",
+      "nt_zh": "血清素",
+      "nt_en": "Serotonin",
+      "voxels": 232583,
+      "src_dims": [
+        282,
+        354,
+        243
+      ],
+      "src_bytes": 618777,
+      "centroid": [
+        132.9,
+        -106.0,
+        -9.6
+      ],
+      "hue_kaleido": 201.6,
+      "hue_random": 327.6,
+      "hue_nt": 225.0,
+      "hue_paper10N": 216.0,
+      "hue_misread": 334.8,
+      "gap_kaleido": 158.4,
+      "gap_random": 90.0
+    },
+    {
+      "idx": 74,
+      "id": "Trh-M-000151",
+      "driver": "Trh",
+      "sex": "M",
+      "cell": "000151",
+      "nt_zh": "血清素",
+      "nt_en": "Serotonin",
+      "voxels": 234167,
+      "src_dims": [
+        249,
+        371,
+        328
+      ],
+      "src_bytes": 652885,
+      "centroid": [
+        324.0,
+        -124.7,
+        -43.7
+      ],
+      "hue_kaleido": 360.0,
+      "hue_random": 277.2,
+      "hue_nt": 225.0,
+      "hue_paper10N": 108.0,
+      "hue_misread": 288.0,
+      "gap_kaleido": 32.4,
+      "gap_random": 122.4
+    },
+    {
+      "idx": 75,
+      "id": "Trh-M-000154",
+      "driver": "Trh",
+      "sex": "M",
+      "cell": "000154",
+      "nt_zh": "血清素",
+      "nt_en": "Serotonin",
+      "voxels": 240542,
+      "src_dims": [
+        760,
+        375,
+        256
+      ],
+      "src_bytes": 678112,
+      "centroid": [
+        26.8,
+        -144.4,
+        -37.1
+      ],
+      "hue_kaleido": 133.2,
+      "hue_random": 219.6,
+      "hue_nt": 225.0,
+      "hue_paper10N": 331.2,
+      "hue_misread": 234.0,
+      "gap_kaleido": 169.2,
+      "gap_random": 126.0
+    },
+    {
+      "idx": 76,
+      "id": "Trh-M-000166",
+      "driver": "Trh",
+      "sex": "M",
+      "cell": "000166",
+      "nt_zh": "血清素",
+      "nt_en": "Serotonin",
+      "voxels": 231161,
+      "src_dims": [
+        223,
+        352,
+        270
+      ],
+      "src_bytes": 617053,
+      "centroid": [
+        -310.7,
+        -148.3,
+        -35.8
+      ],
+      "hue_kaleido": 93.6,
+      "hue_random": 111.6,
+      "hue_nt": 225.0,
+      "hue_paper10N": 147.6,
+      "hue_misread": 244.8,
+      "gap_kaleido": 122.4,
+      "gap_random": 36.0
+    },
+    {
+      "idx": 77,
+      "id": "Trh-M-100000",
+      "driver": "Trh",
+      "sex": "M",
+      "cell": "100000",
+      "nt_zh": "血清素",
+      "nt_en": "Serotonin",
+      "voxels": 326915,
+      "src_dims": [
+        165,
+        184,
+        201
+      ],
+      "src_bytes": 630061,
+      "centroid": [
+        70.0,
+        32.3,
+        18.4
+      ],
+      "hue_kaleido": 306.0,
+      "hue_random": 262.8,
+      "hue_nt": 225.0,
+      "hue_paper10N": 133.2,
+      "hue_misread": 82.8,
+      "gap_kaleido": 79.2,
+      "gap_random": 176.4
+    },
+    {
+      "idx": 78,
+      "id": "Trh-M-100039",
+      "driver": "Trh",
+      "sex": "M",
+      "cell": "100039",
+      "nt_zh": "血清素",
+      "nt_en": "Serotonin",
+      "voxels": 246255,
+      "src_dims": [
+        233,
+        353,
+        276
+      ],
+      "src_bytes": 669727,
+      "centroid": [
+        -313.3,
+        -155.5,
+        -28.4
+      ],
+      "hue_kaleido": 216.0,
+      "hue_random": 75.6,
+      "hue_nt": 225.0,
+      "hue_paper10N": 97.2,
+      "hue_misread": 201.6,
+      "gap_kaleido": 75.6,
+      "gap_random": 165.6
+    },
+    {
+      "idx": 79,
+      "id": "Trh-M-500024",
+      "driver": "Trh",
+      "sex": "M",
+      "cell": "500024",
+      "nt_zh": "血清素",
+      "nt_en": "Serotonin",
+      "voxels": 239716,
+      "src_dims": [
+        238,
+        357,
+        315
+      ],
+      "src_bytes": 652389,
+      "centroid": [
+        -314.5,
+        -152.2,
+        -28.7
+      ],
+      "hue_kaleido": 291.6,
+      "hue_random": 270.0,
+      "hue_nt": 225.0,
+      "hue_paper10N": 104.4,
+      "hue_misread": 223.2,
+      "gap_kaleido": 75.6,
+      "gap_random": 165.6
+    },
+    {
+      "idx": 80,
+      "id": "Trh-M-600023",
+      "driver": "Trh",
+      "sex": "M",
+      "cell": "600023",
+      "nt_zh": "血清素",
+      "nt_en": "Serotonin",
+      "voxels": 252222,
+      "src_dims": [
+        254,
+        347,
+        206
+      ],
+      "src_bytes": 661377,
+      "centroid": [
+        312.8,
+        -153.6,
+        -33.9
+      ],
+      "hue_kaleido": 32.4,
+      "hue_random": 154.8,
+      "hue_nt": 225.0,
+      "hue_paper10N": 126.0,
+      "hue_misread": 284.4,
+      "gap_kaleido": 126.0,
+      "gap_random": 28.8
+    },
+    {
+      "idx": 81,
+      "id": "Trh-M-700056",
+      "driver": "Trh",
+      "sex": "M",
+      "cell": "700056",
+      "nt_zh": "血清素",
+      "nt_en": "Serotonin",
+      "voxels": 258060,
+      "src_dims": [
+        243,
+        385,
+        304
+      ],
+      "src_bytes": 668599,
+      "centroid": [
+        311.2,
+        -155.5,
+        -20.7
+      ],
+      "hue_kaleido": 284.4,
+      "hue_random": 241.2,
+      "hue_nt": 225.0,
+      "hue_paper10N": 162.0,
+      "hue_misread": 295.2,
+      "gap_kaleido": 75.6,
+      "gap_random": 36.0
+    },
+    {
+      "idx": 82,
+      "id": "VGlut-F-000192",
+      "driver": "VGlut",
+      "sex": "F",
+      "cell": "000192",
+      "nt_zh": "麩胺酸",
+      "nt_en": "Glutamate",
+      "voxels": 256105,
+      "src_dims": [
+        872,
+        399,
+        290
+      ],
+      "src_bytes": 747927,
+      "centroid": [
+        -27.7,
+        -144.7,
+        -32.7
+      ],
+      "hue_kaleido": 324.0,
+      "hue_random": 93.6,
+      "hue_nt": 270.0,
+      "hue_paper10N": 295.2,
+      "hue_misread": 266.4,
+      "gap_kaleido": 126.0,
+      "gap_random": 162.0
+    },
+    {
+      "idx": 83,
+      "id": "VGlut-F-000232",
+      "driver": "VGlut",
+      "sex": "F",
+      "cell": "000232",
+      "nt_zh": "麩胺酸",
+      "nt_en": "Glutamate",
+      "voxels": 266529,
+      "src_dims": [
+        321,
+        236,
+        179
+      ],
+      "src_bytes": 641292,
+      "centroid": [
+        -141.6,
+        -62.5,
+        -10.5
+      ],
+      "hue_kaleido": 3.6,
+      "hue_random": 169.2,
+      "hue_nt": 270.0,
+      "hue_paper10N": 212.4,
+      "hue_misread": 187.2,
+      "gap_kaleido": 50.4,
+      "gap_random": 21.6
+    },
+    {
+      "idx": 84,
+      "id": "VGlut-F-000347",
+      "driver": "VGlut",
+      "sex": "F",
+      "cell": "000347",
+      "nt_zh": "麩胺酸",
+      "nt_en": "Glutamate",
+      "voxels": 277313,
+      "src_dims": [
+        293,
+        218,
+        201
+      ],
+      "src_bytes": 647638,
+      "centroid": [
+        146.6,
+        -60.6,
+        -14.7
+      ],
+      "hue_kaleido": 212.4,
+      "hue_random": 176.4,
+      "hue_nt": 270.0,
+      "hue_paper10N": 151.2,
+      "hue_misread": 360.0,
+      "gap_kaleido": 140.4,
+      "gap_random": 14.4
+    },
+    {
+      "idx": 85,
+      "id": "VGlut-F-000422",
+      "driver": "VGlut",
+      "sex": "F",
+      "cell": "000422",
+      "nt_zh": "麩胺酸",
+      "nt_en": "Glutamate",
+      "voxels": 240626,
+      "src_dims": [
+        440,
+        357,
+        218
+      ],
+      "src_bytes": 680491,
+      "centroid": [
+        88.1,
+        -78.5,
+        -51.4
+      ],
+      "hue_kaleido": 241.2,
+      "hue_random": 324.0,
+      "hue_nt": 270.0,
+      "hue_paper10N": 122.4,
+      "hue_misread": 54.0,
+      "gap_kaleido": 136.8,
+      "gap_random": 100.8
+    },
+    {
+      "idx": 86,
+      "id": "VGlut-F-100013",
+      "driver": "VGlut",
+      "sex": "F",
+      "cell": "100013",
+      "nt_zh": "麩胺酸",
+      "nt_en": "Glutamate",
+      "voxels": 288302,
+      "src_dims": [
+        211,
+        333,
+        188
+      ],
+      "src_bytes": 673669,
+      "centroid": [
+        36.4,
+        17.9,
+        -4.9
+      ],
+      "hue_kaleido": 194.4,
+      "hue_random": 342.0,
+      "hue_nt": 270.0,
+      "hue_paper10N": 68.4,
+      "hue_misread": 75.6,
+      "gap_kaleido": 57.6,
+      "gap_random": 129.6
+    },
+    {
+      "idx": 87,
+      "id": "VGlut-F-100293",
+      "driver": "VGlut",
+      "sex": "F",
+      "cell": "100293",
+      "nt_zh": "麩胺酸",
+      "nt_en": "Glutamate",
+      "voxels": 330937,
+      "src_dims": [
+        156,
+        164,
+        88
+      ],
+      "src_bytes": 661807,
+      "centroid": [
+        -67.0,
+        -58.3,
+        48.9
+      ],
+      "hue_kaleido": 338.4,
+      "hue_random": 198.0,
+      "hue_nt": 270.0,
+      "hue_paper10N": 154.8,
+      "hue_misread": 136.8,
+      "gap_kaleido": 122.4,
+      "gap_random": 100.8
+    },
+    {
+      "idx": 88,
+      "id": "VGlut-F-200042",
+      "driver": "VGlut",
+      "sex": "F",
+      "cell": "200042",
+      "nt_zh": "麩胺酸",
+      "nt_en": "Glutamate",
+      "voxels": 301940,
+      "src_dims": [
+        295,
+        271,
+        179
+      ],
+      "src_bytes": 689012,
+      "centroid": [
+        141.3,
+        -67.7,
+        -11.2
+      ],
+      "hue_kaleido": 36.0,
+      "hue_random": 244.8,
+      "hue_nt": 270.0,
+      "hue_paper10N": 172.8,
+      "hue_misread": 356.4,
+      "gap_kaleido": 46.8,
+      "gap_random": 36.0
+    },
+    {
+      "idx": 89,
+      "id": "VGlut-F-200158",
+      "driver": "VGlut",
+      "sex": "F",
+      "cell": "200158",
+      "nt_zh": "麩胺酸",
+      "nt_en": "Glutamate",
+      "voxels": 249260,
+      "src_dims": [
+        394,
+        310,
+        179
+      ],
+      "src_bytes": 621617,
+      "centroid": [
+        -3.2,
+        -171.0,
+        -44.0
+      ],
+      "hue_kaleido": 219.6,
+      "hue_random": 10.8,
+      "hue_nt": 270.0,
+      "hue_paper10N": 194.4,
+      "hue_misread": 108.0,
+      "gap_kaleido": 129.6,
+      "gap_random": 122.4
+    },
+    {
+      "idx": 90,
+      "id": "VGlut-F-200413",
+      "driver": "VGlut",
+      "sex": "F",
+      "cell": "200413",
+      "nt_zh": "麩胺酸",
+      "nt_en": "Glutamate",
+      "voxels": 281994,
+      "src_dims": [
+        739,
+        306,
+        205
+      ],
+      "src_bytes": 662249,
+      "centroid": [
+        -183.1,
+        -133.8,
+        -46.4
+      ],
+      "hue_kaleido": 151.2,
+      "hue_random": 43.2,
+      "hue_nt": 270.0,
+      "hue_paper10N": 50.4,
+      "hue_misread": 241.2,
+      "gap_kaleido": 108.0,
+      "gap_random": 18.0
+    },
+    {
+      "idx": 91,
+      "id": "VGlut-F-300019",
+      "driver": "VGlut",
+      "sex": "F",
+      "cell": "300019",
+      "nt_zh": "麩胺酸",
+      "nt_en": "Glutamate",
+      "voxels": 323433,
+      "src_dims": [
+        738,
+        328,
+        199
+      ],
+      "src_bytes": 727013,
+      "centroid": [
+        203.5,
+        -141.9,
+        -54.6
+      ],
+      "hue_kaleido": 50.4,
+      "hue_random": 331.2,
+      "hue_nt": 270.0,
+      "hue_paper10N": 201.6,
+      "hue_misread": 277.2,
+      "gap_kaleido": 100.8,
+      "gap_random": 75.6
+    },
+    {
+      "idx": 92,
+      "id": "VGlut-F-300298",
+      "driver": "VGlut",
+      "sex": "F",
+      "cell": "300298",
+      "nt_zh": "麩胺酸",
+      "nt_en": "Glutamate",
+      "voxels": 310424,
+      "src_dims": [
+        252,
+        331,
+        157
+      ],
+      "src_bytes": 736843,
+      "centroid": [
+        324.4,
+        -148.3,
+        -36.9
+      ],
+      "hue_kaleido": 244.8,
+      "hue_random": 28.8,
+      "hue_nt": 270.0,
+      "hue_paper10N": 259.2,
+      "hue_misread": 302.4,
+      "gap_kaleido": 147.6,
+      "gap_random": 126.0
+    },
+    {
+      "idx": 93,
+      "id": "VGlut-F-300388",
+      "driver": "VGlut",
+      "sex": "F",
+      "cell": "300388",
+      "nt_zh": "麩胺酸",
+      "nt_en": "Glutamate",
+      "voxels": 325836,
+      "src_dims": [
+        842,
+        346,
+        214
+      ],
+      "src_bytes": 765963,
+      "centroid": [
+        -128.7,
+        -130.1,
+        -41.6
+      ],
+      "hue_kaleido": 7.2,
+      "hue_random": 205.2,
+      "hue_nt": 270.0,
+      "hue_paper10N": 72.0,
+      "hue_misread": 259.2,
+      "gap_kaleido": 108.0,
+      "gap_random": 180.0
+    },
+    {
+      "idx": 94,
+      "id": "VGlut-F-400089",
+      "driver": "VGlut",
+      "sex": "F",
+      "cell": "400089",
+      "nt_zh": "麩胺酸",
+      "nt_en": "Glutamate",
+      "voxels": 311549,
+      "src_dims": [
+        240,
+        226,
+        155
+      ],
+      "src_bytes": 660819,
+      "centroid": [
+        123.4,
+        -35.6,
+        -18.9
+      ],
+      "hue_kaleido": 54.0,
+      "hue_random": 338.4,
+      "hue_nt": 270.0,
+      "hue_paper10N": 334.8,
+      "hue_misread": 36.0,
+      "gap_kaleido": 97.2,
+      "gap_random": 75.6
+    },
+    {
+      "idx": 95,
+      "id": "VGlut-F-400341",
+      "driver": "VGlut",
+      "sex": "F",
+      "cell": "400341",
+      "nt_zh": "麩胺酸",
+      "nt_en": "Glutamate",
+      "voxels": 353481,
+      "src_dims": [
+        146,
+        178,
+        121
+      ],
+      "src_bytes": 687105,
+      "centroid": [
+        189.3,
+        -49.4,
+        12.7
+      ],
+      "hue_kaleido": 108.0,
+      "hue_random": 61.2,
+      "hue_nt": 270.0,
+      "hue_paper10N": 313.2,
+      "hue_misread": 324.0,
+      "gap_kaleido": 36.0,
+      "gap_random": 100.8
+    },
+    {
+      "idx": 96,
+      "id": "VGlut-F-500043",
+      "driver": "VGlut",
+      "sex": "F",
+      "cell": "500043",
+      "nt_zh": "麩胺酸",
+      "nt_en": "Glutamate",
+      "voxels": 227881,
+      "src_dims": [
+        406,
+        459,
+        264
+      ],
+      "src_bytes": 651061,
+      "centroid": [
+        -269.3,
+        -76.3,
+        -46.0
+      ],
+      "hue_kaleido": 331.2,
+      "hue_random": 144.0,
+      "hue_nt": 270.0,
+      "hue_paper10N": 190.8,
+      "hue_misread": 237.6,
+      "gap_kaleido": 162.0,
+      "gap_random": 36.0
+    },
+    {
+      "idx": 97,
+      "id": "VGlut-F-500422",
+      "driver": "VGlut",
+      "sex": "F",
+      "cell": "500422",
+      "nt_zh": "麩胺酸",
+      "nt_en": "Glutamate",
+      "voxels": 344161,
+      "src_dims": [
+        177,
+        194,
+        141
+      ],
+      "src_bytes": 701294,
+      "centroid": [
+        -244.8,
+        -124.4,
+        -52.4
+      ],
+      "hue_kaleido": 266.4,
+      "hue_random": 100.8,
+      "hue_nt": 270.0,
+      "hue_paper10N": 316.8,
+      "hue_misread": 190.8,
+      "gap_kaleido": 104.4,
+      "gap_random": 14.4
+    },
+    {
+      "idx": 98,
+      "id": "VGlut-F-600257",
+      "driver": "VGlut",
+      "sex": "F",
+      "cell": "600257",
+      "nt_zh": "麩胺酸",
+      "nt_en": "Glutamate",
+      "voxels": 280645,
+      "src_dims": [
+        720,
+        298,
+        192
+      ],
+      "src_bytes": 643180,
+      "centroid": [
+        195.6,
+        -131.1,
+        -52.4
+      ],
+      "hue_kaleido": 309.6,
+      "hue_random": 46.8,
+      "hue_nt": 270.0,
+      "hue_paper10N": 266.4,
+      "hue_misread": 262.8,
+      "gap_kaleido": 100.8,
+      "gap_random": 75.6
+    },
+    {
+      "idx": 99,
+      "id": "VGlut-F-600606",
+      "driver": "VGlut",
+      "sex": "F",
+      "cell": "600606",
+      "nt_zh": "麩胺酸",
+      "nt_en": "Glutamate",
+      "voxels": 227553,
+      "src_dims": [
+        835,
+        355,
+        211
+      ],
+      "src_bytes": 651594,
+      "centroid": [
+        65.1,
+        -134.0,
+        -45.9
+      ],
+      "hue_kaleido": 86.4,
+      "hue_random": 50.4,
+      "hue_nt": 270.0,
+      "hue_paper10N": 144.0,
+      "hue_misread": 216.0,
+      "gap_kaleido": 136.8,
+      "gap_random": 3.6
+    }
+  ]
+}

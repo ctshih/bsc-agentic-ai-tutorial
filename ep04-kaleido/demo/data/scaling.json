@@ -1,0 +1,61 @@
+{
+  "grid": [
+    891,
+    484,
+    238
+  ],
+  "grid_voxels": 102636072,
+  "rows": [
+    {
+      "N": 10,
+      "src_mb": 6.9,
+      "dense_mb": 444.4,
+      "voxels": 2806436,
+      "merged_mb": 410.5,
+      "t_load": 0.76,
+      "t_dist": 0.004,
+      "t_mc": 0.002,
+      "t_merge": 11.35
+    },
+    {
+      "N": 25,
+      "src_mb": 17.4,
+      "dense_mb": 1466.1,
+      "voxels": 6792445,
+      "merged_mb": 410.5,
+      "t_load": 2.42,
+      "t_dist": 0.03,
+      "t_mc": 0.005,
+      "t_merge": 11.81
+    },
+    {
+      "N": 50,
+      "src_mb": 34.5,
+      "dense_mb": 2309.9,
+      "voxels": 14643389,
+      "merged_mb": 410.5,
+      "t_load": 3.92,
+      "t_dist": 0.109,
+      "t_mc": 0.013,
+      "t_merge": 13.33
+    },
+    {
+      "N": 100,
+      "src_mb": 68.2,
+      "dense_mb": 4886.2,
+      "voxels": 28823759,
+      "merged_mb": 410.5,
+      "t_load": 8.2,
+      "t_dist": 0.46,
+      "t_mc": 0.024,
+      "t_merge": 15.83
+    }
+  ],
+  "extrapolate": {
+    "per_neuron_dense_mb": 49.5,
+    "n_flycircuit": 130000,
+    "naive_tb": 6.44,
+    "merged_mb": 410.5
+  },
+  "mc_exponent": 1.11
+}
