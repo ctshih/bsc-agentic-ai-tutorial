@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>用 Agentic AI 打開陌生的科學資料｜果蠅神經元 3D 視覺化｜Claude Code 教學 EP03</title>
+<style>
+  :root{
+    --ink:#1b2733; --soft:#5a6b7b; --faint:#8b98a5;
+    --bg:#ffffff; --panel:#f7f8fa; --border:#e4e8ee;
+    --accent:#2563eb; --accent-soft:#eff4ff;
+    --maxw:920px; --radius:12px;
+    --green:#16a34a; --blue:#2563eb; --purple:#9333ea; --amber:#d97706; --red:#dc2626;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,"Segoe UI","Noto Sans TC","Microsoft JhengHei","PingFang TC",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.85; font-size:16.5px; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 22px 120px}
+  header.hero{ max-width:var(--maxw); margin:0 auto; padding:54px 22px 26px; }
+  .eyebrow{color:var(--accent); font-weight:700; font-size:13px; letter-spacing:.08em; text-transform:uppercase; margin:0 0 10px}
+  h1{font-size:33px; line-height:1.3; margin:0 0 12px; letter-spacing:-.01em}
+  .subtitle{font-size:18px; color:var(--soft); margin:0 0 26px}
+  .meta-card{ background:var(--panel); border:1px solid var(--border); border-radius:var(--radius); padding:18px 22px; font-size:15px; }
+  .meta-card p{margin:6px 0}
+  .meta-card b{color:var(--ink)}
+  h2{font-size:25px; margin:64px 0 8px; padding-top:16px; border-top:2px solid var(--border); line-height:1.35}
+  h2 .pt{color:var(--accent); font-size:15px; display:block; font-weight:700; letter-spacing:.05em; margin-bottom:2px}
+  h3{font-size:19px; margin:38px 0 10px}
+  h4{font-size:16px; margin:24px 0 6px; color:var(--ink)}
+  p{margin:12px 0}
+  a{color:var(--accent); text-decoration:none}
+  a:hover{text-decoration:underline}
+  code{background:var(--panel); border:1px solid var(--border); border-radius:5px; padding:1px 6px; font-family:"Cascadia Code",Consolas,Menlo,monospace; font-size:.86em}
+  pre{background:#0f1622; color:#e6edf3; border-radius:10px; padding:16px 18px; overflow:auto; font-size:13.5px; line-height:1.6}
+  pre code{background:none; border:none; color:inherit; padding:0}
+  ul,ol{padding-left:22px}
+  li{margin:7px 0}
+  blockquote{margin:16px 0; padding:10px 18px; border-left:4px solid var(--accent); background:var(--accent-soft); border-radius:0 8px 8px 0; color:var(--ink)}
+
+  nav.toc{background:var(--panel); border:1px solid var(--border); border-radius:var(--radius); padding:20px 26px; margin:30px 0}
+  nav.toc h2{border:none; margin:0 0 10px; padding:0; font-size:18px}
+  nav.toc ol{margin:6px 0 0; columns:2; column-gap:34px}
+  nav.toc a{color:var(--ink)}
+  nav.toc blockquote a{color:var(--accent); text-decoration:underline; font-weight:500}
+  @media(max-width:620px){nav.toc ol{columns:1}}
+
+  .msg{padding:11px 16px; margin:14px 0; border-radius:5px; font-size:15.5px}
+  .msg .who{font-weight:700; margin-right:4px}
+  .msg.g{background:rgba(34,197,94,.10); border-left:4px solid var(--green)}
+  .msg.b{background:rgba(59,130,246,.10); border-left:4px solid var(--blue)}
+  .msg.p{background:rgba(168,85,247,.12); border-left:4px solid var(--purple)}
+  .msg.y{background:rgba(245,158,11,.13); border-left:4px solid var(--amber)}
+  .msg.r{background:rgba(239,68,68,.10); border-left:4px solid var(--red)}
+  .msg ol,.msg ul{margin:8px 0 2px}
+  .ai{margin:10px 0 22px; padding-left:6px}
+  .ai .tag{display:inline-block; font-size:12px; font-weight:700; color:var(--accent); background:var(--accent-soft); border-radius:5px; padding:1px 8px; margin-right:6px}
+  .ai .tag.q{color:#7c3aed; background:#f3e8ff}
+  .ai .tag.bug{color:#b91c1c; background:#fee2e2}
+
+  figure{margin:22px 0; padding:0}
+  figure img,figure video{width:100%; display:block; border:1px solid var(--border); border-radius:10px; box-shadow:0 6px 24px rgba(16,24,40,.08); background:#000}
+  figcaption{font-size:13.5px; color:var(--soft); margin-top:9px; text-align:center}
+  figcaption b{color:var(--ink)}
+  .cmp{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:22px 0}
+  .cmp figure{margin:0}
+  .cmp .tagline{font-size:13px; font-weight:700; margin:0 0 6px}
+  .cmp .before{color:var(--red)} .cmp .after{color:var(--green)}
+  @media(max-width:620px){.cmp{grid-template-columns:1fr}}
+
+  table{border-collapse:collapse; width:100%; margin:18px 0; font-size:14.5px}
+  th,td{border:1px solid var(--border); padding:9px 12px; text-align:left; vertical-align:top}
+  th{background:var(--panel); font-weight:700}
+  td code{font-size:.9em}
+
+  .callout{background:#fffbeb; border:1px solid #fde68a; border-left:4px solid var(--amber); border-radius:0 8px 8px 0; padding:12px 16px; margin:18px 0; font-size:15px}
+  .note{background:var(--accent-soft); border:1px solid #c7dbff; border-radius:8px; padding:12px 16px; margin:18px 0; font-size:15px}
+  .foot{max-width:var(--maxw); margin:0 auto; padding:30px 22px; color:var(--faint); font-size:13px; border-top:1px solid var(--border)}
+  .lesson{background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:4px 20px 14px; margin:16px 0}
+  .lesson h4{color:var(--accent)}
+  .seg{scroll-margin-top:16px}
+  .num{display:inline-block; min-width:30px; height:30px; line-height:30px; text-align:center; background:var(--accent); color:#fff; border-radius:8px; font-weight:700; font-size:15px; margin-right:8px}
+  .recap{display:flex; gap:14px; align-items:flex-start; background:var(--accent-soft); border:1px solid #c7dbff; border-radius:var(--radius); padding:16px 20px; margin:22px 0}
+  .recap .ico{font-size:22px; flex:none}
+  .video-box{margin:28px 0 6px}
+  .video-box .vlabel{font-size:14px; color:var(--accent); font-weight:700; letter-spacing:.04em; margin:0 0 10px}
+  .video-wrap{position:relative; width:100%; aspect-ratio:16/9; border-radius:var(--radius); overflow:hidden; box-shadow:0 8px 30px rgba(16,24,40,.14); background:#000}
+  .video-wrap iframe{position:absolute; inset:0; width:100%; height:100%; border:0}
+  .video-box .vcap{font-size:13.5px; color:var(--soft); margin:10px 0 0}
+  .demo-box{display:flex; align-items:center; gap:14px; margin:18px 0 6px; padding:16px 22px;
+    background:var(--accent-soft); border:1px solid #c7dbff; border-radius:var(--radius);
+    text-decoration:none; color:var(--ink); transition:border-color .15s, box-shadow .15s}
+  .demo-box:hover{border-color:var(--accent); box-shadow:0 6px 20px rgba(37,99,235,.12)}
+  .demo-ico{font-size:24px; flex:none}
+  .demo-txt{font-size:15.5px}
+  .demo-txt b{color:var(--accent)}
+  .quiz-cta{margin:34px 0 6px; background:var(--accent-soft); border:1px solid #c7dbff; border-radius:var(--radius); padding:24px 26px; text-align:center}
+  .quiz-cta h3{margin:0 0 6px; font-size:19px}
+  .quiz-cta p{margin:0 0 16px; color:var(--soft); font-size:15px}
+  .quiz-cta a{display:inline-block; background:var(--accent); color:#fff; text-decoration:none; font-weight:600; font-size:16px; padding:12px 30px; border-radius:10px; box-shadow:0 4px 14px rgba(37,99,235,.3)}
+  .quiz-cta a:hover{background:#1d50c9}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <p class="eyebrow"><a href="../index.html" style="color:var(--accent);text-decoration:none">← BSC with Agentic AI Tutorial</a> · EP03</p>
+  <h1>用 Agentic AI 打開陌生的科學資料<br>果蠅神經元的 3D 視覺化</h1>
+  <p class="subtitle">前兩集處理的是「文字」；這一集面對的是一批連格式都不確定的 3D 影像檔。從「這是什麼？」問到能在螢幕上轉動的神經元。</p>
+  <div class="meta-card">
+    <p><b>這份文件是什麼：</b>一次真實協作的<b>逐句重演</b>。手上有 20 個副檔名 <code>.am</code> 的檔案，除了「是果蠅神經元」之外一無所知。你會看到使用者只用<b>七句話</b>，如何一路推進到三視圖相簿、旋轉動畫，最後在 napari 裡把六條神經元擺回同一顆腦裡自由轉動。</p>
+    <p><b>適合誰讀：</b>手上有實驗資料、但不確定怎麼下手的研究者；想學「<b>怎麼讓 AI 幫你打開沒看過的檔案格式</b>」的人。<b>不需要會寫程式</b>——這一集的程式全部由 AI 寫，人只負責提問、判斷與決策。</p>
+    <p><b>成果（一句話）：</b>從零寫出 <b>5 支 Python 工具</b>，把 20 個 AmiraMesh 體積影像變成 <b>60 張三視圖 ＋ 20 段旋轉動畫 ＋ 一頁可篩選的互動網頁 ＋ 一個 napari 3D 檢視器</b>；過程中量測出資料的軸向解析度限制，並抓掉一個只在特定角度才會現形的繪圖 bug。</p>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="recap">
+    <span class="ico">🧭</span>
+    <div><b>這一集換了題材。</b><a href="../ep01-knowledge-base/index.html">EP01</a> 從零建立論文知識庫、<a href="../ep02-grow-knowledge-base/index.html">EP02</a> 把它反覆迭代養大——兩集處理的都是<b>文字</b>。EP03 換成<b>真實的實驗影像資料</b>：二進位、有壓縮、沒有說明文件。沒看過前兩集也能直接讀這一集，因為題目完全獨立。</div>
+  </div>
+
+  <!-- ① 影片版：等 YouTube 上傳後把下面這段的註解拆掉，並把 YOUTUBE_ID 換成 youtu.be/xxxx 後面那段
+  <div class="video-box">
+    <p class="vlabel">📺 影片版</p>
+    <div class="video-wrap">
+      <iframe src="https://www.youtube.com/embed/YOUTUBE_ID" title="BSC with Agentic AI Tutorial EP03 用 Agentic AI 打開陌生的科學資料" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+    <p class="vcap">不想讀字？可以先看影片導覽，再回來細讀；兩者內容一致。</p>
+  </div>
+  -->
+
+  <a class="demo-box" href="demo/index.html" target="_blank" rel="noopener">
+    <span class="demo-ico">🔗</span>
+    <span class="demo-txt"><b>看這一集做出來的成品：</b>20 個神經元的三視圖相簿，每張卡片還帶一段繞 Y 軸的旋轉動畫，點此直接逛逛 →</span>
+  </a>
+
+  <nav class="toc">
+    <h2>目錄</h2>
+    <blockquote>想直接看怎麼實做，可以從 <a href="#part1">Part 1 — 完整對話時序</a> 開始。</blockquote>
+    <ol>
+      <li><a href="#colors">對話框顏色說明</a></li>
+      <li><a href="#glossary">名詞速查表</a></li>
+      <li><a href="#mindset">面對陌生資料的 5 個心法</a></li>
+      <li><a href="#part1">Part 1 — 完整對話時序</a></li>
+      <li><a href="#part2">Part 2 — 最佳實踐清單</a></li>
+      <li><a href="#part3">Part 3 — 本次成果</a></li>
+      <li><a href="#part4">Part 4 — 10 個核心教訓</a></li>
+      <li><a href="#closing">結語：給初學者的下一步</a></li>
+    </ol>
+  </nav>
+
+  <!-- ============ 顏色說明 ============ -->
+  <h2 id="colors">對話框顏色說明</h2>
+  <p>後面 <a href="#part1">Part 1</a> 會<b>逐句、完整重現使用者的每一句指令</b>（截圖只是輔助，讓你更有臨場感；真正要看清楚的是文字框裡的內容）。AI 的回應與動作則用灰底「AI 做了什麼」<b>摘要</b>。所有使用者發言用五種顏色標示「這句話在做什麼」：</p>
+  <div class="msg g"><span class="who">🟢 使用者：</span>請求動作 — 叫 AI 去做一件事。</div>
+  <div class="msg b"><span class="who">🔵 使用者：</span>問問題 — 詢問現況、原理、估算。</div>
+  <div class="msg p"><span class="who">🟣 使用者：</span>關鍵決策 — 在 AI 攤開的選項中做選擇。</div>
+  <div class="msg y"><span class="who">🟡 使用者：</span>中斷 / 澄清 — 補充條件、修正誤會。</div>
+  <div class="msg r"><span class="who">🔴 使用者：</span>設計回饋 / 糾錯 — 指出方案或產出的根本問題。</div>
+  <p class="note">EP03 的顏色分布很有特色：<b>幾乎全是 🔵 問問題</b>，只有兩句 🟢 和一句 🟣，完全沒有 🔴 糾錯。這不是因為 AI 沒犯錯——它犯了兩個錯，但都是<b>自己抓到的</b>。這一集想示範的正是：<b>當你會問問題，你就不需要一直糾錯。</b></p>
+
+  <!-- ============ 名詞速查表 ============ -->
+  <h2 id="glossary">名詞速查表</h2>
+  <p>看到不懂的詞先回來查。分成三張表：資料本身、影像處理、Agentic AI 能力。</p>
+
+  <h3>A. 這批資料是什麼</h3>
+  <table>
+    <tr><th>名詞</th><th>白話解釋</th></tr>
+    <tr><td><b>體積影像 (volume)</b></td><td>把一疊顯微鏡切片堆起來形成的立體影像。像一塊 3D 的方糖，每個小方格（voxel）記一個亮度值。</td></tr>
+    <tr><td><b>voxel（體素）</b></td><td>3D 版的像素。2D 影像的最小單位是 pixel，3D 就是 voxel。</td></tr>
+    <tr><td><b>AmiraMesh / <code>.am</code></b></td><td>Amira／Avizo 這套商業 3D 影像軟體的原生檔案格式。前段是純文字檔頭（寫著尺寸、座標），後段是二進位資料。</td></tr>
+    <tr><td><b>HxZip</b></td><td>AmiraMesh 用的壓縮方式。實測就是標準的 <b>zlib</b>，所以 Python 內建函式庫就能解開，不必買軟體。</td></tr>
+    <tr><td><b>BoundingBox</b></td><td>檔頭裡記錄「這塊立體影像在標準腦座標中佔哪個範圍」的六個數字。它讓不同檔案能對上位置。</td></tr>
+    <tr><td><b>標準腦座標</b></td><td>把每隻果蠅的腦變形對齊到同一個「標準模板」後的共同座標系。有了它，不同個體的神經元才能疊在一起比較。檔名裡的 <code>warp</code> 就是「已經對齊過」的意思。</td></tr>
+    <tr><td><b>driver line（驅動品系）</b></td><td>基因工具，決定螢光標記會出現在哪一類神經元。<code>TH</code> 標多巴胺、<code>Tdc2</code> 標章魚胺、<code>Trh</code> 標血清素、<code>VGlut</code> 標麩胺酸、<code>Gad1</code> 標 GABA、<code>fru</code> 標性別二型迴路。</td></tr>
+    <tr><td><b>FlyCircuit</b></td><td>清華大學建立的果蠅單神經元影像資料庫，這批檔案就出自它的處理流程。</td></tr>
+  </table>
+
+  <h3>B. 影像處理與繪圖</h3>
+  <table>
+    <tr><th>名詞</th><th>白話解釋</th></tr>
+    <tr><td><b>MIP（最大強度投影）</b></td><td>沿著一個方向看穿整塊立體影像，每條視線上只留<b>最亮的那一點</b>。稀疏的樹狀結構用這招才看得到全貌，切片只會切到零星幾段。</td></tr>
+    <tr><td><b>gamma 校正</b></td><td>調整亮度的非線性映射。gamma 小於 1 會把暗的部分拉亮——這裡用 0.5，否則只看得到主幹、看不到細小分支。</td></tr>
+    <tr><td><b>PSF（點擴散函數）</b></td><td>顯微鏡把「一個點」拍成的模糊光斑。共軛焦顯微鏡的 PSF 在<b>光軸（深度）方向被拉長</b>，所以 z 軸解析度天生比 xy 差 2–3 倍。</td></tr>
+    <tr><td><b>自相關</b></td><td>把影像沿某方向平移幾格後跟自己比對的相似度。相似度掉得越慢＝結構被抹得越開＝該方向越模糊。本集用它<b>量化</b>了 z 軸有多糊。</td></tr>
+    <tr><td><b>點雲 splatting</b></td><td>不去旋轉整塊立體資料，而是只取出「有訊號」的少數點，旋轉這些點再投影到畫面。資料稀疏時可以快上百倍。</td></tr>
+    <tr><td><b>銀行家捨入 (round-half-to-even)</b></td><td><code>0.5</code> 要進位還是捨去？這種捨入法固定進到<b>最近的偶數</b>。numpy 的 <code>np.rint</code> 就是這樣——本集的繪圖 bug 就是它造成的。</td></tr>
+    <tr><td><b>napari</b></td><td>Python 生態系的 3D 影像檢視器。它本身幾乎不做影像處理，價值在於「你的資料就是 numpy 陣列，處理用 scipy／scikit-image，napari 負責讓你隨時看」。</td></tr>
+    <tr><td><b>Qt / PyQt6</b></td><td>做桌面視窗程式的圖形介面函式庫。napari 需要它才能開視窗，但 <code>pip install napari</code> 預設<b>不會</b>幫你裝。</td></tr>
+  </table>
+
+  <h3>C. 這一集用到的 Agentic AI 能力</h3>
+  <table>
+    <tr><th>名詞</th><th>白話解釋</th></tr>
+    <tr><td><b>假設 → 驗證</b></td><td>AI 先講出它的猜測（「HxZip 應該就是 zlib」），再用可檢查的方式證明（解出來的 voxel 數要跟檔頭寫的完全吻合），才往下做。</td></tr>
+    <tr><td><b>瀏覽器驗證</b></td><td>AI 可以自己把網頁開起來、量元素尺寸、讀 console 錯誤、發 HTTP 請求確認圖片沒破——不是寫完就說「應該可以」。</td></tr>
+    <tr><td><b>環境盤點</b></td><td>動手前先查機器上有什麼（已安裝的軟體、GPU 與 VRAM 餘量）。本集就是這樣發現使用者早就裝了 Avizo。</td></tr>
+    <tr><td><b>背景任務</b></td><td>把會卡住的程式（例如會開視窗、要等人關閉的 napari）丟到背景跑，AI 繼續做別的事，程式結束時再回報。</td></tr>
+    <tr><td><b>AskUserQuestion（決策選單）</b></td><td>遇到該由人決定的岔路，AI 攤開選項讓你點，而不是替你猜。本集用在「三條路要走哪條」。</td></tr>
+    <tr><td><b>Skill（技能）</b></td><td>把一套標準作業流程寫成檔案，之後喊一聲就照著跑。這份教材本身就是用 <code>tutorial-episode-production</code> skill 產出的。</td></tr>
+  </table>
+
+  <!-- ============ 心法 ============ -->
+  <h2 id="mindset">面對陌生資料的 5 個心法</h2>
+  <p>如果你只記得五件事，記這五件：</p>
+  <ol>
+    <li><b>先問「這是什麼」，不要先問「幫我畫圖」。</b>第一句話花在勘查，後面每一步都會順。這一集的第一個問題只是「裡面有什麼東西」，卻一次問出了格式、座標系與資料稀疏度三件關鍵事實。</li>
+    <li><b>讓資料的性質決定做法。</b>發現「非零體素只佔 2–4%」之後，後面兩個關鍵決定（用 MIP 而不是切片、用點雲而不是旋轉整個陣列）都是這個事實推出來的。</li>
+    <li><b>問「為什麼」，而且要求它量給你看。</b>「為什麼這幾張比較糊？」逼出的不是一段說明，而是一組實測數字。<b>能量化的解釋才驗證得了。</b></li>
+    <li><b>「做不到」也是有用的答案。</b>AI 明講「這個模糊救不回來，任何銳化都只是放大雜訊」，比硬做一個漂亮但假的結果有價值得多。</li>
+    <li><b>驗證要專挑會出事的地方。</b>那個梳狀條紋 bug 只在 0°／90°／180° 出現，隨便挑個 45° 檢查根本看不出來。</li>
+  </ol>
+
+  <!-- ============ PART 1 ============ -->
+  <h2 id="part1"><span class="pt">PART 1</span>完整對話時序</h2>
+  <p>以下按時間順序，<b>逐句重現使用者的指令</b>（彩色框，逐字）＋ <b>AI 做了什麼</b>（灰框，摘要）。整段協作使用者總共只講了七句話。</p>
+
+  <h3 class="seg" id="s1"><span class="num">1</span>第一句：先勘查，不要先動手</h3>
+  <div class="msg b"><span class="who">🔵 使用者：</span>請看一下「C:\Users\USER\Cowork\BSC with AgenticAI Tutorial\FCdata\neurons」裡面有什麼東西</div>
+  <p>注意這句話有多克制：<b>沒有要求任何產出</b>，只是叫它去看。這是面對陌生資料最該講的第一句話。</p>
+  <div class="ai"><span class="tag">AI 做了什麼</span>沒有直接 <code>ls</code> 交差。它先說明自己的判斷：「副檔名 <code>.am</code> 我不能只憑名字猜格式，得從檔案內容確認」，然後列出資料夾、再抓一個檔案的<b>前 700 個位元組</b>來看。發現檔頭是純文字之後，它做了一件很關鍵的事——<b>把 20 個檔的規格全部掃出來</b>再下結論，而不是從一個樣本外推。</div>
+  <figure>
+    <img src="images/dialog-3-1.jpg" alt="實際對話：AI 讀取 .am 檔頭並解析檔名結構">
+    <figcaption><b>實際對話截圖：</b>AI 先講「為什麼要看檔頭」，再動手。下方表格是它從檔名拆解出的意義。</figcaption>
+  </figure>
+
+  <h3 class="seg" id="s2"><span class="num">2</span>一次勘查，問出三件關鍵事實</h3>
+  <p>掃完 20 個檔的檔頭，AI 提出三個發現。這三件事決定了後面所有做法：</p>
+  <table>
+    <tr><th>發現</th><th>怎麼看出來的</th><th>為什麼重要</th></tr>
+    <tr><td><b>① 格式與內容</b><br>AmiraMesh 2.1，16-bit 灰階體積，HxZip 壓縮</td><td>檔頭第一行 <code># AmiraMesh BINARY-LITTLE-ENDIAN 2.1</code> 直接寫明</td><td>知道要怎麼解碼，也知道這是 Amira／Avizo 的原生格式</td></tr>
+    <tr><td><b>② 共用同一個座標系</b><br>三軸 voxel 間距都剛好是 1.0</td><td>把 BoundingBox 跨距除以格點數：<code>(138.026−(−148.974)) ÷ (288−1) = 1.0</code></td><td>20 個體積可以<b>直接疊在同一個空間</b>，不必再做對位——這是後面 napari 那張圖的前提</td></tr>
+    <tr><td><b>③ 資料極度稀疏</b><br>格點數差 7 倍，壓縮後檔案卻一樣大</td><td>最小的 850 萬 voxel、最大的 6200 萬 voxel，壓縮後都是 760–820 KB</td><td>代表絕大多數 voxel 是 0。後面兩個效能關鍵決定都建立在這件事上</td></tr>
+  </table>
+  <div class="callout"><b>這一段最值得學的：</b>第三個發現不是「查」出來的，是 AI <b>覺得數字不對勁</b>才追下去的——「格點數差七倍，檔案大小卻一樣，這不合理」。好的勘查不只是列出事實，還要對<b>互相矛盾的線索</b>有反應。</div>
+
+  <h3 class="seg" id="s3"><span class="num">3</span>第二句：要圖，但先驗證假設</h3>
+  <div class="msg g"><span class="who">🟢 使用者：</span>所以這些檔案是果蠅神經元影像，我想看看它們長什麼樣子，幫我畫每個檔案的三視圖給我看一下。用網頁清楚呈現。把這次任務相關的產出都放在「C:\Users\USER\Cowork\BSC with AgenticAI Tutorial\Visualization」裡</div>
+  <div class="ai"><span class="tag">AI 做了什麼</span>沒有立刻寫繪圖程式，而是先講計畫（解碼 → MIP → 存 PNG → 組網頁），然後<b>驗證兩個假設</b>：① <code>HxZip</code> 是不是標準 zlib？② 數值分佈長什麼樣？第一個用一行程式驗掉——解壓後得到 8,547,651 個 voxel，跟檔頭寫的 153×308×161 <b>完全吻合</b>，格式假設成立。第二個查出數值是 0–4095、非零只佔 2–4%。</div>
+  <figure>
+    <img src="images/dialog-3-2.jpg" alt="實際對話：先驗證 HxZip 是 zlib，再開始產圖">
+    <figcaption><b>實際對話截圖：</b>「解出來 8,547,651 個 voxel，和 153×347×161 完全吻合 → 格式假設成立，不需要 Amira。」——這種<b>對得上數字</b>的驗證，比「應該可以」有價值太多。</figcaption>
+  </figure>
+  <div class="note"><b>給初學者：</b>「假設 → 用一個對得上的數字證明 → 才往下做」是這一集反覆出現的節奏。你可以直接對 AI 說：<b>「動手前先告訴我你的假設，還有你打算怎麼驗證它。」</b></div>
+
+  <h3 class="seg" id="s4"><span class="num">4</span>為什麼是投影，不是切片</h3>
+  <p>AI 主動解釋了它的繪圖選擇——這個選擇直接來自「資料很稀疏」這個發現：</p>
+  <blockquote>三視圖我採「最大強度投影」而不是切片，因為神經元是稀疏的立體樹狀結構，切一刀通常只切到零星幾段，投影才看得到完整形態。</blockquote>
+  <p>接著它訂了三個影像處理參數，每個都有理由：以非零值的 <b>99.5 百分位</b>當白點（避免單一極亮體素壓掉整張圖）、套 <b>gamma 0.5</b> 提亮暗部（否則只看得到主幹）、用 <b>inferno 色階</b>上色（亮黃＝訊號強）。60 張投影圖一次產出。</p>
+  <div class="ai"><span class="tag">AI 做了什麼</span>寫了兩支程式並刻意<b>分開</b>：<code>amread.py</code>（讀檔）＋ <code>render_mip.py</code>（算圖）。然後在組網頁前先<b>自己看一張圖</b>確認方向與亮度合理——它挑了 <code>TH-F-000020</code>，看到胞體、主神經突與兩叢樹突，判定解碼正確才繼續。</div>
+
+  <h3 class="seg" id="s5"><span class="num">5</span>組網頁，並且真的開起來檢查</h3>
+  <div class="ai"><span class="tag">AI 做了什麼</span>再寫一支 <code>build_page.py</code> 把圖組成相簿——同樣<b>刻意跟算圖分開</b>：「算圖很慢（要解壓 20 個上百 MB 的體積），但排版常常要改。分開之後改版面只要重跑這支，幾毫秒就好。」接著把網頁<b>實際開起來驗證</b>：確認 60 張圖全部載入無破圖、三欄版面在寬螢幕正常、篩選與放大功能可用、console 沒有錯誤。</div>
+  <figure>
+    <img src="images/result-threeview.jpg" alt="三視圖網頁成果：每個神經元一張卡片、三個投影方向">
+    <figcaption><b>第一版成果：</b>每個神經元一張卡片，並排 XY／XZ／ZY 三個投影，附體素尺寸、非零數量與質心座標。</figcaption>
+  </figure>
+  <div class="callout"><b>過程中的小插曲：</b>AI 想用預覽工具開網頁時，發現預覽伺服器的設定檔在別的資料夾、服務範圍到不了新目錄。它<b>沒有硬闖</b>，而是先說明原因、再新增一條設定（明講「純新增，不動原有那條」），然後才繼續。<b>要動到不屬於本次任務的檔案時先講清楚</b>，是值得要求 AI 養成的習慣。</div>
+
+  <h3 class="seg" id="s6"><span class="num">6</span>第三句：一個「為什麼」，換來一組實測數字</h3>
+  <div class="msg b"><span class="who">🔵 使用者：</span>為什麼這些圖，XY 很清楚，XZ 跟 ZY 都糊糊的？</div>
+  <p>這是整段協作<b>資訊含量最高</b>的一句話。使用者沒有說「幫我修好」，而是問「為什麼」。</p>
+  <div class="ai"><span class="tag">AI 做了什麼</span>開頭第一句是：<b>「我不猜，直接量給你看。」</b>它先講出兩個假設——① 共軛焦顯微鏡 z 軸解析度天生較差；② XZ／ZY 投影穿過的組織比較厚——然後寫了一支 <code>probe_axes.py</code>，用兩個指標分別量測三個軸。</div>
+  <figure>
+    <img src="images/dialog-3-3.jpg" alt="實際對話：量測三個軸的銳利度，用數字回答為什麼比較糊">
+    <figcaption><b>實際對話截圖：</b>不是講道理，是把三個神經元、兩個指標的實測值排成一張表。</figcaption>
+  </figure>
+
+  <h3 class="seg" id="s7"><span class="num">7</span>答案：主因是物理限制，救不回來</h3>
+  <p>量測結果（節錄 <code>TH-F-000020</code>）：</p>
+  <table>
+    <tr><th>指標</th><th>沿 z</th><th>沿 y</th><th>沿 x</th><th>怎麼讀</th></tr>
+    <tr><td>相鄰體素平均變化量</td><td><b>0.0087</b></td><td>0.0188</td><td>0.0190</td><td>越大＝越銳利。z 只有其他兩軸的一半</td></tr>
+    <tr><td>自相關掉到 0.5 的距離</td><td><b>≈4.3</b></td><td>≈2.0</td><td>≈1.9 voxel</td><td>越大＝越糊。同一結構沿 z 被抹開成兩倍寬</td></tr>
+  </table>
+  <p>結論分成兩個因素：</p>
+  <ul>
+    <li><b>主因（物理限制）：</b>共軛焦顯微鏡的點擴散函數在光軸方向被拉長，軸向解析度比橫向差 2–3 倍。加上取像時 z 的切片間距本來就比較粗，之後對齊到標準腦時又被內插放大成等向格點——<b>內插只會讓它變平滑，不會補回不存在的細節</b>。沿 z 的相鄰體素相關性高達 0.87–0.94，正是內插的典型指紋。</li>
+    <li><b>次因（因檔案而異）：</b>投影穿透的厚度不同。<code>Gad1-F-400376</code> 的 ZY 方向每個畫面像素疊了 35.2 個體素，是 XY 的 2.6 倍，自然糊成一團。</li>
+  </ul>
+  <div class="callout"><b>最值得學的一句回答：</b>「因素一無法用後製救回來——資訊在拍攝當下就沒被記錄下來。任何銳化都只是把雜訊放大，科學上反而危險。」<br>AI 沒有為了讓你滿意而硬做一個看起來變清楚的結果。<b>能明確說出「這做不到、而且為什麼不該硬做」，是可信度的來源。</b></div>
+
+  <h3 class="seg" id="s8"><span class="num">8</span>第四句：加動畫——用資料的性質換效能</h3>
+  <div class="msg g"><span class="who">🟢 使用者：</span>我想要在每個神經元三視圖的左邊，加一個動畫，轉軸為 Y 方向、通過影像檔中央</div>
+  <div class="ai"><span class="tag">AI 做了什麼</span>先點出關鍵技術選擇：直覺做法是用 <code>scipy.ndimage.rotate</code> 旋轉整個 3D 陣列，但最大的檔有 6200 萬個體素，乘上 36 個角度 × 20 個神經元「會跑到天荒地老」。因為<b>資料只有 0.5–4% 非零</b>，它改成把非零體素當<b>點雲</b>：取出約 30 萬個點 → 旋轉這些點 → 投影取最大值。正交投影下兩者數學上等價，但快了兩個數量級。</div>
+  <figure>
+    <img src="images/dialog-3-4.jpg" alt="實際對話：用點雲取代旋轉整個陣列，並抽格檢查">
+    <figcaption><b>實際對話截圖：</b>「只算 30 萬個點，快上百倍且結果等價。」——第 2 段那個「資料很稀疏」的發現，在這裡第二次發揮作用。</figcaption>
+  </figure>
+  <p>它還用了一個小技巧來取最大值：<b>先把所有點依強度由小到大排序</b>，投影時直接覆蓋寫入，後寫的蓋掉先寫的，最後留下的自然是最大值——比 <code>np.maximum.at</code> 快很多。20 段動畫全部產完不到兩分鐘。</p>
+
+  <h3 class="seg" id="s9"><span class="num">9</span>Bug 故事：只在四個角度現形的梳狀條紋</h3>
+  <p>第一版動畫產出後，AI 主動說「點雲投影最大的風險是旋轉後出現破洞或雜點」，於是抽第 9 格（90°，最容易露餡的角度）出來檢查——結果真的出事了：</p>
+  <div class="cmp">
+    <figure>
+      <p class="tagline before">✗ 修正前（90°）</p>
+      <img src="images/bug-stripes.png" alt="90 度時出現梳狀縱向條紋">
+      <figcaption>整張圖布滿<b>縱向條紋</b>，奇數欄全是空的。</figcaption>
+    </figure>
+    <figure>
+      <p class="tagline after">✓ 修正後（90°）</p>
+      <img src="images/bug-fixed.png" alt="修正後條紋消失">
+      <figcaption>條紋消失，形態與靜態 ZY 圖一致。</figcaption>
+    </figure>
+  </div>
+  <div class="ai"><span class="tag bug">AI 找到的原因</span><code>np.rint</code> 用的是<b>銀行家捨入</b>（<code>.5</code> 進位到最近的偶數）。當格點數是偶數時，體積中心會是 <code>83.5</code> 這種半整數；旋轉到 90° 時每個點的座標<b>剛好都落在 .5</b>，於是全部被捨入到偶數欄——奇數欄永遠沒人寫入，就成了梳狀條紋。改用 <code>floor(x + 0.5)</code>（固定方向的四捨五入、沒有平手問題）即可解決，而且不犧牲銳利度。</div>
+  <div class="callout"><b>這個 bug 為什麼值得單獨講：</b>它只在 <b>0°／90°／180°／270°</b> 這幾個「正角度」出現——因為只有這時候三角函數會剛好是 0 或 1、湊出那個 <code>.5</code> 的平手。<b>隨便挑個 45° 檢查根本看不出來。</b>修完之後 AI 實測五個角度，確認空欄比例全部是 0.0% 才算數。</div>
+  <figure>
+    <img src="images/result-card.png" alt="最終版卡片：3D 旋轉動畫加三視圖共四欄">
+    <figcaption><b>最終版卡片：</b>左起「3D 旋轉」動畫 ＋ XY ／ XZ ／ ZY 三視圖，共四欄。</figcaption>
+  </figure>
+
+  <h3 class="seg" id="s10"><span class="num">10</span>第五句：問工具，AI 先查你機器上有什麼</h3>
+  <div class="msg b"><span class="who">🔵 使用者：</span>這些 *.am 檔，通常是用什麼軟體來開？才能做真正的 3D 操作像是放大縮小、平移旋轉？</div>
+  <div class="ai"><span class="tag">AI 做了什麼</span>先給通用答案（<code>.am</code> 是 Amira／Avizo 的原生格式，商業軟體），然後做了一件很聰明的事——<b>直接掃描這台機器</b>，看實際裝了什麼。結果發現使用者早就有 <b>Avizo 8.1.1</b>，以及 ParaView 6.0.1、napari、pyvista。</div>
+  <figure>
+    <img src="images/dialog-3-5.jpg" alt="實際對話：AI 查出機器上已裝 Avizo 8.1.1">
+    <figcaption><b>實際對話截圖：</b>與其給一份通用清單，不如查一下「你手上已經有什麼」。</figcaption>
+  </figure>
+  <p>還有一個有趣的細節：檔頭裡的原始路徑寫著 <code>/disk/sourceData/data2014_a12/</code>，而 Avizo 8.1.1 正好是 2014 年前後的版本——<b>這批資料很可能就是用這台機器上的這套軟體產生的</b>。</p>
+  <div class="ai"><span class="tag q">AI 問你</span>攤開三條路讓使用者選：<b>A.</b> 直接用 napari 開起來（最快，東西都現成）<b>B.</b> 寫轉檔腳本轉成 TIFF／NRRD，之後 Avizo、ParaView、Fiji 都能開 <b>C.</b> 做網頁版互動 3D，學生不用裝任何軟體。並附上自己的判斷：「如果目標是教學課程，我猜 C 最有價值，但 A 最能讓你馬上感受真正的 3D 操作。」</div>
+  <figure>
+    <img src="images/dialog-3-6.jpg" alt="實際對話：三條免費路線與 A/B/C 選項">
+    <figcaption><b>實際對話截圖：</b>AI 也誠實標出自己<b>沒查證</b>的部分——「我不確定 Fiji 的 reader 支不支援 HxZip 壓縮，這點要實測才知道」。</figcaption>
+  </figure>
+
+  <h3 class="seg" id="s11"><span class="num">11</span>第六句：追問工具的適用性</h3>
+  <div class="msg b"><span class="who">🔵 使用者：</span>如果學生不只是要 visualization，而是需要做一些進一步的影像處理，是不是 A napari 比較適合？</div>
+  <div class="ai"><span class="tag">AI 做了什麼</span>回答「是」，但先<b>修正一個常見誤解</b>：napari 本身幾乎不內建影像處理演算法，它的角色是「Python 生態系的眼睛」——資料就是 numpy 陣列，處理交給 <code>scipy.ndimage</code>／<code>scikit-image</code>，napari 負責隨時把中間結果叫出來看。</div>
+  <figure>
+    <img src="images/dialog-3-7.jpg" alt="實際對話：釐清 napari 的角色是檢視器而非處理工具">
+    <figcaption><b>實際對話截圖：</b>「處理與檢視分離」的架構圖，以及對應到這批資料的實際下游分析。</figcaption>
+  </figure>
+  <p>它也給了兩個誠實的但書：不寫程式的人會卡住（那時 Fiji 更友善）、napari 是桌面應用不適合無人值守的批次流程。最後才給建議——而且理由扣回這個系列的核心：</p>
+  <blockquote>GUI 工具有個致命限制：<b>agent 沒辦法幫你點選單</b>。但 Python 腳本可以由 agent 寫、由 agent 跑、由 agent 除錯，學生看得到程式碼也看得到結果——教學迴路是完整的。</blockquote>
+
+  <h3 class="seg" id="s12"><span class="num">12</span>第七句：決策，然後踩到第一個地雷</h3>
+  <div class="msg p"><span class="who">🟣 使用者：</span>好，那我們就走 napari，先不作分析，純粹讓我玩一下 3D 的手感</div>
+  <div class="ai"><span class="tag bug">地雷一：缺 Qt 後端</span>AI 先驗證環境，立刻發現問題：napari 0.7.0 有裝，但 <b>PyQt5／PySide2／PyQt6／PySide6 一個都沒有</b>，所以 <code>napari.Viewer()</code> 會直接報錯。這是 napari 的常見坑——<code>pip install napari</code> 預設不含 GUI 後端。它選了 <b>PyQt6</b>，理由是它的 wheel 是 abi3（<code>cp39-abi3</code>），對使用者的 Python 3.14 相容性最好。</div>
+  <div class="ai"><span class="tag">AI 做了什麼</span>裝好後<b>沒有直接開視窗</b>，而是先照規矩盤點顯示卡資源——確認 RTX 5090 有 29.4 GB VRAM 空著、沒有別人的運算工作在跑，才決定用全解析度載入。<span style="color:var(--soft)">（多人共用工作站時，這一步能避免把別人的工作擠掉。）</span></div>
+  <figure>
+    <img src="images/dialog-3-8.jpg" alt="實際對話：安裝 PyQt6、盤點 GPU 資源、遇到 pint 錯誤">
+    <figcaption><b>實際對話截圖：</b>驗證環境 → 裝後端 → 盤點 GPU → 寫腳本 → 踩到第二個地雷，一氣呵成。</figcaption>
+  </figure>
+
+  <h3 class="seg" id="s13"><span class="num">13</span>地雷二：比例尺的單位不能亂寫</h3>
+  <div class="ai"><span class="tag bug">地雷二：pint 不認得 "voxel"</span>第一次啟動時程式死在最後一行 <code>viewer.scale_bar.unit = "voxel"</code>。原因是 napari 的比例尺用 <b>pint</b> 這個物理單位套件解析字串，而 <code>"voxel"</code> 不是它認得的單位，賦值當下就丟 <code>UndefinedUnitError</code>。六個體積其實都已經載入成功了，是最後那一行才炸。拿掉單位字串即可——比例尺照樣顯示數字。</div>
+  <div class="note"><b>兩個地雷的共通點：</b>都不是演算法錯，而是<b>整合別人的套件時的意外</b>。第一個是「套件沒把相依裝齊」，第二個是「參數的型別對、值卻不被接受」。這類問題無法靠讀文件預防，只能<b>跑起來才知道</b>——所以「先跑一次最小可行版本」永遠值得。</div>
+
+  <h3 class="seg" id="s14"><span class="num">14</span>成果：六條神經元，回到同一顆腦裡</h3>
+  <p>修好之後視窗順利開啟。這裡有一個從第 2 段就埋下的伏筆終於發揮作用——因為所有檔案共用同一個標準腦座標系，AI 用 napari 的 <code>translate</code> 依各自的 BoundingBox 擺位，<b>六條神經元落在真實的相對位置上</b>，而不是全部疊在原點：</p>
+  <figure>
+    <img src="images/napari-6neurons.jpg" alt="napari 中六條不同品系的神經元擺在標準腦座標">
+    <figcaption><b>napari 3D 檢視：</b>六個 driver line 各一條，各自一個顏色（洋紅＝多巴胺、黃＝章魚胺、綠＝血清素、青＝麩胺酸、紅＝GABA、藍＝fruitless）。<b>它們的相對位置是真的</b>——這是第 2 段那個「voxel 間距都是 1.0」的發現換來的。</figcaption>
+  </figure>
+  <p>實際操作起來是這樣（左鍵拖曳旋轉、滾輪縮放、Shift＋左鍵平移）：</p>
+  <figure>
+    <video src="images/napari-demo.mp4" controls preload="metadata" poster="images/napari-6neurons.jpg"></video>
+    <figcaption><b>37 秒實機操作錄影：</b>靜態投影看不出前後關係，一轉起來，人眼就自己從運動視差還原出深度——這也是繞開 z 軸解析度問題最有效的辦法。</figcaption>
+  </figure>
+
+  <h3 class="seg" id="s15"><span class="num">15</span>最後一句：把這段協作變成教材</h3>
+  <div class="msg g"><span class="who">🟢 使用者：</span>好，把從我問你「請看一下…FCdata\neurons…裡面有什麼東西」開始到這裡，製作成一份完整的教材（EP03），放到 Tutorial 裡面，整合在一起</div>
+  <div class="ai"><span class="tag">AI 做了什麼</span>呼叫 <code>tutorial-episode-production</code> <b>Skill</b>——一套寫好的標準作業流程，規定了一集教材＝教學文件 ＋ 截圖 ＋ 影片 ＋ 測驗 ＋ 上架，以及彼此的依賴順序。AI 依此讀取前兩集的版型、盤點使用者已經拍好的截圖、產生成品畫面，然後才動筆寫這份文件。你現在讀的就是產物。</div>
+  <div class="note"><b>Skill 是什麼：</b>把「這件事該怎麼做」寫成檔案，之後喊一聲就照著跑。它的價值不在省字，而在<b>不會漏步驟</b>——例如這套流程明文規定「新一集的成品絕對不可以蓋掉前一集的 demo 快照」，因為舊教材講的是舊版本，覆蓋過去教材就壞了。</div>
+
+  <!-- ============ PART 2 ============ -->
+  <h2 id="part2"><span class="pt">PART 2</span>最佳實踐清單</h2>
+  <p>把上面的過程整理成可以照抄的做法。每一條都連回實際發生的段落。</p>
+  <table>
+    <tr><th>實踐</th><th>對應段落</th><th>為什麼重要</th></tr>
+    <tr><td><b>第一句話用來勘查，不要求產出</b></td><td><a href="#s1">1</a></td><td>先搞清楚手上是什麼，後面每一步都會順。省下的返工遠多於這一句的成本。</td></tr>
+    <tr><td><b>要求它從檔案內容確認格式，不要憑副檔名猜</b></td><td><a href="#s1">1</a></td><td>副檔名會騙人。檔頭、magic number 才是事實。</td></tr>
+    <tr><td><b>不要從一個樣本外推</b></td><td><a href="#s2">2</a></td><td>掃過全部 20 個檔，才發現「共用座標系」與「極度稀疏」這兩件關鍵事實。</td></tr>
+    <tr><td><b>對矛盾的線索有反應</b></td><td><a href="#s2">2</a></td><td>「格點差七倍、檔案一樣大」這個不對勁，就是稀疏性的線索。</td></tr>
+    <tr><td><b>動手前先講假設與驗證方式</b></td><td><a href="#s3">3</a></td><td>「解出來的 voxel 數要跟檔頭吻合」是可檢查的；「應該可以」不是。</td></tr>
+    <tr><td><b>讓資料性質決定演算法</b></td><td><a href="#s4">4</a>、<a href="#s8">8</a></td><td>同一個「稀疏」發現，先後推出了 MIP 與點雲兩個關鍵決定。</td></tr>
+    <tr><td><b>把慢的計算與快的排版分開</b></td><td><a href="#s5">5</a></td><td>算圖要幾分鐘、改版面要幾毫秒。分成兩支程式，迭代速度差幾十倍。</td></tr>
+    <tr><td><b>要它真的把成品打開來驗</b></td><td><a href="#s5">5</a></td><td>載入狀態、版面、console 錯誤都要實際量，不能用「寫完了」代替。</td></tr>
+    <tr><td><b>問「為什麼」，並要求量化</b></td><td><a href="#s6">6</a></td><td>能量化的解釋才驗證得了，也才會發現「這救不回來」。</td></tr>
+    <tr><td><b>接受「做不到」的答案</b></td><td><a href="#s7">7</a></td><td>硬做一個看起來變清楚的結果，在科學上是有害的。</td></tr>
+    <tr><td><b>驗證專挑退化情況</b></td><td><a href="#s9">9</a></td><td>0°／90°／180° 才會現形的 bug，測 45° 永遠測不到。</td></tr>
+    <tr><td><b>先盤點環境再開工</b></td><td><a href="#s10">10</a>、<a href="#s12">12</a></td><td>查出機器上已有 Avizo；查出 VRAM 餘量才決定用全解析度。</td></tr>
+    <tr><td><b>要它標出「沒查證」的部分</b></td><td><a href="#s10">10</a></td><td>「Fiji 支不支援 HxZip 我不確定」比含糊帶過可信得多。</td></tr>
+    <tr><td><b>岔路讓它攤開選項，不要替你猜</b></td><td><a href="#s10">10</a></td><td>A／B／C 三條路各有代價，該由你決定。</td></tr>
+    <tr><td><b>動到任務範圍外的檔案要先講</b></td><td><a href="#s5">5</a></td><td>「純新增，不動原有那條」——讓你知道它碰了什麼。</td></tr>
+  </table>
+
+  <!-- ============ PART 3 ============ -->
+  <h2 id="part3"><span class="pt">PART 3</span>本次成果</h2>
+
+  <h3>寫出來的程式</h3>
+  <table>
+    <tr><th>檔案</th><th>做什麼</th><th>關鍵設計</th></tr>
+    <tr><td><code>amread.py</code></td><td>讀 AmiraMesh <code>.am</code>，還原成 numpy 陣列</td><td>解析純文字檔頭、zlib 解壓、算出 voxel 間距</td></tr>
+    <tr><td><code>render_mip.py</code></td><td>算三視圖投影，輸出 60 張 PNG</td><td>先在 3D 裡裁掉空白，三個視圖才是同一塊區域</td></tr>
+    <tr><td><code>render_spin.py</code></td><td>算繞 Y 軸旋轉動畫，輸出 20 段 WebP</td><td>點雲 splatting；依強度排序後覆蓋寫入以取最大值</td></tr>
+    <tr><td><code>build_page.py</code></td><td>把圖組成一頁互動相簿</td><td>與算圖分離，改版面只要幾毫秒</td></tr>
+    <tr><td><code>view3d.py</code></td><td>在 napari 裡互動檢視</td><td>用 BoundingBox 當 <code>translate</code>，把神經元擺回標準腦座標</td></tr>
+  </table>
+
+  <h3>數字總結</h3>
+  <table>
+    <tr><th>項目</th><th>數量</th></tr>
+    <tr><td>處理的神經元</td><td>20 條（6 個 driver line，19 雌 1 雄）</td></tr>
+    <tr><td>解碼的體積資料</td><td>最大 842×346×214 ＝ 約 6200 萬 voxel</td></tr>
+    <tr><td>三視圖投影</td><td>60 張 PNG</td></tr>
+    <tr><td>旋轉動畫</td><td>20 段 WebP，各 36 格，合計 11.6 MB</td></tr>
+    <tr><td>使用者說的話</td><td><b>7 句</b></td></tr>
+    <tr><td>AI 自己抓到的 bug</td><td>2 個（梳狀條紋、pint 單位）</td></tr>
+  </table>
+
+  <h3>成品長什麼樣</h3>
+  <figure>
+    <img src="images/result-page-top.png" alt="成品網頁頂部：說明、統計與品系篩選">
+    <figcaption><b>成品網頁：</b>開頭就把「這些圖是怎麼來的」講清楚——包括為什麼用 MIP、參數怎麼訂，以及為什麼 XZ／ZY 比較糊。<a href="demo/index.html" target="_blank" rel="noopener">點此逛逛 →</a></figcaption>
+  </figure>
+
+  <!-- ============ PART 4 ============ -->
+  <h2 id="part4"><span class="pt">PART 4</span>10 個核心教訓</h2>
+
+  <div class="lesson"><h4>1. 副檔名不是格式，檔頭才是</h4>
+  <p>AI 的第一句話是「<code>.am</code> 我不能只憑名字猜格式，得從檔案內容確認」。結果檔頭是純文字，尺寸、座標、壓縮方式全寫在裡面——五分鐘就搞定了本來以為要買軟體才能開的檔案。</p></div>
+
+  <div class="lesson"><h4>2. 勘查要全掃，不要抽樣</h4>
+  <p>掃過全部 20 個檔，才看得出「三軸 voxel 間距都是 1.0」這種一個樣本看不出來的規律。這個發現在後面兩次（做動畫、進 napari）救了場。</p></div>
+
+  <div class="lesson"><h4>3. 對不合理的數字要追下去</h4>
+  <p>「格點數差七倍，壓縮後檔案卻一樣大」——AI 沒有放過這個矛盾，追出了「資料極度稀疏」。這件事後來決定了兩個關鍵演算法選擇。</p></div>
+
+  <div class="lesson"><h4>4. 假設要用對得上的數字證明</h4>
+  <p>「HxZip 應該就是 zlib」是假設；「解出 8,547,651 個 voxel，和 153×347×161 完全吻合」是證明。要求 AI 給你後者，不要接受前者。</p></div>
+
+  <div class="lesson"><h4>5. 讓資料的性質決定演算法</h4>
+  <p>稀疏 → 用 MIP 而不是切片；稀疏 → 用點雲而不是旋轉整個陣列。第二個選擇讓 20 段動畫從「跑到天荒地老」變成「不到兩分鐘」。</p></div>
+
+  <div class="lesson"><h4>6. 「為什麼」要換來數字，不是換來說明</h4>
+  <p>「為什麼比較糊？」的正確回答不是一段光學原理，而是「沿 z 的自相關要走 1.5–2.2 倍的距離才掉一半」。<b>能量化才驗證得了。</b></p></div>
+
+  <div class="lesson"><h4>7. 「這做不到」是誠實，不是失職</h4>
+  <p>「資訊在拍攝當下就沒被記錄下來，任何銳化都只是把雜訊放大」——願意這樣講的 AI，它說「做到了」的時候你才敢信。</p></div>
+
+  <div class="lesson"><h4>8. 驗證要挑最容易出事的地方</h4>
+  <p>梳狀條紋只在 0°／90°／180°／270° 出現。AI 挑 90° 檢查是有意識的選擇（「最容易露餡的角度」），不是運氣。修完還實測五個角度確認空欄比例是 0。</p></div>
+
+  <div class="lesson"><h4>9. 整合外部套件的雷，只能跑起來才知道</h4>
+  <p>napari 沒把 Qt 裝齊、pint 不認得 <code>"voxel"</code>——兩個都不是演算法問題，讀文件也預防不了。所以<b>先跑一次最小可行版本</b>永遠值得。</p></div>
+
+  <div class="lesson"><h4>10. 開工前盤點環境</h4>
+  <p>查出機器上早就有 Avizo（省下一輪冤枉路）、查出 GPU 有 29.4 GB VRAM 空著且沒有別人的工作在跑（才敢用全解析度）。在多人共用的工作站上，這一步是基本禮貌。</p></div>
+
+  <!-- ============ 結語 ============ -->
+  <h2 id="closing">結語：給初學者的下一步</h2>
+  <p>這一集從頭到尾，使用者<b>沒有寫過一行程式</b>，也沒有事先知道 <code>.am</code> 是什麼格式。七句話裡有四句是「問問題」。</p>
+  <p>如果你手上也有一批不知道怎麼下手的資料，可以照這個順序試：</p>
+  <ol>
+    <li><b>先叫它看。</b>「請看一下這個資料夾裡面有什麼東西」——不要一開始就要圖。</li>
+    <li><b>要它講假設跟驗證方式。</b>「動手前先告訴我你的假設，還有你打算怎麼驗證它。」</li>
+    <li><b>看到不對勁就問為什麼，並要求量給你看。</b>這是資訊含量最高的一種提問。</li>
+    <li><b>岔路讓它攤開選項。</b>該你決定的事，不要讓它替你猜。</li>
+    <li><b>要求它標出沒查證的部分。</b>知道哪裡不確定，比假裝什麼都確定安全得多。</li>
+  </ol>
+  <p>下一步如果要往<b>影像分析</b>走（骨架化、量分支數與總長度、算兩條神經元的空間重疊來估計潛在連結），這批資料已經準備好了——它們共用同一個標準腦座標系，兩個 numpy 陣列可以直接做布林運算。那會是另一集的題目。</p>
+
+  <div class="quiz-cta">
+    <h3>讀完了？來檢驗一下 ✏️</h3>
+    <p>10 題單選、當場計分，看看你掌握了多少。</p>
+    <a href="quiz.html">來做隨堂測驗 →</a>
+  </div>
+
+</div>
+
+<div class="foot">
+  BSC with Agentic AI Tutorial · EP03 — 用 Agentic AI 打開陌生的科學資料<br>
+  教學內容為一次真實人機協作的完整重演。資料來源：FlyCircuit 果蠅單神經元影像。
+</div>
+
+</body>
+</html>
