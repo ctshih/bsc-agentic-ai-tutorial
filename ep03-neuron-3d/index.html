@@ -97,6 +97,9 @@
   .demo-ico{font-size:24px; flex:none}
   .demo-txt{font-size:15.5px}
   .demo-txt b{color:var(--accent)}
+  .demo-box.data{background:#f0fdf4; border-color:#bbf7d0}
+  .demo-box.data:hover{border-color:var(--green); box-shadow:0 6px 20px rgba(22,163,74,.14)}
+  .demo-box.data .demo-txt b{color:#15803d}
   .quiz-cta{margin:34px 0 6px; background:var(--accent-soft); border:1px solid #c7dbff; border-radius:var(--radius); padding:24px 26px; text-align:center}
   .quiz-cta h3{margin:0 0 6px; font-size:19px}
   .quiz-cta p{margin:0 0 16px; color:var(--soft); font-size:15px}
@@ -135,6 +138,11 @@
   <a class="demo-box" href="demo/index.html" target="_blank" rel="noopener">
     <span class="demo-ico">🔗</span>
     <span class="demo-txt"><b>看這一集做出來的成品：</b>20 個神經元的三視圖相簿，每張卡片還帶一段繞 Y 軸的旋轉動畫，點此直接逛逛 →</span>
+  </a>
+
+  <a class="demo-box data" href="https://drive.google.com/file/d/1iZkqG6_vLFt2MZO9K_gwt-6yQ-JL9DMW/view?usp=sharing" target="_blank" rel="noopener">
+    <span class="demo-ico">📦</span>
+    <span class="demo-txt"><b>下載這一集的原始資料：</b>20 個 FlyCircuit 果蠅單神經元的 <code>.am</code> 體積影像（約 16 MB）。想自己動手做一遍，從這裡拿資料 →</span>
   </a>
 
   <nav class="toc">
@@ -463,6 +471,25 @@
     <li><b>岔路讓它攤開選項。</b>該你決定的事，不要讓它替你猜。</li>
     <li><b>要求它標出沒查證的部分。</b>知道哪裡不確定，比假裝什麼都確定安全得多。</li>
   </ol>
+  <h3>想自己跑一遍</h3>
+  <p>這一集的資料與程式都放出來了，照下面三步就能重現全部成果：</p>
+  <ol>
+    <li>下載上面那包 <code>.am</code> 資料，解壓到 <code>FCdata/neurons/</code>。</li>
+    <li>從<a href="demo/index.html" target="_blank" rel="noopener">成品快照</a>取得五支 Python 程式，放進與 <code>FCdata</code> 同層的 <code>Visualization/</code>。</li>
+    <li>裝好套件後依序執行。</li>
+  </ol>
+<pre><code>專案資料夾/
+├── FCdata/neurons/     ← 解壓後的 20 個 .am 檔
+└── Visualization/      ← amread.py / render_mip.py / render_spin.py
+                           build_page.py / view3d.py</code></pre>
+<pre><code>pip install numpy pillow matplotlib napari PyQt6
+
+python render_mip.py     # 六十張三視圖投影
+python render_spin.py    # 二十段旋轉動畫
+python build_page.py     # 組成互動網頁 index.html
+python view3d.py         # 在 napari 裡互動檢視</code></pre>
+  <p class="callout"><b>兩個提醒：</b><code>pip install napari</code> <b>不會</b>幫你裝圖形介面後端，所以上面要一併裝 <code>PyQt6</code>（這正是第 <a href="#s12">12</a> 段那個地雷）。另外 <code>render_spin.py</code> 要解壓二十個上百 MB 的體積，跑起來需要幾分鐘，這是正常的。</p>
+
   <p>下一步如果要往<b>影像分析</b>走（骨架化、量分支數與總長度、算兩條神經元的空間重疊來估計潛在連結），這批資料已經準備好了——它們共用同一個標準腦座標系，兩個 numpy 陣列可以直接做布林運算。那會是另一集的題目。</p>
 
   <div class="quiz-cta">
