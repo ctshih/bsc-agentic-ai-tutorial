@@ -146,7 +146,7 @@
   <a class="demo-box data" href="https://github.com/ctshih/Kaleido-Claude" target="_blank" rel="noopener">
     <span class="demo-ico">📦</span>
     <span class="demo-txt"><b>① 一個可以自己跑的 GitHub repo：<code>ctshih/Kaleido-Claude</code></b><br>
-    Kaleido 演算法的完整實作（六支 Python）＋ 100 個 FlyCircuit 神經元影像。<code>git clone</code> 之後三行指令就能在自己機器上重現全部結果 →</span>
+    Kaleido 演算法的完整實作（六支 Python）＋ 100 個 FlyCircuit 神經元影像（<a href="https://github.com/ctshih/Kaleido-Claude/releases/tag/v1.0" style="color:inherit;text-decoration:underline">v1.0 Release</a>，61 MB，首次執行自動下載）。<code>git clone</code> 之後三行指令就能在自己機器上重現全部結果 →</span>
   </a>
 
   <a class="demo-box" href="demo/index.html" target="_blank" rel="noopener">
@@ -425,7 +425,7 @@
   <a class="demo-box data" href="https://github.com/ctshih/Kaleido-Claude" target="_blank" rel="noopener">
     <span class="demo-ico">📦</span>
     <span class="demo-txt"><b>github.com/ctshih/Kaleido-Claude</b><br>
-    六支 Python ＋ 100 個 FlyCircuit 神經元影像（<code>data/neurons100.zip</code>，首次執行自動解開）。
+    六支 Python ＋ 100 個 FlyCircuit 神經元影像（<a href="https://github.com/ctshih/Kaleido-Claude/releases/tag/v1.0" style="color:inherit;text-decoration:underline"><code>neurons100.zip</code>，61 MB</a>，首次執行自動下載）。
     只需要 numpy、pillow、matplotlib，沒有 GPU 需求 →</span>
   </a>
   <table>
@@ -518,7 +518,15 @@
 
   <a class="demo-box data" href="https://github.com/ctshih/Kaleido-Claude" target="_blank" rel="noopener">
     <span class="demo-ico">📦</span>
-    <span class="demo-txt"><b>ctshih/Kaleido-Claude</b>　六支 Python 程式 ＋ 100 個 FlyCircuit 單神經元影像（<code>data/neurons100.zip</code>，約 61 MB）。只需要 numpy、pillow、matplotlib，沒有 GPU 需求 →</span>
+    <span class="demo-txt"><b>程式碼：<code>ctshih/Kaleido-Claude</code></b><br>
+    六支 Python，只需要 numpy、pillow、matplotlib，沒有 GPU 需求 →</span>
+  </a>
+
+  <a class="demo-box data" href="https://github.com/ctshih/Kaleido-Claude/releases/tag/v1.0" target="_blank" rel="noopener">
+    <span class="demo-ico">🧠</span>
+    <span class="demo-txt"><b>資料：<code>neurons100.zip</code>（61 MB）</b><br>
+    100 個 FlyCircuit 果蠅單神經元的 <code>.am</code> 影像，全部已對位到同一個標準腦座標系。
+    <b>不必手動下載</b>——第一次執行程式時會自動抓；想先拿也可以從這裡下載 →</span>
   </a>
 
   <pre><code>git clone https://github.com/ctshih/Kaleido-Claude.git
@@ -533,7 +541,7 @@ python build_page.py  # 組成 out/index.html</code></pre>
 
   <p>全部跑完約五分鐘，結果都在 <code>out/</code>；打開 <code>out/index.html</code> 就是這一集的成果報告——<b>你自己機器上重新算出來的那一份</b>。</p>
 
-  <p class="callout"><b>三個提醒：</b>第一次執行 <code>kaleido.py</code> 會自動把 <code>neurons100.zip</code> 解開（100 個檔、約 65 MB），這一步加上讀檔約兩分鐘，是正常的。<code>scaling.py</code> 會實際寫出 410 MB 的合併檔再刪掉（<b>不真的寫檔就不算量測</b>），確認硬碟有空間。最後，蒙地卡羅每次跑的亂數不同，你算出來的數字會和這裡差一點點——<b>那正是第 <a href="#s9">⑨</a> 段在講的事</b>，所以程式預設就跑 8 個種子給你看分布。</p>
+  <p class="callout"><b>三個提醒：</b>第一次執行 <code>kaleido.py</code> 會先下載 61 MB 的影像再解開，加上讀檔約需幾分鐘，是正常的（之後就不會再下載）。<code>scaling.py</code> 會實際寫出 410 MB 的合併檔再刪掉（<b>不真的寫檔就不算量測</b>），確認硬碟有空間。最後，蒙地卡羅每次跑的亂數不同，你算出來的數字會和這裡差一點點——<b>那正是第 <a href="#s9">⑨</a> 段在講的事</b>，所以程式預設就跑 8 個種子給你看分布。</p>
 
   <p>這一集當下產出的版本（不會再更動）也留了一份快照在 <a href="demo/index.html" target="_blank" rel="noopener">demo 資料夾</a>。</p>
 
